@@ -13,10 +13,10 @@ import { useTranslation } from 'react-i18next'
 import { useCurrency } from '../context/CurrencyContext'
 
 const WHY = [
-  { icon: <FiDroplet size={22} />, title_ar: '100% طبيعي', title_en: '100% Natural', desc_ar: 'بدون مواد حافظة أو إضافات صناعية', desc_en: 'No preservatives or artificial additives' },
+  { icon: <FiDroplet size={22} />, title_ar: '100% طبيعي', title_en: '100% Natural', desc_ar: 'بدون مواد حافظة أو إضافات صناعّية', desc_en: 'No preservatives or artificial additives' },
   { icon: <FiGlobe size={22} />, title_ar: 'من أجود المصادر', title_en: 'Premium Sources', desc_ar: 'بهارات مختارة من أفضل مناطق العالم', desc_en: 'Spices from the finest regions worldwide' },
-  { icon: <FiTruck size={22} />, title_ar: 'شحن سريع', title_en: 'Fast Shipping', desc_ar: 'توصيل لأوروبا والخليج وتركيا', desc_en: 'Delivery to Europe, Gulf & Turkey' },
-  { icon: <FiHeart size={22} />, title_ar: 'بكل حب', title_en: 'Made with Love', desc_ar: 'كل منتج يُعبّأ بعناية واهتمام', desc_en: 'Every product packed with care' },
+  { icon: <FiTruck size={22} />, title_ar: 'شحن سريع', title_en: 'Fast Shipping', desc_ar: 'توصيل لأوروبا والخليج وتركيّا', desc_en: 'Delivery to Europe, Gulf & Turkey' },
+  { icon: <FiHeart size={22} />, title_ar: 'بكلّ حب', title_en: 'Made with Love', desc_ar: 'كل منتج يُعبّأ بعناية واهتمام', desc_en: 'Every product packed with care' },
 ]
 
 const STATS = [
@@ -222,7 +222,9 @@ export default function Home() {
                   <>
                     أرومينا وُلِدت من شغف أصيل في عالم البهارات والنّكهات الغنيّة
                      
-                    حكاية بدأت من هواية في مطبخ المنزل لـ شيف مُحترفة وخبرة على مدار سنين，
+                    <br />
+                    حكاية بدأت من هواية في مطبخ المنزل لـ شيف مُحترفة وخبرة على مدار سنين
+                    <br />
                     وتحوّلت إلى حلم بـ جودة استثنائيّة نحملُها معاً إلى كُلِّ بيت عربي في العالم.
                   </>
                 ) : (
@@ -236,7 +238,7 @@ export default function Home() {
               </p>
               <p style={{ color: '#9C6B4E', lineHeight: 1.9, fontSize: '0.92rem', marginBottom: 10 }}>
                 {isAr
-                  ? 'في أرومينا نؤمنُ بأنّ الطّعام الشّهي يبدأ من بهار مُتقن الخلطة — كُل مُنتج مُختار بعناية من أجود المصادر حول العالم لمنحك مذاقاً لا يُنسى.'
+                  ? <>في أرومينا نؤمنُ بأنّ الطّعام الشّهي يبدأ من بهار مُتقن الخلطة<br />كُل مُنتج مُختار بعناية من أجود المصادر حول العالم لمنحك مذاقاً لا يُنسى.</>
                   : 'At Aromena, we believe delicious food starts with a perfectly crafted spice blend — every product is carefully sourced from the finest origins around the world to give you an unforgettable taste.'}
               </p>
               <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '0.95rem', fontStyle: 'italic', marginBottom: 28 }}>

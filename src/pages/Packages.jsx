@@ -263,7 +263,7 @@ export default function Packages() {
                     }}>
                       {isAdded
                         ? <><FiCheck size={16} /> {isAr ? 'تمت الإضافة!' : 'Added!'}</>
-                        : <><FiShoppingCart size={16} /> {isAr ? 'أضف للسلة' : 'Add to Cart'}</>
+                        : <><FiShoppingCart size={16} /> {isAr ? 'أضف للسّلّة' : 'Add to Cart'}</>
                       }
                     </button>
                   </div>

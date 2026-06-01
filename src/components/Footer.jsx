@@ -21,10 +21,10 @@ export default function Footer() {
   ]
 
   const socials = [
-    { href: 'https://instagram.com/aromena_spices',   icon: <SiInstagram size={15} />, label: 'Instagram', hoverBg: 'rgba(225,48,108,0.2)',  hoverColor: '#E1306C' },
+    { href: 'https://www.instagram.com/aromena.official?igsh=eTU3bWcycmI3djRt',   icon: <SiInstagram size={15} />, label: 'Instagram', hoverBg: 'rgba(225,48,108,0.2)',  hoverColor: '#E1306C' },
     { href: 'https://wa.me/905550044476',             icon: <SiWhatsapp size={15} />,  label: 'WhatsApp',  hoverBg: 'rgba(37,211,102,0.2)',  hoverColor: '#25D366' },
-    { href: 'https://www.tiktok.com/@aromena_spices', icon: <SiTiktok size={15} />,    label: 'TikTok',    hoverBg: 'rgba(244,190,105,0.2)', hoverColor: '#f4be69' },
-    { href: 'https://facebook.com/aromenaspices',     icon: <SiFacebook size={15} />,  label: 'Facebook',  hoverBg: 'rgba(24,119,242,0.2)',  hoverColor: '#1877F2' },
+    { href: 'https://www.tiktok.com/@aromena.official?lang=en', icon: <SiTiktok size={15} />,    label: 'TikTok',    hoverBg: 'rgba(244,190,105,0.2)', hoverColor: '#f4be69' },
+    { href: 'https://www.facebook.com/share/1FThc3cWgo/?mibextid=wwXIfr',     icon: <SiFacebook size={15} />,  label: 'Facebook',  hoverBg: 'rgba(24,119,242,0.2)',  hoverColor: '#1877F2' },
   ]
 
   const legal = [
@@ -56,7 +56,7 @@ export default function Footer() {
                 {s.icon}
               </a>
             ))}
-            <a href="mailto:aromenaspices@gmail.com" title="aromenaspices@gmail.com" style={socialBtn}
+            <a href="mailto:aromena.official@gmail.com" title="aromena.official@gmail.com" style={socialBtn}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(244,190,105,0.15)'; e.currentTarget.style.color = '#f4be69' }}
               onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(244,190,105,0.6)' }}
             >

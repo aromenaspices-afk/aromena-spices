@@ -1,7 +1,7 @@
 const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY
-const SENDER_EMAIL  = 'aromenaspices@gmail.com'
+const SENDER_EMAIL  = 'aromena.official@gmail.com'
 const SENDER_NAME   = 'Aromena Spices'
-const ADMIN_EMAIL   = 'aromenaspices@gmail.com'
+const ADMIN_EMAIL   = 'aromena.official@gmail.com'
 const SITE          = 'https://aromena.com.tr'
 const LOGO          = 'https://res.cloudinary.com/dvt0nntn7/image/upload/v1775408607/02_fwrhni.png'
 
@@ -82,7 +82,7 @@ ${content}
 <p style="margin-top:6px">
 <a href="${SITE}">الموقع</a> &nbsp;|&nbsp;
 <a href="https://wa.me/905550044476">واتساب</a> &nbsp;|&nbsp;
-<a href="https://instagram.com/aromena_spices">إنستغرام</a>
+<a href="https://www.instagram.com/aromena.official?igsh=eTU3bWcycmI3djRt">إنستغرام</a>
 </p>
 <p style="margin-top:8px;color:#C4956A;font-size:11px">Aromena Spices &copy; ${new Date().getFullYear()}</p>
 </div>

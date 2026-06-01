@@ -9,7 +9,7 @@ admin.initializeApp()
 async function sendEmail({ to, toName, subject, html }) {
   const config = functions.config()
   const apiKey = config.brevo?.api_key
-  const senderEmail = config.brevo?.sender_email || 'aromenaspices@gmail.com'
+  const senderEmail = config.brevo?.sender_email || 'aromena.official@gmail.com'
   const senderName  = config.brevo?.sender_name  || 'Aromena Spices'
 
   if (!apiKey) {
@@ -114,7 +114,7 @@ function emailWrapper(content) {
         <p style="margin-top:6px">
           <a href="${SITE}">زيارة الموقع</a> &nbsp;|&nbsp;
           <a href="https://wa.me/905550044476">واتساب</a> &nbsp;|&nbsp;
-          <a href="https://instagram.com/aromena_spices">إنستغرام</a>
+          <a href="https://www.instagram.com/aromena.official?igsh=eTU3bWcycmI3djRt">إنستغرام</a>
         </p>
         <p style="margin-top:10px;color:#C4956A;font-size:11px">
           Aromena Spices © ${new Date().getFullYear()} — aromina.com.tr
@@ -164,7 +164,7 @@ function buildWelcomeEmail({ firstName }) {
       </table>
 
       <div class="divider"></div>
-      <p>إذا كان لديك أي سؤال، نحن هنا دائماً على <a href="https://wa.me/905550044476" style="color:#7b192c;font-weight:700">واتساب</a> أو <a href="mailto:aromenaspices@gmail.com" style="color:#7b192c;font-weight:700">البريد الإلكتروني</a>.</p>
+      <p>إذا كان لديك أي سؤال، نحن هنا دائماً على <a href="https://wa.me/905550044476" style="color:#7b192c;font-weight:700">واتساب</a> أو <a href="mailto:aromena.official@gmail.com" style="color:#7b192c;font-weight:700">البريد الإلكتروني</a>.</p>
     </div>
   `)
 }
@@ -518,7 +518,7 @@ exports.onOrderCreated = functions.firestore
 
     // إيميل الأدمن
     const config  = functions.config()
-    const adminEmail = config.brevo?.sender_email || 'aromenaspices@gmail.com'
+    const adminEmail = config.brevo?.sender_email || 'aromena.official@gmail.com'
     await sendEmail({
       to:      adminEmail,
       toName:  'Admin — Aromena',

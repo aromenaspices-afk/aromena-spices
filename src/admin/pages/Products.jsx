@@ -363,8 +363,8 @@ export default function AdminProducts() {
               <div><label style={labelStyle}>الوصف القصير بالإنجليزي</label><FTextarea value={form.desc_en} onChange={e => setForm(f => ({ ...f, desc_en: e.target.value }))} rows={2} /></div>
               <div><label style={labelStyle}>الوصف التفصيلي بالعربي</label><FTextarea value={form.desc_long_ar} onChange={e => setForm(f => ({ ...f, desc_long_ar: e.target.value }))} rows={3} /></div>
               <div><label style={labelStyle}>الوصف التفصيلي بالإنجليزي</label><FTextarea value={form.desc_long_en} onChange={e => setForm(f => ({ ...f, desc_long_en: e.target.value }))} rows={3} /></div>
-              <div><label style={labelStyle}>المكونات بالعربي</label><FTextarea value={form.ingredients_ar} onChange={e => setForm(f => ({ ...f, ingredients_ar: e.target.value }))} rows={2} /></div>
-              <div><label style={labelStyle}>المكونات بالإنجليزي</label><FTextarea value={form.ingredients_en} onChange={e => setForm(f => ({ ...f, ingredients_en: e.target.value }))} rows={2} /></div>
+              <div><label style={labelStyle}>المكوّنات بالعربي</label><FTextarea value={form.ingredients_ar} onChange={e => setForm(f => ({ ...f, ingredients_ar: e.target.value }))} rows={2} /></div>
+              <div><label style={labelStyle}>المكوّنات بالإنجليزي</label><FTextarea value={form.ingredients_en} onChange={e => setForm(f => ({ ...f, ingredients_en: e.target.value }))} rows={2} /></div>
               <div><label style={labelStyle}>طريقة الاستخدام بالعربي</label><FTextarea value={form.usage_ar} onChange={e => setForm(f => ({ ...f, usage_ar: e.target.value }))} rows={2} /></div>
               <div><label style={labelStyle}>طريقة الاستخدام بالإنجليزي</label><FTextarea value={form.usage_en} onChange={e => setForm(f => ({ ...f, usage_en: e.target.value }))} rows={2} /></div>
 

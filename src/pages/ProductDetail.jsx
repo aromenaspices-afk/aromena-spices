@@ -107,7 +107,7 @@ export default function ProductDetail() {
   const price       = currentSize?.price || 0
   const disc        = calcDiscount(price, product.discount, product.discountExpiry)
   const avgRating   = reviews.length ? (reviews.reduce((s, r) => s + (r.rating || 0), 0) / reviews.length) : null
-  const isAdmin     = user?.email === 'aromenaspices@gmail.com'
+  const isAdmin     = user?.email === 'aromena.official@gmail.com'
   const related     = products.filter(p => p.category === product.category && p.slug !== product.slug).slice(0, 4)
 
   function prevImg() { setActiveImg(i => (i - 1 + images.length) % images.length) }
@@ -159,7 +159,7 @@ export default function ProductDetail() {
 
   const tabs = [
     { id: 'desc',        label: isAr ? 'الوصف'     : 'Description' },
-    { id: 'ingredients', label: isAr ? 'المكونات'  : 'Ingredients' },
+    { id: 'ingredients', label: isAr ? 'المكوّنات'  : 'Ingredients' },
     { id: 'usage',       label: isAr ? 'الاستخدام' : 'How to Use' },
     { id: 'reviews',     label: isAr ? `التقييمات (${reviews.length})` : `Reviews (${reviews.length})` },
   ]
@@ -391,7 +391,7 @@ export default function ProductDetail() {
 
           <div style={{ background: '#fff', borderRadius: 20, padding: '24px', border: '1px solid #E2C9A8', boxShadow: '0 2px 12px rgba(123,25,44,0.05)' }}>
             {activeTab === 'desc' && <p style={{ color: '#6B3A2A', lineHeight: 2, fontSize: '0.95rem' }}>{descLong || desc || (isAr ? 'لا يوجد وصف.' : 'No description available.')}</p>}
-            {activeTab === 'ingredients' && (ingredients ? <p style={{ color: '#6B3A2A', lineHeight: 2 }}>{ingredients}</p> : <p style={{ color: '#9C6B4E' }}>{isAr ? 'لم تُضف المكونات بعد.' : 'Not added yet.'}</p>)}
+            {activeTab === 'ingredients' && (ingredients ? <p style={{ color: '#6B3A2A', lineHeight: 2 }}>{ingredients}</p> : <p style={{ color: '#9C6B4E' }}>{isAr ? 'لم تُضف المكوّنات بعد.' : 'Not added yet.'}</p>)}
             {activeTab === 'usage' && (usage ? <p style={{ color: '#6B3A2A', lineHeight: 2 }}>{usage}</p> : <p style={{ color: '#9C6B4E' }}>{isAr ? 'لم تُضف طريقة الاستخدام بعد.' : 'Not added yet.'}</p>)}
 
 

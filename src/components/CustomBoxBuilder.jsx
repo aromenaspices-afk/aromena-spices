@@ -82,7 +82,7 @@ export default function CustomBoxBuilder() {
     })
     setAdded(true)
     setTimeout(() => { setAdded(false); setSelected([]) }, 2000)
-    toast.success(isAr ? '✅ تمت إضافة باقتك للسلة!' : '✅ Custom box added to cart!')
+    toast.success(isAr ? '✅ تمت إضافة باقتك للسّلّة!' : '✅ Custom box added to cart!')
   }
 
   const BORDEAUX = '#7b192c'
@@ -222,7 +222,7 @@ export default function CustomBoxBuilder() {
             ? <><FiCheck size={16} /> {isAr ? 'تمت الإضافة!' : 'Added!'}</>
             : !isFull
               ? (isAr ? `اختر ${remaining} قطع أخرى` : `Select ${remaining} more items`)
-              : <><FiShoppingCart size={16} /> {isAr ? 'أضف باقتي للسلة' : 'Add my box to cart'}</>
+              : <><FiShoppingCart size={16} /> {isAr ? 'أضف باقتي للسّلّة' : 'Add my box to cart'}</>
           }
         </button>
       </div>

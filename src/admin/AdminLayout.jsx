@@ -128,7 +128,7 @@ export default function AdminLayout({ children, onLogout }) {
             </div>
             <div style={{ borderRight: '1px solid #E2C9A8', paddingRight: 10 }}>
               <p style={{ color: '#3E1C00', fontWeight: 700, fontSize: '0.84rem' }}>Admin</p>
-              <p style={{ color: '#9C6B4E', fontSize: '0.71rem' }}>aromenaspices@gmail.com</p>
+              <p style={{ color: '#9C6B4E', fontSize: '0.71rem' }}>aromena.official@gmail.com</p>
             </div>
           </div>
           <div style={{ background: 'rgba(123,25,44,0.07)', border: '1px solid rgba(123,25,44,0.15)', borderRadius: 50, padding: '5px 14px', fontSize: '0.78rem', color: BORDEAUX, fontWeight: 700 }}>

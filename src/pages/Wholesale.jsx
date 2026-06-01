@@ -12,10 +12,10 @@ import toast from 'react-hot-toast'
 import { sendAdminNewOrderEmail } from '../utils/emailService'
 
 const BENEFITS = [
-  { icon: <FiDollarSign size={20} />, title_ar: 'أسعار الجملة', title_en: 'Wholesale Prices', desc_ar: 'أسعار تنافسية خاصة بكميات الجملة', desc_en: 'Competitive prices for bulk orders' },
-  { icon: <FiTruck size={20} />, title_ar: 'شحن سريع', title_en: 'Fast Shipping', desc_ar: 'توصيل لكل أوروبا والخليج وتركيا', desc_en: 'Delivery across Europe, Gulf & Turkey' },
-  { icon: <FiPackage size={20} />, title_ar: 'كميات مرنة', title_en: 'Flexible Quantities', desc_ar: 'تلبية احتياجات عملك بأي كمية', desc_en: 'Meeting your business needs at any volume' },
-  { icon: <FiUsers size={20} />, title_ar: 'شراكة مستدامة', title_en: 'Long-term Partnership', desc_ar: 'نبني علاقات تجارية طويلة الأمد', desc_en: 'We build long-term business relationships' },
+  { icon: <FiDollarSign size={20} />, title_ar: 'أسعار الجملة', title_en: 'Wholesale Prices', desc_ar: 'أسعار تنافُسيّة خاصّة بكمّيّات الجّملة', desc_en: 'Competitive prices for bulk orders' },
+  { icon: <FiTruck size={20} />, title_ar: 'شحن سريع', title_en: 'Fast Shipping', desc_ar: 'توصيل لكل أوروبّا والخليج وتركيّا', desc_en: 'Delivery across Europe, Gulf & Turkey' },
+  { icon: <FiPackage size={20} />, title_ar: 'كمّيّات مرنة', title_en: 'Flexible Quantities', desc_ar: 'تلبية احتياجات عملك بأيّ كمّيّة', desc_en: 'Meeting your business needs at any volume' },
+  { icon: <FiUsers size={20} />, title_ar: 'شراكة مُستدامة', title_en: 'Long-term Partnership', desc_ar: 'نبني علاقات تجاريُة طويلة الأمد', desc_en: 'We build long-term business relationships' },
 ]
 
 const FAQ = [
@@ -59,17 +59,17 @@ const FAQ = [
 
 const BUSINESS_TYPES = [
   { value: 'restaurant',  label_ar: 'مطعم',         label_en: 'Restaurant' },
-  { value: 'trader',      label_ar: 'تاجر / موزع',  label_en: 'Trader / Distributor' },
+  { value: 'trader',      label_ar: 'موزّع',  label_en: 'Trader / Distributor' },
   { value: 'supermarket', label_ar: 'سوبرماركت',    label_en: 'Supermarket' },
-  { value: 'catering', label_ar: 'خدمات الطعام', label_en: 'Catering' },
+  { value: 'catering', label_ar: 'خدمات الطّعام', label_en: 'Catering' },
   { value: 'other',       label_ar: 'غيره',          label_en: 'Other' },
 ]
 
 const STEPS = [
-  { num: '01', title_ar: 'أرسل طلبك', title_en: 'Send Request', desc_ar: 'املأ النموذج أدناه', desc_en: 'Fill the form below' },
+  { num: '01', title_ar: 'أرسل طلبك', title_en: 'Send Request', desc_ar: 'املأ النّموذج أدناه', desc_en: 'Fill the form below' },
   { num: '02', title_ar: 'نتواصل معك', title_en: 'We Contact You', desc_ar: 'خلال 24 ساعة', desc_en: 'Within 24 hours' },
-  { num: '03', title_ar: 'نرسل العرض', title_en: 'We Send Offer', desc_ar: 'سعر وشروط مخصصة', desc_en: 'Custom price & terms' },
-  { num: '04', title_ar: 'نبدأ الشحن', title_en: 'We Ship', desc_ar: 'سريع وآمن', desc_en: 'Fast & safe' },
+  { num: '03', title_ar: 'نرسل العرض', title_en: 'We Send Offer', desc_ar: 'سعر وشروط مُخصّصة', desc_en: 'Custom price & terms' },
+  { num: '04', title_ar: 'نبدأ الشحن', title_en: 'We Ship', desc_ar: 'نبدأ الشّحن', desc_en: 'Fast & safe' },
 ]
 
 export default function Wholesale() {
@@ -176,7 +176,7 @@ export default function Wholesale() {
       <div style={{ padding: '40px 16px', background: '#EDD9C0' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <h2 style={{ textAlign: 'center', color: '#3E1C00', fontFamily: 'Amiri, serif', fontSize: '1.4rem', marginBottom: 28 }}>
-            {isAr ? 'كيف يعمل النظام؟' : 'How Does It Work?'}
+            {isAr ? 'كيف يعمل النّظام؟' : 'How Does It Work?'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
             {STEPS.map((s, i) => (
@@ -198,7 +198,7 @@ export default function Wholesale() {
       <div id="form" style={{ padding: '40px 16px 60px', background: '#EDD9C0' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           <h2 style={{ textAlign: 'center', color: '#3E1C00', fontFamily: 'Amiri, serif', fontSize: '1.4rem', marginBottom: 6 }}>
-            {isAr ? 'أرسل طلب الجملة' : 'Send Wholesale Request'}
+            {isAr ? 'أرسل طلب الجّملة' : 'Send Wholesale Request'}
           </h2>
           <p style={{ textAlign: 'center', color: '#9C6B4E', fontSize: '0.84rem', marginBottom: 24 }}>
             {isAr ? 'سنتواصل معك خلال 24 ساعة' : 'We will contact you within 24 hours'}
@@ -240,7 +240,7 @@ export default function Wholesale() {
 
                 {/* الشركة */}
                 <div>
-                  <label style={labelStyle}><FiHome size={12} color="#7b192c" />{isAr ? 'اسم الشركة / المؤسسة' : 'Company / Business Name'}</label>
+                  <label style={labelStyle}><FiHome size={12} color="#7b192c" />{isAr ? 'اسم الشّركة - المؤسّسة' : 'Company / Business Name'}</label>
                   <input value={form.company} onChange={e => set('company', e.target.value)} style={inputStyle} placeholder={isAr ? 'اختياري' : 'Optional'}
                     onFocus={e => e.target.style.borderColor = '#7b192c'} onBlur={e => e.target.style.borderColor = '#E2C9A8'} />
                 </div>
@@ -289,7 +289,7 @@ export default function Wholesale() {
                 <div>
                   <label style={labelStyle}>{t('wholesale.details')}</label>
                   <textarea value={form.details} onChange={e => set('details', e.target.value)} rows={3}
-                    placeholder={isAr ? 'الكمية المطلوبة، المنتجات المفضلة، أي ملاحظات...' : 'Required quantity, preferred products, any notes...'}
+                    placeholder={isAr ? 'الكمّيّة المطلوبة، المُنتجات المُفضّلة، أي ملاحظات...' : 'Required quantity, preferred products, any notes...'}
                     style={{ ...inputStyle, resize: 'vertical' }}
                     onFocus={e => e.target.style.borderColor = '#7b192c'} onBlur={e => e.target.style.borderColor = '#E2C9A8'}
                   />

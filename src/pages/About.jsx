@@ -70,13 +70,13 @@ export default function About() {
                 {t('about.owner')}
               </h3>
               <p style={{ color: '#7b192c', fontSize: '0.82rem', fontWeight: 600, marginBottom: 14 }}>
-                {isAr ? 'مُؤسِّسة Aromena' : 'Founder of Aromena'}
+                {isAr ? 'مؤسّسة Aromena' : 'Founder of Aromena'}
               </p>
-              <p style={{ color: '#9C6B4E', fontSize: '0.86rem', lineHeight: 1.8 }}>
+              <p style={{ color: '#9C6B4E', fontSize: '0.86rem', lineHeight: 1.8, whiteSpace: 'pre-line' }}>
                 {t('about.owner_desc')}
               </p>
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-                <a href="https://instagram.com/aromena_spices" target="_blank" rel="noreferrer" style={{ width: 38, height: 38, borderRadius: 10, background: '#fdf0f2', border: '1px solid rgba(123,25,44,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7b192c', textDecoration: 'none', transition: 'all 0.2s' }}
+                <a href="https://www.instagram.com/aromena.official?igsh=eTU3bWcycmI3djRt" target="_blank" rel="noreferrer" style={{ width: 38, height: 38, borderRadius: 10, background: '#fdf0f2', border: '1px solid rgba(123,25,44,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7b192c', textDecoration: 'none', transition: 'all 0.2s' }}
                   onMouseEnter={e => { e.currentTarget.style.background = '#E1306C'; e.currentTarget.style.color = '#fff' }}
                   onMouseLeave={e => { e.currentTarget.style.background = '#fdf0f2'; e.currentTarget.style.color = '#7b192c' }}
                 >
@@ -87,9 +87,6 @@ export default function About() {
 
             
             <div>
-              <div style={{ display: 'inline-block', background: 'rgba(123,25,44,0.08)', border: '1px solid rgba(123,25,44,0.15)', color: '#7b192c', padding: '4px 14px', borderRadius: 50, fontSize: '0.78rem', fontWeight: 600, marginBottom: 16 }}>
-                {isAr ? 'قصتنا' : 'Our Story'}
-              </div>
               <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 16, lineHeight: 1.3 }}>
                 {t('about.story_title')}
               </h2>

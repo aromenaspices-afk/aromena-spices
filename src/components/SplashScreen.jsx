@@ -84,21 +84,12 @@ export default function SplashScreen({ onDone }) {
             fontWeight: 700,
             lineHeight: 1.8,
             letterSpacing: 0.3,
-            margin: '0 0 10px',
+            margin: 0,
           }}>
             {isAr
-              ? 'حيث تبدأ رائحة الطبخ، تبدأ أرومينا'
+              ? 'حيثُ تبدأ رائحةُ الطّبخ ، تبدأ أرومينا'
               : 'Where the Scent of Cooking Begins, Aromena Begins'
             }
-          </p>
-          <p style={{
-            color: 'rgba(244,190,105,0.45)',
-            fontFamily: 'Amiri, serif',
-            fontSize: '0.82rem',
-            letterSpacing: 1.5,
-            textTransform: 'uppercase',
-          }}>
-            {isAr ? '— أرومينا للبهارات —' : '— Aromena Spices —'}
           </p>
         </div>
 

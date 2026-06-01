@@ -35,11 +35,11 @@ export default function Contact() {
       value: '+90 555 004 4476',
     },
     {
-      href: 'mailto:aromenaspices@gmail.com',
+      href: 'mailto:aromena.official@gmail.com',
       icon: <FiMail size={20} />,
       iconColor: '#7b192c', iconBg: '#fdf0f2',
       title: isAr ? 'البريد الإلكتروني' : 'Email',
-      value: 'aromenaspices@gmail.com',
+      value: 'aromena.official@gmail.com',
     },
     {
       href: 'tel:+905550044476',
@@ -49,21 +49,21 @@ export default function Contact() {
       value: '+90 555 004 4476',
     },
     {
-      href: 'https://instagram.com/aromena.official',
+      href: 'https://www.instagram.com/aromena.official?igsh=eTU3bWcycmI3djRt',
       icon: <SiInstagram size={20} />,
       iconColor: '#E1306C', iconBg: '#FDF0F6',
       title: 'Instagram',
       value: '@aromena.official',
     },
     {
-      href: 'https://www.tiktok.com/@aromena.official',
+      href: 'https://www.tiktok.com/@aromena.official?lang=en',
       icon: <SiTiktok size={20} />,
       iconColor: '#1a0610', iconBg: '#F0F0F0',
       title: 'TikTok',
       value: '@aromena.official',
     },
     {
-      href: 'https://facebook.com/aromena.official',
+      href: 'https://www.facebook.com/share/1FThc3cWgo/?mibextid=wwXIfr',
       icon: <SiFacebook size={20} />,
       iconColor: '#1877F2', iconBg: '#EAF2FF',
       title: 'Facebook',

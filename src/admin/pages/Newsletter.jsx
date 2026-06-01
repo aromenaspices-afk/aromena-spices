@@ -95,7 +95,7 @@ p{color:#6B3A2A;font-size:14px;line-height:1.8}
 ${content}
 <div class="ft">
 <p>أرومينا للبهارات — بهارات أصيلة من قلب الشرق</p>
-<p style="margin-top:6px"><a href="${SITE}">الموقع</a> &nbsp;|&nbsp; <a href="https://wa.me/905550044476">واتساب</a> &nbsp;|&nbsp; <a href="https://instagram.com/aromena_spices">إنستغرام</a></p>
+<p style="margin-top:6px"><a href="${SITE}">الموقع</a> &nbsp;|&nbsp; <a href="https://wa.me/905550044476">واتساب</a> &nbsp;|&nbsp; <a href="https://www.instagram.com/aromena.official?igsh=eTU3bWcycmI3djRt">إنستغرام</a></p>
 <p class="unsubscribe">Aromena Spices © ${new Date().getFullYear()} — <a href="${SITE}">إلغاء الاشتراك</a></p>
 </div></div></div></body></html>`
 
