@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --bg:          #F5E6D3;
+  --bg-section:  #EDD9C0;
+  --card:        #FFFFFF;
+  --primary:     #7b192c;
+  --accent:      #f4be69;
+  --navbar:      #6b1426;
+  --footer:      #6b1426;
+  --heading:     #3E1C00;
+  --text:        #6B3A2A;
+  --text-muted:  #9C6B4E;
+  --border:      #E2C9A8;
+  --shadow:      rgba(123,25,44,0.10);
+  --success:     #16A34A;
+  --error:       #DC2626;
+  --warning:     #F59E0B;
+  --radius:      14px;
+  --radius-sm:   8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Amiri', serif;
+  direction: rtl;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.ltr {
+  direction: ltr;
+  font-family: 'AwanZaman', 'Amiri', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  outline: none;
+}
+
+.btn-primary {
+  background: linear-gradient(to left, #7b192c, #a82040);
+  color: #f4be69;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 700;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.88;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #7b192c;
+  border: 2px solid #7b192c;
+  padding: 10px 26px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  background: #7b192c;
+  color: #f4be69;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.section-alt {
+  background: var(--bg-section);
+  padding: 60px 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #7b192c; border-radius: 10px; }
+
+/* Mobile First */
+@media (max-width: 768px) {
+  .section, .section-alt { padding: 40px 0; }
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.4rem; }
+}

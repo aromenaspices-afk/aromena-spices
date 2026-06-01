@@ -1,0 +1,124 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "packages": "Packages",
+    "about": "About",
+    "contact": "Contact",
+    "wholesale": "Wholesale",
+    "cart": "Cart"
+  },
+  "home": {
+    "hero_title": "Authentic Spices",
+    "hero_subtitle": "From the Heart of the East to Your Kitchen",
+    "hero_btn": "Shop Now",
+    "featured": "Featured Products",
+    "why_title": "Why Aromena?",
+    "why_1": "Premium Quality",
+    "why_1_desc": "Carefully selected spices from the finest sources worldwide",
+    "why_2": "Fast Shipping",
+    "why_2_desc": "Delivery to Europe, Gulf, Jordan and Turkey",
+    "why_3": "100% Natural",
+    "why_3_desc": "No preservatives or artificial additives",
+    "why_4": "Quality Guarantee",
+    "why_4_desc": "We guarantee your satisfaction or your money back"
+  },
+  "products": {
+    "title": "Our Products",
+    "all": "All",
+    "blends": "Blends",
+    "classic": "Classic",
+    "hot": "Hot",
+    "premium": "Premium",
+    "add_cart": "Add to Cart",
+    "size": "Size",
+    "origin": "Origin",
+    "heat": "Heat",
+    "added": "Added ✓"
+  },
+  "packages": {
+    "title": "Packages",
+    "subtitle": "Choose your favorite package",
+    "customize": "Customize Your Package",
+    "add_cart": "Add to Cart",
+    "includes": "Includes 4 x 100g jars"
+  },
+  "about": {
+    "title": "About Us",
+    "story_title": "Our Story",
+    "story": "Aromena — a journey born from a true passion for authentic spices. We carry the essence of the East to bring it to your kitchen, wherever you are.",
+    "owner": "Ghalia Sawan",
+    "owner_desc": "Founder of Aromena and a passionate lover of authentic spices and flavors"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "message": "Your Message",
+    "send": "Send",
+    "whatsapp": "WhatsApp",
+    "phone": "Phone"
+  },
+  "wholesale": {
+    "title": "Wholesale Orders",
+    "subtitle": "Are you a restaurant owner or trader? Contact us",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "country": "Country",
+    "email": "Email",
+    "whatsapp": "WhatsApp Number",
+    "business": "Business Type",
+    "business_types": {
+      "restaurant": "Restaurant",
+      "trader": "Trader",
+      "supermarket": "Supermarket",
+      "other": "Other"
+    },
+    "details": "Additional Details",
+    "send": "Send Request",
+    "success": "Your request has been sent successfully! We will contact you soon"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "coupon": "Discount Coupon",
+    "apply": "Apply",
+    "shipping": "Shipping",
+    "continue": "Continue Shopping"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "payment": "Payment Method",
+    "order_summary": "Order Summary",
+    "place_order": "Place Order",
+    "terms": "I agree to the Terms and Conditions"
+  },
+  "footer": {
+    "desc": "Authentic spices from the heart of the East",
+    "links": "Quick Links",
+    "contact": "Contact Us",
+    "rights": "All rights reserved"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "back": "Back",
+    "more": "More",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "search": "Search",
+    "currency": "EUR €"
+  }
+}
