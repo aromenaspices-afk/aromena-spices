@@ -41,6 +41,10 @@ export default function Home() {
   const touchStartX = useRef(null)
   const sliderImages = settings?.slider_images || []
 
+  const [banIdx, setBanIdx] = useState(0)
+  const banTouchX = useRef(null)
+  const BANNER_COUNT = 3
+
   useEffect(() => { setTimeout(() => setVisible(true), 100) }, [])
 
   useEffect(() => {
@@ -48,6 +52,11 @@ export default function Home() {
     const interval = setInterval(() => setSliderIdx(i => (i + 1) % sliderImages.length), 4000)
     return () => clearInterval(interval)
   }, [sliderImages.length])
+
+  useEffect(() => {
+    const interval = setInterval(() => setBanIdx(i => (i + 1) % BANNER_COUNT), 5500)
+    return () => clearInterval(interval)
+  }, [])
 
   function sliderPrev() { setSliderIdx(i => (i - 1 + sliderImages.length) % sliderImages.length) }
   function sliderNext() { setSliderIdx(i => (i + 1) % sliderImages.length) }
@@ -57,6 +66,16 @@ export default function Home() {
     const diff = touchStartX.current - e.changedTouches[0].clientX
     if (Math.abs(diff) > 50) { diff > 0 ? sliderNext() : sliderPrev() }
     touchStartX.current = null
+  }
+
+  function banPrev() { setBanIdx(i => (i - 1 + BANNER_COUNT) % BANNER_COUNT) }
+  function banNext() { setBanIdx(i => (i + 1) % BANNER_COUNT) }
+  function banTouchStart(e) { banTouchX.current = e.touches[0].clientX }
+  function banTouchEnd(e) {
+    if (!banTouchX.current) return
+    const diff = banTouchX.current - e.changedTouches[0].clientX
+    if (Math.abs(diff) > 50) { diff > 0 ? banNext() : banPrev() }
+    banTouchX.current = null
   }
 
   return (
@@ -148,6 +167,114 @@ export default function Home() {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ بنرات إعلانية ═══ */}
+      <section style={{ background: '#F5E6D3', padding: 'clamp(28px, 4vw, 48px) 20px' }}>
+        <div
+          onTouchStart={banTouchStart}
+          onTouchEnd={banTouchEnd}
+          className="ban-track"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)', transition: 'all 0.7s ease' }}
+        >
+
+          {/* البنر الأول — افتتاح المتجر */}
+          <div className={`banner b1 ${banIdx === 0 ? 'active' : ''}`} id="b1">
+            <div className="ornament-corner ornament-tl"></div>
+            <div className="ornament-corner ornament-br"></div>
+            <div className="ban-content">
+              <div className="top-row">
+                <div className="ar-brand">
+                  <svg className="ar-brand-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2 C 8 8, 8 14, 12 18 C 16 14, 16 8, 12 2 Z" fill="#c9a961" opacity="0.9"></path>
+                    <path d="M7 12 C 5 16, 5 19, 7 21 C 9 19, 9 16, 7 12 Z" fill="#c9a961" opacity="0.7"></path>
+                    <path d="M17 12 C 15 16, 15 19, 17 21 C 19 19, 19 16, 17 12 Z" fill="#c9a961" opacity="0.7"></path>
+                  </svg>
+                  <span className="ar-brand-name">AROMENA</span>
+                  <span className="ar-brand-tag">SPICES</span>
+                </div>
+                <div className="opening-badge">افتتاح المتجر</div>
+              </div>
+              <div className="main-row">
+                <div className="text-block">
+                  <h2>النّكهة الأصلية<br /><span className="accent">أصبحت بين يديك</span></h2>
+                  <p>تشكيلة فاخرة من خلطات البهارات الأصلية، تُحضّر بعناية واحترافية</p>
+                  <div className="promo-tag">
+                    <strong>15%</strong>
+                    <span>خصم ترحيبي<br />كوبون WELCOME15</span>
+                  </div>
+                </div>
+                <div className="right-mark">
+                  <div className="digit">12</div>
+                  <div className="digit-label">خلطة أصيلة</div>
+                  <div className="gold-line"></div>
+                  <div className="url-mini">aromena.com.tr</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* البنر الثاني — لماذا أرومينا */}
+          <div className={`banner b2 ${banIdx === 1 ? 'active' : ''}`} id="b2">
+            <div className="ornament-corner ornament-tl"></div>
+            <div className="ornament-corner ornament-br"></div>
+            <div className="ban-content">
+              <div className="layout">
+                <div className="left">
+                  <span className="small-tag">— لماذا أرومينا</span>
+                  <h2>الجّودة في <span className="accent">كلّ رشّة</span></h2>
+                  <p>مكوّنات طبيعيّة من مصادرها الأصليّة، خلطات مُتقنة بوصفات مدروسة، وتنوّع استثنائي من المطبخ الخليجي إلى التّركي والإيطالي.</p>
+                  <div className="boxes">
+                    <div className="box-item">طبيعي 100%</div>
+                    <div className="box-item">بدون حافظ</div>
+                    <div className="box-item">شحن سريع</div>
+                  </div>
+                </div>
+                <div className="right-vase">
+                  <div className="vase-content">
+                    <div className="num">100%</div>
+                    <div className="lbl">طبيعي</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* البنر الثالث — المجموعة الكاملة */}
+          <div className={`banner b3 ${banIdx === 2 ? 'active' : ''}`} id="b3">
+            <div className="ornament-corner ornament-tl"></div>
+            <div className="ornament-corner ornament-br"></div>
+            <div className="ban-content">
+              <div className="layout">
+                <div className="bottles-mock">
+                  <div className="bottle"></div>
+                  <div className="bottle"></div>
+                  <div className="bottle"></div>
+                  <div className="bottle"></div>
+                </div>
+                <div className="right-content">
+                  <span className="new-pill">جديد · 2026</span>
+                  <h2>مجموعة <span className="gold">أرومينا</span> الكاملة</h2>
+                  <p className="desc">12 خلطة بهارات أصيلة + 3 بوكسات هدايا فاخرة — تشكيلة بهارات مختلفة حول العالم.</p>
+                  <div className="num-row">
+                    <div><strong>12</strong><span>خلطة</span></div>
+                    <div><strong>3</strong><span>بوكسات</span></div>
+                    <div><strong>$4+</strong><span>تبدأ من</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* أزرار التنقل */}
+          <button onClick={banPrev} className="ban-nav ban-nav-next" aria-label="prev"><FiChevronRight size={18} /></button>
+          <button onClick={banNext} className="ban-nav ban-nav-prev" aria-label="next"><FiChevronLeft size={18} /></button>
+          <div className="ban-dots">
+            {[0, 1, 2].map(idx => (
+              <button key={idx} onClick={() => setBanIdx(idx)} className={banIdx === idx ? 'dot active' : 'dot'} aria-label={`banner ${idx + 1}`} />
+            ))}
           </div>
         </div>
       </section>
@@ -341,6 +468,113 @@ export default function Home() {
 
       <style>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ===== Advertising banner slider ===== */
+        .ban-track { position: relative; width: 100%; max-width: 1180px; margin: 0 auto; height: clamp(380px, 44vw, 440px); }
+        .banner {
+          position: absolute; inset: 0; opacity: 0; pointer-events: none;
+          transition: opacity 0.8s ease;
+          border-radius: 24px; overflow: hidden;
+          background:
+            radial-gradient(60% 80% at 78% 50%, rgba(168,32,64,0.55) 0%, transparent 60%),
+            linear-gradient(105deg, #3d0d18 0%, #5e1322 48%, #7a1a2e 100%);
+          border: 1px solid rgba(201,169,97,0.22);
+          box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+        }
+        .banner.active { opacity: 1; pointer-events: auto; }
+        /* زخارف الأوراق الخافتة في الخلفية */
+        .banner::before, .banner::after {
+          content: ''; position: absolute; z-index: 0; border-radius: 50% 0 50% 50%;
+          background: rgba(201,169,97,0.05);
+        }
+        .banner::before { width: 130px; height: 130px; top: 30%; right: 30%; transform: rotate(35deg); }
+        .banner::after { width: 90px; height: 90px; bottom: 18%; right: 44%; transform: rotate(-20deg); }
+
+        .ornament-corner { position: absolute; width: 50px; height: 50px; border: 2px solid rgba(201,169,97,0.55); z-index: 3; }
+        .ornament-tl { top: 18px; right: 18px; border-left: none; border-bottom: none; border-top-right-radius: 8px; }
+        .ornament-br { bottom: 18px; left: 18px; border-right: none; border-top: none; border-bottom-left-radius: 8px; }
+
+        .ban-content { position: relative; z-index: 2; height: 100%; padding: clamp(22px, 3.6vw, 40px) clamp(58px, 6vw, 72px); display: flex; flex-direction: column; color: #f3e3cf; }
+
+        /* Banner 1 */
+        .top-row { display: flex; justify-content: space-between; align-items: flex-start; }
+        .ar-brand { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .ar-brand-icon { width: 22px; height: 22px; margin-bottom: 2px; }
+        .ar-brand-name { font-family: 'Amiri', serif; font-weight: 900; letter-spacing: 5px; color: #d6b36a; font-size: 1.05rem; }
+        .ar-brand-tag { font-size: 0.52rem; letter-spacing: 5px; color: rgba(214,179,106,0.65); }
+        .opening-badge { background: #c9a961; color: #5e1322; padding: 8px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 800; box-shadow: 0 4px 14px rgba(201,169,97,0.3); }
+        .main-row { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+        .text-block { text-align: right; }
+        .text-block h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; line-height: 1.25; margin-bottom: 14px; color: #f6ecdc; }
+        .text-block .accent { color: #d6b36a; font-style: italic; }
+        .text-block p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); max-width: 430px; margin: 0 0 18px auto; line-height: 1.8; }
+        .promo-tag { display: inline-flex; align-items: center; gap: 12px; background: rgba(201,169,97,0.08); border: 1px solid rgba(201,169,97,0.3); padding: 10px 18px; border-radius: 12px; }
+        .promo-tag strong { font-size: 1.8rem; font-weight: 900; color: #d6b36a; font-family: 'Amiri', serif; }
+        .promo-tag span { font-size: 0.72rem; color: rgba(243,227,207,0.82); line-height: 1.5; text-align: right; }
+        .right-mark { flex-shrink: 0; text-align: center; border: 1px solid rgba(201,169,97,0.35); border-radius: 16px; padding: clamp(18px, 3vw, 30px) clamp(20px, 3.2vw, 34px); }
+        .right-mark .digit { font-family: 'Amiri', serif; font-size: clamp(2.4rem, 6.5vw, 4.2rem); font-weight: 900; color: #d6b36a; line-height: 1; }
+        .right-mark .digit-label { color: rgba(243,227,207,0.7); font-size: 0.82rem; margin-top: 6px; }
+        .right-mark .gold-line { width: 56px; height: 1px; background: linear-gradient(90deg, transparent, #c9a961, transparent); margin: 14px auto; }
+        .right-mark .url-mini { font-size: 0.68rem; letter-spacing: 1px; color: rgba(214,179,106,0.6); }
+
+        /* Banner 2 */
+        .layout { flex: 1; display: flex; align-items: center; gap: 34px; }
+        .b2 .left { flex: 1; text-align: right; }
+        .small-tag { color: #d6b36a; font-size: 0.84rem; font-weight: 600; letter-spacing: 1px; }
+        .b2 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin: 10px 0 14px; color: #f6ecdc; }
+        .b2 .accent { color: #d6b36a; }
+        .b2 p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin-bottom: 22px; }
+        .boxes { display: flex; gap: 12px; flex-wrap: wrap; }
+        .box-item { background: rgba(201,169,97,0.08); border: 1px solid rgba(201,169,97,0.35); color: #d6b36a; padding: 9px 20px; border-radius: 50px; font-size: 0.82rem; font-weight: 700; }
+        .right-vase { flex-shrink: 0; width: clamp(130px, 19vw, 200px); height: clamp(130px, 19vw, 200px); border-radius: 50%;
+          background: radial-gradient(circle at 35% 30%, #e6cd92 0%, #cda85f 45%, #b08c45 100%);
+          box-shadow: 0 18px 44px rgba(0,0,0,0.35), inset -8px -10px 26px rgba(120,90,30,0.5), inset 6px 8px 22px rgba(255,244,214,0.45);
+          display: flex; align-items: center; justify-content: center; }
+        .vase-content { text-align: center; }
+        .vase-content .num { font-family: 'Amiri', serif; font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 900; color: #5e1322; }
+        .vase-content .lbl { color: rgba(94,19,34,0.8); font-size: 0.92rem; font-weight: 700; }
+
+        /* Banner 3 */
+        .b3 .layout { gap: 40px; }
+        .bottles-mock { display: flex; gap: 12px; align-items: flex-end; flex-shrink: 0; padding-top: 14px; }
+        .bottle { width: clamp(28px, 4.2vw, 50px); border-radius: 6px 6px 4px 4px;
+          background: linear-gradient(to top, #b08c45 0%, #d6b36a 55%, #e6cd92 100%);
+          box-shadow: inset -4px 0 8px rgba(120,90,30,0.4), inset 4px 0 8px rgba(255,244,214,0.3);
+          position: relative; }
+        .bottle::before { content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 70%; height: 10px; background: #2f6b3d; border-radius: 3px 3px 0 0; box-shadow: 0 -2px 0 #245430; }
+        .b3 .bottle:nth-child(1) { height: 76px; }
+        .b3 .bottle:nth-child(2) { height: 112px; }
+        .b3 .bottle:nth-child(3) { height: 94px; }
+        .b3 .bottle:nth-child(4) { height: 64px; }
+        .right-content { flex: 1; text-align: right; }
+        .new-pill { display: inline-block; background: #c9a961; color: #5e1322; padding: 5px 16px; border-radius: 50px; font-size: 0.74rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
+        .b3 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin-bottom: 12px; color: #f6ecdc; }
+        .b3 .gold { color: #d6b36a; }
+        .b3 .desc { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin: 0 0 22px auto; }
+        .num-row { display: flex; gap: 34px; justify-content: flex-start; }
+        .num-row > div { text-align: center; }
+        .num-row strong { display: block; font-family: 'Amiri', serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; color: #d6b36a; }
+        .num-row span { color: rgba(243,227,207,0.7); font-size: 0.8rem; }
+
+        /* Nav + dots */
+        .ban-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%; background: rgba(26,6,16,0.5); border: 1px solid rgba(201,169,97,0.35); color: #d6b36a; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; transition: background 0.2s; }
+        .ban-nav:hover { background: rgba(123,25,44,0.9); }
+        .ban-nav-next { right: 14px; }
+        .ban-nav-prev { left: 14px; }
+        .ban-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; z-index: 5; }
+        .ban-dots .dot { width: 8px; height: 8px; border-radius: 50px; background: rgba(201,169,97,0.35); border: none; cursor: pointer; padding: 0; transition: all 0.3s; }
+        .ban-dots .dot.active { width: 22px; background: #d6b36a; }
+
+        @media (max-width: 680px) {
+          .ban-track { height: 540px; }
+          .ban-content { padding: clamp(22px, 4vw, 36px); }
+          .ban-nav { display: none; }
+          .main-row, .layout { flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+          .text-block, .b2 .left, .right-content { text-align: center; }
+          .text-block p, .b3 .desc { margin-left: auto; margin-right: auto; }
+          .num-row { justify-content: center; gap: 22px; }
+          .b3 .layout { flex-direction: column-reverse; }
+        }
       `}</style>
     </div>
   )
