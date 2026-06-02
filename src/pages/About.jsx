@@ -61,10 +61,7 @@ export default function About() {
             
             <div style={{ background: '#fff', borderRadius: 24, padding: '36px 24px', textAlign: 'center', border: '1px solid #E2C9A8', boxShadow: '0 8px 32px rgba(123,25,44,0.08)' }}>
               <div style={{ width: 110, height: 110, borderRadius: '50%', background: 'linear-gradient(135deg, #7b192c, #a82040)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(123,25,44,0.25)' }}>
-                {settings?.owner_photo_url
-                  ? <img src={settings.owner_photo_url} alt="Ghalia" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  : <div style={{ width: 60, height: 60, borderRadius: '50%', background: 'rgba(244,190,105,0.3)' }} />
-                }
+                <img src="/aromena-founder.webp" alt="Ghalia" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <h3 style={{ color: '#3E1C00', fontSize: '1.15rem', fontWeight: 700, marginBottom: 5, fontFamily: 'Amiri, serif' }}>
                 {t('about.owner')}
