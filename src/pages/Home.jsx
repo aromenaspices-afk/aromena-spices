@@ -365,7 +365,7 @@ export default function Home() {
                 <div style={{ position: 'absolute', inset: -12, borderRadius: '50%', border: '3px dashed rgba(123,25,44,0.3)', animation: 'spin 20s linear infinite' }} />
                 <div style={{ position: 'absolute', bottom: 10, right: -10, background: '#fff', borderRadius: 16, padding: '10px 16px', boxShadow: '0 8px 24px rgba(62,28,0,0.12)', zIndex: 2 }}>
                   <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '0.85rem', marginBottom: 2 }}>Ghalia Sawan</p>
-                  <p style={{ color: '#9C6B4E', fontSize: '0.75rem' }}>{isAr ? 'مؤسسة أرومينا' : 'Founder of Aromena'}</p>
+                  <p style={{ color: '#9C6B4E', fontSize: '0.75rem' }}>{isAr ? 'مؤسِّسة أرومينا' : 'Founder of Aromena'}</p>
                 </div>
               </div>
             </div>
@@ -483,7 +483,7 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
-              {isAr ? 'باقاتنا المميزة' : 'Our Packages'}
+              {isAr ? 'باقاتنا المُميّزة' : 'Our Packages'}
             </h2>
             <p style={{ color: '#9c6b4e', fontSize: '0.95rem' }}>
               {isAr ? '3 باقات جاهزة أو صمّم باقتك الخاصّة' : '3 ready packages or build your own'}
