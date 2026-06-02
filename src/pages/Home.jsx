@@ -3,10 +3,12 @@ import { useCart } from '../context/CartContext'
 import { useCollection } from '../hooks/useFirestore'
 import { useSettings } from '../hooks/useSettings'
 import Ticker from '../components/Ticker'
+import ShareButton from '../components/ShareButton'
 import {
   FiShoppingCart, FiArrowLeft, FiArrowRight,
   FiChevronLeft, FiChevronRight,
-  FiDroplet, FiGlobe, FiTruck, FiHeart
+  FiDroplet, FiGlobe, FiTruck, FiHeart,
+  FiPackage, FiCheck
 } from 'react-icons/fi'
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -37,6 +39,7 @@ export default function Home() {
   const featured = products.slice(0, 8)
   const [visible, setVisible] = useState(false)
   const [addedPkg, setAddedPkg] = useState(null)
+  const packagesUrl = `${window.location.origin}/packages`
 
   function handleAddPackage(pkg) {
     const pd = calcDiscount(pkg.price, pkg.discount, pkg.discountExpiry)
@@ -486,37 +489,125 @@ export default function Home() {
               {isAr ? '3 باقات جاهزة أو صمّم باقتك الخاصّة' : '3 ready packages or build your own'}
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginBottom: 20 }}>
-            {packages.map((pkg, i) => (
-              <div key={pkg.id || i} style={{ background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1px solid #E2C9A8', boxShadow: '0 4px 20px rgba(62,28,0,0.07)', position: 'relative' }}>
-                {pkg.tag_ar && (
-                  <div style={{ position: 'absolute', top: 12, right: isAr ? 'auto' : 12, left: isAr ? 12 : 'auto', background: pkg.color, color: '#fff', fontSize: '0.7rem', padding: '3px 12px', borderRadius: 50, fontWeight: 700, zIndex: 1 }}>
-                    {isAr ? pkg.tag_ar : pkg.tag_en}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24, alignItems: 'stretch', marginBottom: 24 }}>
+            {packages.map((pkg, i) => {
+              const pkgProducts = (pkg.items || []).map(slug => products.find(p => p.slug === slug)).filter(Boolean)
+              const isAdded     = addedPkg === pkg.id
+              const pkgName     = isAr ? pkg.name_ar : pkg.name_en
+              const pkgImg      = pkg.images?.[0] || pkg.image || null
+              const pd          = calcDiscount(pkg.price, pkg.discount, pkg.discountExpiry)
+
+              return (
+                <div key={pkg.id || i} style={{
+                  background: '#fff', borderRadius: 22, border: '1px solid #E2C9A8',
+                  boxShadow: '0 4px 24px rgba(123,25,44,0.07)', overflow: 'hidden',
+                  transition: 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease',
+                  display: 'flex', flexDirection: 'column',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 20px 48px rgba(123,25,44,0.15)' }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(123,25,44,0.07)' }}
+                >
+                  {/* الصورة */}
+                  <div style={{ position: 'relative', height: 260, flexShrink: 0, overflow: 'hidden', borderRadius: '22px 22px 0 0', background: '#fdf0f2' }}>
+                    {pkgImg
+                      ? <img src={pkgImg} alt={pkgName} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>{pkg.emoji || '🎁'}</div>
+                    }
+                    {pd.has && (
+                      <div style={{
+                        position: 'absolute', top: 14, right: isAr ? 'auto' : 14, left: isAr ? 14 : 'auto',
+                        width: 54, height: 54, borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #f4be69, #e09d30)',
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.25)', zIndex: 3, border: '2px solid rgba(255,255,255,0.4)',
+                      }}>
+                        <span style={{ color: '#7b192c', fontSize: '0.6rem', fontWeight: 800, lineHeight: 1 }}>{isAr ? 'خصم' : 'SALE'}</span>
+                        <span style={{ color: '#7b192c', fontSize: '0.85rem', fontWeight: 900, lineHeight: 1 }}>{pd.pct}%</span>
+                      </div>
+                    )}
+                    {pkg.tag_ar && (
+                      <div style={{
+                        position: 'absolute', top: 14, left: isAr ? 'auto' : 14, right: isAr ? 14 : 'auto',
+                        background: 'linear-gradient(to left, #7b192c, #a82040)',
+                        color: '#f4be69', fontSize: '0.68rem', fontWeight: 700,
+                        padding: '4px 12px', borderRadius: 50, zIndex: 3,
+                      }}>
+                        {isAr ? pkg.tag_ar : pkg.tag_en}
+                      </div>
+                    )}
                   </div>
-                )}
-                <div style={{ background: `linear-gradient(135deg, ${pkg.color}18, ${pkg.color}30)`, padding: '30px 20px', textAlign: 'center', minHeight: 130, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                  {pkg.image
-                    ? <img src={pkg.image} alt={pkg.name_ar} style={{ width: '100%', height: 110, objectFit: 'cover', borderRadius: 12, marginBottom: 8 }} />
-                    : <div style={{ fontSize: '3rem', marginBottom: 8 }}>{pkg.emoji}</div>
-                  }
-                  <h3 style={{ color: '#3E1C00', fontWeight: 700, fontFamily: 'Amiri, serif', fontSize: '1.1rem' }}>{isAr ? pkg.name_ar : pkg.name_en}</h3>
+
+                  {/* المحتوى */}
+                  <div style={{ padding: '18px 18px 20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <h3 style={{ color: '#3E1C00', fontSize: '1.1rem', fontWeight: 700, fontFamily: 'Amiri, serif', margin: 0, marginBottom: 2 }}>{pkgName}</h3>
+                        {pkg.name_en && isAr && <p style={{ color: '#9C6B4E', fontSize: '0.75rem', margin: 0 }}>{pkg.name_en}</p>}
+                      </div>
+                      <ShareButton url={`${packagesUrl}#${pkg.id}`} title={isAr ? `${pkgName} — أرومينا` : `${pkgName} — Aromena`} isAr={isAr} size="small" />
+                    </div>
+
+                    {(isAr ? pkg.desc_ar : pkg.desc_en) && <p style={{ color: '#6B3A2A', fontSize: '0.83rem', lineHeight: 1.7, marginBottom: 14 }}>{isAr ? pkg.desc_ar : pkg.desc_en}</p>}
+
+                    <div style={{ height: 1, background: 'linear-gradient(to right, #E2C9A8, transparent)', marginBottom: 14 }} />
+
+                    {pkgProducts.length > 0 && (
+                      <div style={{ marginBottom: 16 }}>
+                        <p style={{ color: '#3E1C00', fontWeight: 700, fontSize: '0.82rem', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 5 }}>
+                          <FiPackage size={12} color="#7b192c" />
+                          {isAr ? `المحتوى (${pkgProducts.length} منتج)` : `Contents (${pkgProducts.length} items)`}
+                        </p>
+                        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                          {pkgProducts.map(p => (
+                            <div key={p.slug} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: 70 }}>
+                              <div style={{ width: 64, height: 64, borderRadius: '50%', overflow: 'hidden', border: '2px solid #E2C9A8', background: '#fdf0f2', flexShrink: 0 }}>
+                                {(p.images?.[0] || p.image)
+                                  ? <img src={p.images?.[0] || p.image} alt={isAr ? p.name_ar : p.name_en} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                  : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><FiPackage size={22} color="#9C6B4E" /></div>
+                                }
+                              </div>
+                              <span style={{ fontSize: '0.7rem', color: '#6B3A2A', fontWeight: 600, textAlign: 'center', width: '100%', lineHeight: 1.4, wordBreak: 'break-word' }}>
+                                {isAr ? p.name_ar : p.name_en}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div style={{ marginBottom: 14, marginTop: 'auto' }}>
+                      {pd.has ? (
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                          <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(pd.final)}</span>
+                          <span style={{ color: '#9C6B4E', textDecoration: 'line-through', fontSize: '0.92rem' }}>{formatPrice(pkg.price)}</span>
+                        </div>
+                      ) : (
+                        <span style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(pkg.price)}</span>
+                      )}
+                      <p style={{ color: '#9C6B4E', fontSize: '0.72rem', marginTop: 2 }}>{isAr ? 'شامل الشّحن' : 'incl. shipping'}</p>
+                    </div>
+
+                    <button onClick={() => handleAddPackage(pkg)} style={{
+                      width: '100%', background: isAdded ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)',
+                      color: '#f4be69', padding: '13px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem',
+                      border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                      fontFamily: 'Amiri, serif', transition: 'all 0.3s',
+                      boxShadow: isAdded ? 'none' : '0 4px 16px rgba(123,25,44,0.25)',
+                    }}>
+                      {isAdded
+                        ? <><FiCheck size={16} /> {isAr ? 'تمت الإضافة!' : 'Added!'}</>
+                        : <><FiShoppingCart size={16} /> {isAr ? 'أضف للسّلّة' : 'Add to Cart'}</>
+                      }
+                    </button>
+                  </div>
                 </div>
-                <div style={{ padding: '16px 20px', textAlign: 'center' }}>
-                  <p style={{ color: '#9C6B4E', fontSize: '0.85rem', marginBottom: 10 }}>{isAr ? pkg.desc_ar : pkg.desc_en}</p>
-                  <p style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.3rem', marginBottom: 14 }}>{formatPrice(pkg.price)}</p>
-                  <button onClick={() => handleAddPackage(pkg)} style={{ display: 'block', width: '100%', cursor: 'pointer', border: 'none', background: addedPkg === pkg.id ? 'linear-gradient(to left, #16A34A, #15803d)' : 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', fontFamily: 'Amiri, serif', transition: 'background 0.3s ease' }}>
-                    {addedPkg === pkg.id
-                      ? (isAr ? '✓ تمّت الإضافة' : '✓ Added')
-                      : (isAr ? 'أضف للسّلّة' : 'Add to Cart')}
-                  </button>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           {/* ═══ بنر تصميم الباقة الخاصّة (تحت الباقات) ═══ */}
           <Link
-            to="/packages"
+            to="/packages#custom-box"
             dir={isAr ? 'rtl' : 'ltr'}
             className="custom-box-banner"
           >

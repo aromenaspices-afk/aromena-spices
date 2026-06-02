@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../context/CartContext'
 import { useCollection } from '../hooks/useFirestore'
@@ -59,6 +60,18 @@ export default function Packages() {
   const { data: allProducts }   = useCollection('products')
   const { formatPrice }         = useCurrency()
   const [addedPkg, setAddedPkg] = useState(null)
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!location.hash) return
+    const timers = [200, 600, 1000, 1500].map(delay =>
+      setTimeout(() => {
+        const el = document.querySelector(location.hash)
+        if (el) el.scrollIntoView({ behavior: delay === 200 ? 'smooth' : 'auto', block: 'start' })
+      }, delay)
+    )
+    return () => timers.forEach(clearTimeout)
+  }, [location.hash, readyPackages])
 
   function handleAddReady(pkg) {
     const pd = calcDiscount(pkg.price, pkg.discount, pkg.discountExpiry)
@@ -134,7 +147,7 @@ export default function Packages() {
           </div>
 
           {/* Grid — equal height بـ align-items: stretch */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24, alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24, alignItems: 'stretch' }}>
             {readyPackages.map(pkg => {
               const pkgProducts = (pkg.items || []).map(slug => allProducts.find(p => p.slug === slug)).filter(Boolean)
               const isAdded     = addedPkg === pkg.id
@@ -285,7 +298,9 @@ export default function Packages() {
               {isAr ? 'اختر 4 بهارات من تشكيلتنا بسعر خاص' : 'Choose 4 spices from our collection at a special price'}
             </p>
           </div>
-          <CustomBoxBuilder />
+          <div id="custom-box" style={{ scrollMarginTop: 80 }}>
+            <CustomBoxBuilder />
+          </div>
         </div>
       </section>
 
