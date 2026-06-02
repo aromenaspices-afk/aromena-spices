@@ -279,7 +279,7 @@ export default function Packages() {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 8 }}>
             <h2 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 6 }}>
-              {isAr ? 'صمّم باقتك الخاصة' : 'Build Your Custom Box'}
+              {isAr ? 'صمّم باقتك الخاصّة' : 'Build Your Custom Box'}
             </h2>
             <p style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>
               {isAr ? 'اختر 4 بهارات من تشكيلتنا بسعر خاص' : 'Choose 4 spices from our collection at a special price'}

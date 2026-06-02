@@ -43,7 +43,7 @@ export default function Home() {
 
   const [banIdx, setBanIdx] = useState(0)
   const banTouchX = useRef(null)
-  const BANNER_COUNT = 3
+  const BANNER_COUNT = 4
 
   useEffect(() => { setTimeout(() => setVisible(true), 100) }, [])
 
@@ -180,6 +180,32 @@ export default function Home() {
           style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)', transition: 'all 0.7s ease' }}
         >
 
+          {/* البنر الرابع — صمّم باقتك الخاصّة */}
+          <div className={`banner b4 ${banIdx === 3 ? 'active' : ''}`} id="b4">
+            <div className="ornament-corner ornament-tl"></div>
+            <div className="ornament-corner ornament-br"></div>
+            <div className="ban-content">
+              <div className="layout">
+                <div className="left">
+                  <span className="small-tag">— باقة مخصّصة</span>
+                  <h2>صمّم باقتكَ <span className="accent">الخاصّة</span></h2>
+                  <p>اختر 4 خلطات بهارات من تشكيلتنا الفاخرة، نغلّفها لك بعناية في تغليفٍ أنيق — هديّة مثاليّة لمن تحبّ.</p>
+                  <div className="boxes">
+                    <div className="box-item">4 خلطات مختارة</div>
+                    <div className="box-item">تغليف فاخر</div>
+                    <div className="box-item">هديّة مثاليّة</div>
+                  </div>
+                </div>
+                <div className="right-vase">
+                  <div className="vase-content">
+                    <div className="num">4</div>
+                    <div className="lbl">خلطات</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* البنر الأول — افتتاح المتجر */}
           <div className={`banner b1 ${banIdx === 0 ? 'active' : ''}`} id="b1">
             <div className="ornament-corner ornament-tl"></div>
@@ -272,7 +298,7 @@ export default function Home() {
           <button onClick={banPrev} className="ban-nav ban-nav-next" aria-label="prev"><FiChevronRight size={18} /></button>
           <button onClick={banNext} className="ban-nav ban-nav-prev" aria-label="next"><FiChevronLeft size={18} /></button>
           <div className="ban-dots">
-            {[0, 1, 2].map(idx => (
+            {[0, 1, 2, 3].map(idx => (
               <button key={idx} onClick={() => setBanIdx(idx)} className={banIdx === idx ? 'dot active' : 'dot'} aria-label={`banner ${idx + 1}`} />
             ))}
           </div>
@@ -434,7 +460,7 @@ export default function Home() {
               {isAr ? 'باقاتنا المميزة' : 'Our Packages'}
             </h2>
             <p style={{ color: '#9c6b4e', fontSize: '0.95rem' }}>
-              {isAr ? '3 باقات جاهزة أو صمّم باقتك الخاصة' : '3 ready packages or build your own'}
+              {isAr ? '3 باقات جاهزة أو صمّم باقتك الخاصّة' : '3 ready packages or build your own'}
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginBottom: 20 }}>
@@ -517,13 +543,13 @@ export default function Home() {
         .right-mark .gold-line { width: 56px; height: 1px; background: linear-gradient(90deg, transparent, #c9a961, transparent); margin: 14px auto; }
         .right-mark .url-mini { font-size: 0.68rem; letter-spacing: 1px; color: rgba(214,179,106,0.6); }
 
-        /* Banner 2 */
+        /* Banner 2 + 4 */
         .layout { flex: 1; display: flex; align-items: center; gap: 34px; }
-        .b2 .left { flex: 1; text-align: right; }
+        .b2 .left, .b4 .left { flex: 1; text-align: right; }
         .small-tag { color: #d6b36a; font-size: 0.84rem; font-weight: 600; letter-spacing: 1px; }
-        .b2 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin: 10px 0 14px; color: #f6ecdc; }
-        .b2 .accent { color: #d6b36a; }
-        .b2 p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin-bottom: 22px; }
+        .b2 h2, .b4 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin: 10px 0 14px; color: #f6ecdc; }
+        .b2 .accent, .b4 .accent { color: #d6b36a; }
+        .b2 p, .b4 p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin-bottom: 22px; }
         .boxes { display: flex; gap: 12px; flex-wrap: wrap; }
         .box-item { background: rgba(201,169,97,0.08); border: 1px solid rgba(201,169,97,0.35); color: #d6b36a; padding: 9px 20px; border-radius: 50px; font-size: 0.82rem; font-weight: 700; }
         .right-vase { flex-shrink: 0; width: clamp(130px, 19vw, 200px); height: clamp(130px, 19vw, 200px); border-radius: 50%;
@@ -570,7 +596,7 @@ export default function Home() {
           .ban-content { padding: clamp(22px, 4vw, 36px); }
           .ban-nav { display: none; }
           .main-row, .layout { flex-direction: column; align-items: center; gap: 18px; text-align: center; }
-          .text-block, .b2 .left, .right-content { text-align: center; }
+          .text-block, .b2 .left, .b4 .left, .right-content { text-align: center; }
           .text-block p, .b3 .desc { margin-left: auto; margin-right: auto; }
           .num-row { justify-content: center; gap: 22px; }
           .b3 .layout { flex-direction: column-reverse; }
