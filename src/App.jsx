@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './context/AuthContext'
 import { useVisitorTracker } from './hooks/useVisitorTracker'
@@ -32,6 +32,14 @@ function VisitorTracker() {
   return null
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 export default function App() {
   const [splashDone, setSplashDone] = useState(false)
 
@@ -41,6 +49,7 @@ export default function App() {
         <CurrencyProvider>
         <CartProvider>
           {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
+          <ScrollToTop />
           <VisitorTracker />
           <CookieBanner />
           <WhatsAppButton />

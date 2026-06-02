@@ -59,7 +59,7 @@ export const DEFAULT_ZONES = {
 }
 
 export const DEFAULT_COUNTRIES = [
-  { country_ar:'تركيّا',           country_en:'Turkey',       flag:'🇹🇷', zone:0, days:'1-3', domestic:true, freeOver:500  },
+  { country_ar:'تركيّا',           country_en:'Turkey',       flag:'🇹🇷', zone:0, days:'1-3', domestic:true, flatPrice:100, freeOver:500 },
   { country_ar:'ألمانيا',         country_en:'Germany',      flag:'🇩🇪', zone:1, days:'4-5', freeOver:3000 },
   { country_ar:'هولندا',          country_en:'Netherlands',  flag:'🇳🇱', zone:2, days:'4-5', freeOver:3500 },
   { country_ar:'فرنسا',           country_en:'France',       flag:'🇫🇷', zone:2, days:'4-5', freeOver:3500 },
@@ -105,7 +105,7 @@ export async function getShippingConfig() {
 export function clearShippingCache() { _cache = null }
 
 // ── دالة حساب الشحن ──────────────────────────────────
-export async function calculateShipping(countryInput, totalWeightKg, totalPrice) {
+export async function calculateShipping(countryInput, totalWeightKg, totalPrice, boxesOnly = false) {
   const config = await getShippingConfig()
   const countries = config.countries || DEFAULT_COUNTRIES
   const zones = config.zones || DEFAULT_ZONES
@@ -123,16 +123,20 @@ export async function calculateShipping(countryInput, totalWeightKg, totalPrice)
 
   if (!country) return calcZone(8, totalWeightKg, zones, '10-14', null)
 
-  // شحن مجاني
+  // شحن مجاني عند طلب البوكسات فقط (بوكسات جاهزة أو تصميم باقة)
+  if (boxesOnly) {
+    return { price: 0, days: country.days, found: true, country, free: true }
+  }
+
+  // شحن مجاني عند تجاوز حدّ معيّن (دولي)
   if (totalPrice >= (country.freeOver || 99999)) {
     return { price: 0, days: country.days, found: true, country, free: true }
   }
 
-  // شحن محلي تركيا
+  // شحن محلي تركيا — أجرة ثابتة
   if (country.domestic) {
-    const grams = totalWeightKg * 1000
-    const tier = turkey.find(t => grams <= t.maxGrams) || turkey[turkey.length - 1]
-    return { price: tier.price, days: country.days, found: true, country, carrier: 'Yurtiçi Kargo' }
+    const price = country.flatPrice ?? (turkey.find(t => totalWeightKg * 1000 <= t.maxGrams) || turkey[turkey.length - 1]).price
+    return { price, days: country.days, found: true, country, carrier: 'Yurtiçi Kargo' }
   }
 
   return calcZone(country.zone, totalWeightKg, zones, country.days, country)

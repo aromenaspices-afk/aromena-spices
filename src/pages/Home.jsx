@@ -36,6 +36,28 @@ export default function Home() {
   const { settings } = useSettings()
   const featured = products.slice(0, 8)
   const [visible, setVisible] = useState(false)
+  const [addedPkg, setAddedPkg] = useState(null)
+
+  function handleAddPackage(pkg) {
+    const pd = calcDiscount(pkg.price, pkg.discount, pkg.discountExpiry)
+    const pkgProducts = (pkg.items || []).map(slug => products.find(p => p.slug === slug)).filter(Boolean)
+    addItem({
+      id:          `pkg_${pkg.id}`,
+      productId:   pkg.id,
+      isPackage:   true,
+      name:        isAr ? pkg.name_ar : pkg.name_en,
+      size:        isAr ? `${pkgProducts.length} منتج` : `${pkgProducts.length} items`,
+      price:       pd.final,
+      image:       pkg.images?.[0] || pkg.image || null,
+      weightKg:    pkg.weightKg || 0.6,
+      pkgItems:    pkgProducts.map(p => ({
+        name:  isAr ? p.name_ar : p.name_en,
+        image: p.images?.[0] || p.image || null,
+      })),
+    })
+    setAddedPkg(pkg.id)
+    setTimeout(() => setAddedPkg(null), 2000)
+  }
   const [sliderIdx, setSliderIdx] = useState(0)
   const sliderRef = useRef(null)
   const touchStartX = useRef(null)
@@ -177,6 +199,7 @@ export default function Home() {
           onTouchStart={banTouchStart}
           onTouchEnd={banTouchEnd}
           className="ban-track"
+          dir={isAr ? 'rtl' : 'ltr'}
           style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(24px)', transition: 'all 0.7s ease' }}
         >
 
@@ -187,19 +210,19 @@ export default function Home() {
             <div className="ban-content">
               <div className="layout">
                 <div className="left">
-                  <span className="small-tag">— باقة مخصّصة</span>
-                  <h2>صمّم باقتكَ <span className="accent">الخاصّة</span></h2>
-                  <p>اختر 4 خلطات بهارات من تشكيلتنا الفاخرة، نغلّفها لك بعناية في تغليفٍ أنيق — هديّة مثاليّة لمن تحبّ.</p>
+                  <span className="small-tag">{isAr ? '— باقة مخصّصة' : '— Custom Box'}</span>
+                  <h2>{isAr ? <>صمّم باقتكَ <span className="accent">الخاصّة</span></> : <>Build Your <span className="accent">Own Box</span></>}</h2>
+                  <p>{isAr ? 'اختر 4 خلطات بهارات من تشكيلتنا الفاخرة، نغلّفها لك بعناية في تغليفٍ أنيق — هديّة مثاليّة لمن تحبّ.' : 'Choose 4 spice blends from our premium collection, carefully wrapped in elegant packaging — a perfect gift for someone you love.'}</p>
                   <div className="boxes">
-                    <div className="box-item">4 خلطات مختارة</div>
-                    <div className="box-item">تغليف فاخر</div>
-                    <div className="box-item">هديّة مثاليّة</div>
+                    <div className="box-item">{isAr ? '4 خلطات مختارة' : '4 Selected Blends'}</div>
+                    <div className="box-item">{isAr ? 'تغليف فاخر' : 'Luxury Packaging'}</div>
+                    <div className="box-item">{isAr ? 'هديّة مثاليّة' : 'Perfect Gift'}</div>
                   </div>
                 </div>
                 <div className="right-vase">
                   <div className="vase-content">
                     <div className="num">4</div>
-                    <div className="lbl">خلطات</div>
+                    <div className="lbl">{isAr ? 'خلطات' : 'Blends'}</div>
                   </div>
                 </div>
               </div>
@@ -221,20 +244,20 @@ export default function Home() {
                   <span className="ar-brand-name">AROMENA</span>
                   <span className="ar-brand-tag">SPICES</span>
                 </div>
-                <div className="opening-badge">افتتاح المتجر</div>
+                <div className="opening-badge">{isAr ? 'افتتاح المتجر' : 'Store Opening'}</div>
               </div>
               <div className="main-row">
                 <div className="text-block">
-                  <h2>النّكهة الأصلية<br /><span className="accent">أصبحت بين يديك</span></h2>
-                  <p>تشكيلة فاخرة من خلطات البهارات الأصلية، تُحضّر بعناية واحترافية</p>
+                  <h2>{isAr ? <>النّكهة الأصلية<br /><span className="accent">أصبحت بين يديك</span></> : <>Authentic Flavor<br /><span className="accent">Now in Your Hands</span></>}</h2>
+                  <p>{isAr ? 'تشكيلة فاخرة من خلطات البهارات الأصلية، تُحضّر بعناية واحترافية' : 'A premium collection of authentic spice blends, crafted with care and expertise'}</p>
                   <div className="promo-tag">
                     <strong>15%</strong>
-                    <span>خصم ترحيبي<br />كوبون WELCOME15</span>
+                    <span>{isAr ? <>خصم ترحيبي<br />كوبون WELCOME15</> : <>Welcome Discount<br />Coupon WELCOME15</>}</span>
                   </div>
                 </div>
                 <div className="right-mark">
                   <div className="digit">12</div>
-                  <div className="digit-label">خلطة أصيلة</div>
+                  <div className="digit-label">{isAr ? 'خلطة أصيلة' : 'Authentic Blends'}</div>
                   <div className="gold-line"></div>
                   <div className="url-mini">aromena.com.tr</div>
                 </div>
@@ -249,19 +272,19 @@ export default function Home() {
             <div className="ban-content">
               <div className="layout">
                 <div className="left">
-                  <span className="small-tag">— لماذا أرومينا</span>
-                  <h2>الجّودة في <span className="accent">كلّ رشّة</span></h2>
-                  <p>مكوّنات طبيعيّة من مصادرها الأصليّة، خلطات مُتقنة بوصفات مدروسة، وتنوّع استثنائي من المطبخ الخليجي إلى التّركي والإيطالي.</p>
+                  <span className="small-tag">{isAr ? '— لماذا أرومينا' : '— Why Aromena'}</span>
+                  <h2>{isAr ? <>الجّودة في <span className="accent">كلّ رشّة</span></> : <>Quality in <span className="accent">Every Pinch</span></>}</h2>
+                  <p>{isAr ? 'مكوّنات طبيعيّة من مصادرها الأصليّة، خلطات مُتقنة بوصفات مدروسة، وتنوّع استثنائي من المطبخ الخليجي إلى التّركي والإيطالي.' : 'Natural ingredients from their origins, expertly crafted recipes, and an exceptional variety from Gulf to Turkish and Italian cuisine.'}</p>
                   <div className="boxes">
-                    <div className="box-item">طبيعي 100%</div>
-                    <div className="box-item">بدون حافظ</div>
-                    <div className="box-item">شحن سريع</div>
+                    <div className="box-item">{isAr ? 'طبيعي 100%' : '100% Natural'}</div>
+                    <div className="box-item">{isAr ? 'بدون حافظ' : 'No Preservatives'}</div>
+                    <div className="box-item">{isAr ? 'شحن سريع' : 'Fast Shipping'}</div>
                   </div>
                 </div>
                 <div className="right-vase">
                   <div className="vase-content">
                     <div className="num">100%</div>
-                    <div className="lbl">طبيعي</div>
+                    <div className="lbl">{isAr ? 'طبيعي' : 'Natural'}</div>
                   </div>
                 </div>
               </div>
@@ -281,13 +304,13 @@ export default function Home() {
                   <div className="bottle"></div>
                 </div>
                 <div className="right-content">
-                  <span className="new-pill">جديد · 2026</span>
-                  <h2>مجموعة <span className="gold">أرومينا</span> الكاملة</h2>
-                  <p className="desc">12 خلطة بهارات أصيلة + 3 بوكسات هدايا فاخرة — تشكيلة بهارات مختلفة حول العالم.</p>
+                  <span className="new-pill">{isAr ? 'جديد · 2026' : 'New · 2026'}</span>
+                  <h2>{isAr ? <>مجموعة <span className="gold">أرومينا</span> الكاملة</> : <>The Complete <span className="gold">Aromena</span> Collection</>}</h2>
+                  <p className="desc">{isAr ? '12 خلطة بهارات أصيلة + 3 بوكسات هدايا فاخرة — تشكيلة بهارات مختلفة حول العالم.' : '12 authentic spice blends + 3 premium gift boxes — a diverse spice selection from around the world.'}</p>
                   <div className="num-row">
-                    <div><strong>12</strong><span>خلطة</span></div>
-                    <div><strong>3</strong><span>بوكسات</span></div>
-                    <div><strong>$4+</strong><span>تبدأ من</span></div>
+                    <div><strong>12</strong><span>{isAr ? 'خلطة' : 'Blends'}</span></div>
+                    <div><strong>3</strong><span>{isAr ? 'بوكسات' : 'Boxes'}</span></div>
+                    <div><strong>$4+</strong><span>{isAr ? 'تبدأ من' : 'Starts at'}</span></div>
                   </div>
                 </div>
               </div>
@@ -481,19 +504,106 @@ export default function Home() {
                 <div style={{ padding: '16px 20px', textAlign: 'center' }}>
                   <p style={{ color: '#9C6B4E', fontSize: '0.85rem', marginBottom: 10 }}>{isAr ? pkg.desc_ar : pkg.desc_en}</p>
                   <p style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.3rem', marginBottom: 14 }}>{formatPrice(pkg.price)}</p>
-                  <Link to="/packages" style={{ display: 'block', background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none' }}>
-                    {isAr ? 'اطلب الآن' : 'Order Now'}
-                  </Link>
+                  <button onClick={() => handleAddPackage(pkg)} style={{ display: 'block', width: '100%', cursor: 'pointer', border: 'none', background: addedPkg === pkg.id ? 'linear-gradient(to left, #16A34A, #15803d)' : 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', fontFamily: 'Amiri, serif', transition: 'background 0.3s ease' }}>
+                    {addedPkg === pkg.id
+                      ? (isAr ? '✓ تمّت الإضافة' : '✓ Added')
+                      : (isAr ? 'أضف للسّلّة' : 'Add to Cart')}
+                  </button>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* ═══ بنر تصميم الباقة الخاصّة (تحت الباقات) ═══ */}
+          <Link
+            to="/packages"
+            dir={isAr ? 'rtl' : 'ltr'}
+            className="custom-box-banner"
+          >
+            <div className="cbb-glow" />
+            <div className="cbb-text">
+              <span className="cbb-eyebrow">{isAr ? 'باقة مخصّصة' : 'Custom Box'}</span>
+              <h3 className="cbb-title">{isAr ? 'صمّم باقتكَ الخاصّة' : 'Build Your Own Box'}</h3>
+              <p className="cbb-desc">
+                {isAr
+                  ? 'اختر 4 خلطات من تشكيلتنا الفاخرة، بتغليف أنيق وهديّة مثاليّة لمن تحبّ.'
+                  : 'Pick 4 blends from our premium selection, in elegant packaging — a perfect gift.'}
+              </p>
+              <div className="cbb-features">
+                <span>{isAr ? '4 خلطات مختارة' : '4 Selected Blends'}</span>
+                <span>{isAr ? 'تغليف فاخر' : 'Luxury Packaging'}</span>
+                <span>{isAr ? 'هديّة مثاليّة' : 'Perfect Gift'}</span>
+              </div>
+            </div>
+            <span className="cbb-cta">
+              {isAr ? 'اطلب الآن' : 'Order Now'}
+              <span className="cbb-arrow">{isAr ? '←' : '→'}</span>
+            </span>
+          </Link>
 
         </div>
       </section>
 
       <style>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* ===== Custom box CTA banner (under packages) ===== */
+        .custom-box-banner {
+          display: flex; align-items: center; justify-content: space-between; gap: 28px;
+          width: 100%; margin-top: 24px; padding: clamp(26px, 3.4vw, 40px) clamp(28px, 4vw, 52px);
+          position: relative; overflow: hidden; text-decoration: none;
+          border-radius: 22px;
+          background:
+            radial-gradient(60% 80% at 78% 50%, rgba(168,32,64,0.55) 0%, transparent 60%),
+            linear-gradient(105deg, #3d0d18 0%, #5e1322 48%, #7a1a2e 100%);
+          border: 1px solid rgba(201,169,97,0.22);
+          box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .custom-box-banner:hover { transform: translateY(-4px); box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+        .cbb-glow {
+          position: absolute; inset-inline-end: -60px; top: -60px; width: 260px; height: 260px;
+          background: radial-gradient(circle, rgba(201,169,97,0.22) 0%, transparent 70%);
+          pointer-events: none;
+        }
+        .cbb-text { position: relative; z-index: 1; text-align: start; }
+        .cbb-eyebrow {
+          display: inline-block; font-family: 'Amiri', serif; font-size: 0.78rem; font-weight: 700;
+          color: #c9a961; background: rgba(201,169,97,0.14); border: 1px solid rgba(201,169,97,0.35);
+          padding: 4px 14px; border-radius: 50px; margin-bottom: 12px; letter-spacing: 0.3px;
+        }
+        .cbb-title {
+          font-family: 'Amiri', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
+          color: #fdf3e3; margin: 0 0 10px;
+        }
+        .cbb-desc {
+          font-family: 'Amiri', serif; color: #e8cfa6; font-size: clamp(0.9rem, 1.5vw, 1.02rem);
+          line-height: 1.7; max-width: 560px; margin: 0 0 16px;
+        }
+        .cbb-features { display: flex; flex-wrap: wrap; gap: 10px; }
+        .cbb-features span {
+          font-family: 'Amiri', serif; font-size: 0.82rem; font-weight: 700; color: #f3dcb4;
+          background: rgba(255,255,255,0.06); border: 1px solid rgba(201,169,97,0.30);
+          padding: 6px 16px; border-radius: 50px;
+        }
+        .cbb-cta {
+          position: relative; z-index: 1; flex-shrink: 0;
+          display: inline-flex; align-items: center; gap: 10px;
+          font-family: 'Amiri', serif; font-size: 1.02rem; font-weight: 800; color: #5e1322;
+          background: linear-gradient(135deg, #e6cd92, #c9a961);
+          padding: 15px 34px; border-radius: 14px; white-space: nowrap;
+          box-shadow: 0 8px 22px rgba(0,0,0,0.30);
+          transition: gap 0.3s ease;
+        }
+        .custom-box-banner:hover .cbb-cta { gap: 16px; }
+        .cbb-arrow { font-size: 1.15rem; line-height: 1; }
+        @media (max-width: 720px) {
+          .custom-box-banner { flex-direction: column; align-items: stretch; text-align: center; gap: 20px; }
+          .cbb-text { text-align: center; }
+          .cbb-desc { max-width: none; }
+          .cbb-features { justify-content: center; }
+          .cbb-cta { justify-content: center; }
+        }
 
         /* ===== Advertising banner slider ===== */
         .ban-track { position: relative; width: 100%; max-width: 1180px; margin: 0 auto; height: clamp(380px, 44vw, 440px); }
@@ -530,13 +640,13 @@ export default function Home() {
         .ar-brand-tag { font-size: 0.52rem; letter-spacing: 5px; color: rgba(214,179,106,0.65); }
         .opening-badge { background: #c9a961; color: #5e1322; padding: 8px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 800; box-shadow: 0 4px 14px rgba(201,169,97,0.3); }
         .main-row { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-        .text-block { text-align: right; }
+        .text-block { text-align: start; }
         .text-block h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; line-height: 1.25; margin-bottom: 14px; color: #f6ecdc; }
         .text-block .accent { color: #d6b36a; font-style: italic; }
-        .text-block p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); max-width: 430px; margin: 0 0 18px auto; line-height: 1.8; }
+        .text-block p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); max-width: 430px; margin: 0 0 18px; margin-inline-end: auto; line-height: 1.8; }
         .promo-tag { display: inline-flex; align-items: center; gap: 12px; background: rgba(201,169,97,0.08); border: 1px solid rgba(201,169,97,0.3); padding: 10px 18px; border-radius: 12px; }
         .promo-tag strong { font-size: 1.8rem; font-weight: 900; color: #d6b36a; font-family: 'Amiri', serif; }
-        .promo-tag span { font-size: 0.72rem; color: rgba(243,227,207,0.82); line-height: 1.5; text-align: right; }
+        .promo-tag span { font-size: 0.72rem; color: rgba(243,227,207,0.82); line-height: 1.5; text-align: start; }
         .right-mark { flex-shrink: 0; text-align: center; border: 1px solid rgba(201,169,97,0.35); border-radius: 16px; padding: clamp(18px, 3vw, 30px) clamp(20px, 3.2vw, 34px); }
         .right-mark .digit { font-family: 'Amiri', serif; font-size: clamp(2.4rem, 6.5vw, 4.2rem); font-weight: 900; color: #d6b36a; line-height: 1; }
         .right-mark .digit-label { color: rgba(243,227,207,0.7); font-size: 0.82rem; margin-top: 6px; }
@@ -545,7 +655,7 @@ export default function Home() {
 
         /* Banner 2 + 4 */
         .layout { flex: 1; display: flex; align-items: center; gap: 34px; }
-        .b2 .left, .b4 .left { flex: 1; text-align: right; }
+        .b2 .left, .b4 .left { flex: 1; text-align: start; }
         .small-tag { color: #d6b36a; font-size: 0.84rem; font-weight: 600; letter-spacing: 1px; }
         .b2 h2, .b4 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin: 10px 0 14px; color: #f6ecdc; }
         .b2 .accent, .b4 .accent { color: #d6b36a; }
@@ -572,11 +682,11 @@ export default function Home() {
         .b3 .bottle:nth-child(2) { height: 112px; }
         .b3 .bottle:nth-child(3) { height: 94px; }
         .b3 .bottle:nth-child(4) { height: 64px; }
-        .right-content { flex: 1; text-align: right; }
+        .right-content { flex: 1; text-align: start; }
         .new-pill { display: inline-block; background: #c9a961; color: #5e1322; padding: 5px 16px; border-radius: 50px; font-size: 0.74rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
         .b3 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin-bottom: 12px; color: #f6ecdc; }
         .b3 .gold { color: #d6b36a; }
-        .b3 .desc { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin: 0 0 22px auto; }
+        .b3 .desc { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin: 0 0 22px; margin-inline-end: auto; }
         .num-row { display: flex; gap: 34px; justify-content: flex-start; }
         .num-row > div { text-align: center; }
         .num-row strong { display: block; font-family: 'Amiri', serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; color: #d6b36a; }

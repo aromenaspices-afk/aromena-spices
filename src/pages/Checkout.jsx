@@ -417,7 +417,8 @@ export default function Checkout() {
   useEffect(() => {
     if (!form.country || !items.length) { setShippingResult({ price: 0, days: '5-7', found: false }); return }
     const weight = items.reduce((s, i) => s + (i.weightKg || 0.2) * i.qty, 0)
-    calculateShipping(form.country, weight, total).then(setShippingResult)
+    const boxesOnly = items.every(i => i.isPackage)
+    calculateShipping(form.country, weight, total, boxesOnly).then(setShippingResult)
   }, [form.country, items, total])
 
   const shipping = !form.country ? 0 : (shippingResult.price ?? 0)
