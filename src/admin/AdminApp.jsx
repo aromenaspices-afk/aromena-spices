@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { db } from '../firebase'
+import { doc, getDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import AdminLogin from './AdminLogin'
 import AdminLayout from './AdminLayout'
 import Dashboard from './pages/Dashboard'
@@ -26,8 +28,30 @@ export default function AdminApp() {
     () => localStorage.getItem('aromena_admin') === 'true'
   )
 
-  function handleLogin(pass) {
-    if (pass === ADMIN_PASS) {
+  async function handleLogin(pass) {
+    const entered = (pass || '').trim()
+
+    // كلمة المرور المخزّنة في Firestore (admin/config) لها الأولويّة، وإلّا الافتراضيّة
+    let stored = null
+    try {
+      const snap = await getDoc(doc(db, 'admin', 'config'))
+      if (snap.exists() && snap.data().password) stored = String(snap.data().password)
+    } catch { /* تجاهل أخطاء الشبكة ونرجع للافتراضيّة */ }
+
+    const valid = entered === (stored || ADMIN_PASS).trim()
+
+    // تسجيل المحاولة في سجلّ النشاط
+    try {
+      await addDoc(collection(db, 'activity_log'), {
+        type: 'login',
+        success: valid,
+        at: serverTimestamp(),
+        userAgent: navigator.userAgent || '',
+        platform: navigator.platform || '',
+      })
+    } catch { /* السجلّ ليس حرجاً */ }
+
+    if (valid) {
       localStorage.setItem('aromena_admin', 'true')
       setIsLoggedIn(true)
       return true

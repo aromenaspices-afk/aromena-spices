@@ -15,8 +15,8 @@ export default function AdminLogin({ onLogin }) {
     if (!password) return
     setLoading(true)
     setError('')
-    setTimeout(() => {
-      const ok = onLogin(password)
+    setTimeout(async () => {
+      const ok = await onLogin(password)
       if (!ok) {
         setError('كلمة المرور غير صحيحة')
         setPassword('')
