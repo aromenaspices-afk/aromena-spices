@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { db } from '../firebase'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, collection, onSnapshot, query, orderBy } from 'firebase/firestore'
 import {
   FiGrid, FiPackage, FiShoppingBag, FiShoppingCart,
   FiUsers, FiBriefcase, FiDollarSign, FiTruck,
@@ -35,12 +35,35 @@ export default function AdminLayout({ children, onLogout }) {
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [logoUrl,     setLogoUrl]     = useState(FALLBACK_LOGO)
+  const [newOrders,   setNewOrders]   = useState(0)
 
   useEffect(() => {
     getDoc(doc(db, 'settings', 'main'))
       .then(snap => { const url = snap.data()?.logo_url; if (url) setLogoUrl(url) })
       .catch(() => {})
   }, [])
+
+  // عدّاد الطلبات الجديدة (التي وصلت بعد آخر زيارة لصفحة الطلبات)
+  useEffect(() => {
+    const q = query(collection(db, 'orders'), orderBy('createdAt', 'desc'))
+    const unsub = onSnapshot(q, snap => {
+      const seen = Number(localStorage.getItem('admin_orders_seen') || 0)
+      const count = snap.docs.filter(d => {
+        const c = d.data().createdAt
+        return c && new Date(c).getTime() > seen
+      }).length
+      setNewOrders(count)
+    }, () => {})
+    return () => unsub()
+  }, [])
+
+  // تصفير الإشعار عند فتح صفحة الطلبات
+  useEffect(() => {
+    if (location.pathname === '/admin/orders') {
+      localStorage.setItem('admin_orders_seen', String(Date.now()))
+      setNewOrders(0)
+    }
+  }, [location.pathname])
 
   const sidebarContent = (
     <div style={{ width: 240, height: '100%', background: '#2a0d15', display: 'flex', flexDirection: 'column' }}>
@@ -64,6 +87,7 @@ export default function AdminLayout({ children, onLogout }) {
       <nav style={{ flex: 1, padding: '10px', overflowY: 'auto' }}>
         {menuItems.map(item => {
           const isActive = location.pathname === item.path
+          const badge = item.path === '/admin/orders' ? newOrders : 0
           return (
             <Link key={item.path} to={item.path} onClick={() => setSidebarOpen(false)} style={{
               display: 'flex', alignItems: 'center', gap: 11,
@@ -79,6 +103,19 @@ export default function AdminLayout({ children, onLogout }) {
             >
               {item.icon}
               {item.label_ar}
+              {badge > 0 && (
+                <span style={{
+                  marginInlineStart: 'auto',
+                  background: GOLD, color: '#2a0d15',
+                  minWidth: 20, height: 20, padding: '0 6px',
+                  borderRadius: 50, fontSize: '0.7rem', fontWeight: 800,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  lineHeight: 1, boxShadow: '0 0 0 2px rgba(244,190,105,0.3)',
+                  animation: 'orderPulse 1.6s ease-in-out infinite',
+                }}>
+                  {badge > 99 ? '99+' : badge}
+                </span>
+              )}
             </Link>
           )
         })}
@@ -140,6 +177,10 @@ export default function AdminLayout({ children, onLogout }) {
       </div>
 
       <style>{`
+        @keyframes orderPulse {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 0 2px rgba(244,190,105,0.3); }
+          50% { transform: scale(1.12); box-shadow: 0 0 0 4px rgba(244,190,105,0.15); }
+        }
         @media (max-width: 768px) {
           .admin-sidebar-desktop { display: none !important; }
           .admin-hamburger { display: flex !important; }
