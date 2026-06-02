@@ -364,14 +364,21 @@ export default function Checkout() {
   const { data: promoCodes } = useCollection('promocodes')
   const isAr = i18n.language === 'ar'
 
+  const EMPTY_FORM = { firstName: '', lastName: '', email: '', phone: '', district: '', neighborhood: '', address: '', city: '', country: '' }
+
   const [step, setStep] = useState(1) // 1: التفاصيل | 2: الدفع | 3: المراجعة
-  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', district: '', neighborhood: '', address: '', city: '', country: '' })
+  const [form, setForm] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('checkout_form') || 'null')
+      return saved ? { ...EMPTY_FORM, ...saved } : EMPTY_FORM
+    } catch { return EMPTY_FORM }
+  })
   const [errors, setErrors] = useState({})
   const [coupon, setCoupon] = useState('')
   const [couponApplied, setCouponApplied] = useState(false)
   const [couponData, setCouponData] = useState(null)
   const [couponError, setCouponError] = useState('')
-  const [payment, setPayment] = useState('transfer')
+  const [payment, setPayment] = useState(() => localStorage.getItem('checkout_payment') || 'transfer')
   const [agreed, setAgreed] = useState(false)
   const [ordered, setOrdered] = useState(false)
   const [orderNumber, setOrderNumber] = useState('')
@@ -384,17 +391,27 @@ export default function Checkout() {
   useEffect(() => {
     if (!user || !profile) return
     const addr = profile.addresses?.[0]
+    // املأ الحقول الفارغة فقط — لا تطمس ما أدخله المستخدم سابقاً
     setForm(f => ({
       ...f,
-      firstName: profile.firstName || '',
-      lastName: profile.lastName || '',
-      email: user.email || '',
-      phone: addr?.phone || profile.phone || '',
-      address: addr?.street || '',
-      city: addr?.city || '',
-      country: addr?.country || '',
+      firstName: f.firstName || profile.firstName || '',
+      lastName: f.lastName || profile.lastName || '',
+      email: f.email || user.email || '',
+      phone: f.phone || addr?.phone || profile.phone || '',
+      address: f.address || addr?.street || '',
+      city: f.city || addr?.city || '',
+      country: f.country || addr?.country || '',
     }))
   }, [user, profile])
+
+  // حفظ البيانات تلقائياً ليُحتفظ بها عند الخروج والعودة
+  useEffect(() => {
+    try { localStorage.setItem('checkout_form', JSON.stringify(form)) } catch {}
+  }, [form])
+
+  useEffect(() => {
+    localStorage.setItem('checkout_payment', payment)
+  }, [payment])
 
   
   useEffect(() => {
@@ -459,6 +476,7 @@ export default function Checkout() {
           await sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() })
         } catch {}
         clearCart()
+        try { localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
         setOrdered(true)
       } else {
         setShowBank(true)
@@ -479,6 +497,7 @@ export default function Checkout() {
       await sendAdminNewOrderEmail({ orderNumber, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() })
     } catch {}
     clearCart()
+    try { localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
     setOrdered(true)
   }
 
