@@ -38,6 +38,21 @@ export default function CustomBoxBuilder() {
   const remaining = SLOTS - totalSelected
   const isFull = totalSelected === SLOTS
 
+  // سعر القطعة الواحدة (حجم 100مل) من المنتج
+  function getUnitPrice(p) {
+    const sizes = p.sizes?.length
+      ? p.sizes
+      : p.prices
+        ? Object.entries(p.prices).filter(([, v]) => v > 0).map(([k, v]) => ({ label: k, price: v }))
+        : []
+    if (!sizes.length) return 0
+    const match = sizes.find(s => String(s.label).includes('100'))
+    return (match || sizes[0]).price || 0
+  }
+
+  // السعر الإجمالي = مجموع أسعار المنتجات المختارة فقط (يبدأ من صفر)
+  const computedPrice = selected.reduce((sum, s) => sum + getUnitPrice(s.product) * s.qty, 0)
+
   // كم مرة اخترنا هذا المنتج
   function getQty(slug) {
     return selected.find(s => s.product.slug === slug)?.qty || 0
@@ -75,7 +90,7 @@ export default function CustomBoxBuilder() {
       isCustomBox: true,
       name: isAr ? boxConfig.name_ar : boxConfig.name_en,
       size: isAr ? `${SLOTS} قطع مخصصة` : `${SLOTS} custom items`,
-      price: boxConfig.price,
+      price: computedPrice,
       image: boxConfig.image || null,
       weightKg: boxConfig.weightKg || 0.6,
       pkgItems: details,
@@ -205,7 +220,7 @@ export default function CustomBoxBuilder() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <p style={{ color: '#9C6B4E', fontSize: '0.85rem' }}>{isAr ? 'سعر الباكج:' : 'Box price:'}</p>
-          <p style={{ color: BORDEAUX, fontWeight: 900, fontSize: '1.2rem', fontFamily: 'Amiri, serif' }}>{formatPrice(boxConfig.price)}</p>
+          <p style={{ color: BORDEAUX, fontWeight: 900, fontSize: '1.2rem', fontFamily: 'Amiri, serif' }}>{formatPrice(computedPrice)}</p>
         </div>
 
         <button onClick={handleAddToCart} disabled={!isFull || added} style={{

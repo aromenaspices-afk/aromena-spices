@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { Link } from 'react-router-dom'
-import { FiShoppingBag, FiCheck, FiChevronRight, FiChevronLeft, FiCopy, FiX, FiMapPin, FiCreditCard, FiBriefcase, FiDollarSign, FiSmartphone } from 'react-icons/fi'
+import { FiShoppingBag, FiCheck, FiChevronRight, FiChevronLeft, FiCopy, FiX, FiMapPin, FiCreditCard, FiBriefcase, FiDollarSign, FiSmartphone, FiTruck } from 'react-icons/fi'
 import { db, storage } from '../firebase'
 import { collection, addDoc, getDocs, query, orderBy, limit, doc, updateDoc } from 'firebase/firestore'
 import { useCollection } from '../hooks/useFirestore'
@@ -443,17 +443,26 @@ export default function Checkout() {
       const pricingTRY = { ...pricing, currency: 'TRY' }
       const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null }))
       const docRef = await addDoc(collection(db, 'orders'), {
-        orderNumber: orderNum, status: 'awaiting_payment',
+        orderNumber: orderNum, status: payment === 'cod' ? 'confirmed' : 'awaiting_payment',
         customer: { uid: user?.uid || null, ...form, fullAddress: [form.district, form.neighborhood, form.address].filter(Boolean).join('، ') },
         items: orderItems,
-        payment: { method: 'transfer', status: 'pending' },
+        payment: { method: payment, status: 'pending' },
         pricing, pricingTRY,
         coupon: couponApplied ? couponData?.code : null,
         createdAt: new Date().toISOString(), notes: '',
       })
       setOrderNumber(orderNum)
       setOrderId(docRef.id)
-      setShowBank(true)
+      if (payment === 'cod') {
+        try {
+          await sendOrderConfirmEmail({ customer: { ...form }, orderNumber: orderNum, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() })
+          await sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() })
+        } catch {}
+        clearCart()
+        setOrdered(true)
+      } else {
+        setShowBank(true)
+      }
     } catch (err) {
       toast.error(isAr ? 'حدث خطأ' : 'Something went wrong')
     } finally {
@@ -597,6 +606,21 @@ export default function Checkout() {
                 {payment === 'transfer' && <FiCheck size={18} color="#7b192c" />}
               </button>
 
+              {/* الدفع عند التسليم */}
+              <button onClick={() => setPayment('cod')} style={{ background: payment === 'cod' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'cod' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'cod' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <FiTruck size={20} color={payment === 'cod' ? '#7b192c' : '#9C6B4E'} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem' }}>{isAr ? 'الدفع عند التّسليم' : 'Cash on Delivery'}</p>
+                    <span style={{ background: '#16A34A', color: '#fff', fontSize: '0.62rem', fontWeight: 800, padding: '2px 9px', borderRadius: 50, letterSpacing: 0.5 }}>{isAr ? 'متاح' : 'Available'}</span>
+                  </div>
+                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'ادفع نقداً عند استلام طلبك' : 'Pay in cash when your order arrives'}</p>
+                </div>
+                {payment === 'cod' && <FiCheck size={18} color="#7b192c" />}
+              </button>
+
               {/* قريباً */}
               {[
                 { id: 'card',   Icon: FiCreditCard, label_ar: 'بطاقة ائتمان', label_en: 'Credit Card' },
@@ -643,6 +667,20 @@ export default function Checkout() {
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.district, form.neighborhood, form.address].filter(Boolean).join('، ')}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.city, form.country].filter(Boolean).join('، ')}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{form.phone} | {form.email}</p>
+            </div>
+
+            {/* طريقة الدفع */}
+            <div style={{ background: '#fff', borderRadius: 18, padding: '16px 18px', marginBottom: 14, boxShadow: '0 2px 12px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ width: 40, height: 40, borderRadius: 11, background: 'rgba(123,25,44,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                {payment === 'cod' ? <FiTruck size={18} color="#7b192c" /> : <FiBriefcase size={18} color="#7b192c" />}
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.85rem' }}>{isAr ? 'طريقة الدفع' : 'Payment Method'}</p>
+                <p style={{ color: '#9C6B4E', fontSize: '0.8rem', marginTop: 2 }}>
+                  {payment === 'cod' ? (isAr ? 'الدفع عند التّسليم' : 'Cash on Delivery') : (isAr ? 'تحويل بنكي' : 'Bank Transfer')}
+                </p>
+              </div>
+              <button onClick={() => setStep(2)} style={{ background: 'none', border: 'none', color: '#7b192c', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 600, fontFamily: 'Amiri, serif' }}>{isAr ? 'تعديل' : 'Edit'}</button>
             </div>
 
             {/* المنتجات */}

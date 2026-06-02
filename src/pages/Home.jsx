@@ -580,6 +580,12 @@ export default function Home() {
   )
 }
 
+function calcDiscount(price, discount, expiry) {
+  if (!discount || discount <= 0) return { final: price, has: false }
+  if (expiry && new Date(expiry) < new Date()) return { final: price, has: false }
+  return { final: Math.round(price * (1 - discount / 100) * 100) / 100, has: true, pct: discount }
+}
+
 function ProductCard({ product, isAr, t, addItem, delay }) {
   const [added, setAdded] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -594,6 +600,7 @@ function ProductCard({ product, isAr, t, addItem, delay }) {
       : []
 
   const firstSize = productSizes[0]
+  const disc = firstSize ? calcDiscount(firstSize.price, product.discount, product.discountExpiry) : { final: 0, has: false }
 
   useEffect(() => { setTimeout(() => setVisible(true), delay) }, [delay])
 
@@ -602,7 +609,7 @@ function ProductCard({ product, isAr, t, addItem, delay }) {
     addItem({
       id: `${product.slug || product.id}_${firstSize.label}`,
       productId: product.slug || product.id,
-      name, size: firstSize.label, price: firstSize.price,
+      name, size: firstSize.label, price: disc.has ? disc.final : firstSize.price,
       image: product.images?.[0] || product.image || null,
     })
     setAdded(true)
@@ -612,11 +619,19 @@ function ProductCard({ product, isAr, t, addItem, delay }) {
   return (
     <div style={{ background: '#fff', borderRadius: 20, overflow: 'hidden', border: '1px solid #E2C9A8', boxShadow: '0 4px 18px rgba(62,28,0,0.07)', opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(20px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }}>
       <Link to={`/products/${product.slug}`}>
-        <div style={{ height: 155, overflow: 'hidden', background: `linear-gradient(135deg, ${product.color}18, ${product.color}38)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ height: 155, overflow: 'hidden', background: `linear-gradient(135deg, ${product.color}18, ${product.color}38)`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
           {(product.images?.[0] || product.image)
             ? <img src={product.images?.[0] || product.image} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             : <FiShoppingCart size={40} color={product.color || '#E2C9A8'} />
           }
+          {disc.has && (
+            <span style={{
+              position: 'absolute', top: 8,
+              left: isAr ? 'auto' : 8, right: isAr ? 8 : 'auto',
+              background: '#DC2626', color: '#fff',
+              fontSize: '0.65rem', padding: '3px 9px', borderRadius: 50, fontWeight: 700,
+            }}>-{disc.pct}%</span>
+          )}
         </div>
       </Link>
       <div style={{ padding: '14px 12px' }}>
@@ -625,9 +640,15 @@ function ProductCard({ product, isAr, t, addItem, delay }) {
         </Link>
         <p style={{ color: '#9C6B4E', fontSize: '0.75rem', marginBottom: 4 }}>{origin}</p>
         {firstSize && (
-          <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '0.85rem', marginBottom: 10 }}>
-            {isAr ? 'من' : 'from'} {formatPrice(firstSize.price)}
-          </p>
+          disc.has
+            ? <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', marginBottom: 10 }}>
+                <span style={{ color: '#9C6B4E', textDecoration: 'line-through', fontSize: '0.72rem' }}>{formatPrice(firstSize.price)}</span>
+                <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '0.92rem' }}>{formatPrice(disc.final)}</span>
+                <span style={{ background: '#DC2626', color: '#fff', fontSize: '0.6rem', fontWeight: 700, padding: '2px 6px', borderRadius: 50 }}>-{disc.pct}%</span>
+              </div>
+            : <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '0.85rem', marginBottom: 10 }}>
+                {isAr ? 'من' : 'from'} {formatPrice(firstSize.price)}
+              </p>
         )}
         <button onClick={handleAdd} style={{ width: '100%', background: added ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)', color: added ? '#fff' : '#f4be69', padding: '9px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.8rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif', transition: 'background 0.3s' }}>
           {added ? t('products.added') : <><FiShoppingCart size={13} /> {t('products.add_cart')}</>}
