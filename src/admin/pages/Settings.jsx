@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 import { useState, useEffect } from 'react'
-import { FiCheck, FiGlobe, FiMail, FiPhone, FiInstagram, FiUpload, FiX, FiSave, FiLock, FiActivity, FiCheckCircle, FiXCircle } from 'react-icons/fi'
+import { FiCheck, FiGlobe, FiMail, FiPhone, FiInstagram, FiUpload, FiX, FiSave, FiActivity, FiCheckCircle, FiXCircle } from 'react-icons/fi'
 import { uploadImage } from '../../utils/cloudinary'
 import { db } from '../../firebase'
 import { doc, getDoc, setDoc, collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
@@ -105,12 +105,6 @@ export default function AdminSettings() {
   const [uploadingSlider, setUploadingSlider] = useState(false)
   const [sliderProgress,  setSliderProgress]  = useState(0)
 
-  // كلمة المرور
-  const [curPass,  setCurPass]  = useState('')
-  const [newPass,  setNewPass]  = useState('')
-  const [confPass, setConfPass] = useState('')
-  const [savingPass, setSavingPass] = useState(false)
-
   // سجلّ النشاط
   const [activity, setActivity] = useState([])
   const [loadingActivity, setLoadingActivity] = useState(true)
@@ -140,29 +134,6 @@ export default function AdminSettings() {
       console.error(err)
     } finally {
       setLoadingActivity(false)
-    }
-  }
-
-  async function handleChangePassword() {
-    if (!newPass || newPass.length < 4) { toast.error('كلمة المرور الجديدة قصيرة جداً'); return }
-    if (newPass !== confPass) { toast.error('كلمتا المرور غير متطابقتين'); return }
-    setSavingPass(true)
-    try {
-      const snap = await getDoc(doc(db, 'admin', 'config'))
-      const stored = snap.exists() && snap.data().password ? String(snap.data().password) : null
-      const fallback = import.meta.env.VITE_ADMIN_PASSWORD || 'aromena2026'
-      if (curPass.trim() !== (stored || fallback).trim()) {
-        toast.error('كلمة المرور الحاليّة غير صحيحة')
-        setSavingPass(false)
-        return
-      }
-      await setDoc(doc(db, 'admin', 'config'), { password: newPass.trim() })
-      toast.success('تم تغيير كلمة المرور!')
-      setCurPass(''); setNewPass(''); setConfPass('')
-    } catch (err) {
-      toast.error('فشل التغيير: ' + err.message)
-    } finally {
-      setSavingPass(false)
     }
   }
 
@@ -614,39 +585,6 @@ export default function AdminSettings() {
               </p>
             </div>
           </div>
-        </div>
-      </Section>
-
-      {/* ═══ تغيير كلمة المرور ═══ */}
-      <Section title={<><FiLock size={15} color={BORDEAUX} /> كلمة مرور لوحة التحكّم</>}>
-        <div style={{ display: 'grid', gap: 12 }}>
-          <div>
-            <label style={labelStyle}>كلمة المرور الحاليّة</label>
-            <FocusInput type="password" value={curPass} onChange={e => setCurPass(e.target.value)} placeholder="••••••••" autoComplete="current-password" />
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            <div>
-              <label style={labelStyle}>كلمة المرور الجديدة</label>
-              <FocusInput type="password" value={newPass} onChange={e => setNewPass(e.target.value)} placeholder="4 أحرف على الأقل" autoComplete="new-password" />
-            </div>
-            <div>
-              <label style={labelStyle}>تأكيد كلمة المرور</label>
-              <FocusInput type="password" value={confPass} onChange={e => setConfPass(e.target.value)} placeholder="أعد كتابتها" autoComplete="new-password" />
-            </div>
-          </div>
-          <button onClick={handleChangePassword} disabled={savingPass} style={{
-            justifySelf: 'start',
-            background: savingPass ? BG2 : `linear-gradient(to left, ${BORDEAUX}, #a82040)`,
-            color: savingPass ? TEXT2 : GOLD,
-            padding: '11px 26px', borderRadius: 12, fontWeight: 700, fontSize: '0.88rem',
-            border: 'none', cursor: savingPass ? 'not-allowed' : 'pointer',
-            fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', gap: 8,
-          }}>
-            <FiLock size={15} /> {savingPass ? 'جاري الحفظ...' : 'تغيير كلمة المرور'}
-          </button>
-          <p style={{ color: TEXT2, fontSize: '0.74rem', margin: 0 }}>
-            تُحفظ في قاعدة البيانات وتُطبَّق فوراً على جميع الأجهزة دون إعادة نشر.
-          </p>
         </div>
       </Section>
 

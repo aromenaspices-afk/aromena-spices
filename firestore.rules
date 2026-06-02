@@ -113,6 +113,13 @@ service cloud.firestore {
       allow write: if isLoggedIn();
     }
 
+    // ═══ سجلّ النشاط — تسجيل محاولات الدخول (الإنشاء مفتوح، لا تعديل/حذف) ═══
+    match /activity_log/{doc} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if false;
+    }
+
     // ═══ أي collection غير محددة — مرفوض ═══
     match /{document=**} {
       allow read, write: if false;
