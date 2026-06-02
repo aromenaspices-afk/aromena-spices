@@ -180,7 +180,7 @@ export async function sendWelcomeEmail({ email, displayName }) {
         </div>
         <div class="box">
           <p style="color:#7b192c;font-size:13px;margin-bottom:14px">اكتشف تشكيلتنا الفاخرة من البهارات الأصيلة</p>
-          <a href="${SITE}/products" class="btn btn-p">تسوق الآن</a>
+          <a href="${SITE}/products" class="btn btn-p">تسوّق الآن</a>
           <a href="${SITE}/packages" class="btn btn-o">الباقات</a>
         </div>
       </div>

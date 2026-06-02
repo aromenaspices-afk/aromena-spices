@@ -136,11 +136,11 @@ export default function Login() {
               }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>📧</div>
                 <p style={{ color: '#065F46', fontWeight: 700, fontSize: '0.95rem', marginBottom: 6 }}>
-                  {isAr ? 'تم إرسال الرابط!' : 'Link Sent!'}
+                  {isAr ? 'تمَّ إرسال الرابط!' : 'Link Sent!'}
                 </p>
                 <p style={{ color: '#16A34A', fontSize: '0.83rem', lineHeight: 1.7 }}>
                   {isAr
-                    ? `تم إرسال رابط إعادة تعيين كلمة المرور إلى ${resetEmail}`
+                    ? `تمَّ إرسال رابط إعادة تعيين كلمة المرور إلى ${resetEmail}`
                     : `A reset link has been sent to ${resetEmail}`}
                 </p>
                 <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 8 }}>

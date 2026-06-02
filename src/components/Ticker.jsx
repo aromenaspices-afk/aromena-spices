@@ -4,7 +4,7 @@ export default function Ticker({ isAr }) {
   const { settings } = useSettings()
   const items = settings?.ticker_items || [
     '🌶️ بهارات أصيلة من قلب الشرق',
-    '🚚 شحن سريع لأوروبا والخليج',
+    '🚚 شحن سريع لأوروبّا والخليج',
     '✨ جودة مضمونة 100%',
     '🎁 باقات هدايا مميزة',
     '🌿 طبيعي بدون مواد حافظة',

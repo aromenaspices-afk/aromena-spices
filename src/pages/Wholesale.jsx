@@ -12,7 +12,7 @@ import toast from 'react-hot-toast'
 import { sendAdminNewOrderEmail } from '../utils/emailService'
 
 const BENEFITS = [
-  { icon: <FiDollarSign size={20} />, title_ar: 'أسعار الجملة', title_en: 'Wholesale Prices', desc_ar: 'أسعار تنافُسيّة خاصّة بكمّيّات الجّملة', desc_en: 'Competitive prices for bulk orders' },
+  { icon: <FiDollarSign size={20} />, title_ar: 'أسعار الجّملة', title_en: 'Wholesale Prices', desc_ar: 'أسعار تنافُسيّة خاصّة بكمّيّات الجّملة', desc_en: 'Competitive prices for bulk orders' },
   { icon: <FiTruck size={20} />, title_ar: 'شحن سريع', title_en: 'Fast Shipping', desc_ar: 'توصيل لكل أوروبّا والخليج وتركيّا', desc_en: 'Delivery across Europe, Gulf & Turkey' },
   { icon: <FiPackage size={20} />, title_ar: 'كمّيّات مرنة', title_en: 'Flexible Quantities', desc_ar: 'تلبية احتياجات عملك بأيّ كمّيّة', desc_en: 'Meeting your business needs at any volume' },
   { icon: <FiUsers size={20} />, title_ar: 'شراكة مُستدامة', title_en: 'Long-term Partnership', desc_ar: 'نبني علاقات تجاريُة طويلة الأمد', desc_en: 'We build long-term business relationships' },
@@ -28,19 +28,19 @@ const FAQ = [
   {
     q_ar: 'هل تشحنون لجميع الدول؟',
     q_en: 'Do you ship to all countries?',
-    a_ar: 'نشحن حالياً لأوروبا وتركيا والخليج العربي والأردن. للدول الأخرى تواصل معنا مباشرة.',
+    a_ar: 'نشحن حالياً لأوروبّا وتركيّا والخليج العربي والأردن. للدول الأخرى تواصل معنا مباشرة.',
     a_en: 'We currently ship to Europe, Turkey, the Gulf, and Jordan. For other countries, contact us directly.',
   },
   {
     q_ar: 'ما هي طرق الدفع المتاحة للجملة؟',
     q_en: 'What payment methods are available for wholesale?',
-    a_ar: 'نقبل التحويل البنكي وبطاقات الائتمان وPayPal للطلبات الكبيرة. شروط الدفع تُحدد حسب كل عميل.',
+    a_ar: 'نقبل التّحويل البنكي وبطاقات الائتمان وPayPal للطّلبات الكبيرة. الشّروط تُحدد حسب كل عميل.',
     a_en: 'We accept bank transfer, credit cards, and PayPal for large orders. Payment terms are set per client.',
   },
   {
     q_ar: 'هل يمكنني طلب عينات قبل الشراء؟',
     q_en: 'Can I request samples before purchasing?',
-    a_ar: 'نعم، نوفر عينات مجانية للعملاء الجادين مقابل تكلفة الشحن فقط.',
+    a_ar: 'نعم، نوفر عينات مجانية للعملاء الجادين مقابل تكلفة الشّحن فقط.',
     a_en: 'Yes, we provide free samples for serious clients, you only pay shipping costs.',
   },
   {
@@ -50,9 +50,9 @@ const FAQ = [
     a_en: 'Yes, we offer private label packaging for large quantities. Contact us for details.',
   },
   {
-    q_ar: 'كم يستغرق وصول الطلب؟',
+    q_ar: 'كم يستغرق وصول الطّلب؟',
     q_en: 'How long does delivery take?',
-    a_ar: 'عادةً 5-10 أيام عمل داخل أوروبا، و7-14 يوماً للخليج وتركيا، حسب الكمية والوجهة.',
+    a_ar: 'عادةً 5-10 أيام عمل داخل أوروبّا، و7-14 يوماً للخليج وتركيّا، حسب الكمية والوجهة.',
     a_en: 'Usually 5-10 business days within Europe, 7-14 days for Gulf and Turkey, depending on quantity and destination.',
   },
 ]
@@ -69,7 +69,7 @@ const STEPS = [
   { num: '01', title_ar: 'أرسل طلبك', title_en: 'Send Request', desc_ar: 'املأ النّموذج أدناه', desc_en: 'Fill the form below' },
   { num: '02', title_ar: 'نتواصل معك', title_en: 'We Contact You', desc_ar: 'خلال 24 ساعة', desc_en: 'Within 24 hours' },
   { num: '03', title_ar: 'نرسل العرض', title_en: 'We Send Offer', desc_ar: 'سعر وشروط مُخصّصة', desc_en: 'Custom price & terms' },
-  { num: '04', title_ar: 'نبدأ الشحن', title_en: 'We Ship', desc_ar: 'نبدأ الشّحن', desc_en: 'Fast & safe' },
+  { num: '04', title_ar: 'نبدأ الشّحن', title_en: 'We Ship', desc_ar: 'نبدأ الشّحن', desc_en: 'Fast & safe' },
 ]
 
 export default function Wholesale() {
@@ -101,7 +101,7 @@ export default function Wholesale() {
       })
       setSent(true)
       setForm({ firstName: '', lastName: '', company: '', country: '', email: '', whatsapp: '', business: '', details: '' })
-      toast.success(isAr ? 'تم إرسال طلبك!' : 'Request sent!')
+      toast.success(isAr ? 'تمَّ إرسال طلبك!' : 'Request sent!')
     } catch (err) {
       toast.error(isAr ? 'حدث خطأ، حاول مرة ثانية' : 'Error, please try again')
     } finally {
@@ -110,7 +110,7 @@ export default function Wholesale() {
   }
 
   const waUrl = 'https://wa.me/905550044476?text=' + encodeURIComponent(
-    isAr ? 'مرحباً، أنا مهتم بطلبات الجملة من أرومينا' : 'Hello, I am interested in wholesale orders from Aromena'
+    isAr ? 'مرحباً، أنا مهتم بطلبات الجّملة من أرومينا' : 'Hello, I am interested in wholesale orders from Aromena'
   )
 
   const inputStyle = {
@@ -212,7 +212,7 @@ export default function Wholesale() {
                   <FiCheckCircle size={32} color="#16A34A" />
                 </div>
                 <h3 style={{ color: '#16A34A', fontSize: '1.1rem', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
-                  {isAr ? 'تم إرسال طلبك بنجاح!' : 'Request Sent Successfully!'}
+                  {isAr ? 'تمَّ إرسال طلبك بنجاح!' : 'Request Sent Successfully!'}
                 </h3>
                 <p style={{ color: '#9C6B4E', fontSize: '0.86rem', lineHeight: 1.8 }}>
                   {isAr ? 'سيتواصل معك فريقنا خلال 24 ساعة على البريد أو الواتساب.' : 'Our team will contact you within 24 hours via email or WhatsApp.'}

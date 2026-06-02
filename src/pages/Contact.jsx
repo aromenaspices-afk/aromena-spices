@@ -141,7 +141,7 @@ export default function Contact() {
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </div>
                   <h3 style={{ color: '#16A34A', marginBottom: 8, fontSize: '1rem', fontFamily: 'Amiri, serif' }}>
-                    {isAr ? 'تم الإرسال!' : 'Message Sent!'}
+                    {isAr ? 'تمَّ الإرسال!' : 'Message Sent!'}
                   </h3>
                   <p style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>
                     {isAr ? 'سنتواصل معك قريباً' : 'We will contact you soon'}

@@ -23,7 +23,7 @@ const BANK_INFO = {
 
 
 const COUNTRY_LIST = [
-  { ar: 'تركيا',             en: 'Turkey',       flag: '🇹🇷' },
+  { ar: 'تركيّا',             en: 'Turkey',       flag: '🇹🇷' },
   { ar: 'السعودية',          en: 'Saudi Arabia', flag: '🇸🇦' },
   { ar: 'سوريا',             en: 'Syria',        flag: '🇸🇾' },
   { ar: 'الأردن',            en: 'Jordan',       flag: '🇯🇴' },
@@ -138,7 +138,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
   function copy(text, key) {
     navigator.clipboard?.writeText(text)
     setCopied(key)
-    toast.success(isAr ? 'تم النسخ!' : 'Copied!')
+    toast.success(isAr ? 'تمَّ النسخ!' : 'Copied!')
     setTimeout(() => setCopied(''), 2000)
   }
 
@@ -147,7 +147,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
     { key: 'name',   label: isAr ? 'اسم الحساب' : 'Account Name',    value: BANK_INFO.accountName, star: false },
     { key: 'bank',   label: isAr ? 'البنك' : 'Bank',                 value: BANK_INFO.bankName,    star: false },
     { key: 'swift',  label: 'SWIFT / BIC',                            value: BANK_INFO.swift,       star: false },
-    { key: 'reason', label: isAr ? 'سبب التحويل' : 'Reason',         value: orderNumber,           star: true  },
+    { key: 'reason', label: isAr ? 'سبب التّحويل' : 'Reason',         value: orderNumber,           star: true  },
   ]
 
   const waText = encodeURIComponent(isAr
@@ -165,7 +165,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px 10px', borderBottom: '1px solid #F5E6D3' }}>
           <div>
             <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Amiri, serif' }}>
-              {isAr ? 'بيانات التحويل البنكي' : 'Bank Transfer Details'}
+              {isAr ? 'بيانات التّحويل البنكي' : 'Bank Transfer Details'}
             </p>
             <p style={{ color: '#7b192c', fontWeight: 800, fontSize: '0.88rem', marginTop: 2 }}>{total}</p>
           </div>
@@ -214,7 +214,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
           <div style={{ background: '#FFFBF0', borderRadius: 10, padding: '8px 12px', border: '1px solid #FDE68A', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
             <span style={{ fontSize: '0.75rem', flexShrink: 0 }}>⚠️</span>
             <p style={{ color: '#92400E', fontSize: '0.72rem', lineHeight: 1.6 }}>
-              {isAr ? 'تأكد من كتابة رقم الطلب كسبب للتحويل لتسريع معالجة طلبك' : 'Include the order number as transfer reason to speed up processing'}
+              {isAr ? 'تأكّد من كتابة رقم الطّلب كسبب للتّحويل لتسريع معالجة طلبك' : 'Include the order number as transfer reason to speed up processing'}
             </p>
           </div>
 
@@ -228,7 +228,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
             boxShadow: '0 4px 16px rgba(123,25,44,0.3)',
           }}>
             <FiCheck size={15} />
-            {isAr ? 'تم التحويل' : 'Transfer Done'}
+            {isAr ? 'تمَّ التّحويل' : 'Transfer Done'}
           </button>
 
           <a href={`https://wa.me/905550044476?text=${waText}`} target="_blank" rel="noreferrer" style={{
@@ -243,7 +243,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
               <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.12 1.529 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-4.994-1.363l-.358-.213-3.76.982 1.003-3.658-.234-.376A9.818 9.818 0 1112 21.818z"/>
             </svg>
-            {isAr ? 'أرسل إيصال التحويل عبر واتساب' : 'Send Receipt via WhatsApp'}
+            {isAr ? 'أرسل إيصالَ التّحويل عبر واتساب' : 'Send Receipt via WhatsApp'}
           </a>
         </div>
       </div>
@@ -431,7 +431,7 @@ export default function Checkout() {
     if (!found.active) { setCouponError(isAr ? 'الكود غير مفعّل' : 'Code inactive'); return }
     if (found.expires && new Date(found.expires) < new Date()) { setCouponError(isAr ? 'الكود منتهي' : 'Expired'); return }
     setCouponData(found); setCouponApplied(true); setCouponError('')
-    toast.success(isAr ? 'تم تطبيق الكوبون!' : 'Coupon applied!')
+    toast.success(isAr ? 'تمَّ تطبيق الكوبون!' : 'Coupon applied!')
   }
 
   async function handleOrder() {
@@ -592,7 +592,7 @@ export default function Checkout() {
                 </div>
                 <div style={{ flex: 1 }}>
                   <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem' }}>{isAr ? 'تحويل بنكي' : 'Bank Transfer'}</p>
-                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'حوّل وأرسل الإيصال' : 'Transfer and send receipt'}</p>
+                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'حوّل وأرسل الإيصالَ' : 'Transfer and send receipt'}</p>
                 </div>
                 {payment === 'transfer' && <FiCheck size={18} color="#7b192c" />}
               </button>
@@ -630,7 +630,7 @@ export default function Checkout() {
           <div>
             <h2 style={{ color: '#1a0610', fontFamily: 'Amiri, serif', fontSize: '1.1rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
               <FiShoppingBag size={18} color="#7b192c" />
-              {isAr ? 'مراجعة الطلب' : 'Review Order'}
+              {isAr ? 'مراجعة الطّلب' : 'Review Order'}
             </h2>
 
             {/* ملخص البيانات */}
@@ -700,7 +700,7 @@ export default function Checkout() {
                   <span style={{ color: '#1a0610', fontWeight: 600 }}>{formatPrice(total)}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>{isAr ? 'الشحن' : 'Shipping'}</span>
+                  <span style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>{isAr ? 'الشّحن' : 'Shipping'}</span>
                   <span style={{ color: shipping === 0 ? '#16A34A' : '#1a0610', fontWeight: 600 }}>
                     {!form.country ? (isAr ? '—' : '—') : shipping === 0 ? (isAr ? 'مجاني ✓' : 'Free ✓') : formatPrice(shipping)}
                   </span>
@@ -740,7 +740,7 @@ export default function Checkout() {
                 boxShadow: agreed && !loading ? '0 6px 20px rgba(123,25,44,0.3)' : 'none',
               }}>
                 <FiShoppingBag size={18} />
-                {loading ? (isAr ? 'جاري التحضير...' : 'Processing...') : (isAr ? 'تأكيد الطلب' : 'Place Order')}
+                {loading ? (isAr ? 'جاري التحضير...' : 'Processing...') : (isAr ? 'تأكيد الطّلب' : 'Place Order')}
               </button>
             </div>
           </div>

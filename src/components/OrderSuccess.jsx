@@ -127,7 +127,7 @@ export default function OrderSuccess({ orderNumber, email }) {
             </div>
 
             <h2 style={{ color: '#3E1C00', fontSize: '1.4rem', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
-              {isAr ? 'تم تأكيد طلبك!' : 'Order Confirmed!'}
+              {isAr ? 'تمَّ تأكيد طلبك!' : 'Order Confirmed!'}
             </h2>
 
             {orderNumber && (

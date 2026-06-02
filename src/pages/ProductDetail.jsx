@@ -142,7 +142,7 @@ export default function ProductDetail() {
       })
       setReviewForm({ rating: 5, comment: '' })
       setReviewSuccess(true)
-      toast.success(isAr ? 'تم إرسال تقييمك!' : 'Review submitted!')
+      toast.success(isAr ? 'تمَّ إرسال تقييمك!' : 'Review submitted!')
       setTimeout(() => setReviewSuccess(false), 3000)
     } catch {
       toast.error(isAr ? 'فشل إرسال التقييم' : 'Failed to submit review')
@@ -154,7 +154,7 @@ export default function ProductDetail() {
   async function deleteReview(reviewId) {
     if (!confirm(isAr ? 'حذف التقييم؟' : 'Delete review?')) return
     await deleteDoc(doc(db, 'products', product.slug, 'reviews', reviewId))
-    toast.success(isAr ? 'تم حذف التقييم' : 'Review deleted')
+    toast.success(isAr ? 'تمَّ حذف التقييم' : 'Review deleted')
   }
 
   const tabs = [

@@ -29,7 +29,7 @@ const TEMPLATES = [
     icon: '🎁',
     color: '#DC2626',
     fields: ['title_ar', 'subtitle_ar', 'discount', 'code', 'expiry', 'cta'],
-    defaults: { title_ar: 'عرض خاص لك!', subtitle_ar: 'لا تفوّت هذا العرض المميز', discount: '20%', code: 'AROMENA20', expiry: '', cta: 'تسوق الآن' },
+    defaults: { title_ar: 'عرض خاص لك!', subtitle_ar: 'لا تفوّت هذا العرض المميز', discount: '20%', code: 'AROMENA20', expiry: '', cta: 'تسوّق الآن' },
   },
   {
     id: 'new_product',
@@ -45,7 +45,7 @@ const TEMPLATES = [
     icon: '👋',
     color: '#16A34A',
     fields: ['title_ar', 'body_ar', 'cta'],
-    defaults: { title_ar: 'أهلاً بكم في أرومينا!', body_ar: 'شكراً لثقتكم بنا — نحن نقدم أجود البهارات الأصيلة', cta: 'تسوق الآن' },
+    defaults: { title_ar: 'أهلاً بكم في أرومينا!', body_ar: 'شكراً لثقتكم بنا — نحن نقدم أجود البهارات الأصيلة', cta: 'تسوّق الآن' },
   },
   {
     id: 'news',

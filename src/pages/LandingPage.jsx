@@ -87,7 +87,7 @@ export default function LandingPage() {
   const [statsRef, statsVisible] = useVisible()
 
   const keywords = isAr
-    ? ['بهارات عربية', 'توابل فاخرة', 'بهارات مندي', 'بهارات كبسة', 'بهارات تركيا', 'بهارات أوروبا', 'بهارات طبيعية', 'توصيل ألمانيا']
+    ? ['بهارات عربية', 'توابل فاخرة', 'بهارات مندي', 'بهارات كبسة', 'بهارات تركيّا', 'بهارات أوروبّا', 'بهارات طبيعية', 'توصيل ألمانيا']
     : ['Arab spices', 'halal spices', 'mandi spices', 'kabsa blend', 'Turkish spices', 'natural spices', 'spice delivery Europe']
 
   return (
@@ -96,7 +96,7 @@ export default function LandingPage() {
       {/* SEO Keywords مخفية */}
       <div style={{ display: 'none' }} aria-hidden="true">
         {keywords.join(' — ')}
-        {isAr ? 'أرومينا للبهارات — بهارات أصيلة — شحن لأوروبا والخليج وتركيا — بهارات حلال — توابل عربية فاخرة' : 'Aromena Spices — authentic Arab spices — shipping to Europe Gulf Turkey — halal spices premium'}
+        {isAr ? 'أرومينا للبهارات — بهارات أصيلة — شحن لأوروبّا والخليج وتركيّا — بهارات حلال — توابل عربية فاخرة' : 'Aromena Spices — authentic Arab spices — shipping to Europe Gulf Turkey — halal spices premium'}
       </div>
 
       {/* ═══ HERO ═══ */}
@@ -121,7 +121,7 @@ export default function LandingPage() {
           {/* العنوان */}
           <div style={{ opacity: heroVisible ? 1 : 0, transform: heroVisible ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.9s ease 0.2s' }}>
             <p style={{ color: 'rgba(244,190,105,0.6)', fontSize: '0.85rem', letterSpacing: 3, textTransform: 'uppercase', marginBottom: 16 }}>
-              {isAr ? 'بهارات أصيلة — شحن لأوروبا والخليج وتركيا' : 'Premium Spices — Shipping to Europe, Gulf & Turkey'}
+              {isAr ? 'بهارات أصيلة — شحن لأوروبّا والخليج وتركيّا' : 'Premium Spices — Shipping to Europe, Gulf & Turkey'}
             </p>
             <h1 style={{ fontSize: 'clamp(2.2rem, 6vw, 4rem)', color: '#f4be69', lineHeight: 1.2, marginBottom: 20 }}>
               {isAr ? 'عبق الشرق في كل قرصة بهار' : 'The Essence of the East in Every Pinch'}
@@ -133,7 +133,7 @@ export default function LandingPage() {
             </div>
             <p style={{ color: 'rgba(244,190,105,0.7)', fontSize: '1.05rem', lineHeight: 1.9, maxWidth: 600, margin: '0 auto 40px' }}>
               {isAr
-                ? 'أرومينا — بهارات طبيعية 100% مختارة بعناية من أجود المصادر. نوصّل لألمانيا، هولندا، فرنسا، السعودية، الإمارات، الكويت، قطر، وتركيا.'
+                ? 'أرومينا — بهارات طبيعية 100% مختارة بعناية من أجود المصادر. نوصّل لألمانيا، هولندا، فرنسا، السعودية، الإمارات، الكويت، قطر، وتركيّا.'
                 : 'Aromena — 100% natural spices carefully selected from premium sources. We ship to Germany, Netherlands, France, Saudi Arabia, UAE, Kuwait, Qatar, and Turkey.'}
             </p>
           </div>
@@ -144,7 +144,7 @@ export default function LandingPage() {
               onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
               onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              {isAr ? 'تسوق الآن ←' : 'Shop Now →'}
+              {isAr ? 'تسوّق الآن ←' : 'Shop Now →'}
             </Link>
             <Link to="/packages" style={{ background: 'transparent', color: '#f4be69', border: '2px solid rgba(244,190,105,0.4)', padding: '12px 32px', borderRadius: 50, fontWeight: 600, fontSize: '0.95rem', textDecoration: 'none', display: 'inline-block', transition: 'all 0.2s' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = '#f4be69'; e.currentTarget.style.background = 'rgba(244,190,105,0.08)' }}
@@ -243,16 +243,16 @@ export default function LandingPage() {
                 : 'Over 10 years of experience — Bachelor in Culinary Arts — Specialized in recipe development and food products'}
             </p>
             <p style={{ color: '#f4be69', fontWeight: 700, fontStyle: 'italic', fontSize: '1rem' }}>
-              {isAr ? '"صِحَّةٌ بِكُلِّ رَشَّة — Aromena"' : '"A Pinch of Health in Every Dash — Aromena"'}
+              {isAr ? '"صحَّة بكُلّ رَشَّة — Aromena"' : '"A Pinch of Health in Every Dash — Aromena"'}
             </p>
           </div>
 
           {/* مميزات */}
           <div style={{ opacity: storyVisible ? 1 : 0, transform: storyVisible ? 'translateX(0)' : 'translateX(40px)', transition: 'all 0.8s ease 0.2s', display: 'flex', flexDirection: 'column', gap: 14 }}>
             {[
-              { title_ar: 'بهارات طبيعية 100%', title_en: '100% Natural Spices', desc_ar: 'بدون إضافات أو مواد حافظة صناعية', desc_en: 'No additives or artificial preservatives' },
-              { title_ar: 'شحن سريع لأوروبا', title_en: 'Fast Shipping to Europe', desc_ar: 'ألمانيا، هولندا، فرنسا، بلجيكا وأكثر', desc_en: 'Germany, Netherlands, France, Belgium & more' },
-              { title_ar: 'شحن للخليج وتركيا', title_en: 'Gulf & Turkey Delivery', desc_ar: 'السعودية، الإمارات، الكويت، قطر، تركيا', desc_en: 'Saudi Arabia, UAE, Kuwait, Qatar, Turkey' },
+              { title_ar: 'بهارات طبيعية 100%', title_en: '100% Natural Spices', desc_ar: 'بدون إضافات أو مواد حافظة صناعيّة', desc_en: 'No additives or artificial preservatives' },
+              { title_ar: 'شحن سريع لأوروبّا', title_en: 'Fast Shipping to Europe', desc_ar: 'ألمانيا، هولندا، فرنسا، بلجيكا وأكثر', desc_en: 'Germany, Netherlands, France, Belgium & more' },
+              { title_ar: 'شحن للخليج وتركيّا', title_en: 'Gulf & Turkey Delivery', desc_ar: 'السعودية، الإمارات، الكويت، قطر، تركيّا', desc_en: 'Saudi Arabia, UAE, Kuwait, Qatar, Turkey' },
               { title_ar: 'تغليف هدايا فاخر', title_en: 'Luxury Gift Packaging', desc_ar: 'مثالي للمناسبات والهدايا', desc_en: 'Perfect for occasions and gifts' },
             ].map((f, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 14, background: 'rgba(244,190,105,0.05)', borderRadius: 14, padding: '14px 16px', border: '1px solid rgba(244,190,105,0.1)' }}>
@@ -314,7 +314,7 @@ export default function LandingPage() {
           </h2>
           <p style={{ color: 'rgba(244,190,105,0.65)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: 36 }}>
             {isAr
-              ? 'انضم لمئات العائلات العربية في أوروبا والخليج وتركيا الذين اختاروا أرومينا لمطبخهم'
+              ? 'انضم لمئات العائلات العربية في أوروبّا والخليج وتركيّا الذين اختاروا أرومينا لمطبخهم'
               : 'Join hundreds of Arab families across Europe, the Gulf, and Turkey who chose Aromena for their kitchen'}
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>

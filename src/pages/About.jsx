@@ -17,17 +17,17 @@ export default function About() {
   }
 
   const values = [
-    { icon: <FiDroplet size={20} />, title_ar: 'طبيعي 100%',       title_en: '100% Natural',    desc_ar: 'بدون مواد حافظة أو إضافات صناعية',    desc_en: 'No preservatives or artificial additives' },
+    { icon: <FiDroplet size={20} />, title_ar: 'طبيعي 100%',       title_en: '100% Natural',    desc_ar: 'بدون مواد حافظة أو إضافات صناعيّة',    desc_en: 'No preservatives or artificial additives' },
     { icon: <FiGlobe size={20} />,   title_ar: 'من أجود المصادر',   title_en: 'Premium Sources', desc_ar: 'بهارات مختارة من أفضل مناطق العالم',   desc_en: 'Spices selected from the finest regions' },
-    { icon: <FiHeart size={20} />,   title_ar: 'بكل حب',            title_en: 'With Love',       desc_ar: 'كل منتج يُعبّأ بعناية واهتمام',        desc_en: 'Every product packed with care' },
-    { icon: <FiTruck size={20} />,   title_ar: 'شحن سريع',          title_en: 'Fast Shipping',   desc_ar: 'توصيل لأوروبا والخليج والأردن وتركيا', desc_en: 'Delivery to Europe, Gulf, Jordan & Turkey' },
+    { icon: <FiHeart size={20} />,   title_ar: 'بكُلّ حُب',            title_en: 'With Love',       desc_ar: 'كل منتج يُعبّأ بعناية واهتمام',        desc_en: 'Every product packed with care' },
+    { icon: <FiTruck size={20} />,   title_ar: 'شحن سريع',          title_en: 'Fast Shipping',   desc_ar: 'توصيل لأوروبّا والخليج والأردن وتركيّا', desc_en: 'Delivery to Europe, Gulf, Jordan & Turkey' },
   ]
 
   const origins = [
     { code: 'SY', country_ar: 'سوريا',          country_en: 'Syria',     spice_ar: 'السمّاق والفلفل الأحمر', spice_en: 'Sumac & Red Pepper' },
-    { code: 'SA', country_ar: 'الجزيرة العربية', country_en: 'Arabia',    spice_ar: 'الكبسة',                 spice_en: 'Kabsa' },
+    { code: 'SA', country_ar: 'الجّزيرة العربيّة', country_en: 'Arabia',    spice_ar: 'الكبسة',                 spice_en: 'Kabsa' },
     { code: 'YE', country_ar: 'اليمن',            country_en: 'Yemen',     spice_ar: 'المندي',                 spice_en: 'Mandi' },
-    { code: 'TR', country_ar: 'تركيا',            country_en: 'Turkey',    spice_ar: 'الشيش والعثماني',        spice_en: 'Shish & Ottoman' },
+    { code: 'TR', country_ar: 'تركيّا',            country_en: 'Turkey',    spice_ar: 'الشيش والعثماني',        spice_en: 'Shish & Ottoman' },
     { code: 'IT', country_ar: 'إيطاليا',          country_en: 'Italy',     spice_ar: 'باستا الريحان والطماطم', spice_en: 'Basil & Tomato Pasta' },
     { code: 'US', country_ar: 'لويزيانا',         country_en: 'Louisiana', spice_ar: 'الكيجن',                 spice_en: 'Cajun' },
   ]

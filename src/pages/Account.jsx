@@ -14,8 +14,8 @@ import {
 const statusConfig = {
   pending:   { label_ar: 'قيد الانتظار', label_en: 'Pending',      bg: '#EFF6FF', color: '#2563EB' },
   confirmed: { label_ar: 'مؤكد',         label_en: 'Confirmed',    bg: '#F0FDF4', color: '#16A34A' },
-  shipping:  { label_ar: 'قيد الشحن',    label_en: 'Shipping',     bg: '#FEF3C7', color: '#D97706' },
-  delivered: { label_ar: 'تم التسليم',   label_en: 'Delivered',    bg: '#F5F3FF', color: '#7C3AED' },
+  shipping:  { label_ar: 'قيد الشّحن',    label_en: 'Shipping',     bg: '#FEF3C7', color: '#D97706' },
+  delivered: { label_ar: 'تمَّ التسليم',   label_en: 'Delivered',    bg: '#F5F3FF', color: '#7C3AED' },
   cancelled: { label_ar: 'ملغي',         label_en: 'Cancelled',    bg: '#FEF2F2', color: '#DC2626' },
 }
 
@@ -227,14 +227,14 @@ export default function Account() {
       return (
         <div style={{ textAlign: 'center', padding: '40px', color: '#7b192c', fontSize: '0.9rem' }}>
           <div style={{ width: 40, height: 40, border: '3px solid #E2C9A8', borderTopColor: '#7b192c', borderRadius: '50%', margin: '0 auto 12px', animation: 'spin 0.8s linear infinite' }} />
-          {isAr ? 'جاري تحميل الطلبات...' : 'Loading orders...'}
+          {isAr ? 'جاري تحميل الطّلبات...' : 'Loading orders...'}
           <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
         </div>
       )
     }
 
     if (ordersError) {
-      let msg = isAr ? 'حدث خطأ أثناء تحميل الطلبات.' : 'Error loading orders.'
+      let msg = isAr ? 'حدث خطأ أثناء تحميل الطّلبات.' : 'Error loading orders.'
       let hint = null
 
       if (ordersError === 'index') {
@@ -245,8 +245,8 @@ export default function Account() {
           ? 'افتح Console المتصفح (F12) وانقر على الرابط الأزرق لإنشاء الـ Index تلقائياً، ثم أعد تحميل الصفحة.'
           : 'Open browser Console (F12) and click the blue link to create the Index automatically, then reload.'
       } else if (ordersError === 'permission') {
-        msg = isAr ? 'لا توجد صلاحية لعرض الطلبات.' : 'Permission denied.'
-        hint = isAr ? 'تأكد من إعدادات Firestore Security Rules.' : 'Check Firestore Security Rules.'
+        msg = isAr ? 'لا توجد صلاحية لعرض الطّلبات.' : 'Permission denied.'
+        hint = isAr ? 'تأكّد من إعدادات Firestore Security Rules.' : 'Check Firestore Security Rules.'
       }
 
       return (
@@ -274,10 +274,10 @@ export default function Account() {
             {isAr ? 'لا يوجد طلبات بعد' : 'No orders yet'}
           </h3>
           <p style={{ color: '#9C6B4E', fontSize: '0.85rem', marginBottom: 20 }}>
-            {isAr ? 'ابدأ التسوق الآن!' : 'Start shopping now!'}
+            {isAr ? 'ابدأ التّسوّق الآن!' : 'Start shopping now!'}
           </p>
           <Link to="/products" style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 24px', borderRadius: 50, fontWeight: 700, textDecoration: 'none', fontSize: '0.88rem' }}>
-            {isAr ? 'تسوق الآن' : 'Shop Now'}
+            {isAr ? 'تسوّق الآن' : 'Shop Now'}
           </Link>
         </div>
       )
@@ -364,7 +364,7 @@ export default function Account() {
                         <span style={{ color: '#3E1C00', fontWeight: 600, fontSize: '0.8rem' }}>€{order.pricing?.subtotal?.toFixed(2)}</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{isAr ? 'الشحن' : 'Shipping'}</span>
+                        <span style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{isAr ? 'الشّحن' : 'Shipping'}</span>
                         <span style={{ color: order.pricing?.shipping === 0 ? '#16A34A' : '#3E1C00', fontWeight: 600, fontSize: '0.8rem' }}>
                           {order.pricing?.shipping === 0 ? (isAr ? 'مجاني' : 'Free') : `€${order.pricing?.shipping?.toFixed(2)}`}
                         </span>
@@ -389,7 +389,7 @@ export default function Account() {
                       <p style={{ color: '#3E1C00', fontWeight: 600, fontSize: '0.82rem' }}>{order.payment?.method || '—'}</p>
                     </div>
                     <div style={{ background: '#F5E6D3', borderRadius: 8, padding: '10px 12px' }}>
-                      <p style={{ color: '#9C6B4E', fontSize: '0.72rem', marginBottom: 3 }}>{isAr ? 'عنوان الشحن' : 'Ship to'}</p>
+                      <p style={{ color: '#9C6B4E', fontSize: '0.72rem', marginBottom: 3 }}>{isAr ? 'عنوان الشّحن' : 'Ship to'}</p>
                       <p style={{ color: '#3E1C00', fontWeight: 600, fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {order.customer?.city}, {order.customer?.country}
                       </p>
@@ -479,7 +479,7 @@ export default function Account() {
 
             {profileSuccess && (
               <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 8, padding: '9px 12px', marginBottom: 14, color: '#16A34A', fontWeight: 600, fontSize: '0.85rem' }}>
-                {isAr ? 'تم حفظ البيانات!' : 'Profile saved!'}
+                {isAr ? 'تمَّ حفظ البيانات!' : 'Profile saved!'}
               </div>
             )}
 
@@ -652,7 +652,7 @@ export default function Account() {
 
             {passwordSuccess && (
               <div style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 8, padding: '9px 12px', marginBottom: 14, color: '#16A34A', fontWeight: 600, fontSize: '0.85rem' }}>
-                {isAr ? 'تم تغيير كلمة المرور!' : 'Password changed!'}
+                {isAr ? 'تمَّ تغيير كلمة المرور!' : 'Password changed!'}
               </div>
             )}
 

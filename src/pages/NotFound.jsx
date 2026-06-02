@@ -75,7 +75,7 @@ export default function NotFound() {
             transition: 'border-color 0.15s',
           }}>
             <FiShoppingBag size={16} />
-            {isAr ? 'تسوق الآن' : 'Shop Now'}
+            {isAr ? 'تسوّق الآن' : 'Shop Now'}
           </Link>
         </div>
 

@@ -44,7 +44,7 @@ export default function Footer() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginBottom: 24 }}>
           <img src={LOGO} alt="Aromena Spices" style={{ height: 40, objectFit: 'contain' }} />
           <p style={{ color: 'rgba(244,190,105,0.45)', fontSize: '0.72rem', fontStyle: 'italic' }}>
-            {isAr ? 'صِحَّة بكل رشّة' : 'A Pinch of Health in Every Dash'}
+            {isAr ? 'صحّة بكُلّ رشّة' : 'A Pinch of Health in Every Dash'}
           </p>
           {/* سوشل ميديا */}
           <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>

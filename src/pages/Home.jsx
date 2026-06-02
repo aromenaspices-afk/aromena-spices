@@ -15,7 +15,7 @@ import { useCurrency } from '../context/CurrencyContext'
 const WHY = [
   { icon: <FiDroplet size={22} />, title_ar: '100% طبيعي', title_en: '100% Natural', desc_ar: 'بدون مواد حافظة أو إضافات صناعّية', desc_en: 'No preservatives or artificial additives' },
   { icon: <FiGlobe size={22} />, title_ar: 'من أجود المصادر', title_en: 'Premium Sources', desc_ar: 'بهارات مختارة من أفضل مناطق العالم', desc_en: 'Spices from the finest regions worldwide' },
-  { icon: <FiTruck size={22} />, title_ar: 'شحن سريع', title_en: 'Fast Shipping', desc_ar: 'توصيل لأوروبا والخليج وتركيّا', desc_en: 'Delivery to Europe, Gulf & Turkey' },
+  { icon: <FiTruck size={22} />, title_ar: 'شحن سريع', title_en: 'Fast Shipping', desc_ar: 'توصيل لأوروبّا والخليج وتركيّا', desc_en: 'Delivery to Europe, Gulf & Turkey' },
   { icon: <FiHeart size={22} />, title_ar: 'بكلّ حب', title_en: 'Made with Love', desc_ar: 'كل منتج يُعبّأ بعناية واهتمام', desc_en: 'Every product packed with care' },
 ]
 

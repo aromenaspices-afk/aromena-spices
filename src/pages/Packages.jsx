@@ -244,7 +244,7 @@ export default function Packages() {
                         <span style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(pkg.price)}</span>
                       )}
                       <p style={{ color: '#9C6B4E', fontSize: '0.72rem', marginTop: 2 }}>
-                        {isAr ? 'شامل الشحن' : 'incl. shipping'}
+                        {isAr ? 'شامل الشّحن' : 'incl. shipping'}
                       </p>
                     </div>
 
@@ -293,10 +293,10 @@ export default function Packages() {
       <section style={{ background: 'linear-gradient(135deg, #1a0610, #7b192c)', padding: '28px 20px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 20 }}>
           {[
-            { icon: <FiTruck size={18} />, title_ar: 'توصيل سريع وآمن', title_en: 'Fast & Safe Delivery', desc_ar: 'لأوروبا والخليج وتركيا', desc_en: 'Europe, Gulf & Turkey' },
+            { icon: <FiTruck size={18} />, title_ar: 'توصيل سريع وآمن', title_en: 'Fast & Safe Delivery', desc_ar: 'لأوروبّا والخليج وتركيّا', desc_en: 'Europe, Gulf & Turkey' },
             { icon: <FiGift size={18} />, title_ar: 'تغليف هدايا فاخر', title_en: 'Luxury Gift Wrapping', desc_ar: 'جاهز للإهداء', desc_en: 'Ready to gift' },
-            { icon: <FiPackage size={18} />, title_ar: 'مكونات طبيعية 100%', title_en: '100% Natural', desc_ar: 'منتقاة بعناية', desc_en: 'Carefully selected' },
-            { icon: <FiStar size={18} />, title_ar: 'جودة مضمونة', title_en: 'Quality Guaranteed', desc_ar: 'رضاكم أولويتنا', desc_en: 'Your satisfaction first' },
+            { icon: <FiPackage size={18} />, title_ar: 'مكوّنات طبيعيّة 100%', title_en: '100% Natural', desc_ar: 'منتقاة بعناية', desc_en: 'Carefully selected' },
+            { icon: <FiStar size={18} />, title_ar: 'جودة مضمونة', title_en: 'Quality Guaranteed', desc_ar: 'رضاكم أولويّتنا', desc_en: 'Your satisfaction first' },
           ].map((item, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
               <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(244,190,105,0.12)', border: '1px solid rgba(244,190,105,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f4be69', flexShrink: 0 }}>

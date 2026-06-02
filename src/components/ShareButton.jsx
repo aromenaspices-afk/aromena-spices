@@ -11,7 +11,7 @@ export default function ShareButton({ url, title, isAr = true, size = 'normal' }
       } catch (e) {}
     } else {
       navigator.clipboard?.writeText(shareUrl)
-      alert(isAr ? 'تم نسخ الرابط!' : 'Link copied!')
+      alert(isAr ? 'تمَّ نسخ الرابط!' : 'Link copied!')
     }
   }
 

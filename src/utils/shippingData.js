@@ -59,7 +59,7 @@ export const DEFAULT_ZONES = {
 }
 
 export const DEFAULT_COUNTRIES = [
-  { country_ar:'تركيا',           country_en:'Turkey',       flag:'🇹🇷', zone:0, days:'1-3', domestic:true, freeOver:500  },
+  { country_ar:'تركيّا',           country_en:'Turkey',       flag:'🇹🇷', zone:0, days:'1-3', domestic:true, freeOver:500  },
   { country_ar:'ألمانيا',         country_en:'Germany',      flag:'🇩🇪', zone:1, days:'4-5', freeOver:3000 },
   { country_ar:'هولندا',          country_en:'Netherlands',  flag:'🇳🇱', zone:2, days:'4-5', freeOver:3500 },
   { country_ar:'فرنسا',           country_en:'France',       flag:'🇫🇷', zone:2, days:'4-5', freeOver:3500 },
