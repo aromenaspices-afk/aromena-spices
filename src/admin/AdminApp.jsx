@@ -19,6 +19,7 @@ import AdminMarketing from './pages/Marketing'
 import Newsletter from './pages/Newsletter'
 import AdminLocations from './pages/Locations'
 import AdminCustomBox from './pages/CustomBox'
+import AdminAnalytics from './pages/Analytics'
 
 
 const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASSWORD || 'aromena2026'
@@ -76,6 +77,7 @@ export default function AdminApp() {
         <Route path="settings"   element={<AdminSettings />} />
         <Route path="locations"  element={<AdminLocations />} />
         <Route path="custom-box" element={<AdminCustomBox />} />
+        <Route path="analytics"  element={<AdminAnalytics />} />
       </Routes>
     </AdminLayout>
   )

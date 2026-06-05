@@ -6,7 +6,7 @@ import {
   FiGrid, FiPackage, FiShoppingBag, FiShoppingCart,
   FiUsers, FiBriefcase, FiDollarSign, FiTruck,
   FiTag, FiSettings, FiLogOut, FiMenu, FiX, FiStar,
-  FiTrendingUp, FiMail, FiMapPin, FiBox
+  FiTrendingUp, FiMail, FiMapPin, FiBox, FiBarChart2
 } from 'react-icons/fi'
 
 const BORDEAUX = '#7b192c'
@@ -15,6 +15,7 @@ const FALLBACK_LOGO = 'https://res.cloudinary.com/dvt0nntn7/image/upload/v177540
 
 const menuItems = [
   { path: '/admin/dashboard',  icon: <FiGrid size={18} />,         label_ar: 'لوحة التحكم' },
+  { path: '/admin/analytics',  icon: <FiBarChart2 size={18} />,    label_ar: 'التحليلات' },
   { path: '/admin/products',   icon: <FiPackage size={18} />,      label_ar: 'المنتجات' },
   { path: '/admin/packages',   icon: <FiShoppingBag size={18} />,  label_ar: 'الباقات' },
   { path: '/admin/custom-box', icon: <FiBox size={18} />,          label_ar: 'الباكج المخصص' },
