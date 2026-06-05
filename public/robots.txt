@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# منع الزحف على لوحة التحكّم والصفحات الخاصّة
+Disallow: /admin
+Disallow: /admin/
+Disallow: /checkout
+Disallow: /account
+Disallow: /login
+Disallow: /register
+
+Sitemap: https://aromena.com.tr/sitemap.xml
