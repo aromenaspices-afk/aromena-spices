@@ -24,6 +24,18 @@ import AdminAnalytics from './pages/Analytics'
 
 const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASSWORD || 'aromena2026'
 
+// جلب JSON مع مهلة زمنيّة
+async function fetchJson(url, ms = 3500) {
+  const ctrl = new AbortController()
+  const t = setTimeout(() => ctrl.abort(), ms)
+  try {
+    const r = await fetch(url, { signal: ctrl.signal })
+    return await r.json()
+  } finally {
+    clearTimeout(t)
+  }
+}
+
 export default function AdminApp() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => localStorage.getItem('aromena_admin') === 'true'
@@ -32,23 +44,31 @@ export default function AdminApp() {
   async function handleLogin(pass) {
     const valid = (pass || '').trim() === ADMIN_PASS.trim()
 
-    // جلب الموقع الجغرافي عبر IP (خدمة مجّانيّة بلا مفتاح)
+    // جلب الموقع الجغرافي عبر IP — سلسلة بدائل (إن حُجبت خدمة جُرِّبت التالية)
     let geo = {}
-    try {
-      const ctrl = new AbortController()
-      const t = setTimeout(() => ctrl.abort(), 3500)
-      const r = await fetch('https://ipwho.is/', { signal: ctrl.signal })
-      clearTimeout(t)
-      const j = await r.json()
-      if (j && j.success !== false) {
-        geo = {
-          country: j.country || '',
-          countryCode: j.country_code || '',
-          city: j.city || '',
-          ip: j.ip || '',
+    const geoProviders = [
+      async () => {
+        const j = await fetchJson('https://ipwho.is/')
+        if (j && j.success !== false) return { country: j.country, countryCode: j.country_code, city: j.city, ip: j.ip }
+      },
+      async () => {
+        const j = await fetchJson('https://ipapi.co/json/')
+        if (j && !j.error) return { country: j.country_name, countryCode: j.country_code, city: j.city, ip: j.ip }
+      },
+      async () => {
+        const j = await fetchJson('https://api.country.is/')
+        if (j && j.country) return { country: j.country, countryCode: j.country, city: '', ip: j.ip }
+      },
+    ]
+    for (const provider of geoProviders) {
+      try {
+        const g = await provider()
+        if (g && g.countryCode) {
+          geo = { country: g.country || '', countryCode: g.countryCode || '', city: g.city || '', ip: g.ip || '' }
+          break
         }
-      }
-    } catch { /* تجاهل فشل تحديد الموقع */ }
+      } catch { /* جرّب الخدمة التالية */ }
+    }
 
     // تسجيل المحاولة في سجلّ النشاط
     try {
