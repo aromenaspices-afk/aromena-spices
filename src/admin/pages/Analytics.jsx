@@ -417,6 +417,7 @@ export default function Analytics() {
                     <tr style={{ borderBottom: `1px solid ${BORDER}`, color: TEXT2, textAlign: 'right' }}>
                       <th style={{ padding: '8px 10px', fontWeight: 700 }}>الحالة</th>
                       <th style={{ padding: '8px 10px', fontWeight: 700 }}>التاريخ والوقت</th>
+                      <th style={{ padding: '8px 10px', fontWeight: 700 }}>الدولة</th>
                       <th style={{ padding: '8px 10px', fontWeight: 700 }}>الجهاز</th>
                     </tr>
                   </thead>
@@ -432,7 +433,13 @@ export default function Analytics() {
                             </span>
                           </td>
                           <td style={{ padding: '9px 10px', color: TEXT, whiteSpace: 'nowrap' }}>{d ? d.toLocaleString('ar-EG', { dateStyle: 'medium', timeStyle: 'short' }) : '—'}</td>
-                          <td style={{ padding: '9px 10px', color: TEXT2, maxWidth: 360, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={l.userAgent}>{l.userAgent || '—'}</td>
+                          <td style={{ padding: '9px 10px', color: TEXT, whiteSpace: 'nowrap' }} title={l.ip || ''}>
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                              {l.countryCode && <FiMapPin size={12} color={TEXT2} />}
+                              {l.country ? (l.city ? `${l.country} · ${l.city}` : l.country) : '—'}
+                            </span>
+                          </td>
+                          <td style={{ padding: '9px 10px', color: TEXT2, maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={l.userAgent}>{l.userAgent || '—'}</td>
                         </tr>
                       )
                     })}

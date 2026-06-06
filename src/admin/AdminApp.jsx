@@ -32,6 +32,24 @@ export default function AdminApp() {
   async function handleLogin(pass) {
     const valid = (pass || '').trim() === ADMIN_PASS.trim()
 
+    // جلب الموقع الجغرافي عبر IP (خدمة مجّانيّة بلا مفتاح)
+    let geo = {}
+    try {
+      const ctrl = new AbortController()
+      const t = setTimeout(() => ctrl.abort(), 3500)
+      const r = await fetch('https://ipwho.is/', { signal: ctrl.signal })
+      clearTimeout(t)
+      const j = await r.json()
+      if (j && j.success !== false) {
+        geo = {
+          country: j.country || '',
+          countryCode: j.country_code || '',
+          city: j.city || '',
+          ip: j.ip || '',
+        }
+      }
+    } catch { /* تجاهل فشل تحديد الموقع */ }
+
     // تسجيل المحاولة في سجلّ النشاط
     try {
       await addDoc(collection(db, 'activity_log'), {
@@ -40,6 +58,7 @@ export default function AdminApp() {
         at: serverTimestamp(),
         userAgent: navigator.userAgent || '',
         platform: navigator.platform || '',
+        ...geo,
       })
     } catch { /* السجلّ ليس حرجاً */ }
 
