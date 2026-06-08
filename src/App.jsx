@@ -13,6 +13,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Wholesale from './pages/Wholesale'
 import Checkout from './pages/Checkout'
+import PaymentResult from './pages/PaymentResult'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Account from './pages/Account'
@@ -67,6 +68,7 @@ export default function App() {
                   <Route path="/contact"         element={<Contact />} />
                   <Route path="/wholesale"       element={<Wholesale />} />
                   <Route path="/checkout"        element={<Checkout />} />
+                  <Route path="/payment-result"  element={<PaymentResult />} />
                   <Route path="/login"           element={<Login />} />
                   <Route path="/register"        element={<Register />} />
                   <Route path="/account"         element={<Account />} />

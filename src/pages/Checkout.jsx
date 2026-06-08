@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
@@ -131,6 +131,62 @@ function Input({ value, onChange, type = 'text', placeholder, required }) {
   )
 }
 
+
+// نافذة الدفع المضمّن بالبطاقة عبر Iyzico
+function CardSheet({ content, error, isAr, onClose }) {
+  const hostRef = useRef(null)
+
+  useEffect(() => {
+    if (!content || !hostRef.current) return
+    const host = hostRef.current
+    host.innerHTML = '<div id="iyzipay-checkout-form" class="responsive"></div>'
+    // حقن سكربتات Iyzico وتنفيذها (innerHTML لا ينفّذ السكربت)
+    const temp = document.createElement('div')
+    temp.innerHTML = content
+    const injected = []
+    temp.querySelectorAll('script').forEach(old => {
+      const s = document.createElement('script')
+      if (old.src) s.src = old.src
+      else s.textContent = old.textContent
+      s.async = false
+      document.body.appendChild(s)
+      injected.push(s)
+    })
+    return () => { injected.forEach(s => s.remove()) }
+  }, [content])
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(26,6,16,0.6)', backdropFilter: 'blur(4px)', zIndex: 9999, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '24px 14px', overflowY: 'auto' }}>
+      <div style={{ background: '#fff', borderRadius: 22, width: '100%', maxWidth: 520, boxShadow: '0 20px 60px rgba(0,0,0,0.35)', overflow: 'hidden' }}>
+        <div style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <span style={{ color: '#f4be69', fontWeight: 800, fontFamily: 'Amiri, serif', fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <FiCreditCard size={18} /> {isAr ? 'دفع آمن بالبطاقة' : 'Secure Card Payment'}
+          </span>
+          <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.15)', border: 'none', borderRadius: 10, width: 32, height: 32, cursor: 'pointer', color: '#f4be69', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <FiX size={18} />
+          </button>
+        </div>
+        <div style={{ padding: '18px 18px 24px', minHeight: 220 }}>
+          {error ? (
+            <div style={{ textAlign: 'center', padding: '30px 10px' }}>
+              <FiX size={40} color="#DC2626" />
+              <p style={{ color: '#DC2626', fontWeight: 700, marginTop: 12, fontFamily: 'Amiri, serif' }}>{error}</p>
+              <button onClick={onClose} style={{ marginTop: 16, background: '#7b192c', color: '#f4be69', border: 'none', borderRadius: 12, padding: '10px 28px', cursor: 'pointer', fontFamily: 'Amiri, serif', fontWeight: 700 }}>{isAr ? 'إغلاق' : 'Close'}</button>
+            </div>
+          ) : !content ? (
+            <div style={{ textAlign: 'center', padding: '50px 10px', color: '#9C6B4E' }}>
+              <div style={{ width: 38, height: 38, border: '3px solid #E2C9A8', borderTopColor: '#7b192c', borderRadius: '50%', margin: '0 auto 14px', animation: 'spin 0.8s linear infinite' }} />
+              {isAr ? 'جارٍ تجهيز بوابة الدفع…' : 'Preparing payment…'}
+            </div>
+          ) : (
+            <div ref={hostRef} />
+          )}
+        </div>
+      </div>
+      <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+    </div>
+  )
+}
 
 function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
   const [copied, setCopied] = useState('')
@@ -385,6 +441,8 @@ export default function Checkout() {
   const [orderId, setOrderId] = useState('')
   const [loading, setLoading] = useState(false)
   const [showBank, setShowBank] = useState(false)
+  const [showCard, setShowCard] = useState(false)
+  const [cardError, setCardError] = useState('')
   const [shippingResult, setShippingResult] = useState({ price: 0, days: '5-7', found: false })
 
  
@@ -479,6 +537,8 @@ export default function Checkout() {
         clearCart()
         try { localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
         setOrdered(true)
+      } else if (payment === 'card') {
+        await startCardPayment(docRef.id, orderItems)
       } else {
         setShowBank(true)
       }
@@ -502,6 +562,46 @@ export default function Checkout() {
     setOrdered(true)
   }
 
+  const [cardContent, setCardContent] = useState('')
+
+  async function startCardPayment(docId, orderItems) {
+    setCardError('')
+    setShowCard(true)
+    setCardContent('')
+    try {
+      const res = await fetch('/.netlify/functions/iyzico-init', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId: docId,
+          currency: 'TRY',
+          items: orderItems.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
+          shipping,
+          paidTotal: finalTotal,
+          buyer: {
+            uid: user?.uid || null,
+            firstName: form.firstName, lastName: form.lastName,
+            email: form.email, phone: form.phone,
+            city: form.city, country: form.country,
+            address: [form.district, form.neighborhood, form.address].filter(Boolean).join('، '),
+          },
+          address: {
+            full: [form.district, form.neighborhood, form.address].filter(Boolean).join('، '),
+            city: form.city, country: form.country,
+          },
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.checkoutFormContent) {
+        setCardError(data.error || (isAr ? 'تعذّر بدء الدفع' : 'Could not start payment'))
+        return
+      }
+      setCardContent(data.checkoutFormContent)
+    } catch (e) {
+      setCardError(isAr ? 'تعذّر الاتصال ببوابة الدفع' : 'Payment gateway connection failed')
+    }
+  }
+
   if (ordered) return <OrderSuccess orderNumber={orderNumber} email={form.email} />
   if (!items.length) return (
     <div style={{ background: '#F5E6D3', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
@@ -520,6 +620,7 @@ export default function Checkout() {
   return (
     <div style={{ background: '#F5E6D3', minHeight: '100vh' }}>
       {showBank && <BankSheet orderNumber={orderNumber} orderId={orderId} total={formatPrice(finalTotal)} isAr={isAr} onConfirm={handleBankDone} onClose={() => setShowBank(false)} />}
+      {showCard && <CardSheet content={cardContent} error={cardError} isAr={isAr} onClose={() => { setShowCard(false); setCardContent('') }} />}
 
       {/* شريط التقدم */}
       <div style={{ background: '#fff', padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', position: 'sticky', top: 0, zIndex: 10 }}>
@@ -641,9 +742,23 @@ export default function Checkout() {
                 {payment === 'cod' && <FiCheck size={18} color="#7b192c" />}
               </button>
 
+              {/* بطاقة ائتمان — Iyzico (دفع آمن داخل الموقع) */}
+              <button onClick={() => setPayment('card')} style={{ background: payment === 'card' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'card' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'card' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <FiCreditCard size={20} color={payment === 'card' ? '#7b192c' : '#9C6B4E'} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem' }}>{isAr ? 'بطاقة ائتمان' : 'Credit Card'}</p>
+                    <span style={{ background: '#2563EB', color: '#fff', fontSize: '0.62rem', fontWeight: 800, padding: '2px 9px', borderRadius: 50, letterSpacing: 0.5 }}>{isAr ? 'دفع آمن' : 'Secure'}</span>
+                  </div>
+                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'ادفع بأمان داخل الموقع' : 'Pay securely on-site'}</p>
+                </div>
+                {payment === 'card' && <FiCheck size={18} color="#7b192c" />}
+              </button>
+
               {/* قريباً */}
               {[
-                { id: 'card',   Icon: FiCreditCard, label_ar: 'بطاقة ائتمان', label_en: 'Credit Card' },
                 { id: 'paypal', Icon: FiDollarSign, label_ar: 'PayPal',        label_en: 'PayPal'       },
                 { id: 'apple',  Icon: FiSmartphone, label_ar: 'Apple Pay',     label_en: 'Apple Pay'    },
               ].map(pm => (
