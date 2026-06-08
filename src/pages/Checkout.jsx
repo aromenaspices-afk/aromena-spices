@@ -434,7 +434,10 @@ export default function Checkout() {
   const [couponApplied, setCouponApplied] = useState(false)
   const [couponData, setCouponData] = useState(null)
   const [couponError, setCouponError] = useState('')
-  const [payment, setPayment] = useState(() => localStorage.getItem('checkout_payment') || 'transfer')
+  const [payment, setPayment] = useState(() => {
+    const saved = localStorage.getItem('checkout_payment')
+    return (saved === 'card' || saved === 'cod') ? saved : 'card'
+  })
   const [agreed, setAgreed] = useState(false)
   const [ordered, setOrdered] = useState(false)
   const [orderNumber, setOrderNumber] = useState('')
@@ -715,16 +718,19 @@ export default function Checkout() {
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {/* تحويل بنكي */}
-              <button onClick={() => setPayment('transfer')} style={{ background: payment === 'transfer' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'transfer' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right' }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'transfer' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <FiBriefcase size={20} color={payment === 'transfer' ? '#7b192c' : '#9C6B4E'} />
+              {/* بطاقة ائتمان — دفع آمن داخل الموقع (الخيار الأول) */}
+              <button onClick={() => setPayment('card')} style={{ background: payment === 'card' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'card' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'card' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <FiCreditCard size={20} color={payment === 'card' ? '#7b192c' : '#9C6B4E'} />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem' }}>{isAr ? 'تحويل بنكي' : 'Bank Transfer'}</p>
-                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'حوّل وأرسل الإيصالَ' : 'Transfer and send receipt'}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem' }}>{isAr ? 'بطاقة ائتمان' : 'Credit Card'}</p>
+                    <span style={{ background: '#2563EB', color: '#fff', fontSize: '0.62rem', fontWeight: 800, padding: '2px 9px', borderRadius: 50, letterSpacing: 0.5 }}>{isAr ? 'دفع آمن' : 'Secure'}</span>
+                  </div>
+                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'ادفع بأمان داخل الموقع' : 'Pay securely on-site'}</p>
                 </div>
-                {payment === 'transfer' && <FiCheck size={18} color="#7b192c" />}
+                {payment === 'card' && <FiCheck size={18} color="#7b192c" />}
               </button>
 
               {/* الدفع عند التسليم */}
@@ -740,21 +746,6 @@ export default function Checkout() {
                   <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'ادفع نقداً عند استلام طلبك' : 'Pay in cash when your order arrives'}</p>
                 </div>
                 {payment === 'cod' && <FiCheck size={18} color="#7b192c" />}
-              </button>
-
-              {/* بطاقة ائتمان — Iyzico (دفع آمن داخل الموقع) */}
-              <button onClick={() => setPayment('card')} style={{ background: payment === 'card' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'card' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'card' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <FiCreditCard size={20} color={payment === 'card' ? '#7b192c' : '#9C6B4E'} />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem' }}>{isAr ? 'بطاقة ائتمان' : 'Credit Card'}</p>
-                    <span style={{ background: '#2563EB', color: '#fff', fontSize: '0.62rem', fontWeight: 800, padding: '2px 9px', borderRadius: 50, letterSpacing: 0.5 }}>{isAr ? 'دفع آمن' : 'Secure'}</span>
-                  </div>
-                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'ادفع بأمان داخل الموقع' : 'Pay securely on-site'}</p>
-                </div>
-                {payment === 'card' && <FiCheck size={18} color="#7b192c" />}
               </button>
 
               {/* قريباً */}
@@ -807,12 +798,12 @@ export default function Checkout() {
             {/* طريقة الدفع */}
             <div style={{ background: '#fff', borderRadius: 18, padding: '16px 18px', marginBottom: 14, boxShadow: '0 2px 12px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ width: 40, height: 40, borderRadius: 11, background: 'rgba(123,25,44,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                {payment === 'cod' ? <FiTruck size={18} color="#7b192c" /> : <FiBriefcase size={18} color="#7b192c" />}
+                {payment === 'cod' ? <FiTruck size={18} color="#7b192c" /> : <FiCreditCard size={18} color="#7b192c" />}
               </div>
               <div style={{ flex: 1 }}>
                 <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.85rem' }}>{isAr ? 'طريقة الدفع' : 'Payment Method'}</p>
                 <p style={{ color: '#9C6B4E', fontSize: '0.8rem', marginTop: 2 }}>
-                  {payment === 'cod' ? (isAr ? 'الدفع عند التّسليم' : 'Cash on Delivery') : (isAr ? 'تحويل بنكي' : 'Bank Transfer')}
+                  {payment === 'cod' ? (isAr ? 'الدفع عند التّسليم' : 'Cash on Delivery') : (isAr ? 'بطاقة ائتمان' : 'Credit Card')}
                 </p>
               </div>
               <button onClick={() => setStep(2)} style={{ background: 'none', border: 'none', color: '#7b192c', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 600, fontFamily: 'Amiri, serif' }}>{isAr ? 'تعديل' : 'Edit'}</button>
