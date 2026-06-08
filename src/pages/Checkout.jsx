@@ -733,6 +733,18 @@ export default function Checkout() {
                 {payment === 'card' && <FiCheck size={18} color="#7b192c" />}
               </button>
 
+              {/* تحويل بنكي */}
+              <button onClick={() => setPayment('transfer')} style={{ background: payment === 'transfer' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'transfer' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right' }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'transfer' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <FiBriefcase size={20} color={payment === 'transfer' ? '#7b192c' : '#9C6B4E'} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem' }}>{isAr ? 'تحويل بنكي' : 'Bank Transfer'}</p>
+                  <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginTop: 2 }}>{isAr ? 'حوّل وأرسل الإيصالَ' : 'Transfer and send receipt'}</p>
+                </div>
+                {payment === 'transfer' && <FiCheck size={18} color="#7b192c" />}
+              </button>
+
               {/* الدفع عند التسليم */}
               <button onClick={() => setPayment('cod')} style={{ background: payment === 'cod' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'cod' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'cod' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
