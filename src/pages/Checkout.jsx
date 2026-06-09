@@ -135,6 +135,15 @@ function Input({ value, onChange, type = 'text', placeholder, required }) {
 }
 
 
+// تنظيف بقايا Iyzico (سكربتات + متغيّرات عامّة) كي تُعاد التهيئة عند كلّ فتح
+function cleanupIyzico() {
+  try { document.querySelectorAll('script[src*="iyzipay"]').forEach(s => s.remove()) } catch { /* */ }
+  try { document.querySelectorAll('script[id^="iyzipay"], script[id^="iyzi"]').forEach(s => s.remove()) } catch { /* */ }
+  ;['iyziInit', 'iyziInitEditForm', '__iyzicoCheckoutForm', 'iyziInitCheckout'].forEach(k => {
+    try { window[k] = undefined; delete window[k] } catch { /* */ }
+  })
+}
+
 // نافذة الدفع المضمّن بالبطاقة عبر Iyzico
 function CardSheet({ content, error, isAr, onClose }) {
   const hostRef = useRef(null)
@@ -142,6 +151,7 @@ function CardSheet({ content, error, isAr, onClose }) {
 
   useEffect(() => {
     if (!content || !hostRef.current) return
+    cleanupIyzico() // أزِل بقايا أيّ فتح سابق قبل التهيئة الجديدة
     setFormReady(false)
     const host = hostRef.current
     host.innerHTML = '<div id="iyzipay-checkout-form" class="responsive"></div>'
@@ -167,7 +177,7 @@ function CardSheet({ content, error, isAr, onClose }) {
       document.body.appendChild(s)
       injected.push(s)
     })
-    return () => { obs.disconnect(); clearTimeout(safety); injected.forEach(s => s.remove()) }
+    return () => { obs.disconnect(); clearTimeout(safety); injected.forEach(s => s.remove()); cleanupIyzico() }
   }, [content])
 
   return (
