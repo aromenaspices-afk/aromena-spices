@@ -1,25 +1,16 @@
-const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY
-const SENDER_EMAIL  = 'aromena.official@gmail.com'
-const SENDER_NAME   = 'Aromena Spices'
 const ADMIN_EMAIL   = 'aromena.official@gmail.com'
 const SITE          = 'https://aromena.com.tr'
 const LOGO          = 'https://res.cloudinary.com/dvt0nntn7/image/upload/v1775408607/02_fwrhni.png'
 
+// الإرسال عبر دالّة Netlify خادميّة (المفتاح لا يُكشَف في المتصفّح فلا يُعطَّل)
 async function sendEmail({ to, toName, subject, html }) {
-  if (!BREVO_API_KEY) { console.error('❌ VITE_BREVO_API_KEY غير موجود'); return }
   try {
-    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+    const res = await fetch('/.netlify/functions/send-email', {
       method: 'POST',
-      headers: { 'api-key': BREVO_API_KEY, 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        sender:      { name: SENDER_NAME, email: SENDER_EMAIL },
-        to:          [{ email: to, name: toName || to }],
-        subject,
-        htmlContent: html,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to, toName, subject, html }),
     })
-    const txt = await res.text()
-    if (!res.ok) { console.error('❌ Brevo error:', res.status, txt) }
+    if (!res.ok) { console.error('❌ Email error:', res.status, await res.text()) }
     else { console.log('✅ Email sent to:', to) }
   } catch (err) { console.error('❌ Email failed:', err) }
 }
