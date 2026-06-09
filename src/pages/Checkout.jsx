@@ -135,11 +135,23 @@ function Input({ value, onChange, type = 'text', placeholder, required }) {
 // نافذة الدفع المضمّن بالبطاقة عبر Iyzico
 function CardSheet({ content, error, isAr, onClose }) {
   const hostRef = useRef(null)
+  const [formReady, setFormReady] = useState(false)
 
   useEffect(() => {
     if (!content || !hostRef.current) return
+    setFormReady(false)
     const host = hostRef.current
     host.innerHTML = '<div id="iyzipay-checkout-form" class="responsive"></div>'
+    const formEl = host.querySelector('#iyzipay-checkout-form')
+
+    // مراقبة ظهور نموذج Iyzico (iframe) لإخفاء مؤشّر التحميل لحظة جهوزيّته
+    const obs = new MutationObserver(() => {
+      if (formEl && formEl.childNodes.length > 0) { setFormReady(true); obs.disconnect() }
+    })
+    if (formEl) obs.observe(formEl, { childList: true, subtree: true })
+    // أمان: أخفِ المؤشّر بعد 15s مهما حدث
+    const safety = setTimeout(() => setFormReady(true), 15000)
+
     // حقن سكربتات Iyzico وتنفيذها (innerHTML لا ينفّذ السكربت)
     const temp = document.createElement('div')
     temp.innerHTML = content
@@ -152,7 +164,7 @@ function CardSheet({ content, error, isAr, onClose }) {
       document.body.appendChild(s)
       injected.push(s)
     })
-    return () => { injected.forEach(s => s.remove()) }
+    return () => { obs.disconnect(); clearTimeout(safety); injected.forEach(s => s.remove()) }
   }, [content])
 
   return (
@@ -173,13 +185,16 @@ function CardSheet({ content, error, isAr, onClose }) {
               <p style={{ color: '#DC2626', fontWeight: 700, marginTop: 12, fontFamily: 'Amiri, serif' }}>{error}</p>
               <button onClick={onClose} style={{ marginTop: 16, background: '#7b192c', color: '#f4be69', border: 'none', borderRadius: 12, padding: '10px 28px', cursor: 'pointer', fontFamily: 'Amiri, serif', fontWeight: 700 }}>{isAr ? 'إغلاق' : 'Close'}</button>
             </div>
-          ) : !content ? (
-            <div style={{ textAlign: 'center', padding: '50px 10px', color: '#9C6B4E' }}>
-              <div style={{ width: 38, height: 38, border: '3px solid #E2C9A8', borderTopColor: '#7b192c', borderRadius: '50%', margin: '0 auto 14px', animation: 'spin 0.8s linear infinite' }} />
-              {isAr ? 'جارٍ تجهيز بوابة الدفع…' : 'Preparing payment…'}
-            </div>
           ) : (
-            <div ref={hostRef} />
+            <div style={{ position: 'relative', minHeight: 200 }}>
+              <div ref={hostRef} />
+              {(!content || !formReady) && (
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#9C6B4E', textAlign: 'center', borderRadius: 12 }}>
+                  <div style={{ width: 38, height: 38, border: '3px solid #E2C9A8', borderTopColor: '#7b192c', borderRadius: '50%', marginBottom: 14, animation: 'spin 0.8s linear infinite' }} />
+                  {isAr ? 'جارٍ تجهيز بوابة الدفع الآمنة…' : 'Preparing secure payment…'}
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>
