@@ -13,6 +13,9 @@ import OrderSuccess from '../components/OrderSuccess'
 import { useCurrency } from '../context/CurrencyContext'
 import { calculateShipping } from '../utils/shippingData'
 
+// نقطة تهيئة الدفع — Edge (قرب تركيا). للتراجع الفوريّ: '/.netlify/functions/iyzico-init'
+const IYZICO_INIT_URL = '/api/iyzico-init'
+
 
 const BANK_INFO = {
   iban:        'TR11 0020 3000 0093 3795 7000 001',
@@ -495,7 +498,7 @@ export default function Checkout() {
   useEffect(() => {
     if (step === 2 && !warmedRef.current) {
       warmedRef.current = true
-      try { fetch('/.netlify/functions/iyzico-init', { method: 'GET' }).catch(() => {}) } catch {}
+      try { fetch(IYZICO_INIT_URL, { method: 'GET' }).catch(() => {}) } catch {}
     }
   }, [step])
 
@@ -603,7 +606,7 @@ export default function Checkout() {
     const ctrl = new AbortController()
     const timer = setTimeout(() => ctrl.abort(), 20000)
     try {
-      const res = await fetch('/.netlify/functions/iyzico-init', {
+      const res = await fetch(IYZICO_INIT_URL, {
         method: 'POST',
         signal: ctrl.signal,
         headers: { 'Content-Type': 'application/json' },

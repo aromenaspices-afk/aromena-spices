@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next'
 import { FiCheckCircle, FiXCircle, FiLoader, FiShoppingBag, FiHome } from 'react-icons/fi'
 import { sendOrderConfirmEmail, sendAdminNewOrderEmail } from '../utils/emailService'
 
+// نقطة التحقّق — Edge (قرب تركيا). للتراجع الفوريّ: '/.netlify/functions/iyzico-verify'
+const IYZICO_VERIFY_URL = '/api/iyzico-verify'
+
 export default function PaymentResult() {
   const [params] = useSearchParams()
   const { clearCart } = useCart()
@@ -26,7 +29,7 @@ export default function PaymentResult() {
     async function finalize() {
       if (!token) { setState(urlStatus === 'success' ? 'success' : 'failure'); return }
       try {
-        const res = await fetch('/.netlify/functions/iyzico-verify', {
+        const res = await fetch(IYZICO_VERIFY_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token }),
