@@ -474,6 +474,16 @@ export default function Checkout() {
     localStorage.setItem('checkout_payment', payment)
   }, [payment])
 
+  // تسخين دالّة الدفع مسبقاً عند الوصول لخطوة الدفع (يُحمّي الحاوية وحزمة SDK
+  // بينما يكمل العميل، فيكون النموذج أسرع لاحقاً). طلب GET يُهمَل ردّه ولا يمسّ Iyzico.
+  const warmedRef = useRef(false)
+  useEffect(() => {
+    if (step === 2 && !warmedRef.current) {
+      warmedRef.current = true
+      try { fetch('/.netlify/functions/iyzico-init', { method: 'GET' }).catch(() => {}) } catch {}
+    }
+  }, [step])
+
   
   useEffect(() => {
     if (!form.country || !items.length) { setShippingResult({ price: 0, days: '5-7', found: false }); return }
@@ -534,8 +544,10 @@ export default function Checkout() {
       setOrderId(docRef.id)
       if (payment === 'cod') {
         try {
-          await sendOrderConfirmEmail({ customer: { ...form }, orderNumber: orderNum, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() })
-          await sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() })
+          await Promise.all([
+            sendOrderConfirmEmail({ customer: { ...form }, orderNumber: orderNum, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
+            sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
+          ])
         } catch {}
         clearCart()
         try { localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
@@ -557,8 +569,10 @@ export default function Checkout() {
     const pricing = { subtotal: total, shipping, discount, total: finalTotal }
     const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null }))
     try {
-      await sendOrderConfirmEmail({ customer: { ...form }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() })
-      await sendAdminNewOrderEmail({ orderNumber, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() })
+      await Promise.all([
+        sendOrderConfirmEmail({ customer: { ...form }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
+        sendAdminNewOrderEmail({ orderNumber, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
+      ])
     } catch {}
     clearCart()
     try { localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
@@ -571,9 +585,12 @@ export default function Checkout() {
     setCardError('')
     setShowCard(true)
     setCardContent('')
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), 20000)
     try {
       const res = await fetch('/.netlify/functions/iyzico-init', {
         method: 'POST',
+        signal: ctrl.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           orderId: docId,
@@ -601,7 +618,13 @@ export default function Checkout() {
       }
       setCardContent(data.checkoutFormContent)
     } catch (e) {
-      setCardError(isAr ? 'تعذّر الاتصال ببوابة الدفع' : 'Payment gateway connection failed')
+      setCardError(
+        e?.name === 'AbortError'
+          ? (isAr ? 'بوابة الدفع تستغرق وقتاً أطول من المعتاد. أعِد المحاولة من فضلك.' : 'The payment gateway is taking longer than usual. Please try again.')
+          : (isAr ? 'تعذّر الاتصال ببوابة الدفع' : 'Payment gateway connection failed')
+      )
+    } finally {
+      clearTimeout(timer)
     }
   }
 

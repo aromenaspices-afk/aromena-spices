@@ -49,8 +49,11 @@ export default function PaymentResult() {
           // إرسال الإيميلات مرّة واحدة
           try {
             const payload = { orderNumber: order.orderNumber, customer: order.customer, items: order.items, pricing: order.pricing, pricingTRY: order.pricingTRY || order.pricing, payment: { method: 'card' }, createdAt: order.createdAt }
-            await sendOrderConfirmEmail({ ...payload, customer: order.customer })
-            await sendAdminNewOrderEmail(payload)
+            // بالتوازي — يبقى كلاهما مضموناً قبل النجاح، لكن دون انتظار تسلسليّ
+            await Promise.all([
+              sendOrderConfirmEmail({ ...payload, customer: order.customer }),
+              sendAdminNewOrderEmail(payload),
+            ])
           } catch {}
           try { clearCart(); localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
         }
