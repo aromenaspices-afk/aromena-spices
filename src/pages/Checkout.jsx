@@ -565,7 +565,7 @@ export default function Checkout() {
       const orderNum = await generateOrderNumber()
       const pricing = { subtotal: total, shipping, discount, total: finalTotal }
       const pricingTRY = { ...pricing, currency: 'TRY' }
-      const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null }))
+      const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
       const docRef = await addDoc(collection(db, 'orders'), {
         orderNumber: orderNum, status: payment === 'cod' ? 'confirmed' : 'awaiting_payment',
         customer: { uid: user.uid, ...form, fullAddress: [form.district, form.neighborhood, form.address].filter(Boolean).join('، ') },
@@ -602,7 +602,7 @@ export default function Checkout() {
   async function handleBankDone() {
     setShowBank(false)
     const pricing = { subtotal: total, shipping, discount, total: finalTotal }
-    const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null }))
+    const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
     try {
       await Promise.all([
         sendOrderConfirmEmail({ customer: { uid: user.uid, ...form }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),

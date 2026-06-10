@@ -98,6 +98,9 @@ function itemsHtml(items = []) {
         <td style="vertical-align:middle;text-align:right;padding-right:4px">
           <p style="color:#3E1C00;font-size:13px;font-weight:700;margin:0 0 4px">${item.name || ''}</p>
           <p style="color:#9C6B4E;font-size:11px;margin:0">${item.size || ''} &times; ${item.qty || 1}</p>
+          ${item.pkgItems && item.pkgItems.length
+            ? `<p style="color:#7b192c;font-size:11px;margin:5px 0 0;line-height:1.6">📦 المحتوى: ${item.pkgItems.map(pi => `${pi.name || ''}${pi.qty > 1 ? ` ×${pi.qty}` : ''}`).join('، ')}</p>`
+            : ''}
         </td>
         <td style="vertical-align:middle;text-align:left;white-space:nowrap;padding-left:4px;direction:ltr">
           <p style="color:#7b192c;font-size:14px;font-weight:900;margin:0">&#8378;${total}</p>

@@ -358,6 +358,11 @@ export default function Account() {
                         <div style={{ flex: 1 }}>
                           <p style={{ color: '#3E1C00', fontWeight: 600, fontSize: '0.83rem' }}>{item.name}</p>
                           <p style={{ color: '#9C6B4E', fontSize: '0.73rem' }}>{item.size} × {item.qty}</p>
+                          {item.pkgItems?.length > 0 && (
+                            <p style={{ color: '#7b192c', fontSize: '0.72rem', marginTop: 4, lineHeight: 1.6 }}>
+                              📦 {item.pkgItems.map(pi => `${pi.name}${pi.qty > 1 ? ` ×${pi.qty}` : ''}`).join('، ')}
+                            </p>
+                          )}
                         </div>
                         <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '0.82rem' }}>
                           €{(item.price * item.qty).toFixed(2)}
