@@ -890,6 +890,11 @@ export default function Checkout() {
                   <div style={{ flex: 1 }}>
                     <p style={{ color: '#1a0610', fontWeight: 600, fontSize: '0.85rem' }}>{item.name}</p>
                     <p style={{ color: '#9C6B4E', fontSize: '0.75rem' }}>{item.size} × {item.qty}</p>
+                    {item.pkgItems?.length > 0 && (
+                      <p style={{ color: '#7b192c', fontSize: '0.72rem', marginTop: 4, lineHeight: 1.6 }}>
+                        📦 {item.pkgItems.map(pi => `${pi.name}${pi.qty > 1 ? ` ×${pi.qty}` : ''}`).join('، ')}
+                      </p>
+                    )}
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4 }}>
                     <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '0.88rem' }}>{formatPrice(item.price * item.qty)}</p>
