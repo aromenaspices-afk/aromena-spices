@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate, Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import { db } from '../firebase'
 import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore'
+import { getStatus } from '../utils/orderStatus'
 import {
   FiLogOut, FiUser, FiEdit2, FiCheck,
   FiPlus, FiTrash2, FiLock, FiMapPin, FiPhone,
@@ -11,16 +13,11 @@ import {
   FiAlertCircle,
 } from 'react-icons/fi'
 
-const statusConfig = {
-  pending:   { label_ar: 'قيد الانتظار', label_en: 'Pending',      bg: '#EFF6FF', color: '#2563EB' },
-  confirmed: { label_ar: 'مؤكد',         label_en: 'Confirmed',    bg: '#F0FDF4', color: '#16A34A' },
-  shipping:  { label_ar: 'قيد الشّحن',    label_en: 'Shipping',     bg: '#FEF3C7', color: '#D97706' },
-  delivered: { label_ar: 'تمَّ التسليم',   label_en: 'Delivered',    bg: '#F5F3FF', color: '#7C3AED' },
-  cancelled: { label_ar: 'ملغي',         label_en: 'Cancelled',    bg: '#FEF2F2', color: '#DC2626' },
-}
+// الحالات من المصدر الموحّد عبر getStatus(order.status) — تُغطّي كلّ حالات الإدارة
 
 const paymentConfig = {
-  pending:  { label_ar: 'لم يُسدَّد', label_en: 'Unpaid',   bg: '#FEF3C7', color: '#D97706' },
+  pending:          { label_ar: 'لم يُسدَّد',  label_en: 'Unpaid',          bg: '#FEF3C7', color: '#D97706' },
+  receipt_uploaded: { label_ar: 'إيصال مرفوع', label_en: 'Receipt Uploaded', bg: '#FFF7ED', color: '#EA580C' },
   paid:     { label_ar: 'مدفوع',      label_en: 'Paid',      bg: '#F0FDF4', color: '#16A34A' },
   failed:   { label_ar: 'فشل',        label_en: 'Failed',    bg: '#FEF2F2', color: '#DC2626' },
   refunded: { label_ar: 'مُسترجع',    label_en: 'Refunded',  bg: '#F5F3FF', color: '#7C3AED' },
@@ -37,6 +34,7 @@ export default function Account() {
   const [ordersLoading, setOrdersLoading] = useState(true)
   const [ordersError, setOrdersError] = useState(null)
   const [expandedOrder, setExpandedOrder] = useState(null)
+  const prevStatusRef = useRef(null) // لكشف تغيّر الحالة وإظهار تنبيه فوريّ
 
   const [editingProfile, setEditingProfile] = useState(false)
   const [profileForm, setProfileForm] = useState(null)
@@ -63,6 +61,7 @@ export default function Account() {
   useEffect(() => {
     if (!user) return
 
+    prevStatusRef.current = null // بداية نظيفة لكلّ مستخدم
     setOrdersLoading(true)
     setOrdersError(null)
 
@@ -84,6 +83,17 @@ export default function Account() {
       q,
       (snap) => {
         const orders = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+        // تنبيه فوريّ عند تغيّر حالة طلب موجود (لا يظهر عند أوّل تحميل)
+        const prev = prevStatusRef.current
+        if (prev) {
+          orders.forEach(o => {
+            if (prev[o.id] && prev[o.id] !== o.status) {
+              const lbl = isAr ? getStatus(o.status).label_ar : getStatus(o.status).label_en
+              toast.success(isAr ? `تحدّثت حالة طلبك ${o.orderNumber || ''}: ${lbl}` : `Order ${o.orderNumber || ''} updated: ${lbl}`)
+            }
+          })
+        }
+        prevStatusRef.current = Object.fromEntries(orders.map(o => [o.id, o.status]))
         setMyOrders(orders)
         setOrdersLoading(false)
         setOrdersError(null)
@@ -286,7 +296,7 @@ export default function Account() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {myOrders.map(order => {
-          const st = statusConfig[order.status] || statusConfig.pending
+          const st = getStatus(order.status)
           const pst = paymentConfig[order.payment?.status] || paymentConfig.pending
           const isExpanded = expandedOrder === order.id
 

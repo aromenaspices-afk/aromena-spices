@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FiShoppingBag, FiCheck, FiChevronRight, FiChevronLeft, FiCopy, FiX, FiMapPin, FiCreditCard, FiBriefcase, FiDollarSign, FiSmartphone, FiTruck } from 'react-icons/fi'
 import { db, storage } from '../firebase'
 import { collection, addDoc, getDocs, query, orderBy, limit, doc, updateDoc } from 'firebase/firestore'
@@ -444,6 +444,7 @@ export default function Checkout() {
   const { t, i18n } = useTranslation()
   const { items, removeItem, updateQty, clearCart, total } = useCart()
   const { user, profile, updateUserProfile } = useAuth()
+  const navigate = useNavigate()
   const { formatPrice } = useCurrency()
   const { data: promoCodes } = useCollection('promocodes')
   const isAr = i18n.language === 'ar'
@@ -553,6 +554,12 @@ export default function Checkout() {
 
   async function handleOrder() {
     if (!agreed) return
+    // إجبار تسجيل الدخول قبل الشراء (شبكة أمان فوق ProtectedRoute) — يربط الطلب بالحساب
+    if (!user || !user.uid) {
+      toast.error(isAr ? 'يجب تسجيل الدخول لإتمام الطلب' : 'Please sign in to complete your order')
+      navigate('/login', { state: { from: '/checkout' } })
+      return
+    }
     setLoading(true)
     try {
       const orderNum = await generateOrderNumber()
@@ -561,7 +568,7 @@ export default function Checkout() {
       const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null }))
       const docRef = await addDoc(collection(db, 'orders'), {
         orderNumber: orderNum, status: payment === 'cod' ? 'confirmed' : 'awaiting_payment',
-        customer: { uid: user?.uid || null, ...form, fullAddress: [form.district, form.neighborhood, form.address].filter(Boolean).join('، ') },
+        customer: { uid: user.uid, ...form, fullAddress: [form.district, form.neighborhood, form.address].filter(Boolean).join('، ') },
         items: orderItems,
         payment: { method: payment, status: 'pending' },
         pricing, pricingTRY,
@@ -573,10 +580,10 @@ export default function Checkout() {
       if (payment === 'cod') {
         try {
           await Promise.all([
-            sendOrderConfirmEmail({ customer: { ...form }, orderNumber: orderNum, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
-            sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
+            sendOrderConfirmEmail({ customer: { uid: user.uid, ...form }, orderNumber: orderNum, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
+            sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { uid: user.uid, ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
           ])
-        } catch {}
+        } catch (emailErr) { console.error('COD order email failed:', emailErr) }
         clearCart()
         try { localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
         setOrdered(true)
@@ -598,10 +605,10 @@ export default function Checkout() {
     const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null }))
     try {
       await Promise.all([
-        sendOrderConfirmEmail({ customer: { ...form }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
-        sendAdminNewOrderEmail({ orderNumber, customer: { ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
+        sendOrderConfirmEmail({ customer: { uid: user.uid, ...form }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
+        sendAdminNewOrderEmail({ orderNumber, customer: { uid: user.uid, ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
       ])
-    } catch {}
+    } catch (emailErr) { console.error('Transfer order email failed:', emailErr) }
     clearCart()
     try { localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
     setOrdered(true)

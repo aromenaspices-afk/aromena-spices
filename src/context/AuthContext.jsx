@@ -112,6 +112,12 @@ export function AuthProvider({ children }) {
   async function logout() {
     await signOut(auth)
     setProfile(null)
+    // تنظيف بيانات الشراء والسلّة كي لا تتسرّب لمستخدم آخر على جهاز مشترك
+    try {
+      localStorage.removeItem('checkout_form')
+      localStorage.removeItem('checkout_payment')
+      localStorage.removeItem('aromena_cart')
+    } catch { /* */ }
   }
 
   return (

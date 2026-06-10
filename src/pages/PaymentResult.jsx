@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
 import { useTranslation } from 'react-i18next'
 import { FiCheckCircle, FiXCircle, FiLoader, FiShoppingBag, FiHome } from 'react-icons/fi'
 import { sendOrderConfirmEmail, sendAdminNewOrderEmail } from '../utils/emailService'
@@ -13,6 +14,7 @@ const IYZICO_VERIFY_URL = '/api/iyzico-verify'
 export default function PaymentResult() {
   const [params] = useSearchParams()
   const { clearCart } = useCart()
+  const { user } = useAuth()
   const { i18n } = useTranslation()
   const isAr = i18n.language === 'ar'
   const [state, setState] = useState('loading') // loading | success | failure
@@ -42,6 +44,8 @@ export default function PaymentResult() {
         const snap = await getDoc(ref)
         if (!snap.exists()) { setState('success'); return }
         const order = snap.data()
+        // تحقّق من ملكيّة الطلب — يمنع تأكيد طلب الغير عبر توكِن مُزوّر
+        if (order.customer?.uid !== user?.uid) { setState('failure'); return }
         setOrderNumber(order.orderNumber || '')
 
         if (order.payment?.status !== 'paid') {
@@ -57,7 +61,10 @@ export default function PaymentResult() {
               sendOrderConfirmEmail({ ...payload, customer: order.customer }),
               sendAdminNewOrderEmail(payload),
             ])
-          } catch {}
+          } catch (emailErr) {
+            console.error('Payment confirm email failed:', emailErr)
+            try { await updateDoc(ref, { emailError: { at: new Date().toISOString(), error: String(emailErr?.message || emailErr) } }) } catch { /* */ }
+          }
           try { clearCart(); localStorage.removeItem('checkout_form'); localStorage.removeItem('checkout_payment') } catch {}
         }
         setState('success')

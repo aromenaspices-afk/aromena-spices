@@ -14,6 +14,7 @@ import Contact from './pages/Contact'
 import Wholesale from './pages/Wholesale'
 import Checkout from './pages/Checkout'
 import PaymentResult from './pages/PaymentResult'
+import ProtectedRoute from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Account from './pages/Account'
@@ -67,11 +68,11 @@ export default function App() {
                   <Route path="/about"           element={<About />} />
                   <Route path="/contact"         element={<Contact />} />
                   <Route path="/wholesale"       element={<Wholesale />} />
-                  <Route path="/checkout"        element={<Checkout />} />
-                  <Route path="/payment-result"  element={<PaymentResult />} />
+                  <Route path="/checkout"        element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+                  <Route path="/payment-result"  element={<ProtectedRoute><PaymentResult /></ProtectedRoute>} />
                   <Route path="/login"           element={<Login />} />
                   <Route path="/register"        element={<Register />} />
-                  <Route path="/account"         element={<Account />} />
+                  <Route path="/account"         element={<ProtectedRoute><Account /></ProtectedRoute>} />
                   <Route path="/privacy"         element={<PrivacyPolicy />} />
                   <Route path="/shipping-policy" element={<ShippingPolicy />} />
                   <Route path="/sales-contract"  element={<SalesContract />} />

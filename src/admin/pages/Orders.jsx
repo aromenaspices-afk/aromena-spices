@@ -4,6 +4,7 @@ import { db } from '../../firebase'
 import { collection, onSnapshot, doc, updateDoc, deleteDoc, orderBy, query } from 'firebase/firestore'
 import toast from 'react-hot-toast'
 import { sendStatusUpdateEmail, sendTrackingEmail, sendCancellationEmail } from '../../utils/emailService'
+import { isEmailable } from '../../utils/orderStatus'
 
 const statusConfig = {
   awaiting_payment: { label: 'ينتظر التحويل', bg: '#FFF7ED', color: '#EA580C' },
@@ -109,7 +110,7 @@ export default function AdminOrders() {
       return
     }
     await updateOrderField(orderId, { status: newStatus })
-    if (['processing', 'shipped', 'delivered'].includes(newStatus)) {
+    if (isEmailable(newStatus)) {
       await sendStatusUpdateEmail({ customer: order.customer, orderNumber: order.orderNumber, status: newStatus, items: order.items, pricing: order.pricing })
       toast.success('تم التحديث وإرسال إيميل للزبون 📧')
     }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { sendPasswordResetEmail as sendBrevoResetEmail } from '../utils/emailService'
@@ -11,8 +11,10 @@ const LOGO = 'https://res.cloudinary.com/dvt0nntn7/image/upload/v1775408607/02_f
 export default function Login() {
   const { i18n } = useTranslation()
   const isAr = i18n.language === 'ar'
-  const { login, loginWithGoogle, resetPassword } = useAuth()
+  const { login, loginWithGoogle, resetPassword, user } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from || '/'
 
   const [form, setForm]               = useState({ email: '', password: '' })
   const [loading, setLoading]         = useState(false)
@@ -29,7 +31,7 @@ export default function Login() {
     setError('')
     try {
       await login(form.email, form.password)
-      navigate('/')
+      navigate(from, { replace: true })
     } catch {
       setError(isAr ? 'البريد أو كلمة المرور غير صحيحة' : 'Invalid email or password')
     } finally {
@@ -42,7 +44,7 @@ export default function Login() {
     setError('')
     try {
       await loginWithGoogle()
-      navigate('/')
+      navigate(from, { replace: true })
     } catch {
       setError(isAr ? 'فشل تسجيل الدخول بـ Google' : 'Google login failed')
     } finally {
@@ -87,6 +89,9 @@ export default function Login() {
     color: '#3E1C00', fontSize: '0.85rem',
     fontWeight: 600, display: 'block', marginBottom: 6,
   }
+
+  // المستخدم المسجّل لا يرى نموذج الدخول — يُوجَّه لوجهته
+  if (user) return <Navigate to={from} replace />
 
   return (
     <div style={{
@@ -318,7 +323,7 @@ export default function Login() {
 
             <p style={{ textAlign: 'center', color: '#9C6B4E', fontSize: '0.82rem' }}>
               {isAr ? 'ليس لديك حساب؟' : "Don't have an account?"}{' '}
-              <Link to="/register" style={{ color: '#7b192c', fontWeight: 700, textDecoration: 'none' }}>
+              <Link to="/register" state={{ from }} style={{ color: '#7b192c', fontWeight: 700, textDecoration: 'none' }}>
                 {isAr ? 'سجّل الآن' : 'Register'}
               </Link>
             </p>
