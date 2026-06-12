@@ -13,6 +13,7 @@ import OrderSuccess from '../components/OrderSuccess'
 import { useCurrency } from '../context/CurrencyContext'
 import { calculateShipping } from '../utils/shippingData'
 import { TURKEY_IL_LIST, districtsOf } from '../data/turkeyGeo'
+import { DIAL_CODES } from '../data/dialCodes'
 
 // نقطة تهيئة الدفع — Edge (قرب تركيا). للتراجع الفوريّ: '/.netlify/functions/iyzico-init'
 const IYZICO_INIT_URL = '/api/iyzico-init'
@@ -27,28 +28,28 @@ const BANK_INFO = {
 
 
 const COUNTRY_LIST = [
-  { ar: 'تركيّا',             en: 'Turkey',       flag: '🇹🇷' },
-  { ar: 'السعودية',          en: 'Saudi Arabia', flag: '🇸🇦' },
-  { ar: 'سوريا',             en: 'Syria',        flag: '🇸🇾' },
-  { ar: 'الأردن',            en: 'Jordan',       flag: '🇯🇴' },
-  { ar: 'الإمارات',          en: 'UAE',          flag: '🇦🇪' },
-  { ar: 'البحرين',           en: 'Bahrain',      flag: '🇧🇭' },
-  { ar: 'الكويت',            en: 'Kuwait',       flag: '🇰🇼' },
-  { ar: 'قطر',               en: 'Qatar',        flag: '🇶🇦' },
-  { ar: 'لبنان',             en: 'Lebanon',      flag: '🇱🇧' },
-  { ar: 'العراق',            en: 'Iraq',         flag: '🇮🇶' },
-  { ar: 'مصر',               en: 'Egypt',        flag: '🇪🇬' },
-  { ar: 'المغرب',            en: 'Morocco',      flag: '🇲🇦' },
-  { ar: 'ألمانيا',           en: 'Germany',      flag: '🇩🇪' },
-  { ar: 'هولندا',            en: 'Netherlands',  flag: '🇳🇱' },
-  { ar: 'فرنسا',             en: 'France',       flag: '🇫🇷' },
-  { ar: 'بلجيكا',            en: 'Belgium',      flag: '🇧🇪' },
-  { ar: 'النمسا',            en: 'Austria',      flag: '🇦🇹' },
-  { ar: 'إسبانيا',           en: 'Spain',        flag: '🇪🇸' },
-  { ar: 'إيطاليا',           en: 'Italy',        flag: '🇮🇹' },
-  { ar: 'السويد',            en: 'Sweden',       flag: '🇸🇪' },
-  { ar: 'سويسرا',            en: 'Switzerland',  flag: '🇨🇭' },
-  { ar: 'المملكة المتحدة',   en: 'UK',           flag: '🇬🇧' },
+  { ar: 'تركيّا',             en: 'Turkey',       flag: '🇹🇷', dial: '+90'  },
+  { ar: 'السعودية',          en: 'Saudi Arabia', flag: '🇸🇦', dial: '+966' },
+  { ar: 'سوريا',             en: 'Syria',        flag: '🇸🇾', dial: '+963' },
+  { ar: 'الأردن',            en: 'Jordan',       flag: '🇯🇴', dial: '+962' },
+  { ar: 'الإمارات',          en: 'UAE',          flag: '🇦🇪', dial: '+971' },
+  { ar: 'البحرين',           en: 'Bahrain',      flag: '🇧🇭', dial: '+973' },
+  { ar: 'الكويت',            en: 'Kuwait',       flag: '🇰🇼', dial: '+965' },
+  { ar: 'قطر',               en: 'Qatar',        flag: '🇶🇦', dial: '+974' },
+  { ar: 'لبنان',             en: 'Lebanon',      flag: '🇱🇧', dial: '+961' },
+  { ar: 'العراق',            en: 'Iraq',         flag: '🇮🇶', dial: '+964' },
+  { ar: 'مصر',               en: 'Egypt',        flag: '🇪🇬', dial: '+20'  },
+  { ar: 'المغرب',            en: 'Morocco',      flag: '🇲🇦', dial: '+212' },
+  { ar: 'ألمانيا',           en: 'Germany',      flag: '🇩🇪', dial: '+49'  },
+  { ar: 'هولندا',            en: 'Netherlands',  flag: '🇳🇱', dial: '+31'  },
+  { ar: 'فرنسا',             en: 'France',       flag: '🇫🇷', dial: '+33'  },
+  { ar: 'بلجيكا',            en: 'Belgium',      flag: '🇧🇪', dial: '+32'  },
+  { ar: 'النمسا',            en: 'Austria',      flag: '🇦🇹', dial: '+43'  },
+  { ar: 'إسبانيا',           en: 'Spain',        flag: '🇪🇸', dial: '+34'  },
+  { ar: 'إيطاليا',           en: 'Italy',        flag: '🇮🇹', dial: '+39'  },
+  { ar: 'السويد',            en: 'Sweden',       flag: '🇸🇪', dial: '+46'  },
+  { ar: 'سويسرا',            en: 'Switzerland',  flag: '🇨🇭', dial: '+41'  },
+  { ar: 'المملكة المتحدة',   en: 'UK',           flag: '🇬🇧', dial: '+44'  },
 ]
 
 
@@ -152,6 +153,62 @@ function SearchableSelect({ value, onChange, options = [], placeholder, searchPl
           </div>
         </>
       )}
+    </div>
+  )
+}
+
+// حقل هاتف دوليّ: كود الدولة (قائمة بحث) + الرقم الوطنيّ
+function PhoneInput({ code, number, onCodeChange, onNumberChange, isAr }) {
+  const [open, setOpen] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const [search, setSearch] = useState('')
+  const q = search.trim().toLowerCase()
+  const filtered = q
+    ? DIAL_CODES.filter(d => d.ar.includes(search) || d.en.toLowerCase().includes(q) || d.code.includes(q))
+    : DIAL_CODES
+  const sel = DIAL_CODES.find(d => d.code === code)
+  return (
+    <div style={{ display: 'flex', gap: 8, position: 'relative', direction: 'ltr' }}>
+      {/* كود الدولة */}
+      <div style={{ position: 'relative', flexShrink: 0 }}>
+        <button type="button" onClick={() => setOpen(!open)} style={{
+          height: '100%', minHeight: 50, padding: '0 12px', borderRadius: 14,
+          border: `2px solid ${open ? '#7b192c' : '#E2C9A8'}`, background: '#fff', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Amiri, serif', whiteSpace: 'nowrap',
+        }}>
+          <span style={{ fontSize: '1.1rem' }}>{sel?.flag || '🌐'}</span>
+          <span style={{ color: '#1a0610', fontSize: '0.9rem', fontWeight: 600 }}>{code || '+'}</span>
+          <FiChevronLeft size={14} color="#9C6B4E" style={{ transform: open ? 'rotate(-90deg)' : 'rotate(-90deg)' }} />
+        </button>
+        {open && (
+          <>
+            <div onClick={() => { setOpen(false); setSearch('') }} style={{ position: 'fixed', inset: 0, zIndex: 98 }} />
+            <div style={{ position: 'absolute', top: '105%', left: 0, width: 250, background: '#fff', borderRadius: 14, boxShadow: '0 12px 40px rgba(123,25,44,0.18)', border: '1px solid #E2C9A8', zIndex: 99, overflow: 'hidden', maxHeight: 280, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ padding: '10px 12px', borderBottom: '1px solid #F5E6D3' }}>
+                <input autoFocus value={search} onChange={e => setSearch(e.target.value)} placeholder={isAr ? 'ابحث عن دولة...' : 'Search country...'}
+                  style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', boxSizing: 'border-box' }} />
+              </div>
+              <div style={{ overflowY: 'auto' }}>
+                {filtered.map((d, i) => (
+                  <button key={`${d.code}-${d.en}-${i}`} type="button" onClick={() => { onCodeChange(d.code); setOpen(false); setSearch('') }}
+                    style={{ width: '100%', padding: '10px 14px', border: 'none', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid #F5E6D3', fontFamily: 'Amiri, serif', textAlign: 'left' }}
+                    onMouseEnter={e => e.currentTarget.style.background = '#fdf0f2'}
+                    onMouseLeave={e => e.currentTarget.style.background = '#fff'}>
+                    <span style={{ fontSize: '1.1rem' }}>{d.flag}</span>
+                    <span style={{ color: '#1a0610', fontSize: '0.85rem', flex: 1 }}>{isAr ? d.ar : d.en}</span>
+                    <span style={{ color: '#9C6B4E', fontSize: '0.82rem', fontWeight: 600 }}>{d.code}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      {/* الرقم الوطنيّ */}
+      <input value={number} onChange={e => onNumberChange(e.target.value.replace(/[^\d]/g, ''))}
+        type="tel" inputMode="numeric" placeholder={isAr ? 'رقم الهاتف' : 'Phone number'}
+        onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+        style={{ flex: 1, padding: '14px 16px', borderRadius: 14, border: `2px solid ${focused ? '#7b192c' : '#E2C9A8'}`, fontSize: '0.92rem', color: '#1a0610', fontFamily: 'Amiri, serif', outline: 'none', background: '#fff', boxSizing: 'border-box', direction: 'ltr', textAlign: 'left' }} />
     </div>
   )
 }
@@ -504,7 +561,7 @@ export default function Checkout() {
   const { data: promoCodes } = useCollection('promocodes')
   const isAr = i18n.language === 'ar'
 
-  const EMPTY_FORM = { firstName: '', lastName: '', email: '', phone: '', district: '', neighborhood: '', address: '', city: '', country: '' }
+  const EMPTY_FORM = { firstName: '', lastName: '', email: '', phone: '', phoneCode: '', district: '', neighborhood: '', address: '', city: '', country: '' }
 
   const [step, setStep] = useState(1) // 1: التفاصيل | 2: الدفع | 3: المراجعة
   const [form, setForm] = useState(() => {
@@ -587,6 +644,7 @@ export default function Checkout() {
     if (!form.firstName) e.firstName = isAr ? 'الاسم مطلوب' : 'Name required'
     if (!form.email)     e.email     = isAr ? 'الإيميل مطلوب' : 'Email required'
     if (!form.phone)     e.phone     = isAr ? 'الهاتف مطلوب' : 'Phone required'
+    else if (isTurkey(form.country) && !/^5[0-9]{9}$/.test(form.phone)) e.phone = isAr ? 'رقم تركيّ يبدأ بـ5 (10 أرقام)' : 'TR number: 5XXXXXXXXX'
     // تركيا: الولاية والمنطقة إلزاميّتان وضمن القائمة الرسميّة (لشحن Basit Kargo)
     if (isTurkey(form.country)) {
       if (!form.city || !TURKEY_IL_LIST.includes(form.city)) e.city = isAr ? 'اختر الولاية من القائمة' : 'Select a valid province'
@@ -628,7 +686,7 @@ export default function Checkout() {
       const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, weightKg: i.weightKg || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
       const docRef = await addDoc(collection(db, 'orders'), {
         orderNumber: orderNum, status: payment === 'cod' ? 'confirmed' : 'awaiting_payment',
-        customer: { uid: user.uid, ...form, fullAddress: [form.district, form.neighborhood, form.address].filter(Boolean).join('، ') },
+        customer: { uid: user.uid, ...form, phone: [form.phoneCode, form.phone].filter(Boolean).join(' '), fullAddress: [form.district, form.neighborhood, form.address].filter(Boolean).join('، ') },
         items: orderItems,
         payment: { method: payment, status: 'pending' },
         pricing, pricingTRY,
@@ -640,8 +698,8 @@ export default function Checkout() {
       if (payment === 'cod') {
         try {
           await Promise.all([
-            sendOrderConfirmEmail({ customer: { uid: user.uid, ...form }, orderNumber: orderNum, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
-            sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { uid: user.uid, ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
+            sendOrderConfirmEmail({ customer: { uid: user.uid, ...form, phone: [form.phoneCode, form.phone].filter(Boolean).join(' ') }, orderNumber: orderNum, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
+            sendAdminNewOrderEmail({ orderNumber: orderNum, customer: { uid: user.uid, ...form, phone: [form.phoneCode, form.phone].filter(Boolean).join(' ') }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'cod' }, createdAt: new Date().toISOString() }),
           ])
         } catch (emailErr) { console.error('COD order email failed:', emailErr) }
         clearCart()
@@ -665,8 +723,8 @@ export default function Checkout() {
     const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, weightKg: i.weightKg || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
     try {
       await Promise.all([
-        sendOrderConfirmEmail({ customer: { uid: user.uid, ...form }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
-        sendAdminNewOrderEmail({ orderNumber, customer: { uid: user.uid, ...form }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
+        sendOrderConfirmEmail({ customer: { uid: user.uid, ...form, phone: [form.phoneCode, form.phone].filter(Boolean).join(' ') }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
+        sendAdminNewOrderEmail({ orderNumber, customer: { uid: user.uid, ...form, phone: [form.phoneCode, form.phone].filter(Boolean).join(' ') }, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
       ])
     } catch (emailErr) { console.error('Transfer order email failed:', emailErr) }
     clearCart()
@@ -696,7 +754,7 @@ export default function Checkout() {
           buyer: {
             uid: user?.uid || null,
             firstName: form.firstName, lastName: form.lastName,
-            email: form.email, phone: form.phone,
+            email: form.email, phone: [form.phoneCode, form.phone].filter(Boolean).join(' '),
             city: form.city, country: form.country,
             address: [form.district, form.neighborhood, form.address].filter(Boolean).join('، '),
           },
@@ -780,7 +838,7 @@ export default function Checkout() {
             <div style={{ background: '#fff', borderRadius: 20, padding: '20px 18px', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', gap: 2 }}>
 
               <Field label={isAr ? 'الدولة *' : 'Country *'} error={errors.country}>
-                <CountryDropdown value={form.country} onChange={v => { setForm(f => ({ ...f, country: v, city: '', district: '' })); setErrors(e => ({ ...e, country: '', city: '', district: '' })) }} isAr={isAr} />
+                <CountryDropdown value={form.country} onChange={v => { const dial = COUNTRY_LIST.find(c => c.ar === v)?.dial || ''; setForm(f => ({ ...f, country: v, city: '', district: '', phoneCode: dial || f.phoneCode })); setErrors(e => ({ ...e, country: '', city: '', district: '' })) }} isAr={isAr} />
                 {form.country && shippingResult.found && (
                   <div style={{ marginTop: 8, background: shippingResult.price === 0 ? '#F0FDF4' : '#EFF6FF', borderRadius: 10, padding: '8px 14px', display: 'flex', justifyContent: 'space-between', border: `1px solid ${shippingResult.price === 0 ? '#BBF7D0' : '#BFDBFE'}` }}>
                     <span style={{ color: shippingResult.price === 0 ? '#16A34A' : '#2563EB', fontSize: '0.8rem', fontWeight: 600 }}>
@@ -835,7 +893,13 @@ export default function Checkout() {
               )}
 
               <Field label={isAr ? 'رقم الهاتف *' : 'Phone *'} error={errors.phone}>
-                <Input value={form.phone} onChange={v => { setForm(f => ({ ...f, phone: v })); setErrors(e => ({ ...e, phone: '' })) }} type="tel" placeholder="" />
+                <PhoneInput
+                  code={form.phoneCode}
+                  number={form.phone}
+                  onCodeChange={v => setForm(f => ({ ...f, phoneCode: v }))}
+                  onNumberChange={v => { setForm(f => ({ ...f, phone: v })); setErrors(e => ({ ...e, phone: '' })) }}
+                  isAr={isAr}
+                />
               </Field>
 
               <Field label={isAr ? 'البريد الإلكتروني *' : 'Email *'} error={errors.email}>
@@ -946,7 +1010,7 @@ export default function Checkout() {
               <p style={{ color: '#6B3A2A', fontSize: '0.85rem' }}>{form.firstName} {form.lastName}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.district, form.neighborhood, form.address].filter(Boolean).join('، ')}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.city, form.country].filter(Boolean).join('، ')}</p>
-              <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{form.phone} | {form.email}</p>
+              <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.phoneCode, form.phone].filter(Boolean).join(' ')} | {form.email}</p>
             </div>
 
             {/* طريقة الدفع */}
