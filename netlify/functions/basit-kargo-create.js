@@ -80,7 +80,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const r = await fetch(`${BASE}/v2/order`, {
+    const r = await fetch(`${BASE}/v2/order/barcode`, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(body),
