@@ -113,6 +113,16 @@ export default function AdminOrders() {
   // إنشاء شحنة عبر Basit Kargo بالشركة المختارة
   async function sendToBasitKargo() {
     if (!viewing || !kargoCarrier) return
+    // فحص استباقيّ — الطلبات القديمة قد تنقصها المنطقة/الهاتف
+    const cu = viewing.customer || {}
+    const miss = []
+    if (!cu.city) miss.push('الولاية')
+    if (!cu.district) miss.push('المنطقة (İlçe)')
+    if (!cu.phone) miss.push('الهاتف')
+    if (miss.length) {
+      toast.error(`لا يمكن الإرسال — بيانات ناقصة في الطلب: ${miss.join('، ')}. عدّل العنوان أولاً.`)
+      return
+    }
     setKargoSending(true)
     try {
       const res = await fetch('/.netlify/functions/basit-kargo-create', {
@@ -387,7 +397,7 @@ export default function AdminOrders() {
               <p style={{ color: '#6B3A2A', fontSize: '0.85rem', fontWeight: 600 }}>{viewing.customer?.firstName} {viewing.customer?.lastName}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{viewing.customer?.email}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{viewing.customer?.phone}</p>
-              <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{viewing.customer?.address}, {viewing.customer?.city}, {viewing.customer?.country}</p>
+              <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[viewing.customer?.address, viewing.customer?.district, viewing.customer?.city, viewing.customer?.country].filter(Boolean).join('، ')}</p>
             </div>
 
             {/* المنتجات */}

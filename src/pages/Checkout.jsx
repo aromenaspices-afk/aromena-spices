@@ -12,6 +12,7 @@ import { sendOrderConfirmEmail, sendAdminNewOrderEmail } from '../utils/emailSer
 import OrderSuccess from '../components/OrderSuccess'
 import { useCurrency } from '../context/CurrencyContext'
 import { calculateShipping } from '../utils/shippingData'
+import { TURKEY_IL_LIST, districtsOf } from '../data/turkeyGeo'
 
 // نقطة تهيئة الدفع — Edge (قرب تركيا). للتراجع الفوريّ: '/.netlify/functions/iyzico-init'
 const IYZICO_INIT_URL = '/api/iyzico-init'
@@ -100,6 +101,60 @@ function CountryDropdown({ value, onChange, isAr }) {
   )
 }
 
+
+// هل الدولة المختارة تركيا؟ (لإظهار حقول الشحن التركيّة)
+function isTurkey(country) {
+  const c = String(country || '').toLowerCase()
+  return c.includes('ترك') || c.includes('turk') || c.includes('türk')
+}
+
+// قائمة منسدلة قابلة للبحث (للولايات/المناطق التركيّة)
+function SearchableSelect({ value, onChange, options = [], placeholder, searchPlaceholder, disabled, isAr }) {
+  const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
+  const q = search.trim().toLocaleLowerCase('tr')
+  const filtered = q ? options.filter(o => o.toLocaleLowerCase('tr').includes(q)) : options
+  return (
+    <div style={{ position: 'relative' }}>
+      <button type="button" disabled={disabled} onClick={() => !disabled && setOpen(!open)} style={{
+        width: '100%', padding: '14px 16px', borderRadius: 14,
+        border: `2px solid ${open ? '#7b192c' : '#E2C9A8'}`,
+        background: disabled ? '#F5E6D3' : '#fff', cursor: disabled ? 'not-allowed' : 'pointer',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        fontFamily: 'Amiri, serif', transition: 'border-color 0.15s', opacity: disabled ? 0.6 : 1,
+      }}>
+        <span style={{ color: value ? '#1a0610' : '#9C6B4E', fontSize: '0.95rem' }}>
+          {value || placeholder}
+        </span>
+        <FiChevronLeft size={16} color="#9C6B4E" style={{ transform: open ? 'rotate(-90deg)' : 'none', transition: 'transform 0.2s' }} />
+      </button>
+      {open && !disabled && (
+        <>
+          <div onClick={() => { setOpen(false); setSearch('') }} style={{ position: 'fixed', inset: 0, zIndex: 98 }} />
+          <div style={{ position: 'absolute', top: '105%', right: 0, left: 0, background: '#fff', borderRadius: 16, boxShadow: '0 12px 40px rgba(123,25,44,0.18)', border: '1px solid #E2C9A8', zIndex: 99, overflow: 'hidden', maxHeight: 300, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '10px 12px', borderBottom: '1px solid #F5E6D3' }}>
+              <input autoFocus value={search} onChange={e => setSearch(e.target.value)}
+                placeholder={searchPlaceholder || (isAr ? 'ابحث...' : 'Search...')}
+                style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.88rem', outline: 'none', fontFamily: 'Amiri, serif', boxSizing: 'border-box' }} />
+            </div>
+            <div style={{ overflowY: 'auto' }}>
+              {filtered.length === 0 && <p style={{ padding: '12px 16px', color: '#9C6B4E', fontSize: '0.85rem' }}>{isAr ? 'لا نتائج' : 'No results'}</p>}
+              {filtered.map(o => (
+                <button key={o} type="button" onClick={() => { onChange(o); setOpen(false); setSearch('') }}
+                  style={{ width: '100%', padding: '11px 16px', border: 'none', background: value === o ? '#fdf0f2' : '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid #F5E6D3', fontFamily: 'Amiri, serif', textAlign: 'right' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#fdf0f2'}
+                  onMouseLeave={e => e.currentTarget.style.background = value === o ? '#fdf0f2' : '#fff'}>
+                  <span style={{ color: '#1a0610', fontWeight: value === o ? 700 : 400, fontSize: '0.9rem' }}>{o}</span>
+                  {value === o && <FiCheck size={14} color="#7b192c" style={{ marginRight: 'auto' }} />}
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
 
 function Field({ label, icon, error, children }) {
   return (
@@ -532,6 +587,11 @@ export default function Checkout() {
     if (!form.firstName) e.firstName = isAr ? 'الاسم مطلوب' : 'Name required'
     if (!form.email)     e.email     = isAr ? 'الإيميل مطلوب' : 'Email required'
     if (!form.phone)     e.phone     = isAr ? 'الهاتف مطلوب' : 'Phone required'
+    // تركيا: الولاية والمنطقة إلزاميّتان وضمن القائمة الرسميّة (لشحن Basit Kargo)
+    if (isTurkey(form.country)) {
+      if (!form.city || !TURKEY_IL_LIST.includes(form.city)) e.city = isAr ? 'اختر الولاية من القائمة' : 'Select a valid province'
+      else if (!form.district || !districtsOf(form.city).includes(form.district)) e.district = isAr ? 'اختر المنطقة من القائمة' : 'Select a valid district'
+    }
     setErrors(e)
     return Object.keys(e).length === 0
   }
@@ -720,7 +780,7 @@ export default function Checkout() {
             <div style={{ background: '#fff', borderRadius: 20, padding: '20px 18px', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column', gap: 2 }}>
 
               <Field label={isAr ? 'الدولة *' : 'Country *'} error={errors.country}>
-                <CountryDropdown value={form.country} onChange={v => { setForm(f => ({ ...f, country: v })); setErrors(e => ({ ...e, country: '' })) }} isAr={isAr} />
+                <CountryDropdown value={form.country} onChange={v => { setForm(f => ({ ...f, country: v, city: '', district: '' })); setErrors(e => ({ ...e, country: '', city: '', district: '' })) }} isAr={isAr} />
                 {form.country && shippingResult.found && (
                   <div style={{ marginTop: 8, background: shippingResult.price === 0 ? '#F0FDF4' : '#EFF6FF', borderRadius: 10, padding: '8px 14px', display: 'flex', justifyContent: 'space-between', border: `1px solid ${shippingResult.price === 0 ? '#BBF7D0' : '#BFDBFE'}` }}>
                     <span style={{ color: shippingResult.price === 0 ? '#16A34A' : '#2563EB', fontSize: '0.8rem', fontWeight: 600 }}>
@@ -746,14 +806,33 @@ export default function Checkout() {
                 <Input value={form.address} onChange={v => setForm(f => ({ ...f, address: v }))} placeholder={isAr ? 'شارع، حي...' : 'Street, District...'} />
               </Field>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <Field label={isAr ? 'المدينة / الولاية' : 'City / Province'}>
-                  <Input value={form.city} onChange={v => setForm(f => ({ ...f, city: v }))} placeholder={isAr ? 'İstanbul' : 'İstanbul'} />
+              {isTurkey(form.country) ? (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  <Field label={isAr ? 'الولاية (İl) *' : 'Province (İl) *'} error={errors.city}>
+                    <SearchableSelect
+                      value={form.city}
+                      onChange={v => { setForm(f => ({ ...f, city: v, district: '' })); setErrors(e => ({ ...e, city: '' })) }}
+                      options={TURKEY_IL_LIST}
+                      placeholder={isAr ? 'اختر الولاية...' : 'Select province...'}
+                      isAr={isAr}
+                    />
+                  </Field>
+                  <Field label={isAr ? 'المنطقة (İlçe) *' : 'District (İlçe) *'} error={errors.district}>
+                    <SearchableSelect
+                      value={form.district}
+                      onChange={v => { setForm(f => ({ ...f, district: v })); setErrors(e => ({ ...e, district: '' })) }}
+                      options={districtsOf(form.city)}
+                      disabled={!form.city}
+                      placeholder={form.city ? (isAr ? 'اختر المنطقة...' : 'Select district...') : (isAr ? 'اختر الولاية أولاً' : 'Select province first')}
+                      isAr={isAr}
+                    />
+                  </Field>
+                </div>
+              ) : (
+                <Field label={isAr ? 'المدينة' : 'City'}>
+                  <Input value={form.city} onChange={v => setForm(f => ({ ...f, city: v }))} placeholder="" />
                 </Field>
-                <Field label={isAr ? 'المنطقة (İlçe)' : 'District (İlçe)'}>
-                  <Input value={form.district} onChange={v => setForm(f => ({ ...f, district: v }))} placeholder={isAr ? 'Kadıköy' : 'Kadıköy'} />
-                </Field>
-              </div>
+              )}
 
               <Field label={isAr ? 'رقم الهاتف *' : 'Phone *'} error={errors.phone}>
                 <Input value={form.phone} onChange={v => { setForm(f => ({ ...f, phone: v })); setErrors(e => ({ ...e, phone: '' })) }} type="tel" placeholder="" />

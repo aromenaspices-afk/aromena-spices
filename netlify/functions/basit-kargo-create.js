@@ -46,7 +46,7 @@ exports.handler = async (event) => {
 
   // تحقّق من اكتمال العنوان قبل الإرسال
   const missing = []
-  if (!phone || phone.length < 10) missing.push('الهاتف')
+  if (!phone || !/^5[0-9]{9}$/.test(phone)) missing.push('هاتف تركيّ صالح (يبدأ بـ5، 10 أرقام)')
   if (!city) missing.push('المدينة (İl)')
   if (!town) missing.push('المنطقة (İlçe)')
   if (!address) missing.push('العنوان')
@@ -62,6 +62,9 @@ exports.handler = async (event) => {
 
   const isCod = (order.payment?.method === 'cod') && (order.payment?.status !== 'paid')
   const codAmount = isCod ? Math.round(Number(order.pricingTRY?.total || order.pricing?.total || 0)) : 0
+  if (isCod && codAmount <= 0) {
+    return { statusCode: 422, headers: J, body: JSON.stringify({ error: 'مبلغ الدفع عند التسليم غير صالح (يجب أن يكون أكبر من 0)' }) }
+  }
 
   const body = {
     handlerCode,
