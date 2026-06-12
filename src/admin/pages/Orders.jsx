@@ -25,6 +25,22 @@ const paymentStatusConfig = {
   refunded:         { label: 'مُسترجع',        bg: '#F5F3FF', color: '#7C3AED' },
 }
 
+// شركات الشحن المتاحة في Basit Kargo (handlerCode)
+const KARGO_CARRIERS = [
+  { code: 'ARAS',        name: 'Aras Kargo' },
+  { code: 'HEPSIJET',    name: 'HepsiJET' },
+  { code: 'SURAT',       name: 'Sürat Kargo' },
+  { code: 'PTT',         name: 'PTT Kargo' },
+  { code: 'KOLAYGELSIN', name: 'KolayGelsin' },
+  { code: 'YURTICI',     name: 'Yurtiçi Kargo' },
+]
+
+// هل الطلب لتركيا؟ (Basit Kargo داخليّ فقط)
+function isTurkey(country) {
+  const c = String(country || '').toLowerCase()
+  return c.includes('ترك') || c.includes('turk') || c.includes('türk')
+}
+
 // تنسيق السعر بالليرة
 function formatTRY(amount) {
   if (!amount && amount !== 0) return '—'
@@ -41,6 +57,8 @@ export default function AdminOrders() {
   const [saving,        setSaving]        = useState(false)
   const [notesInput,    setNotesInput]    = useState('')
   const [cancelReason,  setCancelReason]  = useState('')
+  const [kargoCarrier,  setKargoCarrier]  = useState('')
+  const [kargoSending,  setKargoSending]  = useState(false)
 
   useEffect(() => {
     const q = query(collection(db, 'orders'), orderBy('createdAt', 'desc'))
@@ -90,6 +108,42 @@ export default function AdminOrders() {
   async function saveNotes() {
     if (!viewing) return
     await updateOrderField(viewing.id, { notes: notesInput })
+  }
+
+  // إنشاء شحنة عبر Basit Kargo بالشركة المختارة
+  async function sendToBasitKargo() {
+    if (!viewing || !kargoCarrier) return
+    setKargoSending(true)
+    try {
+      const res = await fetch('/.netlify/functions/basit-kargo-create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order: viewing, handlerCode: kargoCarrier }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.ok) {
+        const msg = data.error || (data.detail ? JSON.stringify(data.detail) : 'فشل غير معروف')
+        toast.error('فشل إنشاء الشحنة: ' + msg)
+        return
+      }
+      const carrierName = KARGO_CARRIERS.find(k => k.code === kargoCarrier)?.name || kargoCarrier
+      const tracking = data.id || data.barcode || ''
+      await updateOrderField(viewing.id, {
+        status: 'shipped',
+        tracking,
+        carrier: carrierName,
+        basitKargo: { id: data.id || null, barcode: data.barcode || null, status: data.status || null, handlerCode: kargoCarrier, createdAt: new Date().toISOString() },
+      })
+      try {
+        await sendTrackingEmail({ customer: viewing.customer, orderNumber: viewing.orderNumber, trackingNumber: tracking, carrier: carrierName, trackingUrl: '', items: viewing.items })
+      } catch (e) { console.error('Tracking email failed:', e) }
+      setKargoCarrier('')
+      toast.success(`تم إنشاء الشحنة! رقم: ${tracking} 📦`)
+    } catch (e) {
+      toast.error('تعذّر الاتصال بشركة الشحن')
+    } finally {
+      setKargoSending(false)
+    }
   }
 
   async function changeStatus(orderId, newStatus) {
@@ -376,6 +430,31 @@ export default function AdminOrders() {
                 </div>
               </div>
             </div>
+
+            {/* Basit Kargo — إرسال لشركة التوصيل (تركيا) */}
+            {isTurkey(viewing.customer?.country) && (
+              <div style={{ marginBottom: 12, background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: 10, padding: '12px 14px' }}>
+                <p style={{ color: '#3E1C00', fontWeight: 700, marginBottom: 8, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: 5 }}>
+                  📦 إرسال لشركة التوصيل (Basit Kargo)
+                </p>
+                {viewing.basitKargo?.id ? (
+                  <p style={{ color: '#16A34A', fontSize: '0.82rem', fontWeight: 600 }}>
+                    ✓ تم الإرسال عبر {viewing.basitKargo.handlerCode} — رقم التتبّع: {viewing.basitKargo.id}
+                  </p>
+                ) : (
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <select value={kargoCarrier} onChange={e => setKargoCarrier(e.target.value)} style={{ flex: 1, padding: '9px 12px', borderRadius: 8, border: '2px solid #BBF7D0', fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', background: '#fff', color: '#3E1C00' }}>
+                      <option value="">اختر شركة الشحن...</option>
+                      {KARGO_CARRIERS.map(k => <option key={k.code} value={k.code}>{k.name}</option>)}
+                    </select>
+                    <button onClick={sendToBasitKargo} disabled={kargoSending || !kargoCarrier} style={{ background: kargoSending || !kargoCarrier ? '#BBF7D0' : 'linear-gradient(to left, #15803d, #16A34A)', color: kargoSending || !kargoCarrier ? '#16A34A' : '#fff', padding: '9px 16px', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: kargoSending || !kargoCarrier ? 'not-allowed' : 'pointer', fontFamily: 'Amiri, serif', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 5 }}>
+                      {kargoSending ? <FiRefreshCw size={13} className="spin" /> : '🚚 أرسل الشحنة'}
+                    </button>
+                  </div>
+                )}
+                <p style={{ color: '#6B7280', fontSize: '0.72rem', marginTop: 6 }}>سيُنشئ شحنة + رقم تتبّع، ويُحوّل الحالة لـ"قيد الشحن"، ويُرسل إيميل التتبّع للعميل.</p>
+              </div>
+            )}
 
             {/* رقم التتبع */}
             <div style={{ marginBottom: 12 }}>

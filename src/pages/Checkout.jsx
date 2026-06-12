@@ -565,7 +565,7 @@ export default function Checkout() {
       const orderNum = await generateOrderNumber()
       const pricing = { subtotal: total, shipping, discount, total: finalTotal }
       const pricingTRY = { ...pricing, currency: 'TRY' }
-      const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
+      const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, weightKg: i.weightKg || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
       const docRef = await addDoc(collection(db, 'orders'), {
         orderNumber: orderNum, status: payment === 'cod' ? 'confirmed' : 'awaiting_payment',
         customer: { uid: user.uid, ...form, fullAddress: [form.district, form.neighborhood, form.address].filter(Boolean).join('، ') },
@@ -602,7 +602,7 @@ export default function Checkout() {
   async function handleBankDone() {
     setShowBank(false)
     const pricing = { subtotal: total, shipping, discount, total: finalTotal }
-    const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
+    const orderItems = items.map(i => ({ id: i.id, productId: i.productId || i.id, name: i.name, size: i.size, price: i.price, priceTRY: i.price, qty: i.qty, image: i.image || null, weightKg: i.weightKg || null, isPackage: i.isPackage || false, isCustomBox: i.isCustomBox || false, pkgItems: i.pkgItems || null }))
     try {
       await Promise.all([
         sendOrderConfirmEmail({ customer: { uid: user.uid, ...form }, orderNumber, items: orderItems, pricing, pricingTRY: pricing, payment: { method: 'transfer' }, createdAt: new Date().toISOString() }),
@@ -746,9 +746,14 @@ export default function Checkout() {
                 <Input value={form.address} onChange={v => setForm(f => ({ ...f, address: v }))} placeholder={isAr ? 'شارع، حي...' : 'Street, District...'} />
               </Field>
 
-              <Field label={isAr ? 'المدينة' : 'City'}>
-                <Input value={form.city} onChange={v => setForm(f => ({ ...f, city: v }))} placeholder="" />
-              </Field>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <Field label={isAr ? 'المدينة / الولاية' : 'City / Province'}>
+                  <Input value={form.city} onChange={v => setForm(f => ({ ...f, city: v }))} placeholder={isAr ? 'İstanbul' : 'İstanbul'} />
+                </Field>
+                <Field label={isAr ? 'المنطقة (İlçe)' : 'District (İlçe)'}>
+                  <Input value={form.district} onChange={v => setForm(f => ({ ...f, district: v }))} placeholder={isAr ? 'Kadıköy' : 'Kadıköy'} />
+                </Field>
+              </div>
 
               <Field label={isAr ? 'رقم الهاتف *' : 'Phone *'} error={errors.phone}>
                 <Input value={form.phone} onChange={v => { setForm(f => ({ ...f, phone: v })); setErrors(e => ({ ...e, phone: '' })) }} type="tel" placeholder="" />
