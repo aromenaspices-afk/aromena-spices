@@ -137,8 +137,9 @@ function customerInfoHtml(c) {
   return [
     ['الاسم',   `${c.firstName||''} ${c.lastName||''}`],
     ['الإيميل', c.email   || '—'],
-    ['الهاتف',  c.phone   || '—'],
+    ['الهاتف',  c.phone ? `<bdi dir="ltr">${c.phone}</bdi>` : '—'],
     ['العنوان', c.address || '—'],
+    ['المنطقة', c.district || '—'],
     ['المدينة', c.city    || '—'],
     ['الدولة',  c.country || '—'],
   ].map(([label, value]) => `

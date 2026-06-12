@@ -396,7 +396,7 @@ export default function AdminOrders() {
               <p style={{ color: '#3E1C00', fontWeight: 700, marginBottom: 8, fontSize: '0.88rem' }}>بيانات العميل</p>
               <p style={{ color: '#6B3A2A', fontSize: '0.85rem', fontWeight: 600 }}>{viewing.customer?.firstName} {viewing.customer?.lastName}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{viewing.customer?.email}</p>
-              <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{viewing.customer?.phone}</p>
+              <p style={{ color: '#9C6B4E', fontSize: '0.8rem', direction: 'ltr', textAlign: 'right' }}><bdi>{viewing.customer?.phone}</bdi></p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[viewing.customer?.address, viewing.customer?.district, viewing.customer?.city, viewing.customer?.country].filter(Boolean).join('، ')}</p>
             </div>
 

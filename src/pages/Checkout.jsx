@@ -1010,7 +1010,7 @@ export default function Checkout() {
               <p style={{ color: '#6B3A2A', fontSize: '0.85rem' }}>{form.firstName} {form.lastName}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.district, form.neighborhood, form.address].filter(Boolean).join('، ')}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.city, form.country].filter(Boolean).join('، ')}</p>
-              <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.phoneCode, form.phone].filter(Boolean).join(' ')} | {form.email}</p>
+              <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}><bdi dir="ltr">{[form.phoneCode, form.phone].filter(Boolean).join(' ')}</bdi> | {form.email}</p>
             </div>
 
             {/* طريقة الدفع */}
