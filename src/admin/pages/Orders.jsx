@@ -145,7 +145,7 @@ export default function AdminOrders() {
         basitKargo: { id: data.id || null, barcode: data.barcode || null, status: data.status || null, handlerCode: kargoCarrier, createdAt: new Date().toISOString() },
       })
       try {
-        await sendTrackingEmail({ customer: viewing.customer, orderNumber: viewing.orderNumber, trackingNumber: tracking, carrier: carrierName, trackingUrl: '', items: viewing.items })
+        await sendTrackingEmail({ customer: viewing.customer, orderNumber: viewing.orderNumber, trackingNumber: tracking, carrier: carrierName, trackingUrl: data.trackingUrl || '', items: viewing.items })
       } catch (e) { console.error('Tracking email failed:', e) }
       setKargoCarrier('')
       toast.success(`تم إنشاء الشحنة! رقم: ${tracking} 📦`)

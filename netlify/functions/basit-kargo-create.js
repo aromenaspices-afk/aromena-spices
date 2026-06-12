@@ -90,11 +90,14 @@ exports.handler = async (event) => {
     if (!r.ok) {
       return { statusCode: r.status, headers: J, body: JSON.stringify({ error: 'Basit Kargo error', status: r.status, detail: result }) }
     }
+    const trackId = result.id || result.barcode || null
     return { statusCode: 200, headers: J, body: JSON.stringify({
       ok: true,
       id: result.id || null,
       barcode: result.barcode || null,
       status: result.status || null,
+      // رابط صفحة تتبّع Basit Kargo (يُتحقَّق من صيغته)
+      trackingUrl: trackId ? `https://basitkargo.com/takip/${trackId}` : null,
       handlerCode,
       raw: result,
     }) }
