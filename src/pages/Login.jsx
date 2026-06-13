@@ -311,15 +311,15 @@ export default function Login() {
               <div style={{ flex: 1, height: 1, background: '#E2C9A8' }} />
             </div>
 
-            <Link to="/checkout" style={{
-              display: 'block', textAlign: 'center',
+            <button type="button" onClick={() => { if (location.key && location.key !== 'default') navigate(-1); else navigate('/') }} style={{
+              display: 'block', width: '100%', textAlign: 'center',
               padding: '11px 0', borderRadius: 10,
-              border: '2px solid #E2C9A8', color: '#6B3A2A',
-              fontWeight: 600, fontSize: '0.88rem',
-              textDecoration: 'none', fontFamily: 'Amiri, serif',
+              border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A',
+              fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer',
+              fontFamily: 'Amiri, serif',
             }}>
-              {isAr ? 'متابعة كضيف' : 'Continue as Guest'}
-            </Link>
+              {isAr ? 'متابعة التصفّح' : 'Continue Browsing'}
+            </button>
 
             <p style={{ textAlign: 'center', color: '#9C6B4E', fontSize: '0.82rem' }}>
               {isAr ? 'ليس لديك حساب؟' : "Don't have an account?"}{' '}
