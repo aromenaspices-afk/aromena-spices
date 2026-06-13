@@ -557,7 +557,7 @@ export default function Checkout() {
   const { items, removeItem, updateQty, clearCart, total } = useCart()
   const { user, profile, updateUserProfile } = useAuth()
   const navigate = useNavigate()
-  const { formatPrice } = useCurrency()
+  const { formatPrice, formatTRY, isTRY } = useCurrency()
   const { data: promoCodes } = useCollection('promocodes')
   const isAr = i18n.language === 'ar'
 
@@ -798,7 +798,7 @@ export default function Checkout() {
 
   return (
     <div style={{ background: '#F5E6D3', minHeight: '100vh' }}>
-      {showBank && <BankSheet orderNumber={orderNumber} orderId={orderId} total={formatPrice(finalTotal)} isAr={isAr} onConfirm={handleBankDone} onClose={() => setShowBank(false)} />}
+      {showBank && <BankSheet orderNumber={orderNumber} orderId={orderId} total={formatTRY(finalTotal)} isAr={isAr} onConfirm={handleBankDone} onClose={() => setShowBank(false)} />}
       {showCard && <CardSheet content={cardContent} error={cardError} isAr={isAr} onClose={() => { setShowCard(false); setCardContent('') }} />}
 
       {/* شريط التقدم */}
@@ -1102,6 +1102,13 @@ export default function Checkout() {
                   <span style={{ color: '#1a0610', fontWeight: 700, fontSize: '1rem' }}>{isAr ? 'الإجمالي' : 'Total'}</span>
                   <span style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.2rem' }}>{formatPrice(finalTotal)}</span>
                 </div>
+                {!isTRY && (
+                  <p style={{ marginTop: 8, color: '#9C6B4E', fontSize: '0.72rem', lineHeight: 1.6, textAlign: 'center' }}>
+                    {isAr
+                      ? `السعر بعملتك تقديريّ. الدفع النهائيّ بالليرة التركيّة: ${formatTRY(finalTotal)}`
+                      : `Price in your currency is approximate. Final charge in Turkish Lira: ${formatTRY(finalTotal)}`}
+                  </p>
+                )}
               </div>
             </div>
 
