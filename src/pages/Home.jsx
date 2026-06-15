@@ -398,33 +398,6 @@ export default function Home() {
                     : 'Specialized in recipe development, food products and academic culinary training'}
                 </p>
               </div>
-              <p style={{ color: '#6B3A2A', lineHeight: 2, fontSize: '0.95rem', marginBottom: 20 }}>
-                {isAr ? (
-                  <>
-                    أرومينا وُلِدت من شغف أصيل في عالم البهارات والنّكهات الغنيّة
-                     
-                    <br />
-                    حكاية بدأت من هواية في مطبخ المنزل لـ شيف مُحترفة وخبرة على مدار سنين
-                    <br />
-                    وتحوّلت إلى حلم بـ جودة استثنائيّة نحملُها معاً إلى كُلِّ بيت عربي في العالم.
-                  </>
-                ) : (
-                  <>
-                    Aromena was born from a genuine passion for spices and rich flavors —
-                    a story that began as a hobby in a home kitchen, guided by a professional chef
-                    with years of expertise, and transformed into a dream of exceptional quality
-                    brought to every Arab home around the world.
-                  </>
-                )}
-              </p>
-              <p style={{ color: '#9C6B4E', lineHeight: 1.9, fontSize: '0.92rem', marginBottom: 10 }}>
-                {isAr
-                  ? <>في أرومينا نؤمنُ بأنّ الطّعام الشّهي يبدأ من بهار مُتقن الخلطة<br />كُل مُنتج مُختار بعناية من أجود المصادر حول العالم لمنحك مذاقاً لا يُنسى.</>
-                  : 'At Aromena, we believe delicious food starts with a perfectly crafted spice blend — every product is carefully sourced from the finest origins around the world to give you an unforgettable taste.'}
-              </p>
-              <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '0.95rem', fontStyle: 'italic', marginBottom: 28 }}>
-                {isAr ? 'Aromena — صحّة بكل رشّة' : 'Aromena — A Pinch of Health in Every Dash'}
-              </p>
               <Link to="/about" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 background: '#EDD9C0', color: '#7b192c',
