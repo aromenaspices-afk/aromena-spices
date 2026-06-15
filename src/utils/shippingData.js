@@ -151,9 +151,10 @@ export async function calculateShipping(countryInput, totalWeightKg, totalPrice,
     return { price: 0, days: country.days, found: true, country, free: true }
   }
 
-  // شحن محلي تركيا — أجرة ثابتة
+  // شحن محلي تركيا — يُقرأ من جدول الأوزان القابل للتعديل في اللوحة (تبويب «داخل تركيا»)
   if (country.domestic) {
-    const price = country.flatPrice ?? (turkey.find(t => totalWeightKg * 1000 <= t.maxGrams) || turkey[turkey.length - 1]).price
+    const tier = turkey.find(t => totalWeightKg * 1000 <= t.maxGrams) || turkey[turkey.length - 1]
+    const price = (tier && tier.price != null) ? Number(tier.price) : (country.flatPrice ?? 0)
     return { price, days: country.days, found: true, country, carrier: 'Yurtiçi Kargo' }
   }
 
