@@ -132,8 +132,12 @@ export default function AdminOrders() {
       })
       const data = await res.json()
       if (!res.ok || !data.ok) {
-        const msg = data.error || (data.detail ? JSON.stringify(data.detail) : 'فشل غير معروف')
-        toast.error('فشل إنشاء الشحنة: ' + msg)
+        const detailStr = data.detail
+          ? (typeof data.detail === 'string' ? data.detail : (data.detail.message || data.detail.errorMessage || JSON.stringify(data.detail)))
+          : ''
+        const msg = [data.error, detailStr].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).join(' — ') || 'فشل غير معروف'
+        console.error('Basit Kargo error:', data)
+        toast.error('فشل إنشاء الشحنة: ' + msg, { duration: 9000 })
         return
       }
       const carrierName = KARGO_CARRIERS.find(k => k.code === kargoCarrier)?.name || kargoCarrier

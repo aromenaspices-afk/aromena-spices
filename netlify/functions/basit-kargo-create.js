@@ -88,7 +88,11 @@ exports.handler = async (event) => {
     const text = await r.text()
     let result; try { result = JSON.parse(text) } catch { result = { raw: text } }
     if (!r.ok) {
-      return { statusCode: r.status, headers: J, body: JSON.stringify({ error: 'Basit Kargo error', status: r.status, detail: result }) }
+      // استخراج رسالة الخطأ الحقيقيّة من ردّ Basit Kargo
+      const reason = (result && (result.message || result.errorMessage || result.error || result.title
+        || (Array.isArray(result.errors) ? result.errors.join('، ') : '')
+        || (typeof result.raw === 'string' ? result.raw : ''))) || `HTTP ${r.status}`
+      return { statusCode: r.status, headers: J, body: JSON.stringify({ error: String(reason), status: r.status, detail: result }) }
     }
     const trackId = result.id || result.barcode || null
     return { statusCode: 200, headers: J, body: JSON.stringify({
