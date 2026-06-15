@@ -4,6 +4,7 @@ import { useCollection } from '../hooks/useFirestore'
 import { useSettings } from '../hooks/useSettings'
 import Ticker from '../components/Ticker'
 import ShareButton from '../components/ShareButton'
+import ImageLightbox from '../components/ImageLightbox'
 import {
   FiShoppingCart, FiArrowLeft, FiArrowRight,
   FiChevronLeft, FiChevronRight,
@@ -39,6 +40,7 @@ export default function Home() {
   const featured = products.slice(0, 8)
   const [visible, setVisible] = useState(false)
   const [addedPkg, setAddedPkg] = useState(null)
+  const [lightbox, setLightbox] = useState(null) // { images, index }
   const packagesUrl = `${window.location.origin}/packages`
 
   function handleAddPackage(pkg) {
@@ -495,6 +497,7 @@ export default function Home() {
               const isAdded     = addedPkg === pkg.id
               const pkgName     = isAr ? pkg.name_ar : pkg.name_en
               const pkgImg      = pkg.images?.[0] || pkg.image || null
+              const pkgImgs     = pkg.images?.length ? pkg.images : (pkg.image ? [pkg.image] : [])
               const pd          = calcDiscount(pkg.price, pkg.discount, pkg.discountExpiry)
 
               return (
@@ -510,7 +513,7 @@ export default function Home() {
                   {/* الصورة */}
                   <div style={{ position: 'relative', height: 260, flexShrink: 0, overflow: 'hidden', borderRadius: '22px 22px 0 0', background: '#fdf0f2' }}>
                     {pkgImg
-                      ? <img src={pkgImg} alt={pkgName} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ? <img src={pkgImg} alt={pkgName} onClick={() => setLightbox({ images: pkgImgs, index: 0 })} style={{ width: '100%', height: '100%', objectFit: 'cover', cursor: 'zoom-in' }} />
                       : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>{pkg.emoji || '🎁'}</div>
                     }
                     {pd.has && (
@@ -803,6 +806,10 @@ export default function Home() {
           .b3 .layout { flex-direction: column-reverse; }
         }
       `}</style>
+
+      {lightbox && (
+        <ImageLightbox images={lightbox.images} startIndex={lightbox.index} onClose={() => setLightbox(null)} />
+      )}
     </div>
   )
 }

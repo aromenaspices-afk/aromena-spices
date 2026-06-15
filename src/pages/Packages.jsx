@@ -7,6 +7,7 @@ import { useCurrency } from '../context/CurrencyContext'
 import { FiShoppingCart, FiCheck, FiPackage, FiStar, FiTruck, FiGift, FiChevronLeft, FiChevronRight, FiShare2 } from 'react-icons/fi'
 import ShareButton from '../components/ShareButton'
 import CustomBoxBuilder from '../components/CustomBoxBuilder'
+import ImageLightbox from '../components/ImageLightbox'
 
 function calcDiscount(price, discount, expiry) {
   if (!discount || discount <= 0) return { final: price, has: false }
@@ -14,7 +15,7 @@ function calcDiscount(price, discount, expiry) {
   return { final: Math.round(price * (1 - discount / 100) * 100) / 100, has: true, pct: discount }
 }
 
-function ImageSlider({ images, name }) {
+function ImageSlider({ images, name, onImageClick }) {
   const [idx, setIdx] = useState(0)
   const imgs = images?.length ? images : []
 
@@ -26,7 +27,7 @@ function ImageSlider({ images, name }) {
   )
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+    <div onClick={() => onImageClick && onImageClick(idx)} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', cursor: onImageClick ? 'zoom-in' : 'default' }}>
       {imgs.map((img, i) => (
         <img key={i} src={img} alt={name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: i === idx ? 1 : 0, transition: 'opacity 0.5s ease' }} />
       ))}
@@ -60,6 +61,7 @@ export default function Packages() {
   const { data: allProducts }   = useCollection('products')
   const { formatPrice }         = useCurrency()
   const [addedPkg, setAddedPkg] = useState(null)
+  const [lightbox, setLightbox] = useState(null) // { images, index }
   const location = useLocation()
 
   useEffect(() => {
@@ -172,7 +174,7 @@ export default function Packages() {
 
                   {/* الصورة — ارتفاع ثابت دائماً */}
                   <div style={{ position: 'relative', height: 260, flexShrink: 0, overflow: 'hidden', borderRadius: '22px 22px 0 0' }}>
-                    <ImageSlider images={imgs} name={pkgName} />
+                    <ImageSlider images={imgs} name={pkgName} onImageClick={(idx) => imgs.length && setLightbox({ images: imgs, index: idx })} />
 
                     {/* الخصم — ختم ذهبي فوق الصورة فقط */}
                     {pd.has && (
@@ -326,6 +328,9 @@ export default function Packages() {
         </div>
       </section>
 
+      {lightbox && (
+        <ImageLightbox images={lightbox.images} startIndex={lightbox.index} onClose={() => setLightbox(null)} />
+      )}
     </div>
   )
 }
