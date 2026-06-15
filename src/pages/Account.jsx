@@ -120,7 +120,7 @@ export default function Account() {
     width: '100%', padding: '11px 14px',
     borderRadius: 10, border: '2px solid #E2C9A8',
     fontSize: '0.9rem', color: '#3E1C00',
-    fontFamily: 'Amiri, serif', outline: 'none',
+    fontFamily: 'Tajawal, sans-serif', outline: 'none',
     background: '#FFFBF5', boxSizing: 'border-box',
   }
 
@@ -132,7 +132,7 @@ export default function Account() {
   if (!user) return (
     <div style={{ background: '#F5E6D3', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
       <div style={{ textAlign: 'center' }}>
-        <h2 style={{ color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 12 }}>
+        <h2 style={{ color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 12 }}>
           {isAr ? 'يجب تسجيل الدخول أولاً' : 'Please login first'}
         </h2>
         <Link to="/login" style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '12px 32px', borderRadius: 50, fontWeight: 700, textDecoration: 'none' }}>
@@ -266,7 +266,7 @@ export default function Account() {
           {hint && <p style={{ color: '#9C6B4E', fontSize: '0.8rem', lineHeight: 1.6 }}>{hint}</p>}
           <button
             onClick={() => { setOrdersLoading(true); setOrdersError(null) }}
-            style={{ marginTop: 14, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', border: 'none', borderRadius: 50, padding: '8px 20px', cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', fontFamily: 'Amiri, serif' }}
+            style={{ marginTop: 14, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', border: 'none', borderRadius: 50, padding: '8px 20px', cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', fontFamily: 'Tajawal, sans-serif' }}
           >
             {isAr ? 'إعادة المحاولة' : 'Retry'}
           </button>
@@ -280,7 +280,7 @@ export default function Account() {
           <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#fdf0f2', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
             <FiShoppingBag size={28} color="#7b192c" />
           </div>
-          <h3 style={{ color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 8, fontSize: '1rem' }}>
+          <h3 style={{ color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 8, fontSize: '1rem' }}>
             {isAr ? 'لا يوجد طلبات بعد' : 'No orders yet'}
           </h3>
           <p style={{ color: '#9C6B4E', fontSize: '0.85rem', marginBottom: 20 }}>
@@ -423,7 +423,7 @@ export default function Account() {
                   )}
 
                   {/* زر إعادة الطلب */}
-                  <Link to="/products" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 12, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', fontFamily: 'Amiri, serif' }}>
+                  <Link to="/products" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 12, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', fontFamily: 'Tajawal, sans-serif' }}>
                     <FiShoppingBag size={14} />
                     {isAr ? 'اطلب مرة أخرى' : 'Order Again'}
                   </Link>
@@ -449,7 +449,7 @@ export default function Account() {
             }
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <h2 style={{ color: '#f4be69', fontFamily: 'Amiri, serif', fontSize: '1.2rem', marginBottom: 3 }}>
+            <h2 style={{ color: '#f4be69', fontFamily: 'Tajawal, sans-serif', fontSize: '1.2rem', marginBottom: 3 }}>
               {profile?.firstName ? `${profile.firstName} ${profile.lastName}` : user.displayName || (isAr ? 'مرحباً!' : 'Welcome!')}
             </h2>
             <p style={{ color: 'rgba(244,190,105,0.7)', fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -459,7 +459,7 @@ export default function Account() {
               {myOrders.length} {isAr ? 'طلب' : 'orders'} · €{myOrders.reduce((s, o) => s + (o.pricing?.total || 0), 0).toFixed(2)} {isAr ? 'إجمالي' : 'total'}
             </p>
           </div>
-          <button onClick={async () => { await logout(); navigate('/') }} style={{ background: 'rgba(220,38,38,0.2)', border: '1px solid rgba(220,38,38,0.4)', color: '#FCA5A5', borderRadius: 8, padding: '7px 12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.82rem', fontFamily: 'Amiri, serif', flexShrink: 0 }}>
+          <button onClick={async () => { await logout(); navigate('/') }} style={{ background: 'rgba(220,38,38,0.2)', border: '1px solid rgba(220,38,38,0.4)', color: '#FCA5A5', borderRadius: 8, padding: '7px 12px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.82rem', fontFamily: 'Tajawal, sans-serif', flexShrink: 0 }}>
             <FiLogOut size={13} />
             {isAr ? 'خروج' : 'Logout'}
           </button>
@@ -468,7 +468,7 @@ export default function Account() {
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
           {tabs.map(tab => (
-            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ padding: '9px 16px', borderRadius: 50, border: '2px solid', borderColor: activeTab === tab.id ? '#7b192c' : '#E2C9A8', background: activeTab === tab.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: activeTab === tab.id ? '#f4be69' : '#6B3A2A', fontWeight: 700, fontSize: '0.83rem', cursor: 'pointer', fontFamily: 'Amiri, serif', whiteSpace: 'nowrap' }}>
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ padding: '9px 16px', borderRadius: 50, border: '2px solid', borderColor: activeTab === tab.id ? '#7b192c' : '#E2C9A8', background: activeTab === tab.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: activeTab === tab.id ? '#f4be69' : '#6B3A2A', fontWeight: 700, fontSize: '0.83rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', whiteSpace: 'nowrap' }}>
               {tab.label}
             </button>
           ))}
@@ -486,7 +486,7 @@ export default function Account() {
                 {isAr ? 'معلومات الحساب' : 'Account Info'}
               </h3>
               {!editingProfile && (
-                <button onClick={startEditProfile} style={{ background: '#fdf0f2', border: 'none', borderRadius: 8, padding: '6px 12px', color: '#7b192c', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Amiri, serif' }}>
+                <button onClick={startEditProfile} style={{ background: '#fdf0f2', border: 'none', borderRadius: 8, padding: '6px 12px', color: '#7b192c', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Tajawal, sans-serif' }}>
                   <FiEdit2 size={12} /> {isAr ? 'تعديل' : 'Edit'}
                 </button>
               )}
@@ -530,11 +530,11 @@ export default function Account() {
                   </select>
                 </div>
                 <div style={{ display: 'flex', gap: 10 }}>
-                  <button onClick={saveProfile} disabled={savingProfile} style={{ flex: 1, background: savingProfile ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: savingProfile ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', fontSize: '0.88rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                  <button onClick={saveProfile} disabled={savingProfile} style={{ flex: 1, background: savingProfile ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: savingProfile ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontSize: '0.88rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                     <FiCheck size={14} />
                     {savingProfile ? (isAr ? 'جاري الحفظ...' : 'Saving...') : (isAr ? 'حفظ' : 'Save')}
                   </button>
-                  <button onClick={() => setEditingProfile(false)} style={{ padding: '11px 16px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Amiri, serif' }}>
+                  <button onClick={() => setEditingProfile(false)} style={{ padding: '11px 16px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
                     {isAr ? 'إلغاء' : 'Cancel'}
                   </button>
                 </div>
@@ -567,7 +567,7 @@ export default function Account() {
                 <FiMapPin size={15} color="#7b192c" />
                 {isAr ? 'عناوين التوصيل' : 'Delivery Addresses'}
               </h3>
-              <button onClick={() => { setShowAddAddress(true); setEditingAddress(null); setAddressForm({ label: '', street: '', city: '', country: '', zip: '', phone: '' }) }} style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', border: 'none', borderRadius: 50, padding: '7px 14px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.82rem', fontWeight: 700, fontFamily: 'Amiri, serif' }}>
+              <button onClick={() => { setShowAddAddress(true); setEditingAddress(null); setAddressForm({ label: '', street: '', city: '', country: '', zip: '', phone: '' }) }} style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', border: 'none', borderRadius: 50, padding: '7px 14px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.82rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif' }}>
                 <FiPlus size={13} /> {isAr ? 'إضافة عنوان' : 'Add Address'}
               </button>
             </div>
@@ -643,11 +643,11 @@ export default function Account() {
                     <input value={addressForm.phone} onChange={e => setAddressForm(f => ({ ...f, phone: e.target.value }))} placeholder="+49..." style={inputStyle} />
                   </div>
                   <div style={{ display: 'flex', gap: 10 }}>
-                    <button onClick={saveAddress} disabled={savingAddress} style={{ flex: 1, background: savingAddress ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: savingAddress ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', fontSize: '0.88rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                    <button onClick={saveAddress} disabled={savingAddress} style={{ flex: 1, background: savingAddress ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: savingAddress ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontSize: '0.88rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                       <FiCheck size={14} />
                       {savingAddress ? (isAr ? 'جاري الحفظ...' : 'Saving...') : (isAr ? 'حفظ العنوان' : 'Save Address')}
                     </button>
-                    <button onClick={() => { setShowAddAddress(false); setEditingAddress(null) }} style={{ padding: '11px 16px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Amiri, serif' }}>
+                    <button onClick={() => { setShowAddAddress(false); setEditingAddress(null) }} style={{ padding: '11px 16px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
                       {isAr ? 'إلغاء' : 'Cancel'}
                     </button>
                   </div>
@@ -695,7 +695,7 @@ export default function Account() {
                 {isAr ? 'سيتم إرسال إيميل تأكيد لبريدك بعد تغيير كلمة المرور.' : 'A confirmation email will be sent after changing your password.'}
               </div>
 
-              <button onClick={handleChangePassword} disabled={passwordLoading} style={{ background: passwordLoading ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: passwordLoading ? '#9C6B4E' : '#f4be69', padding: '12px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: passwordLoading ? 'not-allowed' : 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+              <button onClick={handleChangePassword} disabled={passwordLoading} style={{ background: passwordLoading ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: passwordLoading ? '#9C6B4E' : '#f4be69', padding: '12px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: passwordLoading ? 'not-allowed' : 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
                 <FiLock size={14} />
                 {passwordLoading ? (isAr ? 'جاري التغيير...' : 'Changing...') : (isAr ? 'تغيير كلمة المرور' : 'Change Password')}
               </button>

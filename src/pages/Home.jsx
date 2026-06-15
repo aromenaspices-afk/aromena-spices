@@ -118,7 +118,7 @@ export default function Home() {
               <div style={{ display: 'inline-block', background: 'rgba(244,190,105,0.12)', border: '1px solid rgba(244,190,105,0.25)', color: '#f4be69', padding: '6px 18px', borderRadius: 50, fontSize: '0.82rem', fontWeight: 600, marginBottom: 20, letterSpacing: 1 }}>
                 Aromena Spices
               </div>
-              <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)', fontWeight: 900, color: '#fff', lineHeight: 1.25, marginBottom: 16, fontFamily: 'Amiri, serif' }}>
+              <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)', fontWeight: 900, color: '#fff', lineHeight: 1.25, marginBottom: 16, fontFamily: 'Tajawal, sans-serif' }}>
                 {t('home.hero_title')}<br />
                 <span style={{ color: '#f4be69' }}>Aromena</span>
               </h1>
@@ -373,7 +373,7 @@ export default function Home() {
               <div style={{ display: 'inline-block', background: 'rgba(123,25,44,0.1)', border: '1px solid rgba(123,25,44,0.2)', color: '#7b192c', padding: '5px 16px', borderRadius: 50, fontSize: '0.8rem', fontWeight: 600, marginBottom: 16 }}>
                 {isAr ? 'قِصَّة الشِّيف' : 'Chef\'s Story'}
               </div>
-              <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 6, lineHeight: 1.3 }}>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 6, lineHeight: 1.3 }}>
                 {isAr ? 'الشِّيف غالية صوَّان' : 'Chef Ghalia Sawan'}
               </h2>
               <p style={{ color: '#7b192c', fontWeight: 600, fontSize: '0.88rem', marginBottom: 6, fontStyle: 'italic' }}>
@@ -449,7 +449,7 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 40, flexWrap: 'wrap', gap: 12 }}>
             <div>
-              <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 4 }}>{t('home.featured')}</h2>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 4 }}>{t('home.featured')}</h2>
               <p style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>{isAr ? 'اختر من مجموعتنا الفاخرة' : 'Choose from our premium collection'}</p>
             </div>
             <Link to="/products" style={{ color: '#7b192c', fontWeight: 600, textDecoration: 'none', fontSize: '0.9rem', border: '2px solid #7b192c', padding: '7px 20px', borderRadius: 50 }}>
@@ -470,7 +470,7 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0 }}>
             {STATS.map((s, i) => (
               <div key={i} style={{ textAlign: 'center', padding: '20px 8px', borderRight: i < STATS.length - 1 ? '1px solid rgba(244,190,105,0.1)' : 'none' }}>
-                <div style={{ fontSize: 'clamp(1.4rem, 4vw, 2.4rem)', fontWeight: 900, color: '#f4be69', marginBottom: 4, fontFamily: 'Amiri, serif' }}>{s.num}</div>
+                <div style={{ fontSize: 'clamp(1.4rem, 4vw, 2.4rem)', fontWeight: 900, color: '#f4be69', marginBottom: 4, fontFamily: 'Tajawal, sans-serif' }}>{s.num}</div>
                 <div style={{ color: 'rgba(244,190,105,0.6)', fontSize: 'clamp(0.65rem, 2vw, 0.85rem)', fontWeight: 500 }}>{isAr ? s.label_ar : s.label_en}</div>
               </div>
             ))}
@@ -482,7 +482,7 @@ export default function Home() {
       <section style={{ background: '#EDD9C0', padding: '70px 20px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 10 }}>
               {isAr ? 'باقاتنا المُميّزة' : 'Our Packages'}
             </h2>
             <p style={{ color: '#9c6b4e', fontSize: '0.95rem' }}>
@@ -541,7 +541,7 @@ export default function Home() {
                   <div style={{ padding: '18px 18px 20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <h3 style={{ color: '#3E1C00', fontSize: '1.1rem', fontWeight: 700, fontFamily: 'Amiri, serif', margin: 0, marginBottom: 2 }}>{pkgName}</h3>
+                        <h3 style={{ color: '#3E1C00', fontSize: '1.1rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif', margin: 0, marginBottom: 2 }}>{pkgName}</h3>
                         {pkg.name_en && isAr && <p style={{ color: '#9C6B4E', fontSize: '0.75rem', margin: 0 }}>{pkg.name_en}</p>}
                       </div>
                       <ShareButton url={`${packagesUrl}#${pkg.id}`} title={isAr ? `${pkgName} — أرومينا` : `${pkgName} — Aromena`} isAr={isAr} size="small" />
@@ -578,11 +578,11 @@ export default function Home() {
                     <div style={{ marginBottom: 14, marginTop: 'auto' }}>
                       {pd.has ? (
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                          <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(pd.final)}</span>
+                          <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(pd.final)}</span>
                           <span style={{ color: '#9C6B4E', textDecoration: 'line-through', fontSize: '0.92rem' }}>{formatPrice(pkg.price)}</span>
                         </div>
                       ) : (
-                        <span style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(pkg.price)}</span>
+                        <span style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(pkg.price)}</span>
                       )}
                       <p style={{ color: '#9C6B4E', fontSize: '0.72rem', marginTop: 2 }}>{isAr ? 'شامل الشّحن' : 'incl. shipping'}</p>
                     </div>
@@ -591,7 +591,7 @@ export default function Home() {
                       width: '100%', background: isAdded ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)',
                       color: '#f4be69', padding: '13px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem',
                       border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                      fontFamily: 'Amiri, serif', transition: 'all 0.3s',
+                      fontFamily: 'Tajawal, sans-serif', transition: 'all 0.3s',
                       boxShadow: isAdded ? 'none' : '0 4px 16px rgba(123,25,44,0.25)',
                     }}>
                       {isAdded
@@ -659,28 +659,28 @@ export default function Home() {
         }
         .cbb-text { position: relative; z-index: 1; text-align: start; }
         .cbb-eyebrow {
-          display: inline-block; font-family: 'Amiri', serif; font-size: 0.78rem; font-weight: 700;
+          display: inline-block; font-family: 'Tajawal', sans-serif; font-size: 0.78rem; font-weight: 700;
           color: #c9a961; background: rgba(201,169,97,0.14); border: 1px solid rgba(201,169,97,0.35);
           padding: 4px 14px; border-radius: 50px; margin-bottom: 12px; letter-spacing: 0.3px;
         }
         .cbb-title {
-          font-family: 'Amiri', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
+          font-family: 'Tajawal', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
           color: #fdf3e3; margin: 0 0 10px;
         }
         .cbb-desc {
-          font-family: 'Amiri', serif; color: #e8cfa6; font-size: clamp(0.9rem, 1.5vw, 1.02rem);
+          font-family: 'Tajawal', sans-serif; color: #e8cfa6; font-size: clamp(0.9rem, 1.5vw, 1.02rem);
           line-height: 1.7; max-width: 560px; margin: 0 0 16px;
         }
         .cbb-features { display: flex; flex-wrap: wrap; gap: 10px; }
         .cbb-features span {
-          font-family: 'Amiri', serif; font-size: 0.82rem; font-weight: 700; color: #f3dcb4;
+          font-family: 'Tajawal', sans-serif; font-size: 0.82rem; font-weight: 700; color: #f3dcb4;
           background: rgba(255,255,255,0.06); border: 1px solid rgba(201,169,97,0.30);
           padding: 6px 16px; border-radius: 50px;
         }
         .cbb-cta {
           position: relative; z-index: 1; flex-shrink: 0;
           display: inline-flex; align-items: center; gap: 10px;
-          font-family: 'Amiri', serif; font-size: 1.02rem; font-weight: 800; color: #5e1322;
+          font-family: 'Tajawal', sans-serif; font-size: 1.02rem; font-weight: 800; color: #5e1322;
           background: linear-gradient(135deg, #e6cd92, #c9a961);
           padding: 15px 34px; border-radius: 14px; white-space: nowrap;
           box-shadow: 0 8px 22px rgba(0,0,0,0.30);
@@ -727,19 +727,19 @@ export default function Home() {
         .top-row { display: flex; justify-content: space-between; align-items: flex-start; }
         .ar-brand { display: flex; flex-direction: column; align-items: center; gap: 2px; }
         .ar-brand-icon { width: 22px; height: 22px; margin-bottom: 2px; }
-        .ar-brand-name { font-family: 'Amiri', serif; font-weight: 900; letter-spacing: 5px; color: #d6b36a; font-size: 1.05rem; }
+        .ar-brand-name { font-family: 'Tajawal', sans-serif; font-weight: 900; letter-spacing: 5px; color: #d6b36a; font-size: 1.05rem; }
         .ar-brand-tag { font-size: 0.52rem; letter-spacing: 5px; color: rgba(214,179,106,0.65); }
         .opening-badge { background: #c9a961; color: #5e1322; padding: 8px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 800; box-shadow: 0 4px 14px rgba(201,169,97,0.3); }
         .main-row { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
         .text-block { text-align: start; }
-        .text-block h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; line-height: 1.25; margin-bottom: 14px; color: #f6ecdc; }
+        .text-block h2 { font-family: 'Tajawal', sans-serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; line-height: 1.25; margin-bottom: 14px; color: #f6ecdc; }
         .text-block .accent { color: #d6b36a; font-style: italic; }
         .text-block p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); max-width: 430px; margin: 0 0 18px; margin-inline-end: auto; line-height: 1.8; }
         .promo-tag { display: inline-flex; align-items: center; gap: 12px; background: rgba(201,169,97,0.08); border: 1px solid rgba(201,169,97,0.3); padding: 10px 18px; border-radius: 12px; }
-        .promo-tag strong { font-size: 1.8rem; font-weight: 900; color: #d6b36a; font-family: 'Amiri', serif; }
+        .promo-tag strong { font-size: 1.8rem; font-weight: 900; color: #d6b36a; font-family: 'Tajawal', sans-serif; }
         .promo-tag span { font-size: 0.72rem; color: rgba(243,227,207,0.82); line-height: 1.5; text-align: start; }
         .right-mark { flex-shrink: 0; text-align: center; border: 1px solid rgba(201,169,97,0.35); border-radius: 16px; padding: clamp(18px, 3vw, 30px) clamp(20px, 3.2vw, 34px); }
-        .right-mark .digit { font-family: 'Amiri', serif; font-size: clamp(2.4rem, 6.5vw, 4.2rem); font-weight: 900; color: #d6b36a; line-height: 1; }
+        .right-mark .digit { font-family: 'Tajawal', sans-serif; font-size: clamp(2.4rem, 6.5vw, 4.2rem); font-weight: 900; color: #d6b36a; line-height: 1; }
         .right-mark .digit-label { color: rgba(243,227,207,0.7); font-size: 0.82rem; margin-top: 6px; }
         .right-mark .gold-line { width: 56px; height: 1px; background: linear-gradient(90deg, transparent, #c9a961, transparent); margin: 14px auto; }
         .right-mark .url-mini { font-size: 0.68rem; letter-spacing: 1px; color: rgba(214,179,106,0.6); }
@@ -748,7 +748,7 @@ export default function Home() {
         .layout { flex: 1; display: flex; align-items: center; gap: 34px; }
         .b2 .left, .b4 .left { flex: 1; text-align: start; }
         .small-tag { color: #d6b36a; font-size: 0.84rem; font-weight: 600; letter-spacing: 1px; }
-        .b2 h2, .b4 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin: 10px 0 14px; color: #f6ecdc; }
+        .b2 h2, .b4 h2 { font-family: 'Tajawal', sans-serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin: 10px 0 14px; color: #f6ecdc; }
         .b2 .accent, .b4 .accent { color: #d6b36a; }
         .b2 p, .b4 p { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin-bottom: 22px; }
         .boxes { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -758,7 +758,7 @@ export default function Home() {
           box-shadow: 0 18px 44px rgba(0,0,0,0.35), inset -8px -10px 26px rgba(120,90,30,0.5), inset 6px 8px 22px rgba(255,244,214,0.45);
           display: flex; align-items: center; justify-content: center; }
         .vase-content { text-align: center; }
-        .vase-content .num { font-family: 'Amiri', serif; font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 900; color: #5e1322; }
+        .vase-content .num { font-family: 'Tajawal', sans-serif; font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 900; color: #5e1322; }
         .vase-content .lbl { color: rgba(94,19,34,0.8); font-size: 0.92rem; font-weight: 700; }
 
         /* Banner 3 */
@@ -775,12 +775,12 @@ export default function Home() {
         .b3 .bottle:nth-child(4) { height: 64px; }
         .right-content { flex: 1; text-align: start; }
         .new-pill { display: inline-block; background: #c9a961; color: #5e1322; padding: 5px 16px; border-radius: 50px; font-size: 0.74rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
-        .b3 h2 { font-family: 'Amiri', serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin-bottom: 12px; color: #f6ecdc; }
+        .b3 h2 { font-family: 'Tajawal', sans-serif; font-size: clamp(1.7rem, 4.2vw, 3rem); font-weight: 900; margin-bottom: 12px; color: #f6ecdc; }
         .b3 .gold { color: #d6b36a; }
         .b3 .desc { color: rgba(243,227,207,0.72); font-size: clamp(0.82rem, 1.5vw, 0.98rem); line-height: 1.9; max-width: 480px; margin: 0 0 22px; margin-inline-end: auto; }
         .num-row { display: flex; gap: 34px; justify-content: flex-start; }
         .num-row > div { text-align: center; }
-        .num-row strong { display: block; font-family: 'Amiri', serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; color: #d6b36a; }
+        .num-row strong { display: block; font-family: 'Tajawal', sans-serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; color: #d6b36a; }
         .num-row span { color: rgba(243,227,207,0.7); font-size: 0.8rem; }
 
         /* Nav + dots */
@@ -877,7 +877,7 @@ function ProductCard({ product, isAr, t, addItem, delay }) {
                 {isAr ? 'من' : 'from'} {formatPrice(firstSize.price)}
               </p>
         )}
-        <button onClick={handleAdd} style={{ width: '100%', background: added ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)', color: added ? '#fff' : '#f4be69', padding: '9px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.8rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif', transition: 'background 0.3s' }}>
+        <button onClick={handleAdd} style={{ width: '100%', background: added ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)', color: added ? '#fff' : '#f4be69', padding: '9px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.8rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif', transition: 'background 0.3s' }}>
           {added ? t('products.added') : <><FiShoppingCart size={13} /> {t('products.add_cart')}</>}
         </button>
       </div>

@@ -65,7 +65,7 @@ function StatCard({ icon, label, value, sub, path, loading, highlight }) {
           <p style={{ color: highlight ? 'rgba(244,190,105,0.65)' : TEXT2, fontSize: '0.78rem', marginBottom: 4 }}>{label}</p>
           {loading
             ? <div style={{ width: 70, height: 26, borderRadius: 7, background: highlight ? 'rgba(255,255,255,0.1)' : BG2, animation: 'pulse 1.2s ease-in-out infinite' }} />
-            : <p style={{ color: highlight ? GOLD : TEXT, fontWeight: 900, fontSize: '1.55rem', lineHeight: 1, fontFamily: 'Amiri, serif' }}>{value}</p>
+            : <p style={{ color: highlight ? GOLD : TEXT, fontWeight: 900, fontSize: '1.55rem', lineHeight: 1, fontFamily: 'Tajawal, sans-serif' }}>{value}</p>
           }
           {sub && !loading && <p style={{ color: highlight ? 'rgba(244,190,105,0.55)' : TEXT2, fontSize: '0.72rem', marginTop: 4 }}>{sub}</p>}
         </div>
@@ -138,7 +138,7 @@ export default function Dashboard() {
 
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif', marginBottom: 4 }}>مرحباً 👋</h1>
+        <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif', marginBottom: 4 }}>مرحباً 👋</h1>
         <p style={{ color: TEXT2, fontSize: '0.85rem' }}>ملخص نشاط متجر Aromena Spices — الأسعار بالليرة التركية ₺</p>
       </div>
 

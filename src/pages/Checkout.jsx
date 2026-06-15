@@ -14,6 +14,7 @@ import { useCurrency } from '../context/CurrencyContext'
 import { calculateShipping } from '../utils/shippingData'
 import { TURKEY_IL_LIST, districtsOf } from '../data/turkeyGeo'
 import { DIAL_CODES } from '../data/dialCodes'
+import FreeShippingBar from '../components/FreeShippingBar'
 
 // نقطة تهيئة الدفع — Edge (قرب تركيا). للتراجع الفوريّ: '/.netlify/functions/iyzico-init'
 const IYZICO_INIT_URL = '/api/iyzico-init'
@@ -67,7 +68,7 @@ function CountryDropdown({ value, onChange, isAr }) {
         border: `2px solid ${open ? '#7b192c' : '#E2C9A8'}`,
         background: '#fff', cursor: 'pointer', display: 'flex',
         alignItems: 'center', justifyContent: 'space-between',
-        fontFamily: 'Amiri, serif', transition: 'border-color 0.15s',
+        fontFamily: 'Tajawal, sans-serif', transition: 'border-color 0.15s',
       }}>
         <span style={{ color: selected ? '#1a0610' : '#9C6B4E', fontSize: '0.95rem' }}>
           {selected ? `${selected.flag}  ${selected.ar}` : (isAr ? 'اختر دولتك...' : 'Select your country...')}
@@ -81,12 +82,12 @@ function CountryDropdown({ value, onChange, isAr }) {
             <div style={{ padding: '10px 12px', borderBottom: '1px solid #F5E6D3' }}>
               <input autoFocus value={search} onChange={e => setSearch(e.target.value)}
                 placeholder={isAr ? 'ابحث...' : 'Search...'}
-                style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.88rem', outline: 'none', fontFamily: 'Amiri, serif', boxSizing: 'border-box' }} />
+                style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.88rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', boxSizing: 'border-box' }} />
             </div>
             <div style={{ overflowY: 'auto' }}>
               {filtered.map(c => (
                 <button key={c.en} type="button" onClick={() => { onChange(c.ar); setOpen(false); setSearch('') }}
-                  style={{ width: '100%', padding: '11px 16px', border: 'none', background: value === c.ar ? '#fdf0f2' : '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid #F5E6D3', fontFamily: 'Amiri, serif' }}
+                  style={{ width: '100%', padding: '11px 16px', border: 'none', background: value === c.ar ? '#fdf0f2' : '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid #F5E6D3', fontFamily: 'Tajawal, sans-serif' }}
                   onMouseEnter={e => e.currentTarget.style.background = '#fdf0f2'}
                   onMouseLeave={e => e.currentTarget.style.background = value === c.ar ? '#fdf0f2' : '#fff'}>
                   <span style={{ fontSize: '1.2rem' }}>{c.flag}</span>
@@ -122,7 +123,7 @@ function SearchableSelect({ value, onChange, options = [], placeholder, searchPl
         border: `2px solid ${open ? '#7b192c' : '#E2C9A8'}`,
         background: disabled ? '#F5E6D3' : '#fff', cursor: disabled ? 'not-allowed' : 'pointer',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        fontFamily: 'Amiri, serif', transition: 'border-color 0.15s', opacity: disabled ? 0.6 : 1,
+        fontFamily: 'Tajawal, sans-serif', transition: 'border-color 0.15s', opacity: disabled ? 0.6 : 1,
       }}>
         <span style={{ color: value ? '#1a0610' : '#9C6B4E', fontSize: '0.95rem' }}>
           {value || placeholder}
@@ -136,13 +137,13 @@ function SearchableSelect({ value, onChange, options = [], placeholder, searchPl
             <div style={{ padding: '10px 12px', borderBottom: '1px solid #F5E6D3' }}>
               <input autoFocus value={search} onChange={e => setSearch(e.target.value)}
                 placeholder={searchPlaceholder || (isAr ? 'ابحث...' : 'Search...')}
-                style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.88rem', outline: 'none', fontFamily: 'Amiri, serif', boxSizing: 'border-box' }} />
+                style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.88rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', boxSizing: 'border-box' }} />
             </div>
             <div style={{ overflowY: 'auto' }}>
               {filtered.length === 0 && <p style={{ padding: '12px 16px', color: '#9C6B4E', fontSize: '0.85rem' }}>{isAr ? 'لا نتائج' : 'No results'}</p>}
               {filtered.map(o => (
                 <button key={o} type="button" onClick={() => { onChange(o); setOpen(false); setSearch('') }}
-                  style={{ width: '100%', padding: '11px 16px', border: 'none', background: value === o ? '#fdf0f2' : '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid #F5E6D3', fontFamily: 'Amiri, serif', textAlign: 'right' }}
+                  style={{ width: '100%', padding: '11px 16px', border: 'none', background: value === o ? '#fdf0f2' : '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid #F5E6D3', fontFamily: 'Tajawal, sans-serif', textAlign: 'right' }}
                   onMouseEnter={e => e.currentTarget.style.background = '#fdf0f2'}
                   onMouseLeave={e => e.currentTarget.style.background = value === o ? '#fdf0f2' : '#fff'}>
                   <span style={{ color: '#1a0610', fontWeight: value === o ? 700 : 400, fontSize: '0.9rem' }}>{o}</span>
@@ -174,7 +175,7 @@ function PhoneInput({ code, number, onCodeChange, onNumberChange, isAr }) {
         <button type="button" onClick={() => setOpen(!open)} style={{
           height: '100%', minHeight: 50, padding: '0 12px', borderRadius: 14,
           border: `2px solid ${open ? '#7b192c' : '#E2C9A8'}`, background: '#fff', cursor: 'pointer',
-          display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Amiri, serif', whiteSpace: 'nowrap',
+          display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Tajawal, sans-serif', whiteSpace: 'nowrap',
         }}>
           <span style={{ fontSize: '1.1rem' }}>{sel?.flag || '🌐'}</span>
           <span style={{ color: '#1a0610', fontSize: '0.9rem', fontWeight: 600 }}>{code || '+'}</span>
@@ -186,12 +187,12 @@ function PhoneInput({ code, number, onCodeChange, onNumberChange, isAr }) {
             <div style={{ position: 'absolute', top: '105%', left: 0, width: 250, background: '#fff', borderRadius: 14, boxShadow: '0 12px 40px rgba(123,25,44,0.18)', border: '1px solid #E2C9A8', zIndex: 99, overflow: 'hidden', maxHeight: 280, display: 'flex', flexDirection: 'column' }}>
               <div style={{ padding: '10px 12px', borderBottom: '1px solid #F5E6D3' }}>
                 <input autoFocus value={search} onChange={e => setSearch(e.target.value)} placeholder={isAr ? 'ابحث عن دولة...' : 'Search country...'}
-                  style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', boxSizing: 'border-box' }} />
+                  style={{ width: '100%', padding: '8px 12px', borderRadius: 10, border: '1.5px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', boxSizing: 'border-box' }} />
               </div>
               <div style={{ overflowY: 'auto' }}>
                 {filtered.map((d, i) => (
                   <button key={`${d.code}-${d.en}-${i}`} type="button" onClick={() => { onCodeChange(d.code); setOpen(false); setSearch('') }}
-                    style={{ width: '100%', padding: '10px 14px', border: 'none', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid #F5E6D3', fontFamily: 'Amiri, serif', textAlign: 'left' }}
+                    style={{ width: '100%', padding: '10px 14px', border: 'none', background: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid #F5E6D3', fontFamily: 'Tajawal, sans-serif', textAlign: 'left' }}
                     onMouseEnter={e => e.currentTarget.style.background = '#fdf0f2'}
                     onMouseLeave={e => e.currentTarget.style.background = '#fff'}>
                     <span style={{ fontSize: '1.1rem' }}>{d.flag}</span>
@@ -208,7 +209,7 @@ function PhoneInput({ code, number, onCodeChange, onNumberChange, isAr }) {
       <input value={number} onChange={e => onNumberChange(e.target.value.replace(/[^\d]/g, ''))}
         type="tel" inputMode="numeric" placeholder={isAr ? 'رقم الهاتف' : 'Phone number'}
         onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-        style={{ flex: 1, padding: '14px 16px', borderRadius: 14, border: `2px solid ${focused ? '#7b192c' : '#E2C9A8'}`, fontSize: '0.92rem', color: '#1a0610', fontFamily: 'Amiri, serif', outline: 'none', background: '#fff', boxSizing: 'border-box', direction: 'ltr', textAlign: 'left' }} />
+        style={{ flex: 1, padding: '14px 16px', borderRadius: 14, border: `2px solid ${focused ? '#7b192c' : '#E2C9A8'}`, fontSize: '0.92rem', color: '#1a0610', fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#fff', boxSizing: 'border-box', direction: 'ltr', textAlign: 'left' }} />
     </div>
   )
 }
@@ -238,7 +239,7 @@ function Input({ value, onChange, type = 'text', placeholder, required }) {
       style={{
         width: '100%', padding: '14px 16px', borderRadius: 14,
         border: `2px solid ${focused ? '#7b192c' : '#E2C9A8'}`,
-        fontSize: '0.92rem', color: '#1a0610', fontFamily: 'Amiri, serif',
+        fontSize: '0.92rem', color: '#1a0610', fontFamily: 'Tajawal, sans-serif',
         outline: 'none', background: '#fff', boxSizing: 'border-box',
         transition: 'border-color 0.15s',
       }}
@@ -296,7 +297,7 @@ function CardSheet({ content, error, isAr, onClose }) {
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(26,6,16,0.6)', backdropFilter: 'blur(4px)', zIndex: 9999, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '24px 14px', overflowY: 'auto' }}>
       <div style={{ background: '#fff', borderRadius: 22, width: '100%', maxWidth: 520, boxShadow: '0 20px 60px rgba(0,0,0,0.35)', overflow: 'hidden' }}>
         <div style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ color: '#f4be69', fontWeight: 800, fontFamily: 'Amiri, serif', fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ color: '#f4be69', fontWeight: 800, fontFamily: 'Tajawal, sans-serif', fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: 8 }}>
             <FiCreditCard size={18} /> {isAr ? 'دفع آمن بالبطاقة' : 'Secure Card Payment'}
           </span>
           <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.15)', border: 'none', borderRadius: 10, width: 32, height: 32, cursor: 'pointer', color: '#f4be69', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -307,8 +308,8 @@ function CardSheet({ content, error, isAr, onClose }) {
           {error ? (
             <div style={{ textAlign: 'center', padding: '30px 10px' }}>
               <FiX size={40} color="#DC2626" />
-              <p style={{ color: '#DC2626', fontWeight: 700, marginTop: 12, fontFamily: 'Amiri, serif' }}>{error}</p>
-              <button onClick={onClose} style={{ marginTop: 16, background: '#7b192c', color: '#f4be69', border: 'none', borderRadius: 12, padding: '10px 28px', cursor: 'pointer', fontFamily: 'Amiri, serif', fontWeight: 700 }}>{isAr ? 'إغلاق' : 'Close'}</button>
+              <p style={{ color: '#DC2626', fontWeight: 700, marginTop: 12, fontFamily: 'Tajawal, sans-serif' }}>{error}</p>
+              <button onClick={onClose} style={{ marginTop: 16, background: '#7b192c', color: '#f4be69', border: 'none', borderRadius: 12, padding: '10px 28px', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontWeight: 700 }}>{isAr ? 'إغلاق' : 'Close'}</button>
             </div>
           ) : (
             <div style={{ position: 'relative', minHeight: 200 }}>
@@ -360,7 +361,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
         {/* الهيدر */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px 10px', borderBottom: '1px solid #F5E6D3' }}>
           <div>
-            <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Amiri, serif' }}>
+            <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Tajawal, sans-serif' }}>
               {isAr ? 'بيانات التّحويل البنكي' : 'Bank Transfer Details'}
             </p>
             <p style={{ color: '#7b192c', fontWeight: 800, fontSize: '0.88rem', marginTop: 2 }}>{total}</p>
@@ -396,7 +397,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
                   border: 'none', borderRadius: 8, cursor: 'pointer',
                   color: copied === f.key ? '#fff' : '#7b192c',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3,
-                  fontSize: '0.65rem', fontWeight: 700, fontFamily: 'Amiri, serif',
+                  fontSize: '0.65rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif',
                   transition: 'background 0.2s',
                 }}>
                   {copied === f.key ? <FiCheck size={13} /> : <FiCopy size={13} />}
@@ -419,7 +420,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
             background: 'linear-gradient(to left, #7b192c, #a82040)',
             color: '#f4be69', padding: '14px 0', borderRadius: 14,
             fontWeight: 700, fontSize: '0.92rem', border: 'none',
-            cursor: 'pointer', fontFamily: 'Amiri, serif',
+            cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             boxShadow: '0 4px 16px rgba(123,25,44,0.3)',
           }}>
@@ -433,7 +434,7 @@ function BankSheet({ orderNumber, total, isAr, onConfirm, onClose }) {
             padding: '13px 0', borderRadius: 14,
             fontWeight: 700, fontSize: '0.88rem',
             textDecoration: 'none', border: '1.5px solid #BBF7D0',
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
           }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="#16A34A">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -487,7 +488,7 @@ function CartBar({ items, updateQty, removeItem, formatPrice, isAr }) {
             <span style={{ position: 'absolute', top: -7, right: -9, background: '#f4be69', color: '#7b192c', borderRadius: '50%', width: 17, height: 17, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', fontWeight: 900 }}>{count}</span>
           )}
         </div>
-        <span style={{ color: '#f4be69', fontWeight: 900, fontSize: '0.7rem', fontFamily: 'Amiri, serif', whiteSpace: 'nowrap' }}>
+        <span style={{ color: '#f4be69', fontWeight: 900, fontSize: '0.7rem', fontFamily: 'Tajawal, sans-serif', whiteSpace: 'nowrap' }}>
           {formatPrice(total)}
         </span>
         <span style={{ color: 'rgba(244,190,105,0.7)', fontSize: '0.6rem', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>▲</span>
@@ -506,7 +507,7 @@ function CartBar({ items, updateQty, removeItem, formatPrice, isAr }) {
           }}>
             <div style={{ width: 40, height: 4, borderRadius: 2, background: '#E2C9A8', margin: '12px auto 0' }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px 10px' }}>
-              <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem', fontFamily: 'Amiri, serif' }}>
+              <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem', fontFamily: 'Tajawal, sans-serif' }}>
                 {isAr ? `سلتك (${count})` : `Cart (${count})`}
               </p>
               <button onClick={() => setOpen(false)} style={{ background: '#F5E6D3', border: 'none', borderRadius: 8, width: 28, height: 28, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -514,6 +515,7 @@ function CartBar({ items, updateQty, removeItem, formatPrice, isAr }) {
               </button>
             </div>
             <div style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <FreeShippingBar subtotal={total} compact />
               {items.map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#FFFBF5', borderRadius: 14, padding: '10px 12px', border: '1px solid #E2C9A8' }}>
                   <div style={{ width: 46, height: 46, borderRadius: 10, background: '#F5E6D3', flexShrink: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -786,7 +788,7 @@ export default function Checkout() {
     <div style={{ background: '#F5E6D3', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div style={{ textAlign: 'center' }}>
         <FiShoppingBag size={52} color="#E2C9A8" />
-        <h2 style={{ color: '#3E1C00', fontFamily: 'Amiri, serif', margin: '16px 0 12px' }}>{t('cart.empty')}</h2>
+        <h2 style={{ color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', margin: '16px 0 12px' }}>{t('cart.empty')}</h2>
         <Link to="/products" style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '12px 28px', borderRadius: 50, fontWeight: 700, textDecoration: 'none' }}>{t('cart.continue')}</Link>
       </div>
     </div>
@@ -830,7 +832,7 @@ export default function Checkout() {
         {/* ═══ المرحلة 1: التفاصيل ═══ */}
         {step === 1 && (
           <div>
-            <h2 style={{ color: '#1a0610', fontFamily: 'Amiri, serif', fontSize: '1.1rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <h2 style={{ color: '#1a0610', fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
               <FiMapPin size={18} color="#7b192c" />
               {isAr ? 'تفاصيل التوصيل' : 'Delivery Details'}
             </h2>
@@ -907,7 +909,7 @@ export default function Checkout() {
               </Field>
             </div>
 
-            <button onClick={goNext} style={{ width: '100%', marginTop: 20, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '16px 0', borderRadius: 16, fontWeight: 700, fontSize: '1rem', border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 6px 20px rgba(123,25,44,0.3)' }}>
+            <button onClick={goNext} style={{ width: '100%', marginTop: 20, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '16px 0', borderRadius: 16, fontWeight: 700, fontSize: '1rem', border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 6px 20px rgba(123,25,44,0.3)' }}>
               {isAr ? 'متابعة' : 'Continue'}
               <FiChevronLeft size={18} />
             </button>
@@ -918,14 +920,14 @@ export default function Checkout() {
         {/* ═══ المرحلة 2: الدفع ═══ */}
         {step === 2 && (
           <div>
-            <h2 style={{ color: '#1a0610', fontFamily: 'Amiri, serif', fontSize: '1.1rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <h2 style={{ color: '#1a0610', fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
               <FiCreditCard size={18} color="#7b192c" />
               {isAr ? 'طريقة الدفع' : 'Payment Method'}
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {/* بطاقة ائتمان — دفع آمن داخل الموقع (الخيار الأول) */}
-              <button onClick={() => setPayment('card')} style={{ background: payment === 'card' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'card' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
+              <button onClick={() => setPayment('card')} style={{ background: payment === 'card' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'card' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'card' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <FiCreditCard size={20} color={payment === 'card' ? '#7b192c' : '#9C6B4E'} />
                 </div>
@@ -940,7 +942,7 @@ export default function Checkout() {
               </button>
 
               {/* تحويل بنكي */}
-              <button onClick={() => setPayment('transfer')} style={{ background: payment === 'transfer' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'transfer' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right' }}>
+              <button onClick={() => setPayment('transfer')} style={{ background: payment === 'transfer' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'transfer' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s', textAlign: 'right' }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'transfer' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <FiBriefcase size={20} color={payment === 'transfer' ? '#7b192c' : '#9C6B4E'} />
                 </div>
@@ -952,7 +954,7 @@ export default function Checkout() {
               </button>
 
               {/* الدفع عند التسليم */}
-              <button onClick={() => setPayment('cod')} style={{ background: payment === 'cod' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'cod' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Amiri, serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
+              <button onClick={() => setPayment('cod')} style={{ background: payment === 'cod' ? '#fdf0f2' : '#fff', border: `2px solid ${payment === 'cod' ? '#7b192c' : '#E2C9A8'}`, borderRadius: 18, padding: '18px 18px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s', textAlign: 'right', position: 'relative' }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: payment === 'cod' ? 'rgba(123,25,44,0.1)' : '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <FiTruck size={20} color={payment === 'cod' ? '#7b192c' : '#9C6B4E'} />
                 </div>
@@ -975,17 +977,17 @@ export default function Checkout() {
                   <div style={{ width: 44, height: 44, borderRadius: 12, background: '#F5E6D3', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <pm.Icon size={20} color="#9C6B4E" />
                   </div>
-                  <span style={{ color: '#9C6B4E', fontWeight: 500, fontSize: '0.92rem', fontFamily: 'Amiri, serif', flex: 1 }}>{isAr ? pm.label_ar : pm.label_en}</span>
+                  <span style={{ color: '#9C6B4E', fontWeight: 500, fontSize: '0.92rem', fontFamily: 'Tajawal, sans-serif', flex: 1 }}>{isAr ? pm.label_ar : pm.label_en}</span>
                   <span style={{ background: '#F5E6D3', color: '#9C6B4E', fontSize: '0.68rem', fontWeight: 700, padding: '3px 10px', borderRadius: 50 }}>{isAr ? 'قريباً' : 'Soon'}</span>
                 </div>
               ))}
             </div>
 
             <div style={{ display: 'flex', gap: 12, marginTop: 20, marginBottom: 70 }}>
-              <button onClick={() => setStep(1)} style={{ flex: 0, background: '#fff', border: '2px solid #E2C9A8', borderRadius: 16, padding: '15px 20px', cursor: 'pointer', color: '#9C6B4E', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Amiri, serif', fontWeight: 600 }}>
+              <button onClick={() => setStep(1)} style={{ flex: 0, background: '#fff', border: '2px solid #E2C9A8', borderRadius: 16, padding: '15px 20px', cursor: 'pointer', color: '#9C6B4E', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Tajawal, sans-serif', fontWeight: 600 }}>
                 <FiChevronRight size={16} />
               </button>
-              <button onClick={goNext} style={{ flex: 1, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '15px 0', borderRadius: 16, fontWeight: 700, fontSize: '1rem', border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 6px 20px rgba(123,25,44,0.3)' }}>
+              <button onClick={goNext} style={{ flex: 1, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '15px 0', borderRadius: 16, fontWeight: 700, fontSize: '1rem', border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, boxShadow: '0 6px 20px rgba(123,25,44,0.3)' }}>
                 {isAr ? 'متابعة' : 'Continue'} <FiChevronLeft size={18} />
               </button>
             </div>
@@ -996,16 +998,21 @@ export default function Checkout() {
         {/* ═══ المرحلة 3: المراجعة ═══ */}
         {step === 3 && (
           <div>
-            <h2 style={{ color: '#1a0610', fontFamily: 'Amiri, serif', fontSize: '1.1rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <h2 style={{ color: '#1a0610', fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
               <FiShoppingBag size={18} color="#7b192c" />
               {isAr ? 'مراجعة الطّلب' : 'Review Order'}
             </h2>
+
+            {/* شريط الشحن المجّاني */}
+            <div style={{ marginBottom: 14 }}>
+              <FreeShippingBar subtotal={total} country={form.country} />
+            </div>
 
             {/* ملخص البيانات */}
             <div style={{ background: '#fff', borderRadius: 18, padding: '16px 18px', marginBottom: 14, boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
                 <p style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.88rem' }}>{isAr ? 'بيانات التوصيل' : 'Delivery Info'}</p>
-                <button onClick={() => setStep(1)} style={{ background: 'none', border: 'none', color: '#7b192c', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 600, fontFamily: 'Amiri, serif' }}>{isAr ? 'تعديل' : 'Edit'}</button>
+                <button onClick={() => setStep(1)} style={{ background: 'none', border: 'none', color: '#7b192c', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 600, fontFamily: 'Tajawal, sans-serif' }}>{isAr ? 'تعديل' : 'Edit'}</button>
               </div>
               <p style={{ color: '#6B3A2A', fontSize: '0.85rem' }}>{form.firstName} {form.lastName}</p>
               <p style={{ color: '#9C6B4E', fontSize: '0.8rem' }}>{[form.district, form.neighborhood, form.address].filter(Boolean).join('، ')}</p>
@@ -1024,7 +1031,7 @@ export default function Checkout() {
                   {payment === 'cod' ? (isAr ? 'الدفع عند التّسليم' : 'Cash on Delivery') : (isAr ? 'بطاقة ائتمان' : 'Credit Card')}
                 </p>
               </div>
-              <button onClick={() => setStep(2)} style={{ background: 'none', border: 'none', color: '#7b192c', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 600, fontFamily: 'Amiri, serif' }}>{isAr ? 'تعديل' : 'Edit'}</button>
+              <button onClick={() => setStep(2)} style={{ background: 'none', border: 'none', color: '#7b192c', fontSize: '0.78rem', cursor: 'pointer', fontWeight: 600, fontFamily: 'Tajawal, sans-serif' }}>{isAr ? 'تعديل' : 'Edit'}</button>
             </div>
 
             {/* المنتجات */}
@@ -1062,7 +1069,7 @@ export default function Checkout() {
               <div style={{ display: 'flex', gap: 8, alignItems: 'stretch' }}>
                 <input value={coupon} onChange={e => { setCoupon(e.target.value); setCouponError('') }}
                   placeholder="AROMENA10" disabled={couponApplied}
-                  style={{ flex: 1, minWidth: 0, padding: '12px 14px', borderRadius: 12, border: `2px solid ${couponError ? '#DC2626' : '#E2C9A8'}`, fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', background: '#FFFBF5', boxSizing: 'border-box' }} />
+                  style={{ flex: 1, minWidth: 0, padding: '12px 14px', borderRadius: 12, border: `2px solid ${couponError ? '#DC2626' : '#E2C9A8'}`, fontSize: '0.85rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', background: '#FFFBF5', boxSizing: 'border-box' }} />
                 <button onClick={applyCoupon} disabled={couponApplied} style={{
                   flexShrink: 0, width: 72,
                   background: couponApplied ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)',
@@ -1070,7 +1077,7 @@ export default function Checkout() {
                   padding: '12px 0', borderRadius: 12, fontWeight: 700,
                   fontSize: '0.82rem', border: 'none',
                   cursor: couponApplied ? 'not-allowed' : 'pointer',
-                  fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   {couponApplied ? <FiCheck size={15} /> : (isAr ? 'تطبيق' : 'Apply')}
                 </button>
@@ -1113,7 +1120,7 @@ export default function Checkout() {
             </div>
 
             {/* الموافقة */}
-            <button onClick={() => setAgreed(!agreed)} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16, fontFamily: 'Amiri, serif', padding: 0, width: '100%' }}>
+            <button onClick={() => setAgreed(!agreed)} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', marginBottom: 16, fontFamily: 'Tajawal, sans-serif', padding: 0, width: '100%' }}>
               <div style={{ width: 24, height: 24, borderRadius: 7, border: `2px solid ${agreed ? '#7b192c' : '#E2C9A8'}`, background: agreed ? '#7b192c' : '#fff', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {agreed && <FiCheck size={13} color="#fff" />}
               </div>
@@ -1122,7 +1129,7 @@ export default function Checkout() {
 
             {/* الأزرار */}
             <div style={{ display: 'flex', gap: 12 }}>
-              <button onClick={() => setStep(2)} style={{ flex: 0, background: '#fff', border: '2px solid #E2C9A8', borderRadius: 16, padding: '15px 20px', cursor: 'pointer', color: '#9C6B4E', display: 'flex', alignItems: 'center', fontFamily: 'Amiri, serif' }}>
+              <button onClick={() => setStep(2)} style={{ flex: 0, background: '#fff', border: '2px solid #E2C9A8', borderRadius: 16, padding: '15px 20px', cursor: 'pointer', color: '#9C6B4E', display: 'flex', alignItems: 'center', fontFamily: 'Tajawal, sans-serif' }}>
                 <FiChevronRight size={16} />
               </button>
               <button onClick={handleOrder} disabled={!agreed || loading} style={{
@@ -1130,7 +1137,7 @@ export default function Checkout() {
                 color: agreed && !loading ? '#f4be69' : '#9C6B4E',
                 padding: '15px 0', borderRadius: 16, fontWeight: 700, fontSize: '1rem',
                 border: 'none', cursor: agreed && !loading ? 'pointer' : 'not-allowed',
-                fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                 boxShadow: agreed && !loading ? '0 6px 20px rgba(123,25,44,0.3)' : 'none',
               }}>
                 <FiShoppingBag size={18} />

@@ -43,7 +43,7 @@ export default function Ticker({ isAr }) {
             display: 'inline-flex', alignItems: 'center',
             padding: '0 32px', color: '#f4be69',
             fontSize: 'clamp(0.8rem, 2vw, 0.95rem)',
-            fontFamily: 'Amiri, serif', fontWeight: 600,
+            fontFamily: 'Tajawal, sans-serif', fontWeight: 600,
             whiteSpace: 'nowrap',
           }}>
             {item}

@@ -20,7 +20,7 @@ const inputStyle = {
   width: '100%', padding: '10px 12px',
   borderRadius: 10, border: `2px solid ${BORDER}`,
   fontSize: '0.88rem', color: TEXT,
-  fontFamily: 'Amiri, serif', outline: 'none',
+  fontFamily: 'Tajawal, sans-serif', outline: 'none',
   background: '#FFFBF5', boxSizing: 'border-box',
   transition: 'border-color 0.15s',
 }
@@ -198,10 +198,10 @@ export default function AdminProducts() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>المنتجات</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>المنتجات</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>{items.length} منتج</p>
         </div>
-        <button onClick={openAdd} style={{ background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '10px 20px', borderRadius: 50, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Amiri, serif', boxShadow: '0 4px 14px rgba(123,25,44,0.25)' }}>
+        <button onClick={openAdd} style={{ background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '10px 20px', borderRadius: 50, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Tajawal, sans-serif', boxShadow: '0 4px 14px rgba(123,25,44,0.25)' }}>
           <FiPlus size={16} /> إضافة منتج
         </button>
       </div>
@@ -295,7 +295,7 @@ export default function AdminProducts() {
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 500, padding: 20 }}>
           <div style={{ background: CARD, borderRadius: 24, padding: '28px 24px', width: '100%', maxWidth: 680, maxHeight: '92vh', overflowY: 'auto', boxShadow: '0 24px 80px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22 }}>
-              <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1.15rem' }}>{editing ? 'تعديل المنتج' : 'إضافة منتج جديد'}</h2>
+              <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1.15rem' }}>{editing ? 'تعديل المنتج' : 'إضافة منتج جديد'}</h2>
               <button onClick={() => setShowForm(false)} style={{ background: BG, border: 'none', borderRadius: 8, padding: 8, cursor: 'pointer', color: TEXT2 }}><FiX size={16} /></button>
             </div>
 
@@ -340,7 +340,7 @@ export default function AdminProducts() {
                       <span style={{ color: TEXT2, fontSize: '0.85rem' }}>{uploadingPdf ? 'جاري الرفع...' : 'لم يتم رفع PDF بعد'}</span>
                     </div>
                   )}
-                  <button onClick={() => document.getElementById('product-pdf-input').click()} disabled={uploadingPdf} style={{ background: uploadingPdf ? BG2 : BG, border: 'none', borderRadius: 8, padding: '7px 14px', color: BORDEAUX, cursor: uploadingPdf ? 'not-allowed' : 'pointer', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <button onClick={() => document.getElementById('product-pdf-input').click()} disabled={uploadingPdf} style={{ background: uploadingPdf ? BG2 : BG, border: 'none', borderRadius: 8, padding: '7px 14px', color: BORDEAUX, cursor: uploadingPdf ? 'not-allowed' : 'pointer', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', gap: 4 }}>
                     <FiUpload size={13} /> رفع PDF
                   </button>
                   <input id="product-pdf-input" type="file" accept=".pdf" style={{ display: 'none' }} onChange={e => handlePdfUpload(e.target.files[0])} />
@@ -401,7 +401,7 @@ export default function AdminProducts() {
               <div style={{ background: '#FFFBF0', borderRadius: 14, padding: '16px', border: '2px solid #FDE68A' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
                   <FiTag size={16} color="#D97706" />
-                  <h3 style={{ color: '#92400E', fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Amiri, serif' }}>
+                  <h3 style={{ color: '#92400E', fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Tajawal, sans-serif' }}>
                     العروض والخصومات
                   </h3>
                 </div>
@@ -439,7 +439,7 @@ export default function AdminProducts() {
                   </div>
                 </div>
                 {form.discount > 0 && (
-                  <button onClick={() => setForm(f => ({ ...f, discount: 0, discountExpiry: '' }))} style={{ marginTop: 10, background: '#FEE2E2', border: 'none', borderRadius: 8, padding: '6px 14px', color: '#DC2626', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'Amiri, serif' }}>
+                  <button onClick={() => setForm(f => ({ ...f, discount: 0, discountExpiry: '' }))} style={{ marginTop: 10, background: '#FEE2E2', border: 'none', borderRadius: 8, padding: '6px 14px', color: '#DC2626', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'Tajawal, sans-serif' }}>
                     إلغاء العرض
                   </button>
                 )}
@@ -449,7 +449,7 @@ export default function AdminProducts() {
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
                   <label style={labelStyle}>الأحجام والأسعار بالليرة التركية ₺</label>
-                  <button onClick={addSize} style={{ background: BG, border: 'none', borderRadius: 8, padding: '6px 12px', color: BORDEAUX, cursor: 'pointer', fontSize: '0.82rem', fontWeight: 700, fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <button onClick={addSize} style={{ background: BG, border: 'none', borderRadius: 8, padding: '6px 12px', color: BORDEAUX, cursor: 'pointer', fontSize: '0.82rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', gap: 4 }}>
                     <FiPlus size={13} /> إضافة حجم
                   </button>
                 </div>
@@ -491,10 +491,10 @@ export default function AdminProducts() {
 
               {/* أزرار الحفظ */}
               <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
-                <button onClick={handleSave} disabled={uploadingIdx !== null || saving} style={{ flex: 1, background: uploadingIdx !== null || saving ? BG2 : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: uploadingIdx !== null || saving ? TEXT2 : GOLD, padding: '12px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: uploadingIdx !== null || saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontFamily: 'Amiri, serif' }}>
+                <button onClick={handleSave} disabled={uploadingIdx !== null || saving} style={{ flex: 1, background: uploadingIdx !== null || saving ? BG2 : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: uploadingIdx !== null || saving ? TEXT2 : GOLD, padding: '12px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: uploadingIdx !== null || saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontFamily: 'Tajawal, sans-serif' }}>
                   <FiCheck size={15} />{saving ? 'جاري الحفظ...' : editing ? 'حفظ التعديلات' : 'إضافة المنتج'}
                 </button>
-                <button onClick={() => setShowForm(false)} style={{ padding: '12px 18px', borderRadius: 12, border: `2px solid ${BORDER}`, background: CARD, color: TEXT2, cursor: 'pointer', fontFamily: 'Amiri, serif', fontSize: '0.88rem' }}>إلغاء</button>
+                <button onClick={() => setShowForm(false)} style={{ padding: '12px 18px', borderRadius: 12, border: `2px solid ${BORDER}`, background: CARD, color: TEXT2, cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontSize: '0.88rem' }}>إلغاء</button>
               </div>
             </div>
           </div>

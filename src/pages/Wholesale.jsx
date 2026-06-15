@@ -117,7 +117,7 @@ export default function Wholesale() {
     width: '100%', padding: '12px 14px',
     borderRadius: 12, border: '2px solid #E2C9A8',
     fontSize: '0.9rem', color: '#3E1C00',
-    fontFamily: 'Amiri, serif', outline: 'none',
+    fontFamily: 'Tajawal, sans-serif', outline: 'none',
     background: '#FFFBF5', boxSizing: 'border-box',
     transition: 'border-color 0.2s',
   }
@@ -138,7 +138,7 @@ export default function Wholesale() {
           <div style={{ display: 'inline-block', background: 'rgba(244,190,105,0.12)', border: '1px solid rgba(244,190,105,0.25)', color: '#f4be69', padding: '5px 18px', borderRadius: 50, fontSize: '0.78rem', fontWeight: 600, letterSpacing: 1, marginBottom: 16 }}>
             B2B
           </div>
-          <h1 style={{ fontSize: 'clamp(1.7rem, 4vw, 2.6rem)', color: '#f4be69', fontFamily: 'Amiri, serif', marginBottom: 12 }}>
+          <h1 style={{ fontSize: 'clamp(1.7rem, 4vw, 2.6rem)', color: '#f4be69', fontFamily: 'Tajawal, sans-serif', marginBottom: 12 }}>
             {t('wholesale.title')}
           </h1>
           <p style={{ color: 'rgba(244,190,105,0.65)', fontSize: '0.9rem', lineHeight: 1.8, maxWidth: 480, margin: '0 auto 28px' }}>
@@ -175,7 +175,7 @@ export default function Wholesale() {
       {/* ═══ HOW IT WORKS ═══ */}
       <div style={{ padding: '40px 16px', background: '#EDD9C0' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', color: '#3E1C00', fontFamily: 'Amiri, serif', fontSize: '1.4rem', marginBottom: 28 }}>
+          <h2 style={{ textAlign: 'center', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', fontSize: '1.4rem', marginBottom: 28 }}>
             {isAr ? 'كيف يعمل النّظام؟' : 'How Does It Work?'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
@@ -197,7 +197,7 @@ export default function Wholesale() {
       {/* ═══ FORM ═══ */}
       <div id="form" style={{ padding: '40px 16px 60px', background: '#EDD9C0' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', color: '#3E1C00', fontFamily: 'Amiri, serif', fontSize: '1.4rem', marginBottom: 6 }}>
+          <h2 style={{ textAlign: 'center', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', fontSize: '1.4rem', marginBottom: 6 }}>
             {isAr ? 'أرسل طلب الجّملة' : 'Send Wholesale Request'}
           </h2>
           <p style={{ textAlign: 'center', color: '#9C6B4E', fontSize: '0.84rem', marginBottom: 24 }}>
@@ -211,13 +211,13 @@ export default function Wholesale() {
                 <div style={{ width: 68, height: 68, borderRadius: '50%', background: '#f0fdf4', border: '2px solid #BBF7D0', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px' }}>
                   <FiCheckCircle size={32} color="#16A34A" />
                 </div>
-                <h3 style={{ color: '#16A34A', fontSize: '1.1rem', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
+                <h3 style={{ color: '#16A34A', fontSize: '1.1rem', fontFamily: 'Tajawal, sans-serif', marginBottom: 10 }}>
                   {isAr ? 'تمَّ إرسال طلبك بنجاح!' : 'Request Sent Successfully!'}
                 </h3>
                 <p style={{ color: '#9C6B4E', fontSize: '0.86rem', lineHeight: 1.8 }}>
                   {isAr ? 'سيتواصل معك فريقنا خلال 24 ساعة على البريد أو الواتساب.' : 'Our team will contact you within 24 hours via email or WhatsApp.'}
                 </p>
-                <button onClick={() => setSent(false)} style={{ marginTop: 20, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 24px', borderRadius: 50, fontWeight: 700, fontSize: '0.86rem', border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif' }}>
+                <button onClick={() => setSent(false)} style={{ marginTop: 20, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 24px', borderRadius: 50, fontWeight: 700, fontSize: '0.86rem', border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
                   {isAr ? 'إرسال طلب آخر' : 'Send Another Request'}
                 </button>
               </div>
@@ -277,7 +277,7 @@ export default function Wholesale() {
                         background: form.business === bt.value ? 'linear-gradient(to left, #7b192c, #a82040)' : '#FFFBF5',
                         color: form.business === bt.value ? '#f4be69' : '#6B3A2A',
                         fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer',
-                        fontFamily: 'Amiri, serif', transition: 'all 0.2s',
+                        fontFamily: 'Tajawal, sans-serif', transition: 'all 0.2s',
                       }}>
                         {isAr ? bt.label_ar : bt.label_en}
                       </button>
@@ -303,7 +303,7 @@ export default function Wholesale() {
                   fontWeight: 700, fontSize: '0.95rem', border: 'none',
                   cursor: loading ? 'not-allowed' : 'pointer',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                  fontFamily: 'Amiri, serif',
+                  fontFamily: 'Tajawal, sans-serif',
                   boxShadow: loading ? 'none' : '0 4px 16px rgba(123,25,44,0.25)',
                 }}>
                   <FiSend size={15} />
@@ -316,7 +316,7 @@ export default function Wholesale() {
                   background: 'rgba(37,211,102,0.08)', color: '#16A34A',
                   padding: '11px 0', borderRadius: 12,
                   fontWeight: 600, fontSize: '0.88rem', textDecoration: 'none',
-                  border: '2px solid rgba(37,211,102,0.2)', fontFamily: 'Amiri, serif',
+                  border: '2px solid rgba(37,211,102,0.2)', fontFamily: 'Tajawal, sans-serif',
                   transition: 'background 0.2s',
                 }}>
                   <SiWhatsapp size={16} />

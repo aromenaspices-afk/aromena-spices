@@ -186,7 +186,7 @@ function Kpi({ icon, label, value, sub, accent = BORDEAUX }) {
         <span style={{ color: TEXT2, fontSize: '0.78rem', fontWeight: 600 }}>{label}</span>
         <span style={{ width: 34, height: 34, borderRadius: 10, background: `${accent}14`, color: accent, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{icon}</span>
       </div>
-      <p style={{ color: TEXT, fontSize: '1.5rem', fontWeight: 800, fontFamily: 'Amiri, serif', lineHeight: 1.1 }}>{value}</p>
+      <p style={{ color: TEXT, fontSize: '1.5rem', fontWeight: 800, fontFamily: 'Tajawal, sans-serif', lineHeight: 1.1 }}>{value}</p>
       {sub && <p style={{ color: TEXT2, fontSize: '0.74rem', marginTop: 4 }}>{sub}</p>}
     </div>
   )
@@ -197,7 +197,7 @@ function Panel({ title, icon, children, extra }) {
   return (
     <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: '18px 18px 20px', boxShadow: '0 2px 10px rgba(62,28,0,0.05)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-        <h3 style={{ color: TEXT, fontWeight: 700, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'Amiri, serif' }}>
+        <h3 style={{ color: TEXT, fontWeight: 700, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: 8, fontFamily: 'Tajawal, sans-serif' }}>
           <span style={{ color: BORDEAUX }}>{icon}</span> {title}
         </h3>
         {extra}
@@ -335,7 +335,7 @@ export default function Analytics() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14, marginBottom: 22 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 9 }}>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 9 }}>
             <FiBarChart2 color={BORDEAUX} /> التحليلات المتقدّمة
           </h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>تحليل شامل لأداء المتجر — {periodLabel} · الأسعار بالليرة التركية ₺</p>
@@ -345,7 +345,7 @@ export default function Analytics() {
           {[{ v: 7, l: '7 أيام' }, { v: 30, l: '30 يوم' }, { v: 90, l: '90 يوم' }, { v: 0, l: 'الكل' }].map(p => (
             <button key={p.v} onClick={() => setPeriod(p.v)} style={{
               border: 'none', cursor: 'pointer', padding: '6px 14px', borderRadius: 50,
-              fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Amiri, serif',
+              fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif',
               background: period === p.v ? `linear-gradient(to left, ${BORDEAUX}, #a82040)` : 'transparent',
               color: period === p.v ? GOLD : TEXT2, transition: 'all 0.2s',
             }}>{p.l}</button>
@@ -369,7 +369,7 @@ export default function Analytics() {
 
           {/* الإيرادات عبر الزمن */}
           <div style={{ marginBottom: 16 }}>
-            <Panel title="الإيرادات عبر الزمن" icon={<FiTrendingUp size={16} />} extra={<span style={{ color: BORDEAUX, fontWeight: 800, fontSize: '0.95rem', fontFamily: 'Amiri, serif' }}>{fmtTRY(revenue)}</span>}>
+            <Panel title="الإيرادات عبر الزمن" icon={<FiTrendingUp size={16} />} extra={<span style={{ color: BORDEAUX, fontWeight: 800, fontSize: '0.95rem', fontFamily: 'Tajawal, sans-serif' }}>{fmtTRY(revenue)}</span>}>
               {series.revenue.some(d => d.value > 0) ? <AreaChart data={series.revenue} color={BORDEAUX} valueFmt={fmtTRY} /> : <Empty />}
             </Panel>
           </div>

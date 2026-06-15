@@ -75,7 +75,7 @@ export default function AdminLayout({ children, onLogout }) {
             <img src={logoUrl} alt="Aromena" style={{ width: '100%', height: '100%', objectFit: 'contain', mixBlendMode: 'screen' }} onError={() => setLogoUrl(FALLBACK_LOGO)} />
           </div>
           <div style={{ minWidth: 0 }}>
-            <p style={{ color: GOLD, fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Amiri, serif' }}>Aromena</p>
+            <p style={{ color: GOLD, fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Tajawal, sans-serif' }}>Aromena</p>
             <p style={{ color: 'rgba(244,190,105,0.45)', fontSize: '0.68rem' }}>Admin Panel</p>
           </div>
         </div>
@@ -129,7 +129,7 @@ export default function AdminLayout({ children, onLogout }) {
           padding: '10px 13px', borderRadius: 11,
           background: 'rgba(220,38,38,0.12)', border: '1px solid rgba(220,38,38,0.2)',
           color: '#FCA5A5', cursor: 'pointer', fontSize: '0.87rem', fontWeight: 600,
-          fontFamily: 'Amiri, serif', transition: 'background 0.15s',
+          fontFamily: 'Tajawal, sans-serif', transition: 'background 0.15s',
         }}
           onMouseEnter={e => e.currentTarget.style.background = 'rgba(220,38,38,0.2)'}
           onMouseLeave={e => e.currentTarget.style.background = 'rgba(220,38,38,0.12)'}

@@ -88,7 +88,7 @@ export default function AdminLocations() {
     width: '100%', padding: '10px 12px', borderRadius: 10,
     border: '2px solid #E2C9A8', fontSize: '0.88rem', color: '#3E1C00',
     outline: 'none', background: '#FFFBF5', boxSizing: 'border-box',
-    fontFamily: 'Amiri, serif',
+    fontFamily: 'Tajawal, sans-serif',
   }
   const labelStyle = { color: '#3E1C00', fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: 5 }
 
@@ -98,7 +98,7 @@ export default function AdminLocations() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ color: '#3E1C00', fontSize: '1.3rem', fontFamily: 'Amiri, serif', marginBottom: 2 }}>
+          <h1 style={{ color: '#3E1C00', fontSize: '1.3rem', fontFamily: 'Tajawal, sans-serif', marginBottom: 2 }}>
             {isAr ? 'نقاط البيع والفعاليات' : 'Sales Points & Events'}
           </h1>
           <p style={{ color: '#9C6B4E', fontSize: '0.83rem' }}>
@@ -109,7 +109,7 @@ export default function AdminLocations() {
           background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69',
           padding: '10px 20px', borderRadius: 12, border: 'none', cursor: 'pointer',
           fontWeight: 700, fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: 6,
-          fontFamily: 'Amiri, serif',
+          fontFamily: 'Tajawal, sans-serif',
         }}>
           <FiPlus size={16} />
           {isAr ? 'إضافة نقطة' : 'Add Location'}
@@ -198,7 +198,7 @@ export default function AdminLocations() {
 
             {/* Modal Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-              <h2 style={{ color: '#3E1C00', fontFamily: 'Amiri, serif', fontSize: '1.1rem' }}>
+              <h2 style={{ color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem' }}>
                 {editId ? (isAr ? 'تعديل النقطة' : 'Edit Location') : (isAr ? 'إضافة نقطة جديدة' : 'Add New Location')}
               </h2>
               <button onClick={closeModal} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9C6B4E' }}>
@@ -317,13 +317,13 @@ export default function AdminLocations() {
                   flex: 1, background: saving ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)',
                   color: saving ? '#9C6B4E' : '#f4be69', padding: '12px 0', borderRadius: 12,
                   fontWeight: 700, fontSize: '0.92rem', border: 'none',
-                  cursor: saving ? 'not-allowed' : 'pointer', fontFamily: 'Amiri, serif',
+                  cursor: saving ? 'not-allowed' : 'pointer', fontFamily: 'Tajawal, sans-serif',
                 }}>
                   {saving ? (isAr ? 'جاري الحفظ...' : 'Saving...') : (isAr ? 'حفظ' : 'Save')}
                 </button>
                 <button onClick={closeModal} style={{
                   padding: '12px 20px', borderRadius: 12, border: '2px solid #E2C9A8',
-                  background: '#fff', color: '#9C6B4E', cursor: 'pointer', fontFamily: 'Amiri, serif',
+                  background: '#fff', color: '#9C6B4E', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
                 }}>
                   {isAr ? 'إلغاء' : 'Cancel'}
                 </button>

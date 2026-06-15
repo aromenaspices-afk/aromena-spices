@@ -59,7 +59,7 @@ export default function Products() {
 
       {/* Header */}
       <div style={{ background: 'linear-gradient(135deg, #7b192c, #a82040)', padding: '40px 20px 50px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#f4be69', fontFamily: 'Amiri, serif', marginBottom: 8 }}>
+        <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#f4be69', fontFamily: 'Tajawal, sans-serif', marginBottom: 8 }}>
           {t('products.title')}
         </h1>
         <p style={{ color: 'rgba(244,190,105,0.75)', fontSize: '0.9rem' }}>
@@ -80,7 +80,7 @@ export default function Products() {
               padding: isAr ? '11px 42px 11px 16px' : '11px 16px 11px 42px',
               borderRadius: 50, border: 'none',
               background: '#fff', fontSize: '0.9rem',
-              color: '#3E1C00', fontFamily: 'Amiri, serif',
+              color: '#3E1C00', fontFamily: 'Tajawal, sans-serif',
               outline: 'none', boxSizing: 'border-box',
               boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
             }}
@@ -99,7 +99,7 @@ export default function Products() {
               background: activeCategory === cat.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff',
               color: activeCategory === cat.id ? '#f4be69' : '#6B3A2A',
               fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer',
-              fontFamily: 'Amiri, serif', transition: 'all 0.2s',
+              fontFamily: 'Tajawal, sans-serif', transition: 'all 0.2s',
             }}>
               {isAr ? cat.label_ar : cat.label_en}
             </button>
@@ -190,7 +190,7 @@ export default function Products() {
                         color: '#f4be69', padding: '9px 0', borderRadius: 10,
                         fontWeight: 700, fontSize: '0.78rem',
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
-                        fontFamily: 'Amiri, serif', textDecoration: 'none',
+                        fontFamily: 'Tajawal, sans-serif', textDecoration: 'none',
                         boxShadow: '0 3px 10px rgba(123,25,44,0.2)',
                       }}>
                         {isAr ? 'عرض المنتج' : 'View Product'}

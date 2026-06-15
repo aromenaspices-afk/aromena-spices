@@ -115,7 +115,7 @@ export default function CustomBoxBuilder() {
             <FiPackage size={20} color={GOLD} />
           </div>
           <div>
-            <h3 style={{ color: GOLD, fontFamily: 'Amiri, serif', fontSize: '1.1rem', fontWeight: 700 }}>
+            <h3 style={{ color: GOLD, fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem', fontWeight: 700 }}>
               {isAr ? boxConfig.name_ar : boxConfig.name_en}
             </h3>
             <p style={{ color: 'rgba(244,190,105,0.55)', fontSize: '0.78rem' }}>
@@ -189,7 +189,7 @@ export default function CustomBoxBuilder() {
                       </button>
                     )}
                     {qty > 0 && <span style={{ fontWeight: 700, fontSize: '0.82rem', color: BORDEAUX, minWidth: 16, textAlign: 'center' }}>{qty}</span>}
-                    <button onClick={() => addProduct(p)} disabled={!canAdd && qty === 0} style={{ width: qty > 0 ? 24 : '100%', height: 24, borderRadius: 6, background: !canAdd && qty === 0 ? '#E2C9A8' : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, border: 'none', color: GOLD, cursor: !canAdd && qty === 0 ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, fontSize: '0.7rem', fontWeight: 700, fontFamily: 'Amiri, serif' }}>
+                    <button onClick={() => addProduct(p)} disabled={!canAdd && qty === 0} style={{ width: qty > 0 ? 24 : '100%', height: 24, borderRadius: 6, background: !canAdd && qty === 0 ? '#E2C9A8' : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, border: 'none', color: GOLD, cursor: !canAdd && qty === 0 ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3, fontSize: '0.7rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif' }}>
                       <FiPlus size={11} />
                       {qty === 0 && (isAr ? 'أضف' : 'Add')}
                     </button>
@@ -220,7 +220,7 @@ export default function CustomBoxBuilder() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <p style={{ color: '#9C6B4E', fontSize: '0.85rem' }}>{isAr ? 'سعر الباكج:' : 'Box price:'}</p>
-          <p style={{ color: BORDEAUX, fontWeight: 900, fontSize: '1.2rem', fontFamily: 'Amiri, serif' }}>{formatPrice(computedPrice)}</p>
+          <p style={{ color: BORDEAUX, fontWeight: 900, fontSize: '1.2rem', fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(computedPrice)}</p>
         </div>
 
         <button onClick={handleAddToCart} disabled={!isFull || added} style={{
@@ -229,7 +229,7 @@ export default function CustomBoxBuilder() {
           color: added ? '#fff' : !isFull ? '#9C6B4E' : GOLD,
           fontWeight: 700, fontSize: '0.95rem', border: 'none',
           cursor: isFull && !added ? 'pointer' : 'not-allowed',
-          fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
           boxShadow: isFull && !added ? '0 6px 20px rgba(123,25,44,0.3)' : 'none',
           transition: 'all 0.3s',
         }}>

@@ -17,7 +17,7 @@ const selectStyle = {
   padding: '8px 12px', borderRadius: 8,
   border: `2px solid ${BORDER}`,
   fontSize: '0.85rem', color: TEXT, outline: 'none',
-  background: '#FFFBF5', fontFamily: 'Amiri, serif',
+  background: '#FFFBF5', fontFamily: 'Tajawal, sans-serif',
   cursor: 'pointer', transition: 'border-color 0.15s',
 }
 
@@ -110,7 +110,7 @@ export default function AdminReviews() {
     <div>
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>إدارة التقييمات</h1>
+        <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>إدارة التقييمات</h1>
         <p style={{ color: TEXT2, fontSize: '0.85rem' }}>{allReviews.length} تقييم</p>
       </div>
 

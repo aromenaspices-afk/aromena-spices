@@ -17,7 +17,7 @@ const BORDER   = '#E2C9A8'
 const inputStyle = {
   width: '100%', padding: '10px 12px', borderRadius: 10,
   border: `2px solid ${BORDER}`, fontSize: '0.88rem',
-  color: TEXT, fontFamily: 'Amiri, serif', outline: 'none',
+  color: TEXT, fontFamily: 'Tajawal, sans-serif', outline: 'none',
   background: '#FFFBF5', boxSizing: 'border-box',
 }
 const labelStyle = { color: TEXT, fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: 5 }
@@ -76,10 +76,10 @@ export default function AdminCustomBox() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.3rem', color: TEXT, fontFamily: 'Amiri, serif' }}>الباكج المخصص</h1>
+          <h1 style={{ fontSize: '1.3rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>الباكج المخصص</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>أداة تصميم الباكج الخاصة بالزبون</p>
         </div>
-        <button onClick={handleSave} disabled={saving} style={{ display: 'flex', alignItems: 'center', gap: 6, background: saving ? BG2 : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: saving ? TEXT2 : GOLD, border: 'none', borderRadius: 12, padding: '10px 22px', fontWeight: 700, fontSize: '0.88rem', cursor: saving ? 'not-allowed' : 'pointer', fontFamily: 'Amiri, serif' }}>
+        <button onClick={handleSave} disabled={saving} style={{ display: 'flex', alignItems: 'center', gap: 6, background: saving ? BG2 : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: saving ? TEXT2 : GOLD, border: 'none', borderRadius: 12, padding: '10px 22px', fontWeight: 700, fontSize: '0.88rem', cursor: saving ? 'not-allowed' : 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
           {saving ? <FiRefreshCw size={14} /> : <FiSave size={14} />}
           {saving ? 'جاري الحفظ...' : 'حفظ الإعدادات'}
         </button>
@@ -89,7 +89,7 @@ export default function AdminCustomBox() {
 
         {/* الإعدادات الأساسية */}
         <div style={{ background: CARD, borderRadius: 20, border: `1px solid ${BORDER}`, padding: '22px 20px' }}>
-          <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1rem', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1rem', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
             <FiPackage size={16} color={BORDEAUX} /> البيانات الأساسية
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -131,14 +131,14 @@ export default function AdminCustomBox() {
 
         {/* صورة الباكج */}
         <div style={{ background: CARD, borderRadius: 20, border: `1px solid ${BORDER}`, padding: '22px 20px' }}>
-          <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1rem', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1rem', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
             <FiUpload size={16} color={BORDEAUX} /> صورة الباكج
           </h2>
 
           {form.image ? (
             <div style={{ position: 'relative', marginBottom: 14 }}>
               <img src={form.image} alt="custom box" style={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 12, border: `2px solid ${BORDER}` }} />
-              <button onClick={() => setForm(f => ({ ...f, image: null }))} style={{ position: 'absolute', top: 8, right: 8, background: '#DC2626', border: 'none', borderRadius: 6, color: '#fff', padding: '4px 8px', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'Amiri, serif' }}>حذف</button>
+              <button onClick={() => setForm(f => ({ ...f, image: null }))} style={{ position: 'absolute', top: 8, right: 8, background: '#DC2626', border: 'none', borderRadius: 6, color: '#fff', padding: '4px 8px', cursor: 'pointer', fontSize: '0.75rem', fontFamily: 'Tajawal, sans-serif' }}>حذف</button>
             </div>
           ) : (
             <div style={{ height: 140, background: BG, borderRadius: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: 14, border: `2px dashed ${BORDER}` }}>
@@ -147,7 +147,7 @@ export default function AdminCustomBox() {
             </div>
           )}
 
-          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: BG, border: `2px dashed ${BORDER}`, borderRadius: 12, padding: '12px 0', cursor: 'pointer', color: BORDEAUX, fontWeight: 600, fontSize: '0.85rem', fontFamily: 'Amiri, serif' }}>
+          <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: BG, border: `2px dashed ${BORDER}`, borderRadius: 12, padding: '12px 0', cursor: 'pointer', color: BORDEAUX, fontWeight: 600, fontSize: '0.85rem', fontFamily: 'Tajawal, sans-serif' }}>
             <FiUpload size={15} />
             {uploading ? 'جاري الرفع...' : 'رفع صورة الباكج'}
             <input type="file" accept="image/*" style={{ display: 'none' }} onChange={e => handleImage(e.target.files[0])} disabled={uploading} />
@@ -166,7 +166,7 @@ export default function AdminCustomBox() {
 
       {/* معاينة */}
       <div style={{ background: CARD, borderRadius: 20, border: `1px solid ${BORDER}`, padding: '22px 20px', marginTop: 20 }}>
-        <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1rem', marginBottom: 16 }}>معاينة كيف يظهر في السلة</h2>
+        <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1rem', marginBottom: 16 }}>معاينة كيف يظهر في السلة</h2>
         <div style={{ background: '#FFFBF5', borderRadius: 14, padding: '14px 16px', border: `1px solid ${BORDER}`, display: 'flex', alignItems: 'center', gap: 12, maxWidth: 480 }}>
           <div style={{ width: 52, height: 52, borderRadius: 10, background: form.image ? 'transparent' : `linear-gradient(135deg, ${BORDEAUX}18, ${BORDEAUX}35)`, flexShrink: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {form.image ? <img src={form.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <FiPackage size={22} color={TEXT2} />}

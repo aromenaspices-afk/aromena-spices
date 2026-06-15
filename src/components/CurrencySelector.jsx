@@ -35,7 +35,7 @@ export default function CurrencySelector({ size = 'normal' }) {
                   width: '100%', padding: '10px 14px', border: 'none',
                   background: code === currency ? '#fdf0f2' : '#fff', cursor: 'pointer',
                   display: 'flex', alignItems: 'center', gap: 10, textAlign: 'start',
-                  borderBottom: '1px solid #F5E6D3', fontFamily: 'Amiri, serif',
+                  borderBottom: '1px solid #F5E6D3', fontFamily: 'Tajawal, sans-serif',
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = '#fdf0f2'}
                 onMouseLeave={e => e.currentTarget.style.background = code === currency ? '#fdf0f2' : '#fff'}>

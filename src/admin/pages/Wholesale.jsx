@@ -109,7 +109,7 @@ export default function AdminWholesale() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>طلبات الجملة</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>طلبات الجملة</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>{requests.length} طلب</p>
         </div>
       </div>
@@ -142,7 +142,7 @@ export default function AdminWholesale() {
           borderColor: filterStatus === 'الكل' ? BORDEAUX : BORDER,
           background: filterStatus === 'الكل' ? `linear-gradient(to left, ${BORDEAUX}, #a82040)` : CARD,
           color: filterStatus === 'الكل' ? GOLD : '#6B3A2A',
-          fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Amiri, serif',
+          fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
         }}>الكل ({requests.length})</button>
 
         {statuses.map(s => {
@@ -154,7 +154,7 @@ export default function AdminWholesale() {
               borderColor: isActive ? st.color : BORDER,
               background: isActive ? st.bg : CARD,
               color: isActive ? st.color : '#6B3A2A',
-              fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Amiri, serif',
+              fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
             }}>{s} ({counts[s] || 0})</button>
           )
         })}
@@ -291,7 +291,7 @@ export default function AdminWholesale() {
             {/* Modal Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
               <div>
-                <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1.1rem' }}>
+                <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem' }}>
                   {viewing.firstName} {viewing.lastName}
                 </h2>
                 <p style={{ color: TEXT2, fontSize: '0.75rem', marginTop: 2 }}>
@@ -375,7 +375,7 @@ export default function AdminWholesale() {
                       color: isActive ? st.color : '#6B3A2A',
                       fontWeight: isActive ? 700 : 400,
                       fontSize: '0.78rem', cursor: 'pointer',
-                      fontFamily: 'Amiri, serif', transition: 'all 0.15s',
+                      fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s',
                     }}>
                       {isActive && '✓ '}{s}
                     </button>
@@ -403,7 +403,7 @@ export default function AdminWholesale() {
                   width: '100%', padding: '11px 14px',
                   borderRadius: 12, border: `2px solid ${BORDER}`,
                   fontSize: '0.88rem', color: TEXT,
-                  fontFamily: 'Amiri, serif', outline: 'none',
+                  fontFamily: 'Tajawal, sans-serif', outline: 'none',
                   background: '#FFFBF5', resize: 'vertical',
                   boxSizing: 'border-box', marginBottom: 10,
                   transition: 'border-color 0.15s',
@@ -424,7 +424,7 @@ export default function AdminWholesale() {
                 border: 'none',
                 cursor: saving || !reply.trim() ? 'not-allowed' : 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                fontFamily: 'Amiri, serif', transition: 'background 0.3s',
+                fontFamily: 'Tajawal, sans-serif', transition: 'background 0.3s',
               }}>
                 {replySent
                   ? <><FiCheck size={15} /> تم الحفظ!</>
@@ -442,7 +442,7 @@ export default function AdminWholesale() {
               width: '100%', padding: '11px',
               borderRadius: 12, border: `2px solid ${BORDER}`,
               background: CARD, color: '#6B3A2A',
-              cursor: 'pointer', fontFamily: 'Amiri, serif', fontWeight: 600,
+              cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontWeight: 600,
             }}>
               إغلاق
             </button>

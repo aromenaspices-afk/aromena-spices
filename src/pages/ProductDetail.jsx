@@ -302,7 +302,7 @@ export default function ProductDetail() {
           {/* Info Panel */}
           <div>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10, marginBottom: 10 }}>
-              <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', lineHeight: 1.3, flex: 1 }}>{name}</h1>
+              <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', lineHeight: 1.3, flex: 1 }}>{name}</h1>
               <ShareButton url={window.location.href} title={isAr ? `${name} — أرومينا للبهارات 🌶️` : `${name} — Aromena Spices 🌶️`} isAr={isAr} />
             </div>
 
@@ -323,7 +323,7 @@ export default function ProductDetail() {
                     const sd = calcDiscount(s.price, product.discount, product.discountExpiry)
                     const isSelected = selectedSize === s.label
                     return (
-                      <button key={s.label} onClick={() => setSelectedSize(s.label)} style={{ padding: '10px 18px', borderRadius: 12, border: '2px solid', borderColor: isSelected ? '#7b192c' : '#E2C9A8', background: isSelected ? 'linear-gradient(135deg, #7b192c, #a82040)' : '#fff', color: isSelected ? '#f4be69' : '#6B3A2A', fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Amiri, serif', transition: 'all 0.2s', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, minWidth: 68, boxShadow: isSelected ? '0 4px 12px rgba(123,25,44,0.25)' : 'none' }}>
+                      <button key={s.label} onClick={() => setSelectedSize(s.label)} style={{ padding: '10px 18px', borderRadius: 12, border: '2px solid', borderColor: isSelected ? '#7b192c' : '#E2C9A8', background: isSelected ? 'linear-gradient(135deg, #7b192c, #a82040)' : '#fff', color: isSelected ? '#f4be69' : '#6B3A2A', fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', transition: 'all 0.2s', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, minWidth: 68, boxShadow: isSelected ? '0 4px 12px rgba(123,25,44,0.25)' : 'none' }}>
                         <span>{s.label}</span>
                         {sd.has ? (
                           <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
@@ -346,13 +346,13 @@ export default function ProductDetail() {
                 {disc.has ? (
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
                     <span style={{ color: '#9C6B4E', textDecoration: 'line-through', fontSize: '1.1rem', fontWeight: 600 }}>{formatPrice(price)}</span>
-                    <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '1.8rem', fontFamily: 'Amiri, serif' }}>{formatPrice(disc.final)}</span>
+                    <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '1.8rem', fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(disc.final)}</span>
                     <span style={{ background: '#DC2626', color: '#fff', fontSize: '0.78rem', fontWeight: 700, padding: '4px 12px', borderRadius: 50 }}>
                       {isAr ? `خصم ${disc.pct}%` : `${disc.pct}% OFF`}
                     </span>
                   </div>
                 ) : (
-                  <p style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(price)}</p>
+                  <p style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(price)}</p>
                 )}
               </div>
             )}
@@ -367,7 +367,7 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            <button onClick={handleAdd} disabled={!selectedSize} style={{ width: '100%', background: added ? '#16A34A' : !selectedSize ? '#E2C9A8' : 'linear-gradient(135deg, #7b192c, #a82040)', color: added ? '#fff' : !selectedSize ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: selectedSize ? 'pointer' : 'not-allowed', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9, fontFamily: 'Amiri, serif', boxShadow: selectedSize && !added ? '0 6px 20px rgba(123,25,44,0.3)' : 'none', marginBottom: 16 }}>
+            <button onClick={handleAdd} disabled={!selectedSize} style={{ width: '100%', background: added ? '#16A34A' : !selectedSize ? '#E2C9A8' : 'linear-gradient(135deg, #7b192c, #a82040)', color: added ? '#fff' : !selectedSize ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: selectedSize ? 'pointer' : 'not-allowed', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9, fontFamily: 'Tajawal, sans-serif', boxShadow: selectedSize && !added ? '0 6px 20px rgba(123,25,44,0.3)' : 'none', marginBottom: 16 }}>
               {added ? t('products.added') : <><FiShoppingCart size={18} /> {t('products.add_cart')}</>}
             </button>
 
@@ -383,7 +383,7 @@ export default function ProductDetail() {
         <div style={{ marginBottom: 40 }}>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 18 }}>
             {tabs.map(tab => (
-              <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ padding: '9px 16px', borderRadius: 10, border: '2px solid', borderColor: activeTab === tab.id ? '#7b192c' : '#E2C9A8', background: activeTab === tab.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: activeTab === tab.id ? '#f4be69' : '#6B3A2A', fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Amiri, serif', transition: 'all 0.2s' }}>
+              <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ padding: '9px 16px', borderRadius: 10, border: '2px solid', borderColor: activeTab === tab.id ? '#7b192c' : '#E2C9A8', background: activeTab === tab.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: activeTab === tab.id ? '#f4be69' : '#6B3A2A', fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', transition: 'all 0.2s' }}>
                 {tab.label}
               </button>
             ))}
@@ -425,7 +425,7 @@ export default function ProductDetail() {
 
                 {user ? (
                   <div style={{ background: '#fdf0f2', borderRadius: 16, padding: '18px 20px', marginBottom: 24, border: '1px solid #F0D4D8' }}>
-                    <h4 style={{ color: '#3E1C00', fontWeight: 700, marginBottom: 14, fontSize: '0.95rem', fontFamily: 'Amiri, serif' }}>{isAr ? 'أضف تقييمك' : 'Add Your Review'}</h4>
+                    <h4 style={{ color: '#3E1C00', fontWeight: 700, marginBottom: 14, fontSize: '0.95rem', fontFamily: 'Tajawal, sans-serif' }}>{isAr ? 'أضف تقييمك' : 'Add Your Review'}</h4>
                     <div style={{ marginBottom: 12 }}>
                       <p style={{ color: '#6B3A2A', fontSize: '0.82rem', marginBottom: 7, fontWeight: 600 }}>{isAr ? 'تقييمك:' : 'Your Rating:'}</p>
                       <div style={{ display: 'flex', gap: 6 }}>
@@ -438,9 +438,9 @@ export default function ProductDetail() {
                       </div>
                     </div>
                     <textarea value={reviewForm.comment} onChange={e => setReviewForm(f => ({ ...f, comment: e.target.value }))} placeholder={isAr ? 'شاركنا تجربتك...' : 'Share your experience...'} rows={3}
-                      style={{ width: '100%', padding: '11px 14px', borderRadius: 12, border: '2px solid #E2C9A8', fontSize: '0.88rem', color: '#3E1C00', fontFamily: 'Amiri, serif', outline: 'none', background: '#fff', boxSizing: 'border-box', resize: 'vertical', marginBottom: 12 }}
+                      style={{ width: '100%', padding: '11px 14px', borderRadius: 12, border: '2px solid #E2C9A8', fontSize: '0.88rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#fff', boxSizing: 'border-box', resize: 'vertical', marginBottom: 12 }}
                     />
-                    <button onClick={submitReview} disabled={submittingReview || !reviewForm.comment.trim()} style={{ background: submittingReview || !reviewForm.comment.trim() ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: submittingReview || !reviewForm.comment.trim() ? '#9C6B4E' : '#f4be69', padding: '10px 24px', borderRadius: 50, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: submittingReview || !reviewForm.comment.trim() ? 'not-allowed' : 'pointer', fontFamily: 'Amiri, serif' }}>
+                    <button onClick={submitReview} disabled={submittingReview || !reviewForm.comment.trim()} style={{ background: submittingReview || !reviewForm.comment.trim() ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: submittingReview || !reviewForm.comment.trim() ? '#9C6B4E' : '#f4be69', padding: '10px 24px', borderRadius: 50, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: submittingReview || !reviewForm.comment.trim() ? 'not-allowed' : 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
                       {submittingReview ? (isAr ? 'جاري الإرسال...' : 'Submitting...') : (isAr ? 'إرسال التقييم' : 'Submit Review')}
                     </button>
                   </div>
@@ -490,7 +490,7 @@ export default function ProductDetail() {
         {/* Related Products */}
         {related.length > 0 && (
           <div>
-            <h2 style={{ fontSize: '1.3rem', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 18 }}>{isAr ? 'منتجات مشابهة' : 'Related Products'}</h2>
+            <h2 style={{ fontSize: '1.3rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 18 }}>{isAr ? 'منتجات مشابهة' : 'Related Products'}</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(145px, 1fr))', gap: 14 }}>
               {related.map(p => {
                 const minPrice = p.sizes?.length ? Math.min(...p.sizes.map(s => s.price || 0)) : p.prices ? Math.min(...Object.values(p.prices).filter(v => v > 0)) : 0

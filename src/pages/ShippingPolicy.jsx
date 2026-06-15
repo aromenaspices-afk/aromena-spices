@@ -82,7 +82,7 @@ export default function ShippingPolicy() {
   return (
     <div style={{ background: '#F5E6D3', minHeight: '100vh' }}>
       <div style={{ background: 'linear-gradient(135deg, #7b192c, #a82040)', padding: '40px 20px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', color: '#f4be69', fontFamily: 'Amiri, serif', marginBottom: 20 }}>
+        <h1 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', color: '#f4be69', fontFamily: 'Tajawal, sans-serif', marginBottom: 20 }}>
           {c.title}
         </h1>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap' }}>
@@ -105,7 +105,7 @@ export default function ShippingPolicy() {
           <p style={{ color: '#9C6B4E', fontSize: '0.82rem', marginBottom: 28 }}>{c.updated}</p>
           {c.sections.map((s, i) => (
             <div key={i} style={{ marginBottom: 24 }}>
-              <h2 style={{ fontFamily: 'Amiri, serif', fontSize: '1.1rem', marginBottom: 10, color: '#7b192c' }}>{s.title}</h2>
+              <h2 style={{ fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem', marginBottom: 10, color: '#7b192c' }}>{s.title}</h2>
               <p style={{ color: '#3E1C00', lineHeight: 1.9, fontSize: '0.92rem', whiteSpace: 'pre-line',
                 ...(i === 6 ? { background: '#FEF3C7', borderRadius: 10, padding: '12px 16px', border: '1px solid #FDE68A', color: '#92400E' } : {})
               }}>

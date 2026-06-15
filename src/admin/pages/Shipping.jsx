@@ -31,7 +31,7 @@ const ZONE_NAMES = {
 const inputStyle = {
   width: '100%', padding: '9px 12px', borderRadius: 8,
   border: `2px solid ${BORDER}`, fontSize: '0.85rem', color: TEXT,
-  fontFamily: 'Amiri, serif', outline: 'none', background: '#FFFBF5',
+  fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#FFFBF5',
   boxSizing: 'border-box',
 }
 
@@ -111,7 +111,7 @@ export default function AdminShipping() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>إعدادات الشحن</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>إعدادات الشحن</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>YK International 2026 + Yurtiçi Kargo</p>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
@@ -121,7 +121,7 @@ export default function AdminShipping() {
             background: uploading ? BG2 : '#EFF6FF',
             border: '2px solid #BFDBFE', borderRadius: 10,
             padding: '8px 16px', cursor: uploading ? 'not-allowed' : 'pointer',
-            color: '#2563EB', fontWeight: 700, fontSize: '0.84rem', fontFamily: 'Amiri, serif',
+            color: '#2563EB', fontWeight: 700, fontSize: '0.84rem', fontFamily: 'Tajawal, sans-serif',
           }}>
             <FiUpload size={14} />
             {uploading ? 'جاري الاستيراد...' : 'رفع Excel جديد'}
@@ -135,7 +135,7 @@ export default function AdminShipping() {
             color: hasChanges ? GOLD : TEXT2,
             border: 'none', borderRadius: 10, padding: '8px 20px',
             fontWeight: 700, fontSize: '0.88rem', cursor: hasChanges ? 'pointer' : 'not-allowed',
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
           }}>
             {saving ? <FiRefreshCw size={14} /> : <FiSave size={14} />}
             {saving ? 'جاري الحفظ...' : 'حفظ التغييرات'}
@@ -165,7 +165,7 @@ export default function AdminShipping() {
             borderColor: activeTab === tab.id ? BORDEAUX : BORDER,
             background: activeTab === tab.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff',
             color: activeTab === tab.id ? GOLD : TEXT2,
-            fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Amiri, serif',
+            fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
           }}>{tab.label}</button>
         ))}
       </div>
@@ -224,7 +224,7 @@ export default function AdminShipping() {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
             <p style={{ color: TEXT, fontWeight: 700 }}>Yurtiçi Kargo — أسعار الشحن الداخلي</p>
-            <button onClick={() => setEditingTurkey(true)} style={{ background: BG2, border: 'none', borderRadius: 8, padding: '7px 14px', color: BORDEAUX, cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', gap: 5 }}>
+            <button onClick={() => setEditingTurkey(true)} style={{ background: BG2, border: 'none', borderRadius: 8, padding: '7px 14px', color: BORDEAUX, cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', gap: 5 }}>
               <FiEdit2 size={13} /> تعديل الأسعار
             </button>
           </div>
@@ -259,7 +259,7 @@ export default function AdminShipping() {
             <div key={zone} style={{ background: CARD, borderRadius: 16, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
               <div style={{ padding: '12px 18px', background: BG, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <p style={{ color: BORDEAUX, fontWeight: 700, fontSize: '0.88rem' }}>{ZONE_NAMES[zone] || `Zone ${zone}`}</p>
-                <button onClick={() => setEditingZone({ zone: +zone, table: table.map(r => ({ ...r })) })} style={{ background: BG2, border: 'none', borderRadius: 7, padding: '5px 12px', color: BORDEAUX, cursor: 'pointer', fontWeight: 600, fontSize: '0.78rem', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', gap: 4 }}>
+                <button onClick={() => setEditingZone({ zone: +zone, table: table.map(r => ({ ...r })) })} style={{ background: BG2, border: 'none', borderRadius: 7, padding: '5px 12px', color: BORDEAUX, cursor: 'pointer', fontWeight: 600, fontSize: '0.78rem', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', gap: 4 }}>
                   <FiEdit2 size={12} /> تعديل
                 </button>
               </div>
@@ -286,7 +286,7 @@ export default function AdminShipping() {
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 500, padding: 20 }}>
           <div style={{ background: CARD, borderRadius: 22, padding: '28px 24px', width: '100%', maxWidth: 420, boxShadow: '0 24px 80px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-              <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1.1rem' }}>{editingCountry.flag} {editingCountry.country_ar}</h2>
+              <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem' }}>{editingCountry.flag} {editingCountry.country_ar}</h2>
               <button onClick={() => setEditingCountry(null)} style={{ background: BG, border: 'none', borderRadius: 8, padding: 7, cursor: 'pointer' }}><FiX size={15} color={TEXT2} /></button>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -306,10 +306,10 @@ export default function AdminShipping() {
                   setHasChanges(true)
                   setEditingCountry(null)
                   toast.success('تم التعديل — اضغط حفظ التغييرات')
-                }} style={{ flex: 1, background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '11px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                }} style={{ flex: 1, background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '11px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <FiCheck size={14} /> تطبيق
                 </button>
-                <button onClick={() => setEditingCountry(null)} style={{ padding: '11px 18px', borderRadius: 10, border: `2px solid ${BORDER}`, background: CARD, color: TEXT2, cursor: 'pointer', fontFamily: 'Amiri, serif' }}>إلغاء</button>
+                <button onClick={() => setEditingCountry(null)} style={{ padding: '11px 18px', borderRadius: 10, border: `2px solid ${BORDER}`, background: CARD, color: TEXT2, cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>إلغاء</button>
               </div>
             </div>
           </div>
@@ -321,7 +321,7 @@ export default function AdminShipping() {
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 500, padding: 20 }}>
           <div style={{ background: CARD, borderRadius: 22, padding: '28px 24px', width: '100%', maxWidth: 460, maxHeight: '88vh', overflowY: 'auto', boxShadow: '0 24px 80px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
-              <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1.1rem' }}>🇹🇷 Yurtiçi Kargo — تعديل الأسعار</h2>
+              <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem' }}>🇹🇷 Yurtiçi Kargo — تعديل الأسعار</h2>
               <button onClick={() => setEditingTurkey(false)} style={{ background: BG, border: 'none', borderRadius: 8, padding: 7, cursor: 'pointer' }}><FiX size={15} color={TEXT2} /></button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, marginBottom: 8 }}>
@@ -343,10 +343,10 @@ export default function AdminShipping() {
                 </div>
               ))}
             </div>
-            <button onClick={() => setTurkey([...turkey, { maxGrams: 0, price: 0 }])} style={{ width: '100%', background: BG, border: `2px dashed ${BORDER}`, borderRadius: 10, padding: '9px 0', color: BORDEAUX, cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, marginBottom: 16 }}>
+            <button onClick={() => setTurkey([...turkey, { maxGrams: 0, price: 0 }])} style={{ width: '100%', background: BG, border: `2px dashed ${BORDER}`, borderRadius: 10, padding: '9px 0', color: BORDEAUX, cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, marginBottom: 16 }}>
               <FiPlus size={14} /> إضافة شريحة
             </button>
-            <button onClick={() => { setHasChanges(true); setEditingTurkey(false); toast.success('تم التعديل — اضغط حفظ التغييرات') }} style={{ width: '100%', background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '12px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <button onClick={() => { setHasChanges(true); setEditingTurkey(false); toast.success('تم التعديل — اضغط حفظ التغييرات') }} style={{ width: '100%', background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '12px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
               <FiCheck size={14} /> تطبيق التغييرات
             </button>
           </div>
@@ -358,7 +358,7 @@ export default function AdminShipping() {
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 500, padding: 20 }}>
           <div style={{ background: CARD, borderRadius: 22, padding: '28px 24px', width: '100%', maxWidth: 500, maxHeight: '88vh', overflowY: 'auto', boxShadow: '0 24px 80px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
-              <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1.05rem' }}>{ZONE_NAMES[editingZone.zone]}</h2>
+              <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1.05rem' }}>{ZONE_NAMES[editingZone.zone]}</h2>
               <button onClick={() => setEditingZone(null)} style={{ background: BG, border: 'none', borderRadius: 8, padding: 7, cursor: 'pointer' }}><FiX size={15} color={TEXT2} /></button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 6, marginBottom: 8 }}>
@@ -381,14 +381,14 @@ export default function AdminShipping() {
                 </div>
               ))}
             </div>
-            <button onClick={() => setEditingZone({ ...editingZone, table: [...editingZone.table, { w: 0, p: 0 }] })} style={{ width: '100%', background: BG, border: `2px dashed ${BORDER}`, borderRadius: 10, padding: '8px 0', color: BORDEAUX, cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, marginBottom: 14 }}>
+            <button onClick={() => setEditingZone({ ...editingZone, table: [...editingZone.table, { w: 0, p: 0 }] })} style={{ width: '100%', background: BG, border: `2px dashed ${BORDER}`, borderRadius: 10, padding: '8px 0', color: BORDEAUX, cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, marginBottom: 14 }}>
               <FiPlus size={13} /> إضافة صف
             </button>
             <button onClick={() => {
               const newZones = { ...zones, [editingZone.zone]: editingZone.table }
               setZones(newZones); setHasChanges(true); setEditingZone(null)
               toast.success('تم التعديل — اضغط حفظ التغييرات')
-            }} style={{ width: '100%', background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '12px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            }} style={{ width: '100%', background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '12px 0', borderRadius: 10, fontWeight: 700, border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
               <FiCheck size={14} /> تطبيق التغييرات
             </button>
           </div>

@@ -19,7 +19,7 @@ const inputStyle = {
   width: '100%', padding: '10px 12px',
   borderRadius: 10, border: `2px solid ${BORDER}`,
   fontSize: '0.88rem', color: TEXT,
-  fontFamily: 'Amiri, serif', outline: 'none',
+  fontFamily: 'Tajawal, sans-serif', outline: 'none',
   background: '#FFFBF5', boxSizing: 'border-box',
   transition: 'border-color 0.15s',
 }
@@ -131,10 +131,10 @@ export default function AdminPackages() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>الباقات</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>الباقات</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>{packages.length} باقات</p>
         </div>
-        <button onClick={openAdd} style={{ background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '10px 20px', borderRadius: 50, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Amiri, serif', boxShadow: '0 4px 14px rgba(123,25,44,0.25)' }}>
+        <button onClick={openAdd} style={{ background: `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: GOLD, padding: '10px 20px', borderRadius: 50, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Tajawal, sans-serif', boxShadow: '0 4px 14px rgba(123,25,44,0.25)' }}>
           <FiPlus size={16} /> إضافة باقة
         </button>
       </div>
@@ -180,7 +180,7 @@ export default function AdminPackages() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button onClick={() => openEdit(pkg)} style={{ flex: 1, background: 'rgba(123,25,44,0.07)', border: '1px solid rgba(123,25,44,0.15)', borderRadius: 10, padding: '8px 0', color: BORDEAUX, cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif' }}>
+                  <button onClick={() => openEdit(pkg)} style={{ flex: 1, background: 'rgba(123,25,44,0.07)', border: '1px solid rgba(123,25,44,0.15)', borderRadius: 10, padding: '8px 0', color: BORDEAUX, cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif' }}>
                     <FiEdit2 size={13} /> تعديل
                   </button>
                   <button onClick={() => handleDelete(pkg.id)} style={{ width: 36, height: 36, borderRadius: 10, background: '#FEE2E2', border: 'none', color: '#DC2626', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -205,7 +205,7 @@ export default function AdminPackages() {
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 500, padding: 20 }}>
           <div style={{ background: CARD, borderRadius: 22, padding: '26px 22px', width: '100%', maxWidth: 580, maxHeight: '92vh', overflowY: 'auto', boxShadow: '0 24px 80px rgba(0,0,0,0.2)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-              <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1.1rem' }}>{showAdd ? 'إضافة باقة جديدة' : 'تعديل الباقة'}</h2>
+              <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem' }}>{showAdd ? 'إضافة باقة جديدة' : 'تعديل الباقة'}</h2>
               <button onClick={() => { setEditing(null); setShowAdd(false) }} style={{ background: BG, border: 'none', borderRadius: 8, padding: 8, cursor: 'pointer', color: TEXT2 }}><FiX size={16} /></button>
             </div>
 
@@ -268,7 +268,7 @@ export default function AdminPackages() {
                   {products.map(p => {
                     const isSelected = form.items?.includes(p.slug)
                     return (
-                      <button key={p.slug || p.id} onClick={() => toggleItem(p.slug)} style={{ padding: '8px 10px', borderRadius: 10, border: '2px solid', borderColor: isSelected ? BORDEAUX : BORDER, background: isSelected ? 'rgba(123,25,44,0.07)' : CARD, color: isSelected ? BORDEAUX : '#6B3A2A', fontWeight: isSelected ? 700 : 400, fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'Amiri, serif', transition: 'all 0.15s' }}>
+                      <button key={p.slug || p.id} onClick={() => toggleItem(p.slug)} style={{ padding: '8px 10px', borderRadius: 10, border: '2px solid', borderColor: isSelected ? BORDEAUX : BORDER, background: isSelected ? 'rgba(123,25,44,0.07)' : CARD, color: isSelected ? BORDEAUX : '#6B3A2A', fontWeight: isSelected ? 700 : 400, fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s' }}>
                         {isSelected && <FiCheck size={11} color={BORDEAUX} />}
                         {(p.images?.[0] || p.image) && !isSelected && <img src={p.images?.[0] || p.image} alt="" style={{ width: 18, height: 18, borderRadius: 4, objectFit: 'cover', flexShrink: 0 }} />}
                         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name_ar}</span>
@@ -298,7 +298,7 @@ export default function AdminPackages() {
               <div style={{ background: '#FFFBF0', borderRadius: 14, padding: '16px', border: '2px solid #FDE68A' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
                   <FiTag size={16} color="#D97706" />
-                  <h3 style={{ color: '#92400E', fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Amiri, serif' }}>العروض والخصومات</h3>
+                  <h3 style={{ color: '#92400E', fontWeight: 700, fontSize: '0.92rem', fontFamily: 'Tajawal, sans-serif' }}>العروض والخصومات</h3>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                   <div>
@@ -313,17 +313,17 @@ export default function AdminPackages() {
                   </div>
                 </div>
                 {form.discount > 0 && (
-                  <button onClick={() => setForm(f => ({ ...f, discount: 0, discountExpiry: '' }))} style={{ marginTop: 10, background: '#FEE2E2', border: 'none', borderRadius: 8, padding: '6px 14px', color: '#DC2626', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'Amiri, serif' }}>
+                  <button onClick={() => setForm(f => ({ ...f, discount: 0, discountExpiry: '' }))} style={{ marginTop: 10, background: '#FEE2E2', border: 'none', borderRadius: 8, padding: '6px 14px', color: '#DC2626', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'Tajawal, sans-serif' }}>
                     إلغاء العرض
                   </button>
                 )}
               </div>
 
               <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-                <button onClick={handleSave} disabled={uploadingIdx !== null || saving} style={{ flex: 1, background: uploadingIdx !== null || saving ? BG2 : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: uploadingIdx !== null || saving ? TEXT2 : GOLD, padding: '12px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: uploadingIdx !== null || saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontFamily: 'Amiri, serif' }}>
+                <button onClick={handleSave} disabled={uploadingIdx !== null || saving} style={{ flex: 1, background: uploadingIdx !== null || saving ? BG2 : `linear-gradient(to left, ${BORDEAUX}, #a82040)`, color: uploadingIdx !== null || saving ? TEXT2 : GOLD, padding: '12px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: uploadingIdx !== null || saving ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontFamily: 'Tajawal, sans-serif' }}>
                   <FiCheck size={15} />{saving ? 'جاري الحفظ...' : showAdd ? 'إضافة الباقة' : 'حفظ التعديلات'}
                 </button>
-                <button onClick={() => { setEditing(null); setShowAdd(false) }} style={{ padding: '12px 18px', borderRadius: 12, border: `2px solid ${BORDER}`, background: CARD, color: TEXT2, cursor: 'pointer', fontFamily: 'Amiri, serif', fontSize: '0.88rem' }}>إلغاء</button>
+                <button onClick={() => { setEditing(null); setShowAdd(false) }} style={{ padding: '12px 18px', borderRadius: 12, border: `2px solid ${BORDER}`, background: CARD, color: TEXT2, cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontSize: '0.88rem' }}>إلغاء</button>
               </div>
             </div>
           </div>

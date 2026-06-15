@@ -361,7 +361,7 @@ export default function Newsletter() {
 
   const inputStyle = {
     padding: '9px 12px', borderRadius: 10, border: `2px solid ${BORDER}`,
-    fontSize: '0.85rem', color: TEXT, fontFamily: 'Amiri, serif',
+    fontSize: '0.85rem', color: TEXT, fontFamily: 'Tajawal, sans-serif',
     outline: 'none', background: '#FFFBF5', transition: 'border-color 0.15s',
   }
 
@@ -374,7 +374,7 @@ export default function Newsletter() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>النيوز ليتر</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>النيوز ليتر</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>{subscribers.length} مشترك</p>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
@@ -383,7 +383,7 @@ export default function Newsletter() {
             borderColor: tab === 'list' ? BORDEAUX : BORDER,
             background: tab === 'list' ? `linear-gradient(to left,${BORDEAUX},#a82040)` : CARD,
             color: tab === 'list' ? GOLD : '#6B3A2A',
-            fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Amiri, serif',
+            fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
           }}>
             <FiUsers size={14} style={{ marginLeft: 5 }} /> المشتركون
           </button>
@@ -392,7 +392,7 @@ export default function Newsletter() {
             borderColor: tab === 'compose' ? BORDEAUX : BORDER,
             background: tab === 'compose' ? `linear-gradient(to left,${BORDEAUX},#a82040)` : CARD,
             color: tab === 'compose' ? GOLD : '#6B3A2A',
-            fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Amiri, serif',
+            fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
           }}>
             <FiMail size={14} style={{ marginLeft: 5 }} /> إنشاء حملة
           </button>
@@ -401,7 +401,7 @@ export default function Newsletter() {
             borderColor: tab === 'custom' ? BORDEAUX : BORDER,
             background: tab === 'custom' ? `linear-gradient(to left,${BORDEAUX},#a82040)` : CARD,
             color: tab === 'custom' ? GOLD : '#6B3A2A',
-            fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Amiri, serif',
+            fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
           }}>
             <FiCode size={14} style={{ marginLeft: 5 }} /> HTML مخصص
           </button>
@@ -442,7 +442,7 @@ export default function Newsletter() {
               <button onClick={addManual} style={{
                 background: `linear-gradient(to left,${BORDEAUX},#a82040)`, color: GOLD,
                 padding: '9px 16px', borderRadius: 10, border: 'none', cursor: 'pointer',
-                fontWeight: 700, fontSize: '0.85rem', fontFamily: 'Amiri, serif',
+                fontWeight: 700, fontSize: '0.85rem', fontFamily: 'Tajawal, sans-serif',
                 display: 'flex', alignItems: 'center', gap: 5,
               }}>
                 <FiPlus size={14} /> إضافة
@@ -450,7 +450,7 @@ export default function Newsletter() {
               <button onClick={() => csvRef.current?.click()} style={{
                 background: BG, border: `2px solid ${BORDER}`, color: TEXT2,
                 padding: '9px 14px', borderRadius: 10, cursor: 'pointer',
-                fontWeight: 600, fontSize: '0.82rem', fontFamily: 'Amiri, serif',
+                fontWeight: 600, fontSize: '0.82rem', fontFamily: 'Tajawal, sans-serif',
                 display: 'flex', alignItems: 'center', gap: 5,
               }}>
                 <FiUpload size={14} /> استيراد CSV
@@ -493,7 +493,7 @@ export default function Newsletter() {
                 <button onClick={() => setTab('compose')} style={{
                   background: `linear-gradient(to left,${BORDEAUX},#a82040)`, color: GOLD,
                   padding: '6px 14px', borderRadius: 50, border: 'none', cursor: 'pointer',
-                  fontWeight: 700, fontSize: '0.78rem', fontFamily: 'Amiri, serif',
+                  fontWeight: 700, fontSize: '0.78rem', fontFamily: 'Tajawal, sans-serif',
                   display: 'flex', alignItems: 'center', gap: 4,
                 }}>
                   <FiMail size={12} /> إرسال للمحددين ({selected.size})
@@ -593,7 +593,7 @@ export default function Newsletter() {
               <button onClick={() => setTab('list')} style={{
                 width: '100%', marginTop: 8, padding: '8px', borderRadius: 8,
                 border: `2px dashed ${BORDER}`, background: CARD, color: TEXT2,
-                cursor: 'pointer', fontSize: '0.78rem', fontFamily: 'Amiri, serif',
+                cursor: 'pointer', fontSize: '0.78rem', fontFamily: 'Tajawal, sans-serif',
               }}>
                 تغيير المستلمين
               </button>
@@ -655,7 +655,7 @@ export default function Newsletter() {
                   <button onClick={() => setPreview(!preview)} style={{
                     flex: 1, padding: '10px 0', borderRadius: 10,
                     border: `2px solid ${BORDER}`, background: preview ? BG2 : CARD,
-                    color: TEXT2, cursor: 'pointer', fontFamily: 'Amiri, serif',
+                    color: TEXT2, cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
                     fontWeight: 600, fontSize: '0.85rem',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
                   }}>
@@ -666,7 +666,7 @@ export default function Newsletter() {
                     background: sending ? BG2 : `linear-gradient(to left,${BORDEAUX},#a82040)`,
                     color: sending ? TEXT2 : GOLD,
                     cursor: sending ? 'not-allowed' : 'pointer',
-                    fontWeight: 700, fontSize: '0.88rem', fontFamily: 'Amiri, serif',
+                    fontWeight: 700, fontSize: '0.88rem', fontFamily: 'Tajawal, sans-serif',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                   }}>
                     {sending ? (
@@ -717,7 +717,7 @@ export default function Newsletter() {
           {/* المحرر */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div style={{ background: CARD, borderRadius: 16, border: `1px solid ${BORDER}`, padding: '18px' }}>
-              <h3 style={{ color: TEXT, fontWeight: 700, fontSize: '0.92rem', marginBottom: 14, fontFamily: 'Amiri, serif' }}>
+              <h3 style={{ color: TEXT, fontWeight: 700, fontSize: '0.92rem', marginBottom: 14, fontFamily: 'Tajawal, sans-serif' }}>
                 HTML مخصص
               </h3>
 
@@ -782,7 +782,7 @@ export default function Newsletter() {
                     background: customPreview ? BG2 : CARD,
                     color: customPreview ? TEXT : TEXT2,
                     cursor: customHtml.trim() ? 'pointer' : 'not-allowed',
-                    fontFamily: 'Amiri, serif', fontWeight: 600, fontSize: '0.85rem',
+                    fontFamily: 'Tajawal, sans-serif', fontWeight: 600, fontSize: '0.85rem',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5,
                     opacity: customHtml.trim() ? 1 : 0.5,
                   }}
@@ -816,7 +816,7 @@ export default function Newsletter() {
                       ? BG2 : `linear-gradient(to left,${BORDEAUX},#a82040)`,
                     color: sending || !customHtml.trim() || !customSubject.trim() ? TEXT2 : GOLD,
                     cursor: sending || !customHtml.trim() || !customSubject.trim() ? 'not-allowed' : 'pointer',
-                    fontWeight: 700, fontSize: '0.88rem', fontFamily: 'Amiri, serif',
+                    fontWeight: 700, fontSize: '0.88rem', fontFamily: 'Tajawal, sans-serif',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                   }}
                 >
@@ -848,7 +848,7 @@ export default function Newsletter() {
               <button onClick={() => setTab('list')} style={{
                 width: '100%', marginTop: 8, padding: '8px', borderRadius: 8,
                 border: `2px dashed ${BORDER}`, background: CARD, color: TEXT2,
-                cursor: 'pointer', fontSize: '0.78rem', fontFamily: 'Amiri, serif',
+                cursor: 'pointer', fontSize: '0.78rem', fontFamily: 'Tajawal, sans-serif',
               }}>
                 تغيير المستلمين
               </button>

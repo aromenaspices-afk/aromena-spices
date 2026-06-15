@@ -44,7 +44,7 @@ export default function AdminLogin({ onLogin }) {
         {/* لوغو */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <img src={LOGO} alt="Aromena Spices" style={{ height: 50, objectFit: 'contain', marginBottom: 16 }} />
-          <h1 style={{ color: '#3E1C00', fontSize: '1.25rem', fontWeight: 900, marginBottom: 4, fontFamily: 'Amiri, serif' }}>
+          <h1 style={{ color: '#3E1C00', fontSize: '1.25rem', fontWeight: 900, marginBottom: 4, fontFamily: 'Tajawal, sans-serif' }}>
             لوحة التحكم
           </h1>
           <p style={{ color: '#9C6B4E', fontSize: '0.82rem' }}>Admin Panel — Aromena Spices</p>
@@ -67,7 +67,7 @@ export default function AdminLogin({ onLogin }) {
                 width: '100%', padding: '13px 42px',
                 borderRadius: 12, border: `2px solid ${error ? '#DC2626' : '#E2C9A8'}`,
                 fontSize: '1rem', color: '#3E1C00', outline: 'none',
-                background: '#FFFBF5', fontFamily: 'Amiri, serif',
+                background: '#FFFBF5', fontFamily: 'Tajawal, sans-serif',
                 boxSizing: 'border-box', transition: 'border-color 0.2s',
               }}
               onFocus={e => { if (!error) e.target.style.borderColor = BORDEAUX }}
@@ -97,7 +97,7 @@ export default function AdminLogin({ onLogin }) {
           padding: '14px 0', borderRadius: 12,
           fontWeight: 700, fontSize: '1rem', border: 'none',
           cursor: password && !loading ? 'pointer' : 'not-allowed',
-          fontFamily: 'Amiri, serif',
+          fontFamily: 'Tajawal, sans-serif',
           boxShadow: password && !loading ? `0 4px 16px rgba(123,25,44,0.3)` : 'none',
           transition: 'all 0.2s',
         }}>

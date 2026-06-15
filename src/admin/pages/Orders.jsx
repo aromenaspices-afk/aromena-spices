@@ -192,7 +192,7 @@ export default function AdminOrders() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: '#3E1C00', fontFamily: 'Amiri, serif' }}>الطلبات</h1>
+          <h1 style={{ fontSize: '1.4rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif' }}>الطلبات</h1>
           <p style={{ color: '#9C6B4E', fontSize: '0.85rem' }}>{orders.length} طلب</p>
         </div>
         {pendingReceipts > 0 && (
@@ -226,11 +226,11 @@ export default function AdminOrders() {
 
       {/* Filters */}
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
-        <button onClick={() => setFilterStatus('all')} style={{ padding: '6px 14px', borderRadius: 50, border: '2px solid', borderColor: filterStatus === 'all' ? '#7b192c' : '#E2C9A8', background: filterStatus === 'all' ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: filterStatus === 'all' ? '#f4be69' : '#6B3A2A', fontWeight: 600, fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'Amiri, serif' }}>
+        <button onClick={() => setFilterStatus('all')} style={{ padding: '6px 14px', borderRadius: 50, border: '2px solid', borderColor: filterStatus === 'all' ? '#7b192c' : '#E2C9A8', background: filterStatus === 'all' ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: filterStatus === 'all' ? '#f4be69' : '#6B3A2A', fontWeight: 600, fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
           الكل ({orders.length})
         </button>
         {Object.entries(statusConfig).map(([key, val]) => (
-          <button key={key} onClick={() => setFilterStatus(filterStatus === key ? 'all' : key)} style={{ padding: '6px 14px', borderRadius: 50, border: '2px solid', borderColor: filterStatus === key ? val.color : '#E2C9A8', background: filterStatus === key ? val.bg : '#fff', color: filterStatus === key ? val.color : '#6B3A2A', fontWeight: 600, fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'Amiri, serif' }}>
+          <button key={key} onClick={() => setFilterStatus(filterStatus === key ? 'all' : key)} style={{ padding: '6px 14px', borderRadius: 50, border: '2px solid', borderColor: filterStatus === key ? val.color : '#E2C9A8', background: filterStatus === key ? val.bg : '#fff', color: filterStatus === key ? val.color : '#6B3A2A', fontWeight: 600, fontSize: '0.78rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
             {val.label} ({orders.filter(o => o.status === key).length})
           </button>
         ))}
@@ -301,11 +301,11 @@ export default function AdminOrders() {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
               <div>
-                <h2 style={{ color: '#3E1C00', fontFamily: 'Amiri, serif', fontSize: '1.1rem' }}>{viewing.orderNumber}</h2>
+                <h2 style={{ color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', fontSize: '1.1rem' }}>{viewing.orderNumber}</h2>
                 <p style={{ color: '#9C6B4E', fontSize: '0.73rem', marginTop: 2 }}>{formatDate(viewing.createdAt)}</p>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
-                <button onClick={() => deleteOrder(viewing.id)} style={{ background: '#FEE2E2', border: 'none', borderRadius: 8, padding: '7px 10px', cursor: 'pointer', color: '#DC2626', display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.78rem', fontWeight: 600, fontFamily: 'Amiri, serif' }}>
+                <button onClick={() => deleteOrder(viewing.id)} style={{ background: '#FEE2E2', border: 'none', borderRadius: 8, padding: '7px 10px', cursor: 'pointer', color: '#DC2626', display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.78rem', fontWeight: 600, fontFamily: 'Tajawal, sans-serif' }}>
                   <FiTrash2 size={13} /> حذف
                 </button>
                 <button onClick={() => setViewing(null)} style={{ background: '#F5E6D3', border: 'none', borderRadius: 8, padding: 8, cursor: 'pointer', color: '#6B3A2A' }}>
@@ -331,10 +331,10 @@ export default function AdminOrders() {
                 </div>
                 {/* أزرار قبول / رفض الإيصال */}
                 <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
-                  <button onClick={() => { updateOrderField(viewing.id, { status: 'confirmed', 'payment.status': 'paid' }); toast.success('تم قبول الإيصال وتأكيد الطلب! 📧') }} style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '9px 0', borderRadius: 10, border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif' }}>
+                  <button onClick={() => { updateOrderField(viewing.id, { status: 'confirmed', 'payment.status': 'paid' }); toast.success('تم قبول الإيصال وتأكيد الطلب! 📧') }} style={{ flex: 1, background: '#16A34A', color: '#fff', padding: '9px 0', borderRadius: 10, border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif' }}>
                     <FiCheck size={13} /> قبول وتأكيد الطلب
                   </button>
-                  <button onClick={() => updateOrderField(viewing.id, { 'payment.status': 'failed' })} style={{ flex: 1, background: '#FEF2F2', color: '#DC2626', padding: '9px 0', borderRadius: 10, border: '2px solid #FCA5A5', cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif' }}>
+                  <button onClick={() => updateOrderField(viewing.id, { 'payment.status': 'failed' })} style={{ flex: 1, background: '#FEF2F2', color: '#DC2626', padding: '9px 0', borderRadius: 10, border: '2px solid #FCA5A5', cursor: 'pointer', fontWeight: 700, fontSize: '0.82rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif' }}>
                     <FiXCircle size={13} /> رفض الإيصال
                   </button>
                 </div>
@@ -361,17 +361,17 @@ export default function AdminOrders() {
             <div style={{ background: '#FFFBF5', border: '1px solid #E2C9A8', borderRadius: 14, padding: '14px 16px', marginBottom: 14 }}>
               <p style={{ color: '#6B3A2A', fontWeight: 700, fontSize: '0.82rem', marginBottom: 10 }}>الإجراء المطلوب</p>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                <button onClick={() => changeStatus(viewing.id, 'confirmed')} style={{ flex: 1, minWidth: 120, background: 'linear-gradient(to left, #059669, #16A34A)', color: '#fff', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif' }}>
+                <button onClick={() => changeStatus(viewing.id, 'confirmed')} style={{ flex: 1, minWidth: 120, background: 'linear-gradient(to left, #059669, #16A34A)', color: '#fff', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif' }}>
                   <FiCheck size={13} /> تأكيد + مدفوع
                 </button>
-                <button onClick={() => changeStatus(viewing.id, 'processing')} style={{ flex: 1, minWidth: 100, background: '#FEF3C7', color: '#D97706', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.82rem', border: '2px solid #FDE68A', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif' }}>
+                <button onClick={() => changeStatus(viewing.id, 'processing')} style={{ flex: 1, minWidth: 100, background: '#FEF3C7', color: '#D97706', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.82rem', border: '2px solid #FDE68A', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif' }}>
                   <FiRefreshCw size={13} /> جاري التجهيز
                 </button>
-                <button onClick={() => changeStatus(viewing.id, 'cancelled')} style={{ flex: 1, minWidth: 80, background: '#FEF2F2', color: '#DC2626', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.82rem', border: '2px solid #FCA5A5', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif' }}>
+                <button onClick={() => changeStatus(viewing.id, 'cancelled')} style={{ flex: 1, minWidth: 80, background: '#FEF2F2', color: '#DC2626', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.82rem', border: '2px solid #FCA5A5', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif' }}>
                   <FiXCircle size={13} /> إلغاء
                 </button>
               </div>
-              <input value={cancelReason} onChange={e => setCancelReason(e.target.value)} placeholder="سبب الإلغاء (اختياري)" style={{ width: '100%', padding: '8px 12px', borderRadius: 8, border: '1px solid #E2C9A8', fontSize: '0.8rem', outline: 'none', fontFamily: 'Amiri, serif', background: '#FFFBF5', boxSizing: 'border-box', marginTop: 8 }} />
+              <input value={cancelReason} onChange={e => setCancelReason(e.target.value)} placeholder="سبب الإلغاء (اختياري)" style={{ width: '100%', padding: '8px 12px', borderRadius: 8, border: '1px solid #E2C9A8', fontSize: '0.8rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', background: '#FFFBF5', boxSizing: 'border-box', marginTop: 8 }} />
             </div>
 
             {/* جميع الحالات */}
@@ -383,7 +383,7 @@ export default function AdminOrders() {
                 {Object.entries(statusConfig).map(([key, val]) => {
                   const isActive = viewing.status === key
                   return (
-                    <button key={key} onClick={() => changeStatus(viewing.id, key)} style={{ padding: '5px 11px', borderRadius: 50, border: '2px solid', borderColor: isActive ? val.color : '#E2C9A8', background: isActive ? val.bg : '#fff', color: isActive ? val.color : '#6B3A2A', fontWeight: isActive ? 700 : 400, fontSize: '0.74rem', cursor: 'pointer', fontFamily: 'Amiri, serif', transition: 'all 0.15s' }}>
+                    <button key={key} onClick={() => changeStatus(viewing.id, key)} style={{ padding: '5px 11px', borderRadius: 50, border: '2px solid', borderColor: isActive ? val.color : '#E2C9A8', background: isActive ? val.bg : '#fff', color: isActive ? val.color : '#6B3A2A', fontWeight: isActive ? 700 : 400, fontSize: '0.74rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s' }}>
                       {isActive && '✓ '}{val.label}
                     </button>
                   )
@@ -453,11 +453,11 @@ export default function AdminOrders() {
                   </p>
                 ) : (
                   <div style={{ display: 'flex', gap: 8 }}>
-                    <select value={kargoCarrier} onChange={e => setKargoCarrier(e.target.value)} style={{ flex: 1, padding: '9px 12px', borderRadius: 8, border: '2px solid #BBF7D0', fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', background: '#fff', color: '#3E1C00' }}>
+                    <select value={kargoCarrier} onChange={e => setKargoCarrier(e.target.value)} style={{ flex: 1, padding: '9px 12px', borderRadius: 8, border: '2px solid #BBF7D0', fontSize: '0.85rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', background: '#fff', color: '#3E1C00' }}>
                       <option value="">اختر شركة الشحن...</option>
                       {KARGO_CARRIERS.map(k => <option key={k.code} value={k.code}>{k.name}</option>)}
                     </select>
-                    <button onClick={sendToBasitKargo} disabled={kargoSending || !kargoCarrier} style={{ background: kargoSending || !kargoCarrier ? '#BBF7D0' : 'linear-gradient(to left, #15803d, #16A34A)', color: kargoSending || !kargoCarrier ? '#16A34A' : '#fff', padding: '9px 16px', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: kargoSending || !kargoCarrier ? 'not-allowed' : 'pointer', fontFamily: 'Amiri, serif', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <button onClick={sendToBasitKargo} disabled={kargoSending || !kargoCarrier} style={{ background: kargoSending || !kargoCarrier ? '#BBF7D0' : 'linear-gradient(to left, #15803d, #16A34A)', color: kargoSending || !kargoCarrier ? '#16A34A' : '#fff', padding: '9px 16px', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: kargoSending || !kargoCarrier ? 'not-allowed' : 'pointer', fontFamily: 'Tajawal, sans-serif', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 5 }}>
                       {kargoSending ? <FiRefreshCw size={13} className="spin" /> : '🚚 أرسل الشحنة'}
                     </button>
                   </div>
@@ -473,10 +473,10 @@ export default function AdminOrders() {
                 <span style={{ color: '#16A34A', fontSize: '0.7rem', fontWeight: 400 }}>📧 يُرسل للزبون تلقائياً</span>
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <input value={carrierInput} onChange={e => setCarrierInput(e.target.value)} placeholder="شركة الشحن (DHL, FedEx, Aramex...)" style={{ padding: '9px 12px', borderRadius: 8, border: '2px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', background: '#FFFBF5' }} />
+                <input value={carrierInput} onChange={e => setCarrierInput(e.target.value)} placeholder="شركة الشحن (DHL, FedEx, Aramex...)" style={{ padding: '9px 12px', borderRadius: 8, border: '2px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', background: '#FFFBF5' }} />
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <input value={trackingInput} onChange={e => setTrackingInput(e.target.value)} placeholder="رقم التتبع" style={{ flex: 1, padding: '9px 12px', borderRadius: 8, border: '2px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', background: '#FFFBF5' }} />
-                  <button onClick={saveTracking} disabled={saving || !trackingInput.trim()} style={{ background: saving || !trackingInput.trim() ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: saving || !trackingInput.trim() ? '#9C6B4E' : '#f4be69', padding: '9px 14px', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: saving || !trackingInput.trim() ? 'not-allowed' : 'pointer', fontFamily: 'Amiri, serif' }}>
+                  <input value={trackingInput} onChange={e => setTrackingInput(e.target.value)} placeholder="رقم التتبع" style={{ flex: 1, padding: '9px 12px', borderRadius: 8, border: '2px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', background: '#FFFBF5' }} />
+                  <button onClick={saveTracking} disabled={saving || !trackingInput.trim()} style={{ background: saving || !trackingInput.trim() ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: saving || !trackingInput.trim() ? '#9C6B4E' : '#f4be69', padding: '9px 14px', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: saving || !trackingInput.trim() ? 'not-allowed' : 'pointer', fontFamily: 'Tajawal, sans-serif' }}>
                     {saving ? <FiRefreshCw size={13} /> : 'حفظ + إرسال'}
                   </button>
                 </div>
@@ -488,14 +488,14 @@ export default function AdminOrders() {
             <div style={{ marginBottom: 16 }}>
               <p style={{ color: '#3E1C00', fontWeight: 700, marginBottom: 8, fontSize: '0.85rem' }}>ملاحظات داخلية</p>
               <div style={{ display: 'flex', gap: 8 }}>
-                <textarea value={notesInput} onChange={e => setNotesInput(e.target.value)} rows={2} placeholder="ملاحظات للأدمن فقط..." style={{ flex: 1, padding: '9px 12px', borderRadius: 8, border: '2px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Amiri, serif', background: '#FFFBF5', resize: 'vertical' }} />
+                <textarea value={notesInput} onChange={e => setNotesInput(e.target.value)} rows={2} placeholder="ملاحظات للأدمن فقط..." style={{ flex: 1, padding: '9px 12px', borderRadius: 8, border: '2px solid #E2C9A8', fontSize: '0.85rem', outline: 'none', fontFamily: 'Tajawal, sans-serif', background: '#FFFBF5', resize: 'vertical' }} />
                 <button onClick={saveNotes} disabled={saving} style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '9px 14px', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: 'pointer', alignSelf: 'flex-start' }}>
                   {saving ? <FiRefreshCw size={13} /> : 'حفظ'}
                 </button>
               </div>
             </div>
 
-            <button onClick={() => setViewing(null)} style={{ width: '100%', padding: '11px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Amiri, serif', fontWeight: 600 }}>
+            <button onClick={() => setViewing(null)} style={{ width: '100%', padding: '11px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontWeight: 600 }}>
               إغلاق
             </button>
           </div>

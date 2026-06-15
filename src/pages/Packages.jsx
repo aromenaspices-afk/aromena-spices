@@ -107,7 +107,7 @@ export default function Packages() {
           <div style={{ display: 'inline-block', background: 'rgba(244,190,105,0.12)', border: '1px solid rgba(244,190,105,0.25)', color: '#f4be69', fontSize: '0.78rem', fontWeight: 600, padding: '4px 16px', borderRadius: 50, marginBottom: 16, letterSpacing: 1 }}>
             {isAr ? 'هدايا فاخرة' : 'Luxury Gifts'}
           </div>
-          <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', color: '#f4be69', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
+          <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', color: '#f4be69', fontFamily: 'Tajawal, sans-serif', marginBottom: 10 }}>
             {t('packages.title')}
           </h1>
           {/* فاصل ذهبي */}
@@ -138,7 +138,7 @@ export default function Packages() {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
 
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <h2 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 6 }}>
+            <h2 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 6 }}>
               {isAr ? 'الباقات الجاهزة' : 'Ready Packages'}
             </h2>
             <p style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>
@@ -208,7 +208,7 @@ export default function Packages() {
                     {/* الاسم + المشاركة */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <h3 style={{ color: '#3E1C00', fontSize: '1.1rem', fontWeight: 700, fontFamily: 'Amiri, serif', margin: 0, marginBottom: 2 }}>{pkgName}</h3>
+                        <h3 style={{ color: '#3E1C00', fontSize: '1.1rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif', margin: 0, marginBottom: 2 }}>{pkgName}</h3>
                         {pkg.name_en && isAr && <p style={{ color: '#9C6B4E', fontSize: '0.75rem', margin: 0 }}>{pkg.name_en}</p>}
                       </div>
                       <ShareButton url={`${packagesUrl}#${pkg.id}`} title={isAr ? `${pkgName} — أرومينا` : `${pkgName} — Aromena`} isAr={isAr} size="small" />
@@ -250,11 +250,11 @@ export default function Packages() {
                     <div style={{ marginBottom: 14, marginTop: 'auto' }}>
                       {pd.has ? (
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                          <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(pd.final)}</span>
+                          <span style={{ color: '#DC2626', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(pd.final)}</span>
                           <span style={{ color: '#9C6B4E', textDecoration: 'line-through', fontSize: '0.92rem' }}>{formatPrice(pkg.price)}</span>
                         </div>
                       ) : (
-                        <span style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Amiri, serif' }}>{formatPrice(pkg.price)}</span>
+                        <span style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.6rem', fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(pkg.price)}</span>
                       )}
                       <p style={{ color: '#9C6B4E', fontSize: '0.72rem', marginTop: 2 }}>
                         {isAr ? 'شامل الشّحن' : 'incl. shipping'}
@@ -270,7 +270,7 @@ export default function Packages() {
                       fontWeight: 700, fontSize: '0.92rem',
                       border: 'none', cursor: 'pointer',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                      fontFamily: 'Amiri, serif',
+                      fontFamily: 'Tajawal, sans-serif',
                       transition: 'all 0.3s',
                       boxShadow: isAdded ? 'none' : '0 4px 16px rgba(123,25,44,0.25)',
                     }}>
@@ -291,7 +291,7 @@ export default function Packages() {
       <section style={{ padding: '0 16px 60px', background: '#F5E6D3' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 8 }}>
-            <h2 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 6 }}>
+            <h2 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 6 }}>
               {isAr ? 'صمّم باقتك الخاصّة' : 'Build Your Custom Box'}
             </h2>
             <p style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>

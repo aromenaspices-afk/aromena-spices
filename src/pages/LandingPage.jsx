@@ -45,10 +45,10 @@ function ProductCard({ p, isAr, formatPrice, addItem, t }) {
         {p.discount > 0 && <span style={{ position: 'absolute', top: 10, right: 10, background: 'linear-gradient(135deg, #DC2626, #ef4444)', color: '#fff', fontSize: '0.7rem', fontWeight: 800, padding: '4px 10px', borderRadius: 50 }}>-{p.discount}%</span>}
       </div>
       <div style={{ padding: '14px 16px' }}>
-        <h3 style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem', marginBottom: 4, fontFamily: 'Amiri, serif' }}>{name}</h3>
+        <h3 style={{ color: '#1a0610', fontWeight: 700, fontSize: '0.95rem', marginBottom: 4, fontFamily: 'Tajawal, sans-serif' }}>{name}</h3>
         <p style={{ color: '#9C6B4E', fontSize: '0.8rem', marginBottom: 10 }}>{isAr ? p.desc_ar : p.desc_en}</p>
-        {price > 0 && <p style={{ color: '#7b192c', fontWeight: 900, fontSize: '1rem', marginBottom: 10, fontFamily: 'Amiri, serif' }}>{formatPrice(price)}</p>}
-        <button onClick={handleAdd} style={{ width: '100%', background: added ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontFamily: 'Amiri, serif', transition: 'all 0.3s' }}>
+        {price > 0 && <p style={{ color: '#7b192c', fontWeight: 900, fontSize: '1rem', marginBottom: 10, fontFamily: 'Tajawal, sans-serif' }}>{formatPrice(price)}</p>}
+        <button onClick={handleAdd} style={{ width: '100%', background: added ? '#16A34A' : 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontFamily: 'Tajawal, sans-serif', transition: 'all 0.3s' }}>
           {added ? <><FiCheck size={14} /> {t('products.added')}</> : <><FiShoppingCart size={14} /> {t('products.add_cart')}</>}
         </button>
       </div>
@@ -91,7 +91,7 @@ export default function LandingPage() {
     : ['Arab spices', 'halal spices', 'mandi spices', 'kabsa blend', 'Turkish spices', 'natural spices', 'spice delivery Europe']
 
   return (
-    <div style={{ background: '#F5E6D3', minHeight: '100vh', fontFamily: 'Amiri, serif' }}>
+    <div style={{ background: '#F5E6D3', minHeight: '100vh', fontFamily: 'Tajawal, sans-serif' }}>
 
       {/* SEO Keywords مخفية */}
       <div style={{ display: 'none' }} aria-hidden="true">
@@ -183,7 +183,7 @@ export default function LandingPage() {
             { num: '100%', label_ar: 'طبيعي وحلال', label_en: 'Natural & Halal' },
           ].map((s, i) => (
             <div key={i} style={{ textAlign: 'center', padding: '28px 16px', borderRight: i < 3 ? '1px solid rgba(123,25,44,0.1)' : 'none', opacity: statsVisible ? 1 : 0, transform: statsVisible ? 'translateY(0)' : 'translateY(30px)', transition: `all 0.6s ease ${i * 0.1}s` }}>
-              <div style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 900, color: '#7b192c', fontFamily: 'Amiri, serif', marginBottom: 8 }}>{s.num}</div>
+              <div style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 900, color: '#7b192c', fontFamily: 'Tajawal, sans-serif', marginBottom: 8 }}>{s.num}</div>
               <div style={{ color: '#9C6B4E', fontSize: '0.85rem' }}>{isAr ? s.label_ar : s.label_en}</div>
             </div>
           ))}
@@ -290,7 +290,7 @@ export default function LandingPage() {
                       : <span style={{ fontSize: '3rem' }}>{pkg.emoji || '🎁'}</span>}
                   </div>
                   <div style={{ padding: '16px 18px', textAlign: 'center' }}>
-                    <h3 style={{ color: '#1a0610', fontWeight: 700, fontSize: '1rem', fontFamily: 'Amiri, serif', marginBottom: 6 }}>{isAr ? pkg.name_ar : pkg.name_en}</h3>
+                    <h3 style={{ color: '#1a0610', fontWeight: 700, fontSize: '1rem', fontFamily: 'Tajawal, sans-serif', marginBottom: 6 }}>{isAr ? pkg.name_ar : pkg.name_en}</h3>
                     <p style={{ color: '#7b192c', fontWeight: 900, fontSize: '1.1rem', marginBottom: 12 }}>{formatPrice(pkg.price)}</p>
                     <Link to="/packages" style={{ display: 'block', background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none' }}>
                       {isAr ? 'اطلب الآن' : 'Order Now'}

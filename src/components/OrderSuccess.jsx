@@ -63,7 +63,7 @@ export default function OrderSuccess({ orderNumber, email }) {
         {phase === 'truck' ? (
           <>
             {/* عنوان */}
-            <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '1rem', fontFamily: 'Amiri, serif', marginBottom: 24 }}>
+            <p style={{ color: '#7b192c', fontWeight: 700, fontSize: '1rem', fontFamily: 'Tajawal, sans-serif', marginBottom: 24 }}>
               {isAr ? 'جاري تجهيز طلبك...' : 'Preparing your order...'}
             </p>
 
@@ -126,7 +126,7 @@ export default function OrderSuccess({ orderNumber, email }) {
               </svg>
             </div>
 
-            <h2 style={{ color: '#3E1C00', fontSize: '1.4rem', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
+            <h2 style={{ color: '#3E1C00', fontSize: '1.4rem', fontFamily: 'Tajawal, sans-serif', marginBottom: 10 }}>
               {isAr ? 'تمَّ تأكيد طلبك!' : 'Order Confirmed!'}
             </h2>
 

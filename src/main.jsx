@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       toastOptions={{
         duration: 3000,
         style: {
-          fontFamily: 'Amiri, serif',
+          fontFamily: 'Tajawal, sans-serif',
           fontSize: '0.9rem',
           borderRadius: '12px',
           padding: '12px 20px',

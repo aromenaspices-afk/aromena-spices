@@ -66,7 +66,7 @@ export default function Register() {
     width: '100%', padding: '11px 14px',
     borderRadius: 10, border: '2px solid #E2C9A8',
     fontSize: '0.9rem', color: '#3E1C00',
-    fontFamily: 'Amiri, serif', outline: 'none',
+    fontFamily: 'Tajawal, sans-serif', outline: 'none',
     background: '#FFFBF5', boxSizing: 'border-box',
   }
 
@@ -106,7 +106,7 @@ export default function Register() {
               />
             </div>
           </Link>
-          <h1 style={{ color: '#3E1C00', fontFamily: 'Amiri, serif', fontSize: '1.4rem', marginBottom: 4 }}>
+          <h1 style={{ color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', fontSize: '1.4rem', marginBottom: 4 }}>
             {isAr ? 'إنشاء حساب' : 'Create Account'}
           </h1>
           <p style={{ color: '#9C6B4E', fontSize: '0.85rem' }}>
@@ -122,7 +122,7 @@ export default function Register() {
             border: '2px solid #E2C9A8', background: '#fff', color: '#3E1C00',
             fontWeight: 700, fontSize: '0.88rem', cursor: googleLoading ? 'not-allowed' : 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
           }}>
             <svg width="18" height="18" viewBox="0 0 48 48">
               <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
@@ -188,7 +188,7 @@ export default function Register() {
             padding: '12px 0', borderRadius: 10,
             fontWeight: 700, fontSize: '0.92rem', border: 'none',
             cursor: loading ? 'not-allowed' : 'pointer',
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
             boxShadow: loading ? 'none' : '0 4px 14px rgba(123,25,44,0.25)',
           }}>
             {loading ? (isAr ? 'جاري التسجيل...' : 'Registering...') : (isAr ? 'إنشاء حساب' : 'Create Account')}
@@ -204,7 +204,7 @@ export default function Register() {
             display: 'block', textAlign: 'center', padding: '11px 0',
             borderRadius: 10, border: '2px solid #E2C9A8', color: '#6B3A2A',
             fontWeight: 600, fontSize: '0.88rem', textDecoration: 'none',
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
           }}>
             {isAr ? 'متابعة كضيف' : 'Continue as Guest'}
           </Link>

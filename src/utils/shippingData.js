@@ -104,6 +104,24 @@ export async function getShippingConfig() {
 
 export function clearShippingCache() { _cache = null }
 
+// عتبة الشحن المجّاني لدولة (افتراضيّاً تركيا المحليّة) — تُرجِع رقماً بالليرة أو null
+export async function getFreeShippingThreshold(countryInput) {
+  const config = await getShippingConfig()
+  const countries = config.countries || DEFAULT_COUNTRIES
+  if (countryInput) {
+    const input = String(countryInput).trim().toLowerCase()
+    const c = countries.find(c =>
+      c.country_ar === String(countryInput).trim() ||
+      c.country_en?.toLowerCase() === input ||
+      input.includes(c.country_ar) ||
+      input.includes(c.country_en?.toLowerCase() || '')
+    )
+    if (c) return c.freeOver || null
+  }
+  const turkey = countries.find(c => c.domestic)
+  return turkey?.freeOver || null
+}
+
 // ── دالة حساب الشحن ──────────────────────────────────
 export async function calculateShipping(countryInput, totalWeightKg, totalPrice, boxesOnly = false) {
   const config = await getShippingConfig()

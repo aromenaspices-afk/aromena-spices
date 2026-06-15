@@ -22,6 +22,7 @@ import NotFound from './pages/NotFound'
 import AdminApp from './admin/AdminApp'
 import SplashScreen from './components/SplashScreen'
 import CookieBanner from './components/CookieBanner'
+import CartSync from './components/CartSync'
 import { CurrencyProvider } from './context/CurrencyContext'
 import WhatsAppButton from './components/WhatsAppButton'
 import PrivacyPolicy  from './pages/PrivacyPolicy'
@@ -53,6 +54,7 @@ export default function App() {
           {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
           <ScrollToTop />
           <VisitorTracker />
+          <CartSync />
           <CookieBanner />
           <WhatsAppButton />
           <Routes>

@@ -18,7 +18,7 @@ export default function NotFound() {
         {/* الرقم */}
         <div style={{
           fontSize: '7rem', fontWeight: 900, lineHeight: 1,
-          fontFamily: 'Amiri, serif',
+          fontFamily: 'Tajawal, sans-serif',
           background: 'linear-gradient(135deg, #7b192c, #a82040)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
@@ -32,7 +32,7 @@ export default function NotFound() {
 
         {/* العنوان */}
         <h1 style={{
-          color: '#3E1C00', fontFamily: 'Amiri, serif',
+          color: '#3E1C00', fontFamily: 'Tajawal, sans-serif',
           fontSize: '1.6rem', marginBottom: 12,
         }}>
           {isAr ? 'الصفحة غير موجودة' : 'Page Not Found'}
@@ -57,7 +57,7 @@ export default function NotFound() {
             borderRadius: 50, fontWeight: 700,
             textDecoration: 'none', fontSize: '0.9rem',
             display: 'flex', alignItems: 'center', gap: 7,
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
             boxShadow: '0 4px 14px rgba(123,25,44,0.25)',
             transition: 'transform 0.15s',
           }}>
@@ -71,7 +71,7 @@ export default function NotFound() {
             fontWeight: 700, textDecoration: 'none',
             fontSize: '0.9rem', border: '2px solid #E2C9A8',
             display: 'flex', alignItems: 'center', gap: 7,
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
             transition: 'border-color 0.15s',
           }}>
             <FiShoppingBag size={16} />

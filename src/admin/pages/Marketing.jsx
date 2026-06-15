@@ -102,7 +102,7 @@ export default function AdminMarketing() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>التسويق والزوار</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>التسويق والزوار</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>تحليل زوار الموقع</p>
         </div>
 
@@ -115,7 +115,7 @@ export default function AdminMarketing() {
               background: period === p ? `linear-gradient(to left, ${BORDEAUX}, #a82040)` : CARD,
               color: period === p ? GOLD : '#6B3A2A',
               fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer',
-              fontFamily: 'Amiri, serif', transition: 'all 0.15s',
+              fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s',
             }}>
               {p} يوم
             </button>

@@ -76,7 +76,7 @@ export default function CookieBanner() {
             padding: '10px 0', borderRadius: 10,
             fontWeight: 700, fontSize: '0.85rem',
             border: 'none', cursor: 'pointer',
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
             boxShadow: '0 3px 12px rgba(123,25,44,0.25)',
           }}
         >
@@ -91,7 +91,7 @@ export default function CookieBanner() {
             padding: '10px 0', borderRadius: 10,
             fontWeight: 600, fontSize: '0.85rem',
             border: '2px solid #E2C9A8', cursor: 'pointer',
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
           }}
         >
           {isAr ? 'رفض' : 'Decline'}

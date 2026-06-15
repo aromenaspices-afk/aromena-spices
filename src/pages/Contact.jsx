@@ -21,7 +21,7 @@ export default function Contact() {
     width: '100%', padding: '12px 14px',
     borderRadius: 12, border: '2px solid #E2C9A8',
     fontSize: '0.9rem', color: '#3E1C00',
-    fontFamily: 'Amiri, serif', outline: 'none',
+    fontFamily: 'Tajawal, sans-serif', outline: 'none',
     background: '#FFFBF5', boxSizing: 'border-box',
     transition: 'border-color 0.15s',
   }
@@ -81,7 +81,7 @@ export default function Contact() {
           <div style={{ display: 'inline-block', background: 'rgba(244,190,105,0.12)', border: '1px solid rgba(244,190,105,0.25)', color: '#f4be69', padding: '5px 18px', borderRadius: 50, fontSize: '0.78rem', fontWeight: 600, letterSpacing: 1, marginBottom: 16 }}>
             Aromena Spices
           </div>
-          <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#f4be69', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
+          <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#f4be69', fontFamily: 'Tajawal, sans-serif', marginBottom: 10 }}>
             {t('contact.title')}
           </h1>
           {/* فاصل ذهبي */}
@@ -102,7 +102,7 @@ export default function Contact() {
 
             {/* معلومات التواصل */}
             <div>
-              <h2 style={{ fontSize: '1.15rem', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 18 }}>
+              <h2 style={{ fontSize: '1.15rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 18 }}>
                 {isAr ? 'تواصل معنا' : 'Get in Touch'}
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -131,7 +131,7 @@ export default function Contact() {
 
             {/* الفورم */}
             <div style={{ background: '#fff', borderRadius: 20, padding: '24px 20px', border: '1px solid #E2C9A8', boxShadow: '0 4px 20px rgba(123,25,44,0.07)' }}>
-              <h2 style={{ fontSize: '1.15rem', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 20 }}>
+              <h2 style={{ fontSize: '1.15rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 20 }}>
                 {isAr ? 'أرسل لنا رسالة' : 'Send us a message'}
               </h2>
 
@@ -140,7 +140,7 @@ export default function Contact() {
                   <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#f0fdf4', border: '2px solid #16A34A', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </div>
-                  <h3 style={{ color: '#16A34A', marginBottom: 8, fontSize: '1rem', fontFamily: 'Amiri, serif' }}>
+                  <h3 style={{ color: '#16A34A', marginBottom: 8, fontSize: '1rem', fontFamily: 'Tajawal, sans-serif' }}>
                     {isAr ? 'تمَّ الإرسال!' : 'Message Sent!'}
                   </h3>
                   <p style={{ color: '#9C6B4E', fontSize: '0.88rem' }}>
@@ -165,7 +165,7 @@ export default function Contact() {
                       style={{ ...inputStyle, resize: 'vertical' }}
                       onFocus={e => e.target.style.borderColor = '#7b192c'} onBlur={e => e.target.style.borderColor = '#E2C9A8'} />
                   </div>
-                  <button onClick={handleSubmit} style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '13px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: 'Amiri, serif', boxShadow: '0 4px 14px rgba(123,25,44,0.25)', transition: 'transform 0.15s' }}
+                  <button onClick={handleSubmit} style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '13px 0', borderRadius: 12, fontWeight: 700, fontSize: '0.92rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontFamily: 'Tajawal, sans-serif', boxShadow: '0 4px 14px rgba(123,25,44,0.25)', transition: 'transform 0.15s' }}
                     onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-1px)'}
                     onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
                   >

@@ -79,7 +79,7 @@ export default function SplashScreen({ onDone }) {
         <div style={{ maxWidth: 320 }}>
           <p style={{
             color: '#f4be69',
-            fontFamily: 'Amiri, serif',
+            fontFamily: 'Tajawal, sans-serif',
             fontSize: 'clamp(1.05rem, 3.8vw, 1.35rem)',
             fontWeight: 700,
             lineHeight: 1.8,

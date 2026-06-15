@@ -21,7 +21,7 @@ const inputStyle = {
   width: '100%', padding: '10px 12px',
   borderRadius: 10, border: `2px solid ${BORDER}`,
   fontSize: '0.88rem', color: TEXT,
-  fontFamily: 'Amiri, serif', outline: 'none',
+  fontFamily: 'Tajawal, sans-serif', outline: 'none',
   background: '#FFFBF5', boxSizing: 'border-box',
   transition: 'border-color 0.15s',
 }
@@ -128,7 +128,7 @@ export default function AdminPromoCodes() {
         alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12,
       }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>كودات الخصم</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>كودات الخصم</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>{codes.length} كود</p>
         </div>
         <button onClick={openAdd} style={{
@@ -137,7 +137,7 @@ export default function AdminPromoCodes() {
           borderRadius: 50, fontWeight: 700,
           fontSize: '0.88rem', border: 'none', cursor: 'pointer',
           display: 'flex', alignItems: 'center', gap: 6,
-          fontFamily: 'Amiri, serif',
+          fontFamily: 'Tajawal, sans-serif',
           boxShadow: '0 4px 14px rgba(123,25,44,0.25)',
         }}>
           <FiPlus size={16} /> إضافة كود
@@ -282,7 +282,7 @@ export default function AdminPromoCodes() {
                   borderColor: c.active ? '#DC2626' : '#16A34A',
                   background: CARD,
                   color: c.active ? '#DC2626' : '#16A34A',
-                  cursor: 'pointer', fontFamily: 'Amiri, serif',
+                  cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
                   transition: 'all 0.15s',
                 }}>
                   {c.active ? 'تعطيل' : 'تفعيل'}
@@ -325,7 +325,7 @@ export default function AdminPromoCodes() {
           }}>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22 }}>
-              <h2 style={{ color: TEXT, fontFamily: 'Amiri, serif', fontSize: '1.15rem' }}>
+              <h2 style={{ color: TEXT, fontFamily: 'Tajawal, sans-serif', fontSize: '1.15rem' }}>
                 {editing ? 'تعديل الكود' : 'إضافة كود جديد'}
               </h2>
               <button onClick={() => setShowForm(false)} style={{
@@ -445,7 +445,7 @@ export default function AdminPromoCodes() {
                   fontWeight: 700, fontSize: '0.92rem',
                   border: 'none', cursor: saving ? 'not-allowed' : 'pointer',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                  fontFamily: 'Amiri, serif', transition: 'all 0.15s',
+                  fontFamily: 'Tajawal, sans-serif', transition: 'all 0.15s',
                 }}>
                   <FiCheck size={15} />
                   {saving ? 'جاري الحفظ...' : editing ? 'حفظ التعديل' : 'إضافة الكود'}
@@ -453,7 +453,7 @@ export default function AdminPromoCodes() {
                 <button onClick={() => setShowForm(false)} style={{
                   padding: '12px 18px', borderRadius: 12,
                   border: `2px solid ${BORDER}`, background: CARD,
-                  color: TEXT2, cursor: 'pointer', fontFamily: 'Amiri, serif',
+                  color: TEXT2, cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
                   fontSize: '0.88rem',
                 }}>
                   إلغاء

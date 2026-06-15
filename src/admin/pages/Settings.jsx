@@ -51,7 +51,7 @@ const inputStyle = {
   width: '100%', padding: '10px 12px',
   borderRadius: 10, border: `2px solid ${BORDER}`,
   fontSize: '0.88rem', color: TEXT,
-  fontFamily: 'Amiri, serif', outline: 'none',
+  fontFamily: 'Tajawal, sans-serif', outline: 'none',
   background: '#FFFBF5', boxSizing: 'border-box',
   transition: 'border-color 0.15s',
 }
@@ -298,7 +298,7 @@ export default function AdminSettings() {
         alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12,
       }}>
         <div>
-          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Amiri, serif' }}>الإعدادات</h1>
+          <h1 style={{ fontSize: '1.4rem', color: TEXT, fontFamily: 'Tajawal, sans-serif' }}>الإعدادات</h1>
           <p style={{ color: TEXT2, fontSize: '0.85rem' }}>إعدادات الموقع العامة</p>
         </div>
         <button onClick={handleSave} disabled={saving} style={{
@@ -312,7 +312,7 @@ export default function AdminSettings() {
           fontWeight: 700, fontSize: '0.88rem',
           border: 'none', cursor: saving ? 'not-allowed' : 'pointer',
           display: 'flex', alignItems: 'center', gap: 6,
-          fontFamily: 'Amiri, serif',
+          fontFamily: 'Tajawal, sans-serif',
           boxShadow: saved || saving ? 'none' : '0 4px 14px rgba(123,25,44,0.25)',
           transition: 'all 0.3s',
         }}>
@@ -528,7 +528,7 @@ export default function AdminSettings() {
               background: BG, border: `2px dashed ${BORDER}`,
               borderRadius: 10, padding: '10px', color: BORDEAUX,
               fontWeight: 700, cursor: 'pointer', fontSize: '0.88rem',
-              fontFamily: 'Amiri, serif', transition: 'border-color 0.15s',
+              fontFamily: 'Tajawal, sans-serif', transition: 'border-color 0.15s',
             }}
             onMouseEnter={e => e.currentTarget.style.borderColor = BORDEAUX}
             onMouseLeave={e => e.currentTarget.style.borderColor = BORDER}
@@ -620,7 +620,7 @@ export default function AdminSettings() {
         <button onClick={loadActivity} style={{
           marginTop: 12, background: 'none', border: `1px solid ${BORDER}`,
           color: TEXT2, padding: '7px 16px', borderRadius: 10, fontSize: '0.8rem',
-          cursor: 'pointer', fontFamily: 'Amiri, serif',
+          cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
         }}>تحديث السجلّ</button>
       </Section>
 
@@ -635,7 +635,7 @@ export default function AdminSettings() {
         fontWeight: 700, fontSize: '0.95rem',
         border: 'none', cursor: saving ? 'not-allowed' : 'pointer',
         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-        fontFamily: 'Amiri, serif', transition: 'all 0.3s',
+        fontFamily: 'Tajawal, sans-serif', transition: 'all 0.3s',
         boxShadow: saved || saving ? 'none' : '0 4px 16px rgba(123,25,44,0.2)',
       }}>
         {saved ? <FiCheck size={18} /> : <FiSave size={18} />}

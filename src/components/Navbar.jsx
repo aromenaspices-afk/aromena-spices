@@ -106,7 +106,7 @@ export default function Navbar() {
               fontSize: '0.78rem', cursor: 'pointer',
               display: 'flex', alignItems: 'center', gap: 4,
               transition: 'all 0.2s',
-              fontFamily: 'Amiri, serif',
+              fontFamily: 'Tajawal, sans-serif',
             }}
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(244,190,105,0.12)'; e.currentTarget.style.color = '#f4be69' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(244,190,105,0.07)'; e.currentTarget.style.color = 'rgba(244,190,105,0.8)' }}
@@ -196,7 +196,7 @@ export default function Navbar() {
                       background: 'none', border: 'none',
                       borderTop: '1px solid #F5E6D3',
                       fontSize: '0.85rem', fontWeight: 600,
-                      cursor: 'pointer', fontFamily: 'Amiri, serif',
+                      cursor: 'pointer', fontFamily: 'Tajawal, sans-serif',
                       transition: 'background 0.15s',
                     }}
                     onMouseEnter={e => e.currentTarget.style.background = '#FEF2F2'}
@@ -297,7 +297,7 @@ export default function Navbar() {
                     <FiUser size={15} />
                     {isAr ? 'حسابي' : 'My Account'}
                   </Link>
-                  <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 14px', borderRadius: 10, color: '#FCA5A5', background: 'none', border: 'none', fontSize: '0.92rem', fontWeight: 600, cursor: 'pointer', fontFamily: 'Amiri, serif', width: '100%' }}>
+                  <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 14px', borderRadius: 10, color: '#FCA5A5', background: 'none', border: 'none', fontSize: '0.92rem', fontWeight: 600, cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', width: '100%' }}>
                     <FiLogOut size={15} />
                     {isAr ? 'تسجيل الخروج' : 'Logout'}
                   </button>

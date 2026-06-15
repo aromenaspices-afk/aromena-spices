@@ -92,7 +92,7 @@ function AddressEditor({ addr, index, viewing, setViewing, inputStyle }) {
             <label style={{ color: '#3E1C00', fontSize: '0.75rem', fontWeight: 600, display: 'block', marginBottom: 3 }}>رقم الهاتف</label>
             <input value={form.phone || ''} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} placeholder="+49..." style={inputStyle} />
           </div>
-          <button onClick={saveAddress} disabled={saving} style={{ background: saving ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: saving ? '#9C6B4E' : '#f4be69', padding: '9px 0', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+          <button onClick={saveAddress} disabled={saving} style={{ background: saving ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: saving ? '#9C6B4E' : '#f4be69', padding: '9px 0', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
             <FiCheck size={13} /> {saving ? 'جاري الحفظ...' : 'حفظ العنوان'}
           </button>
         </div>
@@ -258,7 +258,7 @@ export default function AdminCustomers() {
   const inputStyle = {
     width: '100%', padding: '9px 12px', borderRadius: 8,
     border: '2px solid #E2C9A8', fontSize: '0.85rem', color: '#3E1C00',
-    fontFamily: 'Amiri, serif', outline: 'none', background: '#FFFBF5', boxSizing: 'border-box',
+    fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#FFFBF5', boxSizing: 'border-box',
   }
 
   const labelStyle = { color: '#3E1C00', fontSize: '0.78rem', fontWeight: 600, display: 'block', marginBottom: 4 }
@@ -268,7 +268,7 @@ export default function AdminCustomers() {
   return (
     <div>
       <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: '1.4rem', color: '#3E1C00', fontFamily: 'Amiri, serif' }}>العملاء</h1>
+        <h1 style={{ fontSize: '1.4rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif' }}>العملاء</h1>
         <p style={{ color: '#9C6B4E', fontSize: '0.85rem' }}>{customers.length} عميل مسجل</p>
       </div>
 
@@ -291,17 +291,17 @@ export default function AdminCustomers() {
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 14, alignItems: 'center' }}>
         <div style={{ position: 'relative', flex: 1, minWidth: 200 }}>
           <FiSearch style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', right: 12, color: '#9C6B4E', pointerEvents: 'none' }} size={15} />
-          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="ابحث باسم أو إيميل أو هاتف..." style={{ width: '100%', padding: '10px 38px 10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.85rem', color: '#3E1C00', fontFamily: 'Amiri, serif', outline: 'none', background: '#fff', boxSizing: 'border-box' }} />
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="ابحث باسم أو إيميل أو هاتف..." style={{ width: '100%', padding: '10px 38px 10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.85rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#fff', boxSizing: 'border-box' }} />
         </div>
-        <select value={filterCountry} onChange={e => setFilterCountry(e.target.value)} style={{ padding: '10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.82rem', color: '#3E1C00', fontFamily: 'Amiri, serif', outline: 'none', background: '#fff', cursor: 'pointer' }}>
+        <select value={filterCountry} onChange={e => setFilterCountry(e.target.value)} style={{ padding: '10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.82rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#fff', cursor: 'pointer' }}>
           {['الكل', ...countriesList].map(c => <option key={c} value={c}>{c}</option>)}
         </select>
-        <select value={filterGender} onChange={e => setFilterGender(e.target.value)} style={{ padding: '10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.82rem', color: '#3E1C00', fontFamily: 'Amiri, serif', outline: 'none', background: '#fff', cursor: 'pointer' }}>
+        <select value={filterGender} onChange={e => setFilterGender(e.target.value)} style={{ padding: '10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.82rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#fff', cursor: 'pointer' }}>
           <option value="الكل">كل الجنس</option>
           <option value="male">ذكر</option>
           <option value="female">أنثى</option>
         </select>
-        <select value={filterBanned} onChange={e => setFilterBanned(e.target.value)} style={{ padding: '10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.82rem', color: '#3E1C00', fontFamily: 'Amiri, serif', outline: 'none', background: '#fff', cursor: 'pointer' }}>
+        <select value={filterBanned} onChange={e => setFilterBanned(e.target.value)} style={{ padding: '10px 12px', borderRadius: 50, border: '2px solid #E2C9A8', fontSize: '0.82rem', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', outline: 'none', background: '#fff', cursor: 'pointer' }}>
           <option value="الكل">الكل</option>
           <option value="نشط">نشط</option>
           <option value="محظور">محظور</option>
@@ -421,7 +421,7 @@ export default function AdminCustomers() {
                 { id: 'stats', label: 'الإحصائيات' },
                 { id: 'notes', label: 'ملاحظات' },
               ].map(tab => (
-                <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ padding: '6px 12px', borderRadius: 8, border: '2px solid', borderColor: activeTab === tab.id ? '#7b192c' : '#E2C9A8', background: activeTab === tab.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: activeTab === tab.id ? '#f4be69' : '#6B3A2A', fontWeight: 600, fontSize: '0.75rem', cursor: 'pointer', fontFamily: 'Amiri, serif', whiteSpace: 'nowrap' }}>
+                <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{ padding: '6px 12px', borderRadius: 8, border: '2px solid', borderColor: activeTab === tab.id ? '#7b192c' : '#E2C9A8', background: activeTab === tab.id ? 'linear-gradient(to left, #7b192c, #a82040)' : '#fff', color: activeTab === tab.id ? '#f4be69' : '#6B3A2A', fontWeight: 600, fontSize: '0.75rem', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', whiteSpace: 'nowrap' }}>
                   {tab.label}
                 </button>
               ))}
@@ -462,10 +462,10 @@ export default function AdminCustomers() {
                       </select>
                     </div>
                     <div style={{ display: 'flex', gap: 8 }}>
-                      <button onClick={saveEdit} disabled={saving} style={{ flex: 1, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Amiri, serif' }}>
+                      <button onClick={saveEdit} disabled={saving} style={{ flex: 1, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '10px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.85rem', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontFamily: 'Tajawal, sans-serif' }}>
                         <FiCheck size={13} /> {saving ? 'جاري الحفظ...' : 'حفظ'}
                       </button>
-                      <button onClick={() => setEditing(false)} style={{ padding: '10px 14px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Amiri, serif' }}>إلغاء</button>
+                      <button onClick={() => setEditing(false)} style={{ padding: '10px 14px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>إلغاء</button>
                     </div>
                   </div>
                 ) : (
@@ -493,7 +493,7 @@ export default function AdminCustomers() {
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                   <p style={{ color: '#3E1C00', fontWeight: 700, fontSize: '0.88rem' }}>عناوين التوصيل</p>
-                  <button onClick={() => setShowAddAddress(!showAddAddress)} style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', border: 'none', borderRadius: 50, padding: '6px 12px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4, fontFamily: 'Amiri, serif' }}>
+                  <button onClick={() => setShowAddAddress(!showAddAddress)} style={{ background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', border: 'none', borderRadius: 50, padding: '6px 12px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 4, fontFamily: 'Tajawal, sans-serif' }}>
                     <FiPlus size={12} /> إضافة عنوان
                   </button>
                 </div>
@@ -532,10 +532,10 @@ export default function AdminCustomers() {
                         <input value={newAddress.phone} onChange={e => setNewAddress(f => ({ ...f, phone: e.target.value }))} placeholder="+49..." style={inputStyle} />
                       </div>
                       <div style={{ display: 'flex', gap: 8 }}>
-                        <button onClick={addNewAddress} disabled={savingAddress} style={{ flex: 1, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '9px 0', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+                        <button onClick={addNewAddress} disabled={savingAddress} style={{ flex: 1, background: 'linear-gradient(to left, #7b192c, #a82040)', color: '#f4be69', padding: '9px 0', borderRadius: 8, fontWeight: 700, fontSize: '0.82rem', border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
                           <FiCheck size={13} /> {savingAddress ? 'جاري الحفظ...' : 'حفظ'}
                         </button>
-                        <button onClick={() => setShowAddAddress(false)} style={{ padding: '9px 14px', borderRadius: 8, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Amiri, serif' }}>إلغاء</button>
+                        <button onClick={() => setShowAddAddress(false)} style={{ padding: '9px 14px', borderRadius: 8, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif' }}>إلغاء</button>
                       </div>
                     </div>
                   </div>
@@ -611,14 +611,14 @@ export default function AdminCustomers() {
               <div>
                 <p style={{ color: '#9C6B4E', fontSize: '0.78rem', marginBottom: 8 }}>ملاحظات داخلية — مرئية للأدمن فقط</p>
                 <textarea value={adminNote} onChange={e => setAdminNote(e.target.value)} rows={6} placeholder="أضف ملاحظاتك عن هذا العميل..." style={{ ...inputStyle, resize: 'vertical', marginBottom: 10 }} />
-                <button onClick={saveAdminNote} disabled={savingNote} style={{ width: '100%', background: savingNote ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: savingNote ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: 'pointer', fontFamily: 'Amiri, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <button onClick={saveAdminNote} disabled={savingNote} style={{ width: '100%', background: savingNote ? '#E2C9A8' : 'linear-gradient(to left, #7b192c, #a82040)', color: savingNote ? '#9C6B4E' : '#f4be69', padding: '11px 0', borderRadius: 10, fontWeight: 700, fontSize: '0.88rem', border: 'none', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                   <FiCheck size={14} /> {savingNote ? 'جاري الحفظ...' : 'حفظ الملاحظات'}
                 </button>
               </div>
             )}
 
             <div style={{ marginTop: 16 }}>
-              <button onClick={() => setViewing(null)} style={{ width: '100%', padding: '11px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Amiri, serif', fontWeight: 600 }}>
+              <button onClick={() => setViewing(null)} style={{ width: '100%', padding: '11px', borderRadius: 10, border: '2px solid #E2C9A8', background: '#fff', color: '#6B3A2A', cursor: 'pointer', fontFamily: 'Tajawal, sans-serif', fontWeight: 600 }}>
                 إغلاق
               </button>
             </div>

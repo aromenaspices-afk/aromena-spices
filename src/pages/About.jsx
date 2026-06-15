@@ -44,7 +44,7 @@ export default function About() {
           <div style={{ display: 'inline-block', background: 'rgba(244,190,105,0.12)', border: '1px solid rgba(244,190,105,0.25)', color: '#f4be69', padding: '5px 18px', borderRadius: 50, fontSize: '0.78rem', fontWeight: 600, letterSpacing: 1, marginBottom: 16 }}>
             Aromena Spices
           </div>
-          <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#f4be69', fontFamily: 'Amiri, serif', marginBottom: 12 }}>
+          <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#f4be69', fontFamily: 'Tajawal, sans-serif', marginBottom: 12 }}>
             {t('about.title')}
           </h1>
           <p style={{ color: 'rgba(244,190,105,0.65)', fontSize: '0.9rem', lineHeight: 1.8 }}>
@@ -63,7 +63,7 @@ export default function About() {
               <div style={{ width: 110, height: 110, borderRadius: '50%', background: 'linear-gradient(135deg, #7b192c, #a82040)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(123,25,44,0.25)' }}>
                 <img src="/aromena-founder.webp" alt="Ghalia" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
-              <h3 style={{ color: '#3E1C00', fontSize: '1.15rem', fontWeight: 700, marginBottom: 5, fontFamily: 'Amiri, serif' }}>
+              <h3 style={{ color: '#3E1C00', fontSize: '1.15rem', fontWeight: 700, marginBottom: 5, fontFamily: 'Tajawal, sans-serif' }}>
                 {t('about.owner')}
               </h3>
               <p style={{ color: '#7b192c', fontSize: '0.82rem', fontWeight: 600, marginBottom: 14 }}>
@@ -84,7 +84,7 @@ export default function About() {
 
             
             <div>
-              <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 16, lineHeight: 1.3 }}>
+              <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 16, lineHeight: 1.3 }}>
                 {t('about.story_title')}
               </h2>
               <p style={{ color: '#6B3A2A', lineHeight: 2, fontSize: '0.95rem', whiteSpace: 'pre-line' }}>
@@ -108,7 +108,7 @@ At Aromena, we believe delicious food starts with a perfectly crafted spice blen
       
       <section style={{ background: '#EDD9C0', padding: '50px 16px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 32 }}>
+          <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 32 }}>
             {isAr ? 'قيمنا:' : 'Our Values'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
@@ -130,7 +130,7 @@ At Aromena, we believe delicious food starts with a perfectly crafted spice blen
       
       <section style={{ padding: '50px 16px', background: '#F5E6D3' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 32 }}>
+          <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 32 }}>
             {isAr ? 'مصادر بهاراتنا' : 'Our Spice Origins'}
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 14 }}>
@@ -151,7 +151,7 @@ At Aromena, we believe delicious food starts with a perfectly crafted spice blen
       {activeLocations.length > 0 && (
         <section style={{ background: '#EDD9C0', padding: '50px 16px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', color: '#3E1C00', fontFamily: 'Amiri, serif', marginBottom: 10 }}>
+            <h2 style={{ textAlign: 'center', fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', color: '#3E1C00', fontFamily: 'Tajawal, sans-serif', marginBottom: 10 }}>
               {isAr ? 'نقاط البيع والفعاليات' : 'Sales Points & Events'}
             </h2>
             <p style={{ textAlign: 'center', color: '#9C6B4E', fontSize: '0.88rem', marginBottom: 32 }}>
@@ -183,7 +183,7 @@ At Aromena, we believe delicious food starts with a perfectly crafted spice blen
                           </span>
                         )}
                       </div>
-                      <h3 style={{ color: '#3E1C00', fontSize: '0.97rem', fontWeight: 700, fontFamily: 'Amiri, serif', marginBottom: 6 }}>
+                      <h3 style={{ color: '#3E1C00', fontSize: '0.97rem', fontWeight: 700, fontFamily: 'Tajawal, sans-serif', marginBottom: 6 }}>
                         {isAr ? loc.name_ar : loc.name_en}
                       </h3>
                       {(loc.address || loc.city) && (
