@@ -7,9 +7,9 @@
   node_bundler = "esbuild"
   external_node_modules = ["iyzipay"]
 
-# تذكير السلّة المتروكة — ⚠️ مؤقّت للاختبار: كل دقيقة (الأصل "@hourly")
+# تذكير السلّة المتروكة — يعمل كلّ ساعة
 [functions."cart-reminders"]
-  schedule = "* * * * *"
+  schedule = "@hourly"
 
 # تمرير مسارات الدوال قبل توجيه SPA (يبقى _redirects كما هو للباقي)
 [[redirects]]
