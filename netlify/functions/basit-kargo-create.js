@@ -94,14 +94,15 @@ exports.handler = async (event) => {
         || (typeof result.raw === 'string' ? result.raw : ''))) || `HTTP ${r.status}`
       return { statusCode: r.status, headers: J, body: JSON.stringify({ error: String(reason), status: r.status, detail: result }) }
     }
-    const trackId = result.id || result.barcode || null
+    // رابط التتبّع فقط إن وفّره Basit Kargo في الرد — لا نبني رابطاً من عندنا
+    const apiTrackingUrl = result.trackingUrl || result.trackingLink || result.url || result.link
+      || result.shareUrl || result.cargoTrackingUrl || result.publicUrl || null
     return { statusCode: 200, headers: J, body: JSON.stringify({
       ok: true,
       id: result.id || null,
       barcode: result.barcode || null,
       status: result.status || null,
-      // رابط صفحة تتبّع Basit Kargo (يُتحقَّق من صيغته)
-      trackingUrl: trackId ? `https://basitkargo.com/takip/${trackId}` : null,
+      trackingUrl: apiTrackingUrl,
       handlerCode,
       raw: result,
     }) }
