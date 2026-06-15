@@ -101,7 +101,7 @@ exports.handler = async () => {
   const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig)
   const db = getFirestore(app)
 
-  const cutoff = new Date(Date.now() - 24 * 3600 * 1000).toISOString()       // مرّ 24 ساعة
+  const cutoff = new Date(Date.now() - 1 * 60 * 1000).toISOString()          // ⚠️ مؤقّت للاختبار: دقيقة واحدة (الأصل 24*3600*1000 = 24 ساعة)
   const tooOld = new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString()  // تجاهل أقدم من 30 يوماً
 
   let sent = 0, skipped = 0
