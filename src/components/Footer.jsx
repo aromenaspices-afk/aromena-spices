@@ -86,19 +86,21 @@ export default function Footer() {
         {/* ═══ السجلّات الرسميّة: ضريبيّ + تجاريّ ═══ */}
         <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 18 }}>
           {[
-            { icon: <FiFileText size={12} />, label: isAr ? 'الرقم الضريبيّ' : 'Tax No', value: '3851825173' },
-            { icon: <FiBriefcase size={12} />, label: isAr ? 'السجلّ التجاريّ' : 'Trade Reg. No', value: '379102-5' },
+            { icon: <FiFileText size={15} />, label: isAr ? 'الرقم الضريبيّ' : 'Tax No', value: '3851825173' },
+            { icon: <FiBriefcase size={15} />, label: isAr ? 'السجلّ التجاريّ' : 'Trade Reg. No', value: '379102-5' },
           ].map((it, i) => (
             <div key={i} style={{
-              display: 'flex', alignItems: 'center', gap: 8,
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(244,190,105,0.16)',
-              borderRadius: 11, padding: '7px 14px',
-              boxShadow: 'inset 0 1px 0 rgba(244,190,105,0.06)',
+              display: 'flex', alignItems: 'center', gap: 9,
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(244,190,105,0.24)',
+              borderRadius: 12, padding: '9px 16px',
+              boxShadow: 'inset 0 1px 0 rgba(244,190,105,0.08)',
             }}>
-              <span style={{ color: 'rgba(244,190,105,0.55)', display: 'flex' }}>{it.icon}</span>
-              <span style={{ color: 'rgba(244,190,105,0.45)', fontSize: '0.7rem' }}>{it.label}</span>
-              <bdi dir="ltr" style={{ color: '#f4be69', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.6px', fontVariantNumeric: 'tabular-nums' }}>{it.value}</bdi>
+              <span style={{ color: 'rgba(244,190,105,0.7)', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>{it.icon}</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
+                <span style={{ color: 'rgba(244,190,105,0.7)', fontSize: '0.85rem', fontWeight: 600, lineHeight: 1.2 }}>{it.label}</span>
+                <bdi dir="ltr" style={{ color: '#f7c873', fontSize: '0.95rem', fontWeight: 800, letterSpacing: '0.5px', lineHeight: 1.2, fontVariantNumeric: 'tabular-nums' }}>{it.value}</bdi>
+              </span>
             </div>
           ))}
         </div>
