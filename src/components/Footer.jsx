@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { FiMail, FiPhone } from 'react-icons/fi'
+import { FiMail, FiPhone, FiFileText, FiBriefcase } from 'react-icons/fi'
 import { SiWhatsapp, SiInstagram, SiTiktok, SiFacebook } from 'react-icons/si'
 
 const LOGO        = 'https://res.cloudinary.com/dvt0nntn7/image/upload/v1775408607/02_fwrhni.png'
@@ -80,6 +80,26 @@ export default function Footer() {
             >
               {link.label}
             </Link>
+          ))}
+        </div>
+
+        {/* ═══ السجلّات الرسميّة: ضريبيّ + تجاريّ ═══ */}
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 18 }}>
+          {[
+            { icon: <FiFileText size={12} />, label: isAr ? 'الرقم الضريبيّ' : 'Tax No', value: '3851825173' },
+            { icon: <FiBriefcase size={12} />, label: isAr ? 'السجلّ التجاريّ' : 'Trade Reg. No', value: '379102-5' },
+          ].map((it, i) => (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(244,190,105,0.16)',
+              borderRadius: 11, padding: '7px 14px',
+              boxShadow: 'inset 0 1px 0 rgba(244,190,105,0.06)',
+            }}>
+              <span style={{ color: 'rgba(244,190,105,0.55)', display: 'flex' }}>{it.icon}</span>
+              <span style={{ color: 'rgba(244,190,105,0.45)', fontSize: '0.7rem' }}>{it.label}</span>
+              <bdi dir="ltr" style={{ color: '#f4be69', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.6px', fontVariantNumeric: 'tabular-nums' }}>{it.value}</bdi>
+            </div>
           ))}
         </div>
 
