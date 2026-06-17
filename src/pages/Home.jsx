@@ -282,7 +282,7 @@ export default function Home() {
                   <p>{isAr ? 'مكوّنات طبيعيّة من مصادرها الأصليّة، خلطات مُتقنة بوصفات مدروسة، وتنوّع استثنائي من المطبخ الخليجي إلى التّركي والإيطالي.' : 'Natural ingredients from their origins, expertly crafted recipes, and an exceptional variety from Gulf to Turkish and Italian cuisine.'}</p>
                   <div className="boxes">
                     <div className="box-item">{isAr ? 'طبيعي 100%' : '100% Natural'}</div>
-                    <div className="box-item">{isAr ? 'بدون حافظ' : 'No Preservatives'}</div>
+                    <div className="box-item">{isAr ? 'بدون موادّ حافظة' : 'No Preservatives'}</div>
                     <div className="box-item">{isAr ? 'شحن سريع' : 'Fast Shipping'}</div>
                   </div>
                 </div>
