@@ -864,6 +864,12 @@ export default function Checkout() {
 
               <Field label={isAr ? 'العنوان' : 'Address'}>
                 <Input value={form.address} onChange={v => setForm(f => ({ ...f, address: v }))} placeholder={isAr ? 'شارع، حي...' : 'Street, District...'} />
+                {isTurkey(form.country) && (
+                  <p style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 7, color: '#B45309', fontSize: '0.76rem', lineHeight: 1.6, background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: 10, padding: '7px 11px' }}>
+                    <span style={{ flexShrink: 0 }}>⚠️</span>
+                    {isAr ? 'يرجى إدخال العنوان باللغة التركيّة حصراً' : 'Please enter the address in Turkish only'}
+                  </p>
+                )}
               </Field>
 
               {isTurkey(form.country) ? (
